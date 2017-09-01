@@ -7,7 +7,8 @@ namespace SqueletteImplantation.DbEntities.Models
 {
     public class Rel_Contrat
     {
-        int NoEmploye { get; set; }
+        int NoEnseignant { get; set; }
         int NoEntreprise { get; set; }
+        
     }
 }
