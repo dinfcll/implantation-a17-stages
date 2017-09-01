@@ -15,8 +15,10 @@ namespace SqueletteImplantation.Controllers
         {
             _maBd = maBd;
         }
+        []
+        
 
-        [HttpGet]
+      /*  [HttpGet]
         [Route("api/machins")]
         public IEnumerable Index()
         {
@@ -28,7 +30,6 @@ namespace SqueletteImplantation.Controllers
         public IActionResult CreateMachin(MachinDto machinDto)
         {
             var machin = machinDto.CreateMachin();
-
             _maBd.Machin.Add(machin);
             _maBd.SaveChanges();
 
@@ -80,7 +81,7 @@ namespace SqueletteImplantation.Controllers
             _maBd.SaveChanges();
 
             return new OkResult();
-        }
+        }*/
 
     }
 }
