@@ -28,7 +28,6 @@ namespace SqueletteImplantation.Controllers
         public IActionResult CreateMachin(MachinDto machinDto)
         {
             var machin = machinDto.CreateMachin();
-
             _maBd.Machin.Add(machin);
             _maBd.SaveChanges();
 
