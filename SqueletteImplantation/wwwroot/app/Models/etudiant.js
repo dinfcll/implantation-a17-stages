@@ -1,12 +1,13 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var Etudiant = (function () {
-    function Etudiant(id, password) {
-        this.m_id = id;
+    function Etudiant(noda, password) {
+        this.m_NoDA = noda;
         this.m_password = password;
     }
-    Object.defineProperty(Etudiant.prototype, "ID", {
+    Object.defineProperty(Etudiant.prototype, "NoDa", {
         get: function () {
-            return this.m_id;
+            return this.m_NoDA;
         },
         enumerable: true,
         configurable: true

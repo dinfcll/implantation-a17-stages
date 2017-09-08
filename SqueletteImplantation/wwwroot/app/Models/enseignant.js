@@ -1,12 +1,13 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var Enseignant = (function () {
-    function Enseignant(username, password) {
-        this.m_username = username;
+    function Enseignant(nomutil, password) {
+        this.m_NomUtilisateur = nomutil;
         this.m_password = password;
     }
-    Object.defineProperty(Enseignant.prototype, "Username", {
+    Object.defineProperty(Enseignant.prototype, "NoEns", {
         get: function () {
-            return this.m_username;
+            return this.m_NoEnseignant;
         },
         enumerable: true,
         configurable: true
