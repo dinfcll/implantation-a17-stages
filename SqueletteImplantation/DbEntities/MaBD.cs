@@ -7,7 +7,7 @@ namespace SqueletteImplantation.DbEntities
     public class MaBd : DbContext
     {
         public virtual DbSet<Machin> Machin { get; set; }
-
+        public virtual DbSet<Professeur> Professeur {get; set;}
         public MaBd(DbContextOptions options) : base(options)
         {
         }
@@ -17,7 +17,7 @@ namespace SqueletteImplantation.DbEntities
             base.OnModelCreating(modelBuilder);
 
             new MachinMap(modelBuilder.Entity<Machin>());
-
+            new Professeurmap(modelBuilder.Entity<Professeur>());
         }
     }
 }
