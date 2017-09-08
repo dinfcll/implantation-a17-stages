@@ -10,10 +10,9 @@ namespace SqueletteImplantation.DbEntities.Models
         public int NoDa { get; set; }
         public string Nom{ get; set;}
         public string Prenom { get; set; }
-        public string AddCourriel { get; set; }
-        public string MotDePasse { get; set; }
-        public int NoEnseignant { get; set; }
-        public int NoEntreprise { get; set; }
-
+        public string AddresseCourriel { get; set; }
+        public string MotPasse { get; set; }
+        public string Notel{get;set;}
+        
     }
 }
