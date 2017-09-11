@@ -14,7 +14,6 @@ namespace SqueletteImplantation.DbEntities.Mappers
             entityBuilder.Property(m=>m.NoTel);
             entityBuilder.Property(m=>m.Nom);
             entityBuilder.Property(m=>m.Prenom);
-            entityBuilder.Property(m=>m.NoEntreprise);
         }
     }
 }

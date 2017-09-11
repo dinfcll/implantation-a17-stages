@@ -18,5 +18,12 @@ namespace SqueletteImplantation.DbEntities.Models
         public int NbreNon { get; set; }
         public int NbreOui { get; set; }
         public string date { get; set; }
+        //Une entreprise a plusieurs stagiaires 
+        public ICollection<Etudiant>Etudiants;
+        //Une entreprise est suivie par plusieurs professeurs
+        //Lien vers classe de relation
+        public ICollection<RelProfesseurEntreprise>RelEnsengnantEntreprises{get;set;}
+        // ajouter du sel **************************************************************************
+
     }
 }

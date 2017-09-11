@@ -11,8 +11,8 @@ namespace SqueletteImplantation.DbEntities.Mappers
             entityBuilder.Property(m => m.NomUti).IsRequired();
             entityBuilder.Property(m => m.MotDePasse).IsRequired();
             entityBuilder.Property(m=>m.Prenom);
-             entityBuilder.Property(m=>m.Nom);
-             entityBuilder.Property(m=>m.Courriel);
+            entityBuilder.Property(m=>m.Nom);
+            entityBuilder.Property(m=>m.Courriel);
         }
     }
 }

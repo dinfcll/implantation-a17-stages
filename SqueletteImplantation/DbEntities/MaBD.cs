@@ -17,7 +17,11 @@ namespace SqueletteImplantation.DbEntities
             base.OnModelCreating(modelBuilder);
 
             new MachinMap(modelBuilder.Entity<Machin>());
+            new RelProfesseurEntreprisemap(modelBuilder.Entity<RelProfesseurEntreprise>());
+            new RelProfesseurEtudiantmap(modelBuilder.Entity<RelProfesseurEtudiant>());
+            new Entreprisemap(modelBuilder.Entity<Entreprise>());
             new Professeurmap(modelBuilder.Entity<Professeur>());
+            new Etudiantmap(modelBuilder.Entity<Etudiant>());
         }
     }
 }

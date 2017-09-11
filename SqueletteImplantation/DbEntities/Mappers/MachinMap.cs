@@ -10,6 +10,7 @@ namespace SqueletteImplantation.DbEntities.Mappers
             entityBuilder.HasKey(m => m.Id);
             entityBuilder.Property(m => m.NombreMagique).IsRequired();
             entityBuilder.Property(m => m.Truc).IsRequired();
+
         }
     }
 }

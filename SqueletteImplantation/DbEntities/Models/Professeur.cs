@@ -13,5 +13,13 @@ namespace SqueletteImplantation.DbEntities.Models
         public string Prenom { get; set; }
         public string Courriel { get; set; }
         public string MotDePasse { get; set; }
+        //Un professeur peut avoir plusieurs étudiant à sa charge
+        //Lien avec la table de relation
+        public ICollection<RelProfesseurEtudiant>RelProfesseurEtudiant{get;set;}
+        //Un professeur suis plusieurs entreprises
+        //Lien avec la table de relation
+        public ICollection<RelProfesseurEntreprise>RelProfesseurEntreprises{get;set;}
+
+        
     }
 }
