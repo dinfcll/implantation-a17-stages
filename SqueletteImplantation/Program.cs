@@ -13,6 +13,7 @@ namespace SqueletteImplantation
                 .UseIISIntegration()
                 .UseStartup<Startup>()
                 .UseApplicationInsights()
+                .UseUrls("https://0.0.0.0:5000")
                 .Build();
 
             host.Run();
