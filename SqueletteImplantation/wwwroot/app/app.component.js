@@ -15,7 +15,7 @@ var AppComponent = (function () {
 AppComponent = __decorate([
     core_1.Component({
         selector: 'my-app',
-        template: "<h1>Hello {{name}}</h1>\n  <nav>\n      <a routerLink=\"/accueil-enseignant\" routerLinkActive=\"active\">Page d'accueil enseignant</a>\n              \n  </nav>\n\n  <router-outlet></router-outlet>\n",
+        template: "<h1>Hello {{name}}</h1>\n  <listeEnseignant></listeEnseignant>\n  <router-outlet></router-outlet>\n",
     })
 ], AppComponent);
 exports.AppComponent = AppComponent;

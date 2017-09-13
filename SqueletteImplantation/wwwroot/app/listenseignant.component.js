@@ -17,15 +17,27 @@ var MaListeEnseignantComponent = (function () {
     }
     MaListeEnseignantComponent.prototype.getEnseignants = function () {
         var _this = this;
-        this.http.get("api/Professeur").subscribe(function (donnees) { return _this.enseignants
+        this.http.get("api/machins").subscribe(function (donnees) { return _this.enseignants
             = donnees.json(); });
+    };
+    MaListeEnseignantComponent.prototype.Connexion = function () {
+        var i = 0;
+        var result = false;
+        while (i < this.enseignants.length && this.courriel != this.enseignants[i].Truc) {
+            i++;
+        }
+        if (i < this.enseignants.length) {
+            result = true;
+        }
+        return result;
     };
     return MaListeEnseignantComponent;
 }());
 MaListeEnseignantComponent = __decorate([
     core_1.Component({
         selector: 'listeEnseignant',
-        template: "Je suis un composant super !\n                <div *ngIf=\"enseignants\">Y\u00E9\u00E9\u00E9\u00E9 ! {{ enseignants }} </div>\n                <div *ngIf=\"!enseignants\">Je n'ai rien re\u00E7u encore :(</div>"
+        templateUrl: "./../html/indexConnexionEnseignantEtudiant.html",
+        styleUrls: ["./../css/style_page_accueil.css"],
     }),
     __metadata("design:paramtypes", [http_1.Http])
 ], MaListeEnseignantComponent);
