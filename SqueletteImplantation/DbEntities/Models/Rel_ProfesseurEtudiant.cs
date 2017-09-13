@@ -11,7 +11,7 @@ namespace SqueletteImplantation.DbEntities.Models
         public int NoDa { get; set; }
         public Etudiant Etudiant { get; set; }
         //Clé étrangère Professeur
-        public int NoEnseignant { get; set; }
+        public int NoProfesseur { get; set; }
         public Professeur Professeur { get; set; }
     }
 }
