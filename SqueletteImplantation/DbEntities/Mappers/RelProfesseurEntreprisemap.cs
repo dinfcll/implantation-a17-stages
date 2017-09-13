@@ -10,7 +10,6 @@ namespace SqueletteImplantation.DbEntities.Mappers
     {
         public RelProfesseurEntreprisemap(EntityTypeBuilder<RelProfesseurEntreprise> entityBuilder)
         {
-           //Clé primaire avec deux champs
            entityBuilder
             .HasKey(ee=>new {ee.NoEntreprise,ee.NoProfesseur});
 
@@ -22,7 +21,7 @@ namespace SqueletteImplantation.DbEntities.Mappers
             //Clé étrangère NoEntreprise
             entityBuilder
             .HasOne(ee=>ee.Entreprise)
-            .WithMany(ee=>ee.RelEnsengnantEntreprises)
+            .WithMany(ee=>ee.RelProfesseurEntreprises)
             .HasForeignKey(ee=>ee.NoEntreprise);
         }
     }

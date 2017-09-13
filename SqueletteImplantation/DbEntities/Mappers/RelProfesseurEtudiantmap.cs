@@ -7,7 +7,6 @@ namespace SqueletteImplantation.DbEntities.Mappers
     {
         public RelProfesseurEtudiantmap(EntityTypeBuilder<RelProfesseurEtudiant> entityBuilder)
         {
-           //Clé primaire avec deux champs
            entityBuilder
             .HasKey(ee=>new {ee.NoDa,ee.NoProfesseur});
 
