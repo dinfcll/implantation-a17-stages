@@ -5,9 +5,8 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent }  from './app.component';
 import { RouterModule, Routes }   from '@angular/router';
-import {  MaListeEnseignantComponent }  from './listenseignant.component';
-import { MaListeEntrepriseComponent } from "./listentreprise.component";
-import { MaListeEtudiantComponent } from "./listetudiant.component";
+import {  LoginEnseignantComponent }  from './loginenseignant.component';
+
 
 import { pageAccueilEnseignantComponent } from "./pageAccueilEnseignant.component";
 
@@ -22,9 +21,8 @@ const appRoutes: Routes=[
 @NgModule({
   imports:      [ BrowserModule, FormsModule,HttpModule,  RouterModule.forRoot(appRoutes) ],
   declarations: [ AppComponent,
-                  MaListeEnseignantComponent,
-                  MaListeEntrepriseComponent,
-                  MaListeEtudiantComponent,
+                   LoginEnseignantComponent,
+                 
                   pageAccueilEnseignantComponent],
   bootstrap:    [ AppComponent ]
 })

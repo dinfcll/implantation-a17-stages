@@ -24,10 +24,10 @@
                         <hr id="trait">
                         <p id="pro">Énseignants</p>
                         
-                               <input type="text" placeholder="votre courriel ou votre numéro d'employé" id="Prof" name="Courriel" [(ngModel)]="courriel"  required>
+                               <input type="text" placeholder="votre courriel ou votre numéro d'employé" id="Prof" name="Courriel" [(ngModel)]="courriel" >
                        
-                               <input type="password" placeholder="saisir votre Mot de passe" id="MdpProf" name="mdpProf" [(ngModel)]="mdp"  required>
-                                <button (click)="Connexion()"  [disabled]="!Connexion()" id="btn2" routerLink="/accueil-enseignant" routerLinkActive="active" >Connexion</button>
+                               <input type="password" placeholder="saisir votre Mot de passe" id="MdpProf" name="mdpProf" [(ngModel)]="mdp" >
+                                <button (click)="Connexion()"  [routerLink]="['/accueil-enseignant']" routerLinkActive="active" id="btn2"  >Connexion</button>
                                
                               
                                 

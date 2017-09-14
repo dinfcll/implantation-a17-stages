@@ -3,8 +3,9 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'my-app',
  template: `<h1>Hello {{name}}</h1>
-  <listeEnseignant></listeEnseignant>
-  <router-outlet></router-outlet>
+ <router-outlet></router-outlet>
+  <loginEnseignant></loginEnseignant>
+ 
 `,
 //<listeEnseignant></listeEnseignant>
  /* templateUrl:`./../html/index1.html`,
@@ -12,4 +13,7 @@ import { Component } from '@angular/core';
   //styles: [`
     //        `],
 })
-export class AppComponent  { name = 'Romy Steve'; }
+export class AppComponent  { 
+  name = 'Romy Steve'; 
+ 
+}
