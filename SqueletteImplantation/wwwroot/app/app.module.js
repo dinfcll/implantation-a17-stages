@@ -16,6 +16,10 @@ var loginenseignant_component_1 = require("./loginenseignant.component");
 var pageAccueilEnseignant_component_1 = require("./pageAccueilEnseignant.component");
 var appRoutes = [
     {
+        path: '',
+        component: loginenseignant_component_1.LoginEnseignantComponent
+    },
+    {
         path: 'accueil-enseignant',
         component: pageAccueilEnseignant_component_1.pageAccueilEnseignantComponent
     }

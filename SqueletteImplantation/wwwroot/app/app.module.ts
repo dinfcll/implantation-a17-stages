@@ -12,9 +12,14 @@ import { pageAccueilEnseignantComponent } from "./pageAccueilEnseignant.componen
 
 const appRoutes: Routes=[
   {
+    path:'',
+    component: LoginEnseignantComponent
+  },
+  {
     path:'accueil-enseignant',
     component: pageAccueilEnseignantComponent
   }
+  
 ]
 
 
