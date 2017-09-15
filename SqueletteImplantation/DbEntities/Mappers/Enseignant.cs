@@ -3,11 +3,11 @@ using SqueletteImplantation.DbEntities.Models;
 
 namespace SqueletteImplantation.DbEntities.Mappers
 {
-    public class Professeurmap
+    public class Enseignantmap
     {
-        public Professeurmap(EntityTypeBuilder<Professeur> entityBuilder)
+        public Enseignantmap(EntityTypeBuilder<Enseignant> entityBuilder)
         {
-            entityBuilder.HasKey(m => m.NoProfesseur);
+            entityBuilder.HasKey(m => m.NoEnseignant);
             entityBuilder.Property(m => m.NomUti).IsRequired();
             entityBuilder.Property(m => m.MotDePasse).IsRequired();
             entityBuilder.Property(m=>m.Prenom);

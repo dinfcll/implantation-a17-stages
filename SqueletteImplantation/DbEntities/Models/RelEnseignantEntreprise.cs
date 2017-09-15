@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 
 namespace SqueletteImplantation.DbEntities.Models
 {
-    public class RelProfesseurEntreprise
+    public class RelEnseignantEntreprise
     {
-        //Clé étrangère Professeur:
-        public int NoProfesseur { get; set; }
-        public Professeur Professeur { get; set; }
+        //Clé étrangère Enseignant:
+        public int NoEnseignant { get; set; }
+        public Enseignant Enseignant { get; set; }
         //Clé étrangère Entreprise:
         public int NoEntreprise { get; set; }
         public Entreprise Entreprise { get; set; }

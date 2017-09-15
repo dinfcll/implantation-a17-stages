@@ -5,16 +5,16 @@ using System.Threading.Tasks;
 
 namespace SqueletteImplantation.DbEntities.Models
 {
-    public class Professeur
+    public class Enseignant
     {
-        public int NoProfesseur {get; set; }
+        public int NoEnseignant {get; set; }
         public string NomUti { get; set; }
         public string Nom { get; set; }
         public string Prenom { get; set; }
         public string Courriel { get; set; }
         public string MotDePasse { get; set; }
-        public ICollection<RelProfesseurEtudiant>RelProfesseurEtudiant{get;set;}
-        public ICollection<RelProfesseurEntreprise>RelProfesseurEntreprises{get;set;}
+        public ICollection<RelEnseignantEtudiant>RelEnseignantEtudiant{get;set;}
+        public ICollection<RelEnseignantEntreprise>RelEnseignantEntreprises{get;set;}
 
     }
 }
