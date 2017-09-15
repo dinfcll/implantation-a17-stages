@@ -18,17 +18,15 @@
                         
 
                         
-                              <input type="password" placeholder="saisir votre Mot de passe" id="MdpDA" name="mdpEtu">
+                              <input type="password" placeholder="Saisir votre mot de passe" id="MdpDA" name="mdpEtu">
                               <input type="submit" name="btnConnecEtu" value="Connexion" id="btn1"onclick="ConnexionEtudiant(this.form)">
 
                         <hr id="trait">
-                        <p id="pro">Énseignants</p>
-                        
-                               <input type="text" placeholder="votre courriel ou votre numéro d'employé" id="Prof" name="Courriel" [(ngModel)]="courriel" >
+                        <p id="pro">Enseignants</p>
+                               <input type="text" placeholder="Votre courriel ou votre numéro d'employé" id="Prof" name="Courriel" [(ngModel)]="courriel" >
                        
-                               <input type="password" placeholder="saisir votre Mot de passe" id="MdpProf" name="mdpProf" [(ngModel)]="mdp" >
-                                <button (click)="Connexion()"  [routerLink]="['/accueil-enseignant']" routerLinkActive="active" id="btn2"  >Connexion</button>
-                               
+                               <input type="password" placeholder="Saisir votre mot de passe" id="MdpProf" name="mdpProf" [(ngModel)]="mdp" >
+                                <button (click)="getEnseignants()"  id="btn2"  >Connexion</button>
                               
                                 
                            

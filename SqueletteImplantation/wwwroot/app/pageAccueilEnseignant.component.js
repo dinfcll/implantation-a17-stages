@@ -10,15 +10,15 @@ var core_1 = require("@angular/core");
 var pageAccueilEnseignantComponent = (function () {
     function pageAccueilEnseignantComponent() {
     }
-    pageAccueilEnseignantComponent = __decorate([
-        core_1.Component({
-            selector: 'accueil_enseignant',
-            //template: `<h1>ma page accueil enseignant</h1>`
-            templateUrl: "./../html/AccueilEnseignant.html",
-            styleUrls: ["./../monbootstrap/css/bootstrap.min.css", "./../css/accueil_enseignant.css"],
-        })
-    ], pageAccueilEnseignantComponent);
     return pageAccueilEnseignantComponent;
 }());
+pageAccueilEnseignantComponent = __decorate([
+    core_1.Component({
+        selector: 'accueil_enseignant',
+        //template: `<h1>ma page accueil enseignant</h1>`
+        templateUrl: "./../html/AccueilEnseignant.html",
+        styleUrls: ["./../monbootstrap/css/bootstrap.min.css", "./../css/accueil_enseignant.css"],
+    })
+], pageAccueilEnseignantComponent);
 exports.pageAccueilEnseignantComponent = pageAccueilEnseignantComponent;
 //# sourceMappingURL=pageAccueilEnseignant.component.js.map
