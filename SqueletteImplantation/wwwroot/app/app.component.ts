@@ -8,11 +8,7 @@ import { Component } from '@angular/core';
  
 `,
 
-//<loginEnseignant></loginEnseignant>
- /* templateUrl:`./../html/index1.html`,
-  styleUrls:[`./../css/style_page_accueil.css`],*/
-  //styles: [`
-    //        `],
+
 })
 export class AppComponent  { 
   name = 'Romy Steve'; 
