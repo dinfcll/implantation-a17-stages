@@ -8,19 +8,35 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var platform_browser_1 = require("@angular/platform-browser");
+var forms_1 = require("@angular/forms");
+var http_1 = require("@angular/http");
 var app_component_1 = require("./app.component");
+var router_1 = require("@angular/router");
+var loginenseignant_component_1 = require("./loginenseignant.component");
+var pageAccueilEnseignant_component_1 = require("./pageAccueilEnseignant.component");
+var appRoutes = [
+    {
+        path: '',
+        component: loginenseignant_component_1.LoginEnseignantComponent
+    },
+    {
+        path: 'accueil-enseignant',
+        component: pageAccueilEnseignant_component_1.pageAccueilEnseignantComponent
+    }
+];
 var AppModule = (function () {
     function AppModule() {
     }
+    AppModule = __decorate([
+        core_1.NgModule({
+            imports: [platform_browser_1.BrowserModule, forms_1.FormsModule, http_1.HttpModule, router_1.RouterModule.forRoot(appRoutes)],
+            declarations: [app_component_1.AppComponent,
+                loginenseignant_component_1.LoginEnseignantComponent,
+                pageAccueilEnseignant_component_1.pageAccueilEnseignantComponent],
+            bootstrap: [app_component_1.AppComponent]
+        })
+    ], AppModule);
     return AppModule;
 }());
-AppModule = __decorate([
-    core_1.NgModule({
-        imports: [platform_browser_1.BrowserModule],
-        declarations: [app_component_1.AppComponent,
-        ],
-        bootstrap: [app_component_1.AppComponent]
-    })
-], AppModule);
 exports.AppModule = AppModule;
 //# sourceMappingURL=app.module.js.map
