@@ -28,32 +28,25 @@ import {  Router }   from '@angular/router';
 })
 
 export class LoginEnseignantComponent { 
-    private enseignants: Machin[];
-
-   
-
+    private enseignants: Enseignant[];
+    mdp:string ;
     courriel : string;
     constructor(private http: Http,  private router: Router){
         this. getEnseignants();
     }
 
     getEnseignants():void{
-        this.http.get("api/machins").subscribe(donnees => this.enseignants
-        = donnees.json() as Machin[]);
+        this.http.get("api/Professeur").subscribe(donnees => this.enseignants
+        = donnees.json() as Enseignant[]);
     }
     
     Connexion(): boolean/*void*/{
 
        //console.log(this.enseignants.length);
         this.getEnseignants();
-       
-       
-   
-
-        
         var i=0;
          let result:boolean=false;
-        while(i< this.enseignants.length && this.courriel != this.enseignants[i].Truc)
+        while(i< this.enseignants.length && this.courriel != this.enseignants[i].NomUti&&this.mdp!=this.enseignants[i].MotDePasse)
             {
                 i++;
             }
