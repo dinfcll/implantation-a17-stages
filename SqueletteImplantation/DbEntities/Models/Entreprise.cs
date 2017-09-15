@@ -18,5 +18,9 @@ namespace SqueletteImplantation.DbEntities.Models
         public int NbreNon { get; set; }
         public int NbreOui { get; set; }
         public string date { get; set; }
+        public ICollection<Etudiant>Etudiants;
+        public ICollection<RelEnseignantEntreprise>RelEnseignantEntreprises{get;set;}
+        // ajouter du sel *
+
     }
 }

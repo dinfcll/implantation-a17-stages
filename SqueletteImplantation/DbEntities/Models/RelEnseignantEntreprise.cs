@@ -9,7 +9,7 @@ namespace SqueletteImplantation.DbEntities.Models
     {
         //Clé étrangère Enseignant:
         public int NoEnseignant { get; set; }
-        public Professeur Professeur { get; set; }
+        public Enseignant Enseignant { get; set; }
         //Clé étrangère Entreprise:
         public int NoEntreprise { get; set; }
         public Entreprise Entreprise { get; set; }
