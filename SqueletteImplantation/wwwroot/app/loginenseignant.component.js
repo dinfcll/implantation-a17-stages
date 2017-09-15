@@ -16,46 +16,50 @@ var LoginEnseignantComponent = (function () {
     function LoginEnseignantComponent(http, router) {
         this.http = http;
         this.router = router;
-        this.getEnseignants();
+        //this. getEnseignants();
+        this.enseignants = [];
+        this.result = false;
+        this.courriel = "";
+        this.mdp = "";
     }
     LoginEnseignantComponent.prototype.getEnseignants = function () {
         var _this = this;
-        this.http.get("api/machins").subscribe(function (donnees) { return _this.enseignants
-            = donnees.json(); });
+        this.http.get("api/Enseignant").subscribe(function (donnees) {
+            _this.enseignants
+                = donnees.json();
+            var i = 0;
+            while (i < _this.enseignants.length && _this.courriel != "test" && _this.mdp != "test" /*this.enseignants[i].MotDePasse*/) {
+                console.log(_this.enseignants[i].NomUti);
+                console.log(_this.courriel);
+                i++;
+            }
+            if (i < _this.enseignants.length) {
+                _this.result = true;
+                _this.router.navigate(['/accueil-enseignant']);
+            }
+            console.log(_this.enseignants[i].NomUti);
+            return _this.result;
+        });
     };
-    LoginEnseignantComponent.prototype.Connexion = function () {
-        //console.log(this.enseignants.length);
-        this.getEnseignants();
-        var i = 0;
-        var result = false;
-        while (i < this.enseignants.length && this.courriel != this.enseignants[i].Truc) {
-            i++;
-        }
-        if (i < this.enseignants.length) {
-            result = true;
-            // this.router.navigate(['/accueil-enseignant'])
-        }
-        return result;
-    };
-    LoginEnseignantComponent = __decorate([
-        core_1.Component({
-            selector: 'loginEnseignant',
-            templateUrl: "./../html/indexConnexionEnseignantEtudiant.html",
-            /*template: `Je suis un composant super !
-           
-           
-            
-            <div > Yéééé !
-         
-                 <input type="text" placeholder="votre courriel ou votre numéro d'employé" id="Prof" name="Courriel" [(ngModel)]="courriel"  required>
-                 <button (click)="Connexion()" routerLink="/accueil-enseignant" routerLinkActive="active">Connexion</button>
-            </div>
-            `,*/
-            styleUrls: ["./../css/style_page_accueil.css"],
-        }),
-        __metadata("design:paramtypes", [http_1.Http, router_1.Router])
-    ], LoginEnseignantComponent);
     return LoginEnseignantComponent;
 }());
+LoginEnseignantComponent = __decorate([
+    core_1.Component({
+        selector: 'loginEnseignant',
+        templateUrl: "./../html/indexConnexionEnseignantEtudiant.html",
+        /*template: `Je suis un composant super !
+       
+       
+        
+        <div > Yéééé !
+     
+             <input type="text" placeholder="votre courriel ou votre numéro d'employé" id="Prof" name="Courriel" [(ngModel)]="courriel"  required>
+             <button (click)="Connexion()" routerLink="/accueil-enseignant" routerLinkActive="active">Connexion</button>
+        </div>
+        `,*/
+        styleUrls: ["./../css/style_page_accueil.css"],
+    }),
+    __metadata("design:paramtypes", [http_1.Http, router_1.Router])
+], LoginEnseignantComponent);
 exports.LoginEnseignantComponent = LoginEnseignantComponent;
 //# sourceMappingURL=loginenseignant.component.js.map
