@@ -15,7 +15,7 @@ var pageAccueilEnseignantComponent = (function () {
             selector: 'accueil_enseignant',
             //template: `<h1>ma page accueil enseignant</h1>`
             templateUrl: "./../html/AccueilEnseignant.html",
-            styleUrls: ["./../css/accueil_enseignant.css", "./../monbootstrap/css/bootstrap.min.css"],
+            styleUrls: ["./../monbootstrap/css/bootstrap.min.css", "./../css/accueil_enseignant.css"],
         })
     ], pageAccueilEnseignantComponent);
     return pageAccueilEnseignantComponent;
