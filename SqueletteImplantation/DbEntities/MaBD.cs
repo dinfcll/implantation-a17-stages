@@ -8,6 +8,8 @@ namespace SqueletteImplantation.DbEntities
     {
         public virtual DbSet<Machin> Machin { get; set; }
         public virtual DbSet<Enseignant> Enseignant {get; set;}
+
+        public virtual DbSet<Entreprise> Entreprise {get; set;}
         public MaBd(DbContextOptions options) : base(options)
         {
         }
