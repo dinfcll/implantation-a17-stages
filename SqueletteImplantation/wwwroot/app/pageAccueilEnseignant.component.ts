@@ -29,7 +29,7 @@ export class pageAccueilEnseignantComponent {
         getEntreprise(Annee:string):void{
             //if(this.Annee==null)
             this.http.get("api/Enseignant", JSON.stringify({Annee})).subscribe(donnees => {this.entreprises
-                = donnees.json() as Entreprise[];
+                = donnees.json() as Entreprise[]});
         
         }
     
