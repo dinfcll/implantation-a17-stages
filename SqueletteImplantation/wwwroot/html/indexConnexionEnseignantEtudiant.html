@@ -26,7 +26,7 @@
                                <input type="text" placeholder="Votre courriel ou votre numéro d'employé" id="Prof" name="Courriel" [(ngModel)]="courriel" >
                        
                                <input type="password" placeholder="Saisir votre mot de passe" id="MdpProf" name="mdpProf" [(ngModel)]="mdp" >
-                                <button (click)="getEnseignants()"  id="btn2"  >Connexion</button>
+                                <button (click)="Connexion(courriel, mdp)"  id="btn2"  >Connexion</button>
                               
                                 
                            

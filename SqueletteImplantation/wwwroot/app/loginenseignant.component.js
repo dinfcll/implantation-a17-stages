@@ -8,7 +8,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
 var router_1 = require("@angular/router");
@@ -16,29 +15,20 @@ var LoginEnseignantComponent = (function () {
     function LoginEnseignantComponent(http, router) {
         this.http = http;
         this.router = router;
-        //this. getEnseignants();
-        this.enseignants = [];
-        this.result = false;
-        this.courriel = "";
-        this.mdp = "";
     }
-    LoginEnseignantComponent.prototype.getEnseignants = function () {
+    LoginEnseignantComponent.prototype.Connexion = function (courriel, mdp) {
         var _this = this;
-        this.http.get("api/Enseignant").subscribe(function (donnees) {
-            _this.enseignants
-                = donnees.json();
-            var i = 0;
-            while (i < _this.enseignants.length && _this.courriel != "test" && _this.mdp != "test" /*this.enseignants[i].MotDePasse*/) {
-                console.log(_this.enseignants[i].NomUti);
-                console.log(_this.courriel);
-                i++;
-            }
-            if (i < _this.enseignants.length) {
-                _this.result = true;
+        this.http
+            .post("api/Enseignant", JSON.stringify({ courriel: courriel, mdp: mdp }))
+            .subscribe(function (r) {
+            if (r != null) {
+                //naviguer plus loin
                 _this.router.navigate(['/accueil-enseignant']);
             }
-            console.log(_this.enseignants[i].NomUti);
-            return _this.result;
+            else {
+                //message erreur
+                console.log("desolé, je n ai rien trouvé");
+            }
         });
     };
     return LoginEnseignantComponent;
@@ -47,16 +37,6 @@ LoginEnseignantComponent = __decorate([
     core_1.Component({
         selector: 'loginEnseignant',
         templateUrl: "./../html/indexConnexionEnseignantEtudiant.html",
-        /*template: `Je suis un composant super !
-       
-       
-        
-        <div > Yéééé !
-     
-             <input type="text" placeholder="votre courriel ou votre numéro d'employé" id="Prof" name="Courriel" [(ngModel)]="courriel"  required>
-             <button (click)="Connexion()" routerLink="/accueil-enseignant" routerLinkActive="active">Connexion</button>
-        </div>
-        `,*/
         styleUrls: ["./../css/style_page_accueil.css"],
     }),
     __metadata("design:paramtypes", [http_1.Http, router_1.Router])
