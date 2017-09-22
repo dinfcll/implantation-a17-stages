@@ -8,6 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 var http_1 = require("@angular/http");
 var core_1 = require("@angular/core");
 var pageAccueilEnseignantComponent = (function () {
@@ -16,11 +17,8 @@ var pageAccueilEnseignantComponent = (function () {
     }
     pageAccueilEnseignantComponent.prototype.getEntreprise = function (annee) {
         var _this = this;
-        this.http.get("api/Entreprise", JSON.stringify({ annee: annee })).subscribe(function (donnees) {
+        this.http.get("api/Entreprise/" + annee).subscribe(function (donnees) {
             _this.entreprises = donnees.json();
-            if (donnees != null) {
-                console.log(donnees);
-            }
         });
     };
     return pageAccueilEnseignantComponent;

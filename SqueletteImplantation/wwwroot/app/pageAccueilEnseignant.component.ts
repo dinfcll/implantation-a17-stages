@@ -23,29 +23,13 @@ export class pageAccueilEnseignantComponent {
   
         }
         getEntreprise(annee:string){
-            
-            this.http.get("api/Entreprise", JSON.stringify({annee})).subscribe(
-                donnees => {this.entreprises = donnees.json() as Entreprise[]
-                    
-                    if(donnees != null)
-                        {
-                            console.log(donnees);
-                        }
-                    
-                
-                },
-               
-                
-            
-            
+
+            this.http.get("api/Entreprise/" + annee).subscribe(
+                donnees => {
+                this.entreprises = donnees.json() as Entreprise[]               
+                }    
             );
-        
-        }
-    
-    
-    
-    
-    
-    }
+        }     
+      }
 
 
