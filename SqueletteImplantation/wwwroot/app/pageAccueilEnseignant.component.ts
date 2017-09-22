@@ -18,18 +18,30 @@ import { Component } from '@angular/core';
 
 export class pageAccueilEnseignantComponent { 
     entreprises: Entreprise[];
-   
+    //annee:string;
 
     constructor(private http: Http){
-        //this.Annee="2017";
         
         }
 
 
-        getEntreprise(Annee:string):void{
-            //if(this.Annee==null)
-            this.http.get("api/Enseignant", JSON.stringify({Annee})).subscribe(donnees => {this.entreprises
-                = donnees.json() as Entreprise[]});
+        getEntreprise(annee:string){
+            
+            this.http.get("api/Entreprise", JSON.stringify({annee})).subscribe(
+                donnees => {this.entreprises = donnees.json() as Entreprise[]
+                    
+                    if(donnees != null)
+                        {
+                            console.log(donnees);
+                        }
+                    
+                
+                },
+               
+                
+            
+            
+            );
         
         }
     

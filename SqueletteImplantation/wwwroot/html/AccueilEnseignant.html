@@ -7,38 +7,15 @@
 			</head>
 			<body>
 					<div>
-							<!--<button id="ent">Entrprise</button>
+							<button id="ent">Entrprise</button>
 							<button id="etu">Étudiant</button>
 							<button id="dec">Déconnexion</button>
-							<input type="text" placeholder="Recherche" id="txtRecherche">
-							<button id="rech">Recherche</button>-->
-							<!--<p>Elle chercha donc une cabine téléphonique, </p>
-							<p>Elle chercha donc une cabine téléphonique, </p>
-							<p>Elle chercha donc une cabine téléphonique, </p>
-							<p>Elle chercha donc une cabine téléphonique, </p>
-							<p>Elle chercha donc une cabine téléphonique, </p>
-							<p>Elle chercha donc une cabine téléphonique, </p>
-							<p>Elle chercha donc une cabine téléphonique, </p>
-							<p>Elle chercha donc une cabine téléphonique, </p>
-							<p>Elle chercha donc une cabine téléphonique, </p>
-							<p>Elle chercha donc une cabine téléphonique, </p>
-							<p>Elle chercha donc une cabine téléphonique, </p>
-							<p>Elle chercha donc une cabine téléphonique, </p>
-							<p>Elle chercha donc une cabine téléphonique, </p>
-							<p>Elle chercha donc une cabine téléphonique, </p>
-							<p>Elle chercha donc une cabine téléphonique, </p>
-							<p>Elle chercha donc une cabine téléphonique, </p>
-							<p>Elle chercha donc une cabine téléphonique, </p>
-							<p>Elle chercha donc une cabine téléphonique, </p>
-							<p>Elle chercha donc une cabine téléphonique, </p>
-							<p>Elle chercha donc une cabine téléphonique, </p>
-							<p>Elle chercha donc une cabine téléphonique, </p>
-							<p>Elle chercha donc une cabine téléphonique, </p>
-							<p>Elle chercha donc une cabine téléphonique, </p>
-							<p>Elle chercha donc une cabine téléphonique, </p>
-							<p>Elle chercha donc une cabine téléphonique, </p>
-							<p>Elle chercha donc une cabine téléphonique, </p>
-							<p>Elle chercha donc une cabine téléphonique, </p>-->
+							<div *ngIf="entreprises"> Yeeee {{ entreprises  }}</div>
+							<div *ngIf="!entreprises"> Chargement...</div>
+							<input type="text" placeholder="Recherche" id="txtRecherche" [(ngModel)]="annee">
+							<button id="rech"  (click)="getEntreprise(annee)" >Recherche</button>
+							
+							
 							
 					</div>
 			</body>
