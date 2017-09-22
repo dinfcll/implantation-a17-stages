@@ -19,36 +19,29 @@ import {  Router }   from '@angular/router';
 })
 
 export class LoginEnseignantComponent { 
-    private enseignants: Enseignant[];
-    mdp:string ;
-    result:boolean;
-    courriel : string;
+    
     constructor(private http: Http,  private router: Router){
-        this.enseignants=[];
-        this.result=false;
-        this.courriel="";
-        this.mdp="";
+        
     }
 
-    getEnseignants():void{
-        this.http.get("api/Enseignant").subscribe(donnees => {this.enseignants
-        = donnees.json() as Enseignant[]
-     var i=0;
-        while(i< this.enseignants.length && this.courriel != "test" && this.mdp!="test")
+    Connexion(courriel: string, mdp: string) {
+        this.http
+            .post("api/Enseignant", JSON.stringify({courriel, mdp}))
+            .subscribe(r=>
             {
-                console.log(this.enseignants[i].NomUti);
-                console.log(this.courriel);
-                i++;
-            }
-            if(i< this.enseignants.length)
-                {
+                if(r!= null)
+                    {
+                         //naviguer plus loin
+                         this.router.navigate(['/accueil-enseignant']);
+                    }
                    
-                     this.result =true;
-                     this.router.navigate(['/accueil-enseignant']);
-                }
-             console.log(this.enseignants[i].NomUti);
-        return this.result;
-});
+                else
+                    {
+                        //message erreur
+                         console.log("desolé, je n ai rien trouvé");
+                    }
+                    
+            })
     }
     
     

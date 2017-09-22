@@ -1,56 +1,23 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    
-    
-    <title>Accueil Enseignant</title>
-    
-  </head>
-  <body>
-  
-    <div class="container-fluid">
-      <header class="row col-sm-12">
-        <div class="page-header">
-          <h1>Stage en informatique</h1>
-        </div>
-      </header>
-      <div class="row col-sm-12">
-          <nav class="col-sm-2">
-            <ul class="nav-nav-pills nav-stacked">
-                  <li class="active"><a>Etudiant</a> </li>
-                    
-                  <li class="active"><a>Professeur</a> </li>
-                    
-                  <li class="active"><a>Entreprise</a> </li>
-            </ul>
-          </nav>
+﻿<!DOCTYPE html>
 
-          <section class="col-sm-10">
-            <div class="panel panel-default">
-                <div class="panel panel-heading">
-                    <h3 class="panel-title">Accueil enseignant</h3>
-                </div>
-            </div>
-            <div class="panel-body">
-            
-            
-            </div>
-           
-          </section> 
-      </div>
-      <footer class="row col-sm-12">
-        <div class="panel panel-body"></div>
-      </footer>
-    
-    </div>
-  </body>
+<html lang="fr">
+            <head>
+			   <meta charset="UTF-8">
+			   
+			</head>
+			<body>
+					<div>
+							<button id="ent">Entrprise</button>
+							<button id="etu">Étudiant</button>
+							<button id="dec">Déconnexion</button>
+							<div *ngIf="entreprises"> Yeeee {{ entreprises  }}</div>
+							<div *ngIf="!entreprises"> Chargement...</div>
+							<input type="text" placeholder="Recherche" id="txtRecherche" [(ngModel)]="annee">
+							<button id="rech"  (click)="getEntreprise(annee)" >Recherche</button>
+							
+							
+							
+					</div>
+			</body>
+
 </html>
-
-  
-        
-                
-                
-       
-            
-        
