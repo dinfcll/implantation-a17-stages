@@ -18,13 +18,10 @@ import { Component } from '@angular/core';
 
 export class pageAccueilEnseignantComponent { 
     entreprises: Entreprise[];
-    //annee:string;
 
     constructor(private http: Http){
-        
+  
         }
-
-
         getEntreprise(annee:string){
             
             this.http.get("api/Entreprise", JSON.stringify({annee})).subscribe(

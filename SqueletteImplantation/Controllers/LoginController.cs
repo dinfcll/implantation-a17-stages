@@ -20,15 +20,11 @@ namespace SqueletteImplantation.Controllers
         [Route("api/Enseignant")]
         public IActionResult LoginEnseignant(EnseignantDto ens)
         {
-           //var obj=_maBd.Enseignant.Where(a => a.Courriel.Equals(ens.Courriel) && a.MotDePasse.Equals(ens.MotDePasse)).FirstOrDefault();
            var obj = _maBd.Enseignant.FirstOrDefault(m => m.Courriel == ens.Courriel && m.MotDePasse == ens.MotDePasse);
-           
            if(obj == null)
            {
                return new OkObjectResult(null);
            }
-           
-
             return new OkObjectResult(obj);
         }
     }

@@ -8,19 +8,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 var http_1 = require("@angular/http");
 var core_1 = require("@angular/core");
 var pageAccueilEnseignantComponent = (function () {
-    //annee:string;
     function pageAccueilEnseignantComponent(http) {
         this.http = http;
-        //this.Annee="2017";
-        //this.getEntreprise(this.annee);
     }
     pageAccueilEnseignantComponent.prototype.getEntreprise = function (annee) {
         var _this = this;
-        //if(this.Annee==null)
         this.http.get("api/Entreprise", JSON.stringify({ annee: annee })).subscribe(function (donnees) {
             _this.entreprises = donnees.json();
             if (donnees != null) {
@@ -28,15 +23,15 @@ var pageAccueilEnseignantComponent = (function () {
             }
         });
     };
-    pageAccueilEnseignantComponent = __decorate([
-        core_1.Component({
-            selector: 'accueil_enseignant',
-            templateUrl: "./../html/AccueilEnseignant1.html",
-            styleUrls: ["./../css/accueil_enseignant1.css"],
-        }),
-        __metadata("design:paramtypes", [http_1.Http])
-    ], pageAccueilEnseignantComponent);
     return pageAccueilEnseignantComponent;
 }());
+pageAccueilEnseignantComponent = __decorate([
+    core_1.Component({
+        selector: 'accueil_enseignant',
+        templateUrl: "./../html/AccueilEnseignant.html",
+        styleUrls: ["./../css/accueil_enseignant.css"],
+    }),
+    __metadata("design:paramtypes", [http_1.Http])
+], pageAccueilEnseignantComponent);
 exports.pageAccueilEnseignantComponent = pageAccueilEnseignantComponent;
 //# sourceMappingURL=pageAccueilEnseignant.component.js.map
