@@ -8,19 +8,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 var http_1 = require("@angular/http");
 var core_1 = require("@angular/core");
+var router_1 = require("@angular/router");
 var pageAccueilEnseignantComponent = (function () {
-    function pageAccueilEnseignantComponent(http) {
+    function pageAccueilEnseignantComponent(http, router) {
         this.http = http;
+        this.router = router;
     }
+    pageAccueilEnseignantComponent.prototype.Deconnexion = function () {
+        localStorage.removeItem('currentUser');
+        this.router.navigate(['/Login']);
+    };
     pageAccueilEnseignantComponent.prototype.getEntreprise = function (annee) {
         var _this = this;
-        this.http.get("api/Entreprise", JSON.stringify({ annee: annee })).subscribe(function (donnees) {
+        this.http.get("api/Entreprise/" + annee).subscribe(function (donnees) {
             _this.entreprises = donnees.json();
-            if (donnees != null) {
-                console.log(donnees);
-            }
         });
     };
     return pageAccueilEnseignantComponent;
@@ -31,7 +35,8 @@ pageAccueilEnseignantComponent = __decorate([
         templateUrl: "./../html/AccueilEnseignant.html",
         styleUrls: ["./../css/accueil_enseignant.css"],
     }),
-    __metadata("design:paramtypes", [http_1.Http])
+    __metadata("design:paramtypes", [typeof (_a = typeof http_1.Http !== "undefined" && http_1.Http) === "function" && _a || Object, typeof (_b = typeof router_1.Router !== "undefined" && router_1.Router) === "function" && _b || Object])
 ], pageAccueilEnseignantComponent);
 exports.pageAccueilEnseignantComponent = pageAccueilEnseignantComponent;
+var _a, _b;
 //# sourceMappingURL=pageAccueilEnseignant.component.js.map

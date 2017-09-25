@@ -4,7 +4,7 @@ body{
 }
 #dec {
 	
-	position:fixed;
+	position:relative;
 	margin-top:-450px;
 	margin-left:700px;
 	top:50%;
@@ -13,7 +13,7 @@ body{
 
 #txtRecherche {
 	
-	position:fixed;
+	position:relative;
 	margin-top:-350px;
 	margin-right:50px;
 	width:200px;
