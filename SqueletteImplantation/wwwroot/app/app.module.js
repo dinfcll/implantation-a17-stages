@@ -17,26 +17,36 @@ var pageAccueilEnseignant_component_1 = require("./pageAccueilEnseignant.compone
 var appRoutes = [
     {
         path: '',
-        component: loginenseignant_component_1.LoginEnseignantComponent
+        component: loginenseignant_component_1.LoginEnseignantComponent,
+        pathMatch: 'full',
     },
     {
         path: 'accueil-enseignant',
         component: pageAccueilEnseignant_component_1.pageAccueilEnseignantComponent
-    }
+    },
+    {
+        path: '**',
+        redirectTo: '',
+        pathMatch: 'full',
+    },
+    {
+        path: 'Login',
+        component: loginenseignant_component_1.LoginEnseignantComponent
+    },
 ];
 var AppModule = (function () {
     function AppModule() {
     }
+    AppModule = __decorate([
+        core_1.NgModule({
+            imports: [platform_browser_1.BrowserModule, forms_1.FormsModule, http_1.HttpModule, router_1.RouterModule.forRoot(appRoutes)],
+            declarations: [app_component_1.AppComponent,
+                loginenseignant_component_1.LoginEnseignantComponent,
+                pageAccueilEnseignant_component_1.pageAccueilEnseignantComponent],
+            bootstrap: [app_component_1.AppComponent]
+        })
+    ], AppModule);
     return AppModule;
 }());
-AppModule = __decorate([
-    core_1.NgModule({
-        imports: [platform_browser_1.BrowserModule, forms_1.FormsModule, http_1.HttpModule, router_1.RouterModule.forRoot(appRoutes)],
-        declarations: [app_component_1.AppComponent,
-            loginenseignant_component_1.LoginEnseignantComponent,
-            pageAccueilEnseignant_component_1.pageAccueilEnseignantComponent],
-        bootstrap: [app_component_1.AppComponent]
-    })
-], AppModule);
 exports.AppModule = AppModule;
 //# sourceMappingURL=app.module.js.map

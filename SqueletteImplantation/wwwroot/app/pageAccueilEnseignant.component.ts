@@ -5,6 +5,8 @@ import { Entreprise } from './models/entreprise.class';
 
 import { Component } from '@angular/core';
 
+import {  Router }   from '@angular/router';
+
 
 
 
@@ -19,8 +21,13 @@ import { Component } from '@angular/core';
 export class pageAccueilEnseignantComponent { 
     entreprises: Entreprise[];
 
-    constructor(private http: Http){
+    constructor(private http: Http, private router: Router){
   
+        }
+
+        Deconnexion(){
+            localStorage.removeItem('currentUser');
+            this.router.navigate(['/Login']);
         }
         getEntreprise(annee:string){
 

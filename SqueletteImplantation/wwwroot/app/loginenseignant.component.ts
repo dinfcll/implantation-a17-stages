@@ -9,6 +9,8 @@ import { Machin } from './models/machin.class';
 
 import {  Router }   from '@angular/router';
 
+import 'rxjs/add/operator/map'
+
 @Component({
     selector: 'loginEnseignant',
     templateUrl: `./../html/indexConnexionEnseignantEtudiant.html`,
@@ -20,8 +22,11 @@ import {  Router }   from '@angular/router';
 
 export class LoginEnseignantComponent { 
     isValid=true;
+    public token: string;
     constructor(private http: Http,  private router: Router){
-        
+        // set token if saved in local storage
+        var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        this.token = currentUser && currentUser.token;
     }
 
     Connexion(courriel: string, mdp: string) {
@@ -37,11 +42,20 @@ export class LoginEnseignantComponent {
                 console.log(r);
                 var patate = r.json();
                 console.log(patate);
+                // login successful if there's a jwt token in the response
+                let token = r.json() && r.json().token;
 
                 if(r.status == 200)
                     {
                          //naviguer plus loin
                          this.router.navigate(['/accueil-enseignant']);
+                         /************************** */
+                           // set token property
+                           this.token = token;
+                    
+                            // store courriel and jwt token in local storage to keep user logged in between page refreshes
+                            localStorage.setItem('currentUser', JSON.stringify({ courriel: courriel, token: token }));
+                         /*************************** */
                     }
                    
                 else

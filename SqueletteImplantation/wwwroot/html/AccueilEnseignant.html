@@ -9,7 +9,7 @@
 					<div>
 							<button id="ent">Entrprise</button>
 							<button id="etu">Étudiant</button>
-							<button id="dec">Déconnexion</button>
+							<button id="dec" (click)="Deconnexion()">Déconnexion</button>
 							<div *ngIf="entreprises"> Yeeee {{ entreprises  }}</div>
 							<div *ngIf="!entreprises"> Chargement...</div>
 							<input type="text" placeholder="Recherche" id="txtRecherche" [(ngModel)]="annee">

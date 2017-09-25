@@ -13,12 +13,24 @@ import { pageAccueilEnseignantComponent } from "./pageAccueilEnseignant.componen
 const appRoutes: Routes=[
   {
     path:'',
-    component: LoginEnseignantComponent
+    component: LoginEnseignantComponent,
+    pathMatch: 'full',
+    //name: 'login';
+    //useAsDefault:true
   },
   {
     path:'accueil-enseignant',
     component: pageAccueilEnseignantComponent
-  }
+  },
+  {
+     path: '**', 
+     redirectTo: '',
+     pathMatch: 'full',
+  },
+  {
+    path: 'Login', 
+    component: LoginEnseignantComponent
+  },
   
 ]
 

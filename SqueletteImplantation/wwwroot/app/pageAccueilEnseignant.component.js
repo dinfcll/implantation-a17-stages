@@ -11,40 +11,31 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var http_1 = require("@angular/http");
 var core_1 = require("@angular/core");
+var router_1 = require("@angular/router");
 var pageAccueilEnseignantComponent = (function () {
-    function pageAccueilEnseignantComponent(http) {
+    function pageAccueilEnseignantComponent(http, router) {
         this.http = http;
+        this.router = router;
     }
+    pageAccueilEnseignantComponent.prototype.Deconnexion = function () {
+        localStorage.removeItem('currentUser');
+        this.router.navigate(['/Login']);
+    };
     pageAccueilEnseignantComponent.prototype.getEntreprise = function (annee) {
         var _this = this;
-<<<<<<< HEAD
-        this.http.get("api/Entreprise", JSON.stringify({ annee: annee })).subscribe(function (donnees) {
-=======
         this.http.get("api/Entreprise/" + annee).subscribe(function (donnees) {
->>>>>>> 7e7bfe374eef157ba4e99b4e893ed5cd8bb93427
             _this.entreprises = donnees.json();
         });
     };
-<<<<<<< HEAD
     pageAccueilEnseignantComponent = __decorate([
         core_1.Component({
             selector: 'accueil_enseignant',
             templateUrl: "./../html/AccueilEnseignant.html",
-            styleUrls: ["./../css/accueil_enseignant1.css"],
+            styleUrls: ["./../css/accueil_enseignant.css"],
         }),
-        __metadata("design:paramtypes", [http_1.Http])
+        __metadata("design:paramtypes", [http_1.Http, router_1.Router])
     ], pageAccueilEnseignantComponent);
-=======
->>>>>>> 7e7bfe374eef157ba4e99b4e893ed5cd8bb93427
     return pageAccueilEnseignantComponent;
 }());
-pageAccueilEnseignantComponent = __decorate([
-    core_1.Component({
-        selector: 'accueil_enseignant',
-        templateUrl: "./../html/AccueilEnseignant.html",
-        styleUrls: ["./../css/accueil_enseignant.css"],
-    }),
-    __metadata("design:paramtypes", [http_1.Http])
-], pageAccueilEnseignantComponent);
 exports.pageAccueilEnseignantComponent = pageAccueilEnseignantComponent;
 //# sourceMappingURL=pageAccueilEnseignant.component.js.map
