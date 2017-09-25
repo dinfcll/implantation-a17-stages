@@ -27,15 +27,16 @@ var pageAccueilEnseignantComponent = (function () {
             _this.entreprises = donnees.json();
         });
     };
-    pageAccueilEnseignantComponent = __decorate([
-        core_1.Component({
-            selector: 'accueil_enseignant',
-            templateUrl: "./../html/AccueilEnseignant.html",
-            styleUrls: ["./../css/accueil_enseignant.css"],
-        }),
-        __metadata("design:paramtypes", [http_1.Http, router_1.Router])
-    ], pageAccueilEnseignantComponent);
     return pageAccueilEnseignantComponent;
 }());
+pageAccueilEnseignantComponent = __decorate([
+    core_1.Component({
+        selector: 'accueil_enseignant',
+        templateUrl: "./../html/AccueilEnseignant.html",
+        styleUrls: ["./../css/accueil_enseignant.css"],
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof http_1.Http !== "undefined" && http_1.Http) === "function" && _a || Object, typeof (_b = typeof router_1.Router !== "undefined" && router_1.Router) === "function" && _b || Object])
+], pageAccueilEnseignantComponent);
 exports.pageAccueilEnseignantComponent = pageAccueilEnseignantComponent;
+var _a, _b;
 //# sourceMappingURL=pageAccueilEnseignant.component.js.map

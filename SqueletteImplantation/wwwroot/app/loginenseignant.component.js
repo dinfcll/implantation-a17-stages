@@ -54,15 +54,16 @@ var LoginEnseignantComponent = (function () {
             }
         });
     };
-    LoginEnseignantComponent = __decorate([
-        core_1.Component({
-            selector: 'loginEnseignant',
-            templateUrl: "./../html/indexConnexionEnseignantEtudiant.html",
-            styleUrls: ["./../css/style_page_accueil.css"],
-        }),
-        __metadata("design:paramtypes", [http_1.Http, router_1.Router])
-    ], LoginEnseignantComponent);
     return LoginEnseignantComponent;
 }());
+LoginEnseignantComponent = __decorate([
+    core_1.Component({
+        selector: 'loginEnseignant',
+        templateUrl: "./../html/indexConnexionEnseignantEtudiant.html",
+        styleUrls: ["./../css/style_page_accueil.css"],
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof http_1.Http !== "undefined" && http_1.Http) === "function" && _a || Object, typeof (_b = typeof router_1.Router !== "undefined" && router_1.Router) === "function" && _b || Object])
+], LoginEnseignantComponent);
 exports.LoginEnseignantComponent = LoginEnseignantComponent;
+var _a, _b;
 //# sourceMappingURL=loginenseignant.component.js.map
