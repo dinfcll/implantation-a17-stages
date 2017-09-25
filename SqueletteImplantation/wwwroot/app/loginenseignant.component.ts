@@ -1,7 +1,7 @@
 
 import { Component } from '@angular/core';
 
-import { Http } from '@angular/http';
+import { Http, Headers } from '@angular/http';
 
 import { Enseignant } from './models/enseignant.class';
 
@@ -19,17 +19,26 @@ import {  Router }   from '@angular/router';
 })
 
 export class LoginEnseignantComponent { 
-    
+    isValid=true;
     constructor(private http: Http,  private router: Router){
         
     }
 
     Connexion(courriel: string, mdp: string) {
+        var headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+
+
+
         this.http
-            .post("api/Enseignant", JSON.stringify({courriel, mdp}))
+            .post("api/Enseignant", JSON.stringify({courriel: courriel, motDePasse: mdp}), { headers: headers })
             .subscribe(r=>
             {
-                if(r!= null)
+                console.log(r);
+                var patate = r.json();
+                console.log(patate);
+
+                if(r.status == 200)
                     {
                          //naviguer plus loin
                          this.router.navigate(['/accueil-enseignant']);
@@ -38,7 +47,13 @@ export class LoginEnseignantComponent {
                 else
                     {
                         //message erreur
-                         console.log("desolé, je n ai rien trouvé");
+                        if(r.status == 204)
+                            {
+                                this.isValid=false;
+                                console.log("desolé, je n ai rien trouvé");
+                                console.log(this.isValid);
+                            }
+                         
                     }
                     
             })

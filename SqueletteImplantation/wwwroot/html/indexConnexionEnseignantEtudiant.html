@@ -27,7 +27,7 @@
                        
                                <input type="password" placeholder="Saisir votre mot de passe" id="MdpProf" name="mdpProf" [(ngModel)]="mdp" >
                                 <button (click)="Connexion(courriel, mdp)"  id="btn2"  >Connexion</button>
-                              
+                                <p *ngIf="!isValid" id="alert">Courriel ou mot de passe invalide!!!</p>
                                 
                            
                 

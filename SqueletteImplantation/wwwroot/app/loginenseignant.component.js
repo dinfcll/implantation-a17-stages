@@ -16,19 +16,29 @@ var LoginEnseignantComponent = (function () {
     function LoginEnseignantComponent(http, router) {
         this.http = http;
         this.router = router;
+        this.isValid = true;
     }
     LoginEnseignantComponent.prototype.Connexion = function (courriel, mdp) {
         var _this = this;
+        var headers = new http_1.Headers();
+        headers.append('Content-Type', 'application/json');
         this.http
-            .post("api/Enseignant", JSON.stringify({ courriel: courriel, mdp: mdp }))
+            .post("api/Enseignant", JSON.stringify({ courriel: courriel, motDePasse: mdp }), { headers: headers })
             .subscribe(function (r) {
-            if (r != null) {
+            console.log(r);
+            var patate = r.json();
+            console.log(patate);
+            if (r.status == 200) {
                 //naviguer plus loin
                 _this.router.navigate(['/accueil-enseignant']);
             }
             else {
                 //message erreur
-                console.log("desolé, je n ai rien trouvé");
+                if (r.status == 204) {
+                    _this.isValid = false;
+                    console.log("desolé, je n ai rien trouvé");
+                    console.log(_this.isValid);
+                }
             }
         });
     };

@@ -13,12 +13,12 @@ import { Component } from '@angular/core';
     selector: 'accueil_enseignant',
 
     templateUrl:`./../html/AccueilEnseignant.html`,
-    styleUrls:[`./../css/accueil_enseignant.css`],
+    styleUrls:[`./../css/accueil_enseignant1.css`],
 })
 
 export class pageAccueilEnseignantComponent { 
     entreprises: Entreprise[];
-    //annee:string;
+    
 
     constructor(private http: Http){
         

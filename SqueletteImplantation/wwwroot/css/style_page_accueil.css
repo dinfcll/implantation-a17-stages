@@ -125,3 +125,8 @@ body {
       padding-top:5px;
       font-size:35px;
     }
+
+    #alert {
+      color: red;
+      background-color: red;
+    }
