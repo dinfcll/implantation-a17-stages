@@ -13,42 +13,23 @@ import { Component } from '@angular/core';
     selector: 'accueil_enseignant',
 
     templateUrl:`./../html/AccueilEnseignant.html`,
-    styleUrls:[`./../css/accueil_enseignant1.css`],
+    styleUrls:[`./../css/accueil_enseignant.css`],
 })
 
 export class pageAccueilEnseignantComponent { 
     entreprises: Entreprise[];
-    
 
     constructor(private http: Http){
-        
+  
         }
-
-
         getEntreprise(annee:string){
-            
-            this.http.get("api/Entreprise", JSON.stringify({annee})).subscribe(
-                donnees => {this.entreprises = donnees.json() as Entreprise[]
-                    
-                    if(donnees != null)
-                        {
-                            console.log(donnees);
-                        }
-                    
-                
-                },
-               
-                
-            
-            
+
+            this.http.get("api/Entreprise/" + annee).subscribe(
+                donnees => {
+                this.entreprises = donnees.json() as Entreprise[]               
+                }    
             );
-        
-        }
-    
-    
-    
-    
-    
-    }
+        }     
+      }
 
 

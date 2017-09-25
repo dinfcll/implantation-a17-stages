@@ -17,13 +17,15 @@ var pageAccueilEnseignantComponent = (function () {
     }
     pageAccueilEnseignantComponent.prototype.getEntreprise = function (annee) {
         var _this = this;
+<<<<<<< HEAD
         this.http.get("api/Entreprise", JSON.stringify({ annee: annee })).subscribe(function (donnees) {
+=======
+        this.http.get("api/Entreprise/" + annee).subscribe(function (donnees) {
+>>>>>>> 7e7bfe374eef157ba4e99b4e893ed5cd8bb93427
             _this.entreprises = donnees.json();
-            if (donnees != null) {
-                console.log(donnees);
-            }
         });
     };
+<<<<<<< HEAD
     pageAccueilEnseignantComponent = __decorate([
         core_1.Component({
             selector: 'accueil_enseignant',
@@ -32,7 +34,17 @@ var pageAccueilEnseignantComponent = (function () {
         }),
         __metadata("design:paramtypes", [http_1.Http])
     ], pageAccueilEnseignantComponent);
+=======
+>>>>>>> 7e7bfe374eef157ba4e99b4e893ed5cd8bb93427
     return pageAccueilEnseignantComponent;
 }());
+pageAccueilEnseignantComponent = __decorate([
+    core_1.Component({
+        selector: 'accueil_enseignant',
+        templateUrl: "./../html/AccueilEnseignant.html",
+        styleUrls: ["./../css/accueil_enseignant.css"],
+    }),
+    __metadata("design:paramtypes", [http_1.Http])
+], pageAccueilEnseignantComponent);
 exports.pageAccueilEnseignantComponent = pageAccueilEnseignantComponent;
 //# sourceMappingURL=pageAccueilEnseignant.component.js.map

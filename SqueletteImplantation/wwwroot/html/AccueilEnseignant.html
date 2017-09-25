@@ -14,8 +14,10 @@
 							<div *ngIf="!entreprises"> Chargement...</div>
 							<input type="text" placeholder="Recherche" id="txtRecherche" [(ngModel)]="annee">
 							<button id="rech"  (click)="getEntreprise(annee)" >Recherche</button>
-							
-							
+							<li *ngFor="let entreprise of entreprises">
+ 								<span>{{entreprise.courriel | json}}</span>
+							</li>
+
 							
 					</div>
 			</body>
