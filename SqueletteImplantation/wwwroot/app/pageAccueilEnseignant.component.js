@@ -8,7 +8,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 var http_1 = require("@angular/http");
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
@@ -27,15 +26,15 @@ var pageAccueilEnseignantComponent = (function () {
             _this.entreprises = donnees.json();
         });
     };
-    pageAccueilEnseignantComponent = __decorate([
-        core_1.Component({
-            selector: 'accueil_enseignant',
-            templateUrl: "./../html/AccueilEnseignant.html",
-            styleUrls: ["./../css/accueil_enseignant.css"],
-        }),
-        __metadata("design:paramtypes", [http_1.Http, router_1.Router])
-    ], pageAccueilEnseignantComponent);
     return pageAccueilEnseignantComponent;
 }());
+pageAccueilEnseignantComponent = __decorate([
+    core_1.Component({
+        selector: 'accueil_enseignant',
+        templateUrl: "./../html/AccueilEnseignant.html",
+        styleUrls: ["./../css/accueil_enseignant.css"],
+    }),
+    __metadata("design:paramtypes", [http_1.Http, router_1.Router])
+], pageAccueilEnseignantComponent);
 exports.pageAccueilEnseignantComponent = pageAccueilEnseignantComponent;
 //# sourceMappingURL=pageAccueilEnseignant.component.js.map

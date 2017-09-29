@@ -1,5 +1,4 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 var Etudiant = (function () {
     function Etudiant(NoDa, Nom, Prenom, AddresseCourriel, MotPasse, NoTel, NoEntreprise) {
         this.NoDa = NoDa;
