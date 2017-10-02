@@ -8,6 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
 var router_1 = require("@angular/router");
@@ -41,6 +42,7 @@ var LoginEnseignantComponent = (function () {
                 _this.token = token;
                 // store courriel and jwt token in local storage to keep user logged in between page refreshes
                 localStorage.setItem('currentUser', JSON.stringify({ courriel: courriel, token: token }));
+                /*************************** */
             }
             else {
                 //message erreur
@@ -52,15 +54,15 @@ var LoginEnseignantComponent = (function () {
             }
         });
     };
+    LoginEnseignantComponent = __decorate([
+        core_1.Component({
+            selector: 'loginEnseignant',
+            templateUrl: "./../html/indexConnexionEnseignantEtudiant.html",
+            styleUrls: ["./../css/style_page_accueil.css"],
+        }),
+        __metadata("design:paramtypes", [http_1.Http, router_1.Router])
+    ], LoginEnseignantComponent);
     return LoginEnseignantComponent;
 }());
-LoginEnseignantComponent = __decorate([
-    core_1.Component({
-        selector: 'loginEnseignant',
-        templateUrl: "./../html/indexConnexionEnseignantEtudiant.html",
-        styleUrls: ["./../css/style_page_accueil.css"],
-    }),
-    __metadata("design:paramtypes", [http_1.Http, router_1.Router])
-], LoginEnseignantComponent);
 exports.LoginEnseignantComponent = LoginEnseignantComponent;
 //# sourceMappingURL=loginenseignant.component.js.map
