@@ -16,27 +16,55 @@ var pageAccueilEnseignantComponent = (function () {
     function pageAccueilEnseignantComponent(http, router) {
         this.http = http;
         this.router = router;
+        this.annees = "";
+        this.Recherche = "";
+        this.getEntreprise("", "");
+        this.RemplirCombo();
     }
     pageAccueilEnseignantComponent.prototype.Deconnexion = function () {
         localStorage.removeItem('currentUser');
         this.router.navigate(['/Login']);
     };
-    pageAccueilEnseignantComponent.prototype.getEntreprise = function (annee) {
+    pageAccueilEnseignantComponent.prototype.RemplirCombo = function () {
         var _this = this;
-        this.http.get("api/Entreprise/" + annee).subscribe(function (donnees) {
-            _this.entreprises = donnees.json();
+        this.http.get("api/Entreprise/RemplirCombo").subscribe(function (donnees) {
+            _this.TAnnees = donnees.json();
+            console.log(_this.TAnnees);
         });
     };
+    pageAccueilEnseignantComponent.prototype.getEntreprise = function (Recherche, annees) {
+        var _this = this;
+        var url;
+        if ((Recherche == "" && annees == "")) {
+            url = "api/Entreprise/annees";
+        }
+        else {
+            if (Recherche != "" && annees == "") {
+                url = " api/Entreprise/RechercheSansAnnee/" + Recherche;
+            }
+            else {
+                if (Recherche == "" && annees != "") {
+                    url = "api/Entreprise/RechercheAnnee/" + annees;
+                }
+                else {
+                    url = "api/Entreprise/" + annees + "/" + Recherche;
+                }
+            }
+        }
+        this.http.get(url).subscribe(function (donnees) {
+            _this.entreprises = donnees.json();
+            console.log(_this.entreprises);
+        });
+    };
+    pageAccueilEnseignantComponent = __decorate([
+        core_1.Component({
+            selector: 'accueil_enseignant',
+            templateUrl: "./../html/AccueilEnseignant.html",
+            styleUrls: ["./../css/accueil_enseignant.css"],
+        }),
+        __metadata("design:paramtypes", [http_1.Http, router_1.Router])
+    ], pageAccueilEnseignantComponent);
     return pageAccueilEnseignantComponent;
 }());
-pageAccueilEnseignantComponent = __decorate([
-    core_1.Component({
-        selector: 'accueil_enseignant',
-        templateUrl: "./../html/AccueilEnseignant.html",
-        styleUrls: ["./../css/accueil_enseignant.css"],
-    }),
-    __metadata("design:paramtypes", [typeof (_a = typeof http_1.Http !== "undefined" && http_1.Http) === "function" && _a || Object, typeof (_b = typeof router_1.Router !== "undefined" && router_1.Router) === "function" && _b || Object])
-], pageAccueilEnseignantComponent);
 exports.pageAccueilEnseignantComponent = pageAccueilEnseignantComponent;
-var _a, _b;
 //# sourceMappingURL=pageAccueilEnseignant.component.js.map

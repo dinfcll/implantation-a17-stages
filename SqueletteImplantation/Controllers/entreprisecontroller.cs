@@ -19,33 +19,83 @@ namespace SqueletteImplantation.Controllers
         }
 
 
+       
         [HttpGet]
-        [Route("api/Entreprise/")]
-        public IEnumerable ToutesEntreprises(string Annee)
+        [Route("api/Entreprise/annees")]
+        public IEnumerable EntrepriseAnnee()
         {
-            //Recherche l'occurence des entreprises recherch�es pour une ann�e
-           /* List<Entreprise> ListeEntreprise = 
-            _maBd.Entreprise.Where(m=>m.date==Annee).ToList();*/
+            var AnneeRecente =(from b in _maBd.Entreprise
+             select b.date).Max();
+        return from b in _maBd.Entreprise
+         where b.date.Contains(AnneeRecente.ToString())
+         select b;
+        }
+        [HttpGet]
+        [Route("api/Entreprise/RechercheAnnee/{annees}")]
+        public IEnumerable EntrepriseRechercheAnnee(string annees)
+        {
             return from b in _maBd.Entreprise
-            where b.date==Annee
-            select b;
+                   where b.date.Contains(annees.ToString())
+                   select b;
+        }
+        [HttpGet]
+        [Route("api/Entreprise/RechercheSansAnnee/{recherchetxtbox}")]
+        public IEnumerable Recherche(string recherchetxtbox)
+        {
+            return from b in _maBd.Entreprise
+            where 
+            b.Lieu.Contains(recherchetxtbox)||
+            b.NoTel.Contains(recherchetxtbox) ||
+            b.PersonneResponsable.Contains(recherchetxtbox)||
+            b.Poste.Contains(recherchetxtbox)
+            orderby b.date
+            select new 
+            {b.NomEntreprise,
+            b.Lieu,
+            b.NoTel,
+            b.Poste,
+            b.PersonneResponsable,
+            b.NbreNon, 
+            b.NbreOui, 
+            b.CourrielRes,
+            b.date
+        };
         }
 
         [HttpGet]
-        [Route("api/Entreprise/{recherchetxtbox}")]
-        public IEnumerable Recherche(string recherchetxtbox)
+        [Route("api/Entreprise/{annees}/{recherchetxtbox}")]
+        public IEnumerable Recherche(string recherchetxtbox, string annees)
         {
-             // Linq, recherche l'occurence dans tous les enregistrements.
-             return from b in _maBd.Entreprise
-             where b.date.Contains(recherchetxtbox) || 
-             b.Lieu.Contains(recherchetxtbox)||
-             b.NoTel.Contains(recherchetxtbox)||
-             b.PersonneResponsable.Contains(recherchetxtbox)||
-             b.Poste.Contains(recherchetxtbox)
-             select b;
-             
-             
+            return from b in _maBd.Entreprise
+                   where b.date.Contains(annees) && (
+                   b.Lieu.Contains(recherchetxtbox) ||
+                   b.NoTel.Contains(recherchetxtbox) ||
+                   b.PersonneResponsable.Contains(recherchetxtbox) ||
+                   b.Poste.Contains(recherchetxtbox))
+                   orderby b.date
+                   select new
+                   { b.NomEntreprise,
+                       b.Lieu,
+                       b.NoTel,
+                       b.Poste,
+                       b.PersonneResponsable,
+                       b.NbreNon,
+                       b.NbreOui,
+                       b.CourrielRes,
+                       b.date
+                   };
         }
+
+        [HttpGet]
+        [Route("api/Entreprise/RemplirCombo")]
+        public IEnumerable ListeAnnees()
+        {
+            return (from b in _maBd.Entreprise
+                    orderby b.date descending
+                    select b.date).Distinct();
+        }
+     
+        
     }
 
 }
