@@ -33,22 +33,16 @@ const appRoutes: Routes=[
      redirectTo: '',
      pathMatch: 'full',
   },*/
-/* {
-    path: 'recherche-etudiant', 
-    component: PageRechercheEtudiantComponent 
-  },*/
+ {
+    path: 'Login', 
+    component: LoginEnseignantComponent 
+  },
   
   {
     path: 'recherche-entreprise', 
     component:  pageAccueilEnseignantComponent//PageRechercheEtudiantComponent 
   },
- /*
-  children: [ 
-    {
-        path: 'recherche-etudiant',
-        component: PageRechercheEtudiantComponent
-    }
-       ]*/
+ 
   
 ]
 

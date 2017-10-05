@@ -16,15 +16,15 @@
 							
 							<div>
 								
-									<button id="etu">Étudiant</button>
 									
-									<div *ngIf="!entreprises"> Chargement...</div>
-									<input type="text" placeholder="Recherche" id="txtRecherche" [(ngModel)]="Recherche">
-									<button id="rech"  (click)="getEntreprise(Recherche,annees)" >Recherche</button>	
-									<input type="text" placeholder="Annee" id="txtAnnee" [(ngModel)]="annees">
-
-									<table border=1 >
-										<tr>
+							
+									<input type="text" placeholder="Recherche" id="recherche" [(ngModel)]="Recherche">
+									<button class="loupe"   (click)="getEntreprise(Recherche,annees)" ></button>	
+									
+							<table border=1 >
+											<caption>Tableau de données des entreprises</caption>
+								<thead>	
+								       <tr>
 											<th>
 												Nom d'entreprise
 											</th>
@@ -49,10 +49,13 @@
 											<th>
 												Courriel du responsable 
 											</th>
-											<th>
-												Date
+											<th id="date">
+												Date(Année)
 											</th>
 										</tr>
+									</thead>
+
+									<tbody>
 										<tr *ngFor="let entreprise of entreprises">
 											<td> {{entreprise.nomEntreprise }}</td>
 											<td> {{entreprise.lieu}}</td>
@@ -64,7 +67,8 @@
 											<td> {{entreprise.courrielRes}}</td>
 											<td> {{entreprise.date}}</td>
 										</tr>
-									</table>
+									</tbody>
+								</table>
 
 									<select [(ngModel)]="annees">
 										<option></option>

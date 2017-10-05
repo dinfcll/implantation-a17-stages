@@ -7,6 +7,7 @@ namespace SqueletteImplantation.DbEntities.Models
 {
     public class Entreprise
     {
+        public string NomEntreprise {get; set;}
         public int NoEntreprise {get; set; }
         public string Lieu { get; set; }
         public string NoTel { get; set; }

@@ -36,10 +36,10 @@ var appRoutes = [
         redirectTo: '',
         pathMatch: 'full',
      },*/
-    /* {
-        path: 'recherche-etudiant',
-        component: PageRechercheEtudiantComponent
-      },*/
+    {
+        path: 'Login',
+        component: loginenseignant_component_1.LoginEnseignantComponent
+    },
     {
         path: 'recherche-entreprise',
         component: pageAccueilEnseignant_component_1.pageAccueilEnseignantComponent //PageRechercheEtudiantComponent 
