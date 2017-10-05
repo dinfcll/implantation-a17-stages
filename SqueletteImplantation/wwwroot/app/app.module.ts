@@ -6,9 +6,10 @@ import { HttpModule } from '@angular/http';
 import { AppComponent }  from './app.component';
 import { RouterModule, Routes }   from '@angular/router';
 import {  LoginEnseignantComponent }  from './loginenseignant.component';
-
+import { PageRechercheEtudiantComponent } from "./pageRechercheEtudiant.component";
 
 import { pageAccueilEnseignantComponent } from "./pageAccueilEnseignant.component";
+
 
 const appRoutes: Routes=[
   {
@@ -20,17 +21,34 @@ const appRoutes: Routes=[
   },
   {
     path:'accueil-enseignant',
-    component: pageAccueilEnseignantComponent
+    component: pageAccueilEnseignantComponent,
+    children: [ 
+      {
+          path: 'accueil-enseignant/recherche-etudiant',
+          component: PageRechercheEtudiantComponent
+      }]
   },
-  {
+ /* {
      path: '**', 
      redirectTo: '',
      pathMatch: 'full',
-  },
+  },*/
+/* {
+    path: 'recherche-etudiant', 
+    component: PageRechercheEtudiantComponent 
+  },*/
+  
   {
-    path: 'Login', 
-    component: LoginEnseignantComponent
+    path: 'recherche-entreprise', 
+    component:  pageAccueilEnseignantComponent//PageRechercheEtudiantComponent 
   },
+ /*
+  children: [ 
+    {
+        path: 'recherche-etudiant',
+        component: PageRechercheEtudiantComponent
+    }
+       ]*/
   
 ]
 
@@ -40,7 +58,8 @@ const appRoutes: Routes=[
   declarations: [ AppComponent,
                    LoginEnseignantComponent,
                  
-                  pageAccueilEnseignantComponent],
+                  pageAccueilEnseignantComponent,
+  PageRechercheEtudiantComponent ],
   bootstrap:    [ AppComponent ]
 })
 

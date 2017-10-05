@@ -2,13 +2,18 @@
 
 
             
-					<div id="principal">
-						<ul>
-							<li><a>Etudiants</a></li>
-							<li><a>Entreprises</a></li>
-							
-						</ul>
+					
+						<nav>
+							<ul>
+								<li><a routerLink="accueil-enseignant/recherche-etudiant" routerLinkActive="active">Etudiants</a></li>
+								<li><a routerLink="/accueil-enseignant" routerLinkActive="active">Entreprises</a></li>
+								
+							</ul>
+						</nav>
+						<div id="principal">
+						<router-outlet></router-outlet>
 							<p id="dec" (click)="Deconnexion()">Déconnexion</p>
+							
 							<!--<div *ngIf="entreprises"> Yeeee {{ entreprises  }}</div>
 							<div *ngIf="!entreprises"> Chargement...</div>
 							<input type="text" placeholder="Recherche" id="txtRecherche" [(ngModel)]="annee">
@@ -19,5 +24,5 @@
 
 							
 					</div>
-			
+					
 

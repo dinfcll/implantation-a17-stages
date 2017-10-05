@@ -38,4 +38,15 @@ var pageAccueilEnseignantComponent = (function () {
     return pageAccueilEnseignantComponent;
 }());
 exports.pageAccueilEnseignantComponent = pageAccueilEnseignantComponent;
+//export const routing = RouterModule.forRoot(appRoutes);
+/* @NgModule({
+   imports: [
+     RouterModule.forRoot(
+       appRoutes,
+       { enableTracing: true } // <-- debugging purposes only
+     )
+     // other imports here
+   ],
+   ...
+ })*/
 //# sourceMappingURL=pageAccueilEnseignant.component.js.map

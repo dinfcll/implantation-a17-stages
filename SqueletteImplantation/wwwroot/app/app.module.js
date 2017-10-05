@@ -13,6 +13,7 @@ var http_1 = require("@angular/http");
 var app_component_1 = require("./app.component");
 var router_1 = require("@angular/router");
 var loginenseignant_component_1 = require("./loginenseignant.component");
+var pageRechercheEtudiant_component_1 = require("./pageRechercheEtudiant.component");
 var pageAccueilEnseignant_component_1 = require("./pageAccueilEnseignant.component");
 var appRoutes = [
     {
@@ -22,16 +23,26 @@ var appRoutes = [
     },
     {
         path: 'accueil-enseignant',
-        component: pageAccueilEnseignant_component_1.pageAccueilEnseignantComponent
+        component: pageAccueilEnseignant_component_1.pageAccueilEnseignantComponent,
+        children: [
+            {
+                path: 'accueil-enseignant/recherche-etudiant',
+                component: pageRechercheEtudiant_component_1.PageRechercheEtudiantComponent
+            }
+        ]
     },
-    {
+    /* {
         path: '**',
         redirectTo: '',
         pathMatch: 'full',
-    },
+     },*/
+    /* {
+        path: 'recherche-etudiant',
+        component: PageRechercheEtudiantComponent
+      },*/
     {
-        path: 'Login',
-        component: loginenseignant_component_1.LoginEnseignantComponent
+        path: 'recherche-entreprise',
+        component: pageAccueilEnseignant_component_1.pageAccueilEnseignantComponent //PageRechercheEtudiantComponent 
     },
 ];
 var AppModule = (function () {
@@ -42,7 +53,8 @@ var AppModule = (function () {
             imports: [platform_browser_1.BrowserModule, forms_1.FormsModule, http_1.HttpModule, router_1.RouterModule.forRoot(appRoutes)],
             declarations: [app_component_1.AppComponent,
                 loginenseignant_component_1.LoginEnseignantComponent,
-                pageAccueilEnseignant_component_1.pageAccueilEnseignantComponent],
+                pageAccueilEnseignant_component_1.pageAccueilEnseignantComponent,
+                pageRechercheEtudiant_component_1.PageRechercheEtudiantComponent],
             bootstrap: [app_component_1.AppComponent]
         })
     ], AppModule);

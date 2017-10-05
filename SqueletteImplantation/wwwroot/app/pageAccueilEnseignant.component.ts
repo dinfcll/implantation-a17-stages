@@ -5,10 +5,9 @@ import { Entreprise } from './models/entreprise.class';
 
 import { Component } from '@angular/core';
 
-import {  Router }   from '@angular/router';
+import {  Router, RouterModule, Routes}   from '@angular/router';
 
-
-
+import { PageRechercheEtudiantComponent } from "./pageRechercheEtudiant.component";
 
 
 @Component({
@@ -36,7 +35,35 @@ export class pageAccueilEnseignantComponent {
                 this.entreprises = donnees.json() as Entreprise[]               
                 }    
             );
-        }     
+        }
+        
+        
+
+       /* const appRoutes: Routes=[
+
+            {
+                path: 'recherche-etudiant', 
+                component: PageRechercheEtudiantComponent 
+              },
+
+        ]*/
+
+
+
+
+
       }
 
+      //export const routing = RouterModule.forRoot(appRoutes);
+     /* @NgModule({
+        imports: [
+          RouterModule.forRoot(
+            appRoutes,
+            { enableTracing: true } // <-- debugging purposes only
+          )
+          // other imports here
+        ],
+        ...
+      })*/
 
+      
