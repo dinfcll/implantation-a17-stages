@@ -9,11 +9,11 @@ using System.Collections.Generic;
 namespace SqueletteImplantation.Controllers
 {
 
-    public class entreprisecontoller : Controller
+    public class entreprisecontroller : Controller
     {
         private readonly MaBd _maBd;
 
-        public entreprisecontoller(MaBd maBd)
+        public entreprisecontroller(MaBd maBd)
         {
             _maBd = maBd;
         }
@@ -30,6 +30,7 @@ namespace SqueletteImplantation.Controllers
          where b.date.Contains(AnneeRecente.ToString())
          select b;
         }
+        
         [HttpGet]
         [Route("api/Entreprise/RechercheAnnee/{annees}")]
         public IEnumerable EntrepriseRechercheAnnee(string annees)
@@ -38,6 +39,7 @@ namespace SqueletteImplantation.Controllers
                    where b.date.Contains(annees.ToString())
                    select b;
         }
+        
         [HttpGet]
         [Route("api/Entreprise/RechercheSansAnnee/{recherchetxtbox}")]
         public IEnumerable Recherche(string recherchetxtbox)
@@ -93,6 +95,16 @@ namespace SqueletteImplantation.Controllers
             return (from b in _maBd.Entreprise
                     orderby b.date descending
                     select b.date).Distinct();
+        }
+
+        [HttpPost]
+        [Route("api/Entreprise/Enregistrementbd")]
+        public IActionResult Enregistrementbd(Entreprise Entreprise)
+        {
+            var resultat = _maBd.Entreprise.Add(Entreprise);
+            return new OkObjectResult(Entreprise);
+
+
         }
      
         

@@ -48,17 +48,17 @@ var appRoutes = [
 var AppModule = (function () {
     function AppModule() {
     }
-    AppModule = __decorate([
-        core_1.NgModule({
-            imports: [platform_browser_1.BrowserModule, forms_1.FormsModule, http_1.HttpModule, router_1.RouterModule.forRoot(appRoutes)],
-            declarations: [app_component_1.AppComponent,
-                loginenseignant_component_1.LoginEnseignantComponent,
-                pageAccueilEnseignant_component_1.pageAccueilEnseignantComponent,
-                pageRechercheEtudiant_component_1.PageRechercheEtudiantComponent],
-            bootstrap: [app_component_1.AppComponent]
-        })
-    ], AppModule);
     return AppModule;
 }());
+AppModule = __decorate([
+    core_1.NgModule({
+        imports: [platform_browser_1.BrowserModule, forms_1.FormsModule, http_1.HttpModule, router_1.RouterModule.forRoot(appRoutes)],
+        declarations: [app_component_1.AppComponent,
+            loginenseignant_component_1.LoginEnseignantComponent,
+            pageAccueilEnseignant_component_1.pageAccueilEnseignantComponent,
+            pageRechercheEtudiant_component_1.PageRechercheEtudiantComponent],
+        bootstrap: [app_component_1.AppComponent]
+    })
+], AppModule);
 exports.AppModule = AppModule;
 //# sourceMappingURL=app.module.js.map

@@ -13,16 +13,18 @@ namespace SqueletteTests
 {
     public class entreprisecontrollerTests
     {
-        //un commentaire
-        //private const int UnNombreMagique = 42;
         private const string Annee = "2017";
-        //private const int UnAutreNombre = 43;
-        //private const string UnAutreTruc = "autretruc";
+        private const string recherchetxtbox = "2";
+        Entreprise ent ;
 
         private readonly entreprisecontroller _entreprisecontroller;
 
         public entreprisecontrollerTests()
         {
+            ent = new Entreprise();
+                ent.PersonneResponsable = "6";
+                ent.Lieu = "levis";
+                ent.Notel ="trolo";
             var options = new DbContextOptionsBuilder<MaBd>()
                 .UseInMemoryDatabase("DatabaseEntreprise-" + $"{Guid.NewGuid()}")
                 .Options;
@@ -33,59 +35,43 @@ namespace SqueletteTests
         }
 
         [Fact]
-        public void TestToutsEntreprises(string Annee)
+        public void TestToutsEntreprises()
         {
+            var resultat = _entreprisecontroller.Enregistrementbd(ent);
             var _vartest = (from b in _maBd.Entreprise
             where b.date==Annee
             select b);
-
-            if(_listtest==NotFoundResult)
+            Assert.IsNotNull(_vartest);
+         }
             
-        }
-        /*
+        
+        
         [Fact]
-        public void TestInMemoryAddRetrieveMachin()
+        public IActionResult EnregistrementbdTests()
         {
-            var created = _machinController.CreateMachin(new MachinDto {NombreMagique = UnNombreMagique, Truc = UnTruc});
-
-            var resultat = _machinController.GetMachin(((created as OkObjectResult).Value as Machin).Id);
-
-            Assert.Equal(UnNombreMagique, ((resultat as OkObjectResult).Value as Machin).NombreMagique);
-            Assert.Equal(UnTruc, ((resultat as OkObjectResult).Value as Machin).Truc);
+            var resultat = _entreprisecontroller.Enregistrementbd(ent);
+            Assert.Equal("trolo", ((resultat as OkObjectResult).Value as Entreprise).Notel);
+            Assert.Equal("levis", ((resultat as OkObjectResult).Value as Entreprise).Lieu);
         }
 
         [Fact]
-        public void TestInMemoryAddUpdateMachin()
+        public void TestToutsEntreprises2()
         {
-            var created = _machinController.CreateMachin(new MachinDto { NombreMagique = UnNombreMagique, Truc = UnTruc });
-
-            var resultat = _machinController.ModifyMachin(new Machin
-            {
-                Id = ((created as OkObjectResult).Value as Machin).Id,
-                NombreMagique = UnAutreNombre,
-                Truc = UnAutreTruc
-            });
-
-            Assert.Equal(200, (resultat as OkResult).StatusCode);
-
-            var updated = _machinController.GetMachin(((created as OkObjectResult).Value as Machin).Id);
-
-            Assert.Equal(UnAutreNombre, ((updated as OkObjectResult).Value as Machin).NombreMagique);
-            Assert.Equal(UnAutreTruc, ((updated as OkObjectResult).Value as Machin).Truc);
-        }
-
+            var resultat = _entreprisecontroller.Enregistrementbd(ent);
+            ent.date = "2016";
+            var resultat2 = _entreprisecontroller.Enregistrementbd(ent);
+            var _vartest = _entreprisecontroller.ListeAnnees();
+            Assert.Equal(2, ((resultat as OkObjectResult).Value as Entreprise).Count());         
+         }
         [Fact]
-        public void TestCreateDelete()
+        public void TestToutsEntreprises3()
         {
-            var created = _machinController.CreateMachin(new MachinDto { NombreMagique = UnNombreMagique, Truc = UnTruc });
-
-            var resultat = _machinController.DeleteMachin(((created as OkObjectResult).Value as Machin).Id);
-
-            Assert.Equal(200, (resultat as OkResult).StatusCode);
-
-            var entityNotFound = _machinController.GetMachin(((created as OkObjectResult).Value as Machin).Id);
-
-            Assert.Equal(404, ((NotFoundResult)entityNotFound).StatusCode);
-        }*/
+            var resultat = _entreprisecontroller.Enregistrementbd(ent);
+            ent.date = "2016";
+            var resultat = _entreprisecontroller.Enregistrementbd(ent);
+            var result = _entreprisecontroller.Recherche(recherchetxtbox,Annee);
+            Assert.Equal(1, ((resultat as OkObjectResult).Value as Entreprise).Count());         
+         }
+        
     }
 }
