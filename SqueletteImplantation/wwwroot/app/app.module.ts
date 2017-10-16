@@ -45,8 +45,8 @@ const appRoutes: Routes=[
   },
 
   {
-    path: 'accueil-enseignant/detail-entreprise', 
-    component:  PageDetailEntrepriseComponent//PageRechercheEtudiantComponent 
+    path: 'detailEntreprise', 
+    component:  PageDetailEntrepriseComponent
   },
  
   
@@ -59,7 +59,8 @@ const appRoutes: Routes=[
                    LoginEnseignantComponent,
                  
                   pageAccueilEnseignantComponent,
-  PageRechercheEtudiantComponent ],
+                  PageRechercheEtudiantComponent,
+                  PageDetailEntrepriseComponent ],
   bootstrap:    [ AppComponent ]
 })
 

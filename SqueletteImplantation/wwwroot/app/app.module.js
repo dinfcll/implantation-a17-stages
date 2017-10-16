@@ -15,6 +15,7 @@ var router_1 = require("@angular/router");
 var loginenseignant_component_1 = require("./loginenseignant.component");
 var pageRechercheEtudiant_component_1 = require("./pageRechercheEtudiant.component");
 var pageAccueilEnseignant_component_1 = require("./pageAccueilEnseignant.component");
+var pageDetailsEntreprise_component_1 = require("./pageDetailsEntreprise.component");
 var appRoutes = [
     {
         path: '',
@@ -44,6 +45,10 @@ var appRoutes = [
         path: 'recherche-entreprise',
         component: pageAccueilEnseignant_component_1.pageAccueilEnseignantComponent //PageRechercheEtudiantComponent 
     },
+    {
+        path: 'detailEntreprise',
+        component: pageDetailsEntreprise_component_1.PageDetailEntrepriseComponent
+    },
 ];
 var AppModule = (function () {
     function AppModule() {
@@ -54,7 +59,8 @@ var AppModule = (function () {
             declarations: [app_component_1.AppComponent,
                 loginenseignant_component_1.LoginEnseignantComponent,
                 pageAccueilEnseignant_component_1.pageAccueilEnseignantComponent,
-                pageRechercheEtudiant_component_1.PageRechercheEtudiantComponent],
+                pageRechercheEtudiant_component_1.PageRechercheEtudiantComponent,
+                pageDetailsEntreprise_component_1.PageDetailEntrepriseComponent],
             bootstrap: [app_component_1.AppComponent]
         })
     ], AppModule);
