@@ -9,7 +9,6 @@ namespace SqueletteImplantation.DbEntities.Mappers
         {
            entityBuilder
             .HasKey(ee=>new {ee.NoDa,ee.NoEnseignant});
-
             //Clé étrangère NoEnseignant
             entityBuilder
             .HasOne(ee => ee.Enseignant)

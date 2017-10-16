@@ -102,6 +102,7 @@ namespace SqueletteImplantation.Controllers
         public IActionResult Enregistrementbd(Entreprise Entreprise)
         {
             var resultat = _maBd.Entreprise.Add(Entreprise);
+            _maBd.SaveChanges();
             return new OkObjectResult(Entreprise);
 
 
