@@ -107,8 +107,25 @@ namespace SqueletteImplantation.Controllers
 
 
         }
-     
-        
+        [HttpPost]
+        [Route("api/Entreprise/Modificationbd")]
+        public IActionResult Modificationbd(Entreprise Entreprise)
+        {
+            var resultat = _maBd.Entreprise.Update(Entreprise);
+            _maBd.SaveChanges();
+            return new OkObjectResult(Entreprise);
+        }
+
+        [HttpPost]
+        [Route("api/Entreprise/Modificationbd")]
+        public IActionResult SuprimeEntreprisebd(Entreprise Entreprise)
+        {
+            var resultat = _maBd.Entreprise.Remove(Entreprise);
+            _maBd.SaveChanges();
+            return new OkObjectResult(Entreprise);
+        }
+
+
     }
 
 }
