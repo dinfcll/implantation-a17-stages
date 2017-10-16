@@ -212,3 +212,9 @@ p {
 			color: wheat;
 			font-size: bold;
 		}
+
+		.nomEnt {
+			color: red;
+			cursor: pointer;
+			font-size: x-large;
+		}

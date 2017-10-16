@@ -10,6 +10,7 @@ import { PageRechercheEtudiantComponent } from "./pageRechercheEtudiant.componen
 
 import { pageAccueilEnseignantComponent } from "./pageAccueilEnseignant.component";
 
+import { PageDetailEntrepriseComponent } from "./pageDetailsEntreprise.component";
 
 const appRoutes: Routes=[
   {
@@ -41,6 +42,11 @@ const appRoutes: Routes=[
   {
     path: 'recherche-entreprise', 
     component:  pageAccueilEnseignantComponent//PageRechercheEtudiantComponent 
+  },
+
+  {
+    path: 'accueil-enseignant/detail-entreprise', 
+    component:  PageDetailEntrepriseComponent//PageRechercheEtudiantComponent 
   },
  
   
