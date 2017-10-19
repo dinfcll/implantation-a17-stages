@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <form  >
+        <div id="DivNom">
+            Nom de l'entreprise:
+            <input type="text" name="txtNomEntr" />
+        </div>
+        <br />
+        <div id=" = DivAnnee">
+            Annee :
+            <input type="text" name="txtDate" />
+        </div>
+        <div id="DivLieu">
+            Lieu: 
+            <input type="text" name="txtLieu" />
+        </div>
+        <br />
+        <div id="DivPersonneRes">
+            Nom de la personne responsable:
+            <input type="text" [(ngModel)]="entreprise.personneresponsable" />
+        </div>
+        <br />
+        <div id="DivNotel">
+            Numero de telephone de la personne responsable:
+            <input type="text" [(ngModel)]="entreprise.notel" />
+        </div>
+        <br />
+        <div id=" = DivPoste">
+            Poste de la personne responsable:
+            <input type="text" [(ngModel)]="entreprise.poste" />
+        </div>
+        <br />
+        <div id=" = DivCourrielRes">
+            Courriel de la personne responsable:
+            <input type="text" [(ngModel)]="entreprise.personneresponsable"/>
+        </div>
+        <table title="Nombre d'étudiants par catégorie de sélection">
+         <tr>
+             <th>Vacants</th>
+             <th>Pris</th>
+             <th>Peut-etre</th>
+             <th>Probablement non</th>
+             <th>Non</th>
+         </tr>
+            <tr>
+                <td>
+                    <input type="text" [(ngModel)]="entreprise.nbreconfirmation" />
+                </td>
+                <td>
+                    <input type="text" [(ngModel)]="entreprise.nbreoui" />
+                </td>
+                <td>
+                    <input type="text" [(ngModel)]="entreprise.nbrpeutetre" />
+                </td>
+                <td>
+                    <input type="text" [(ngModel)]="entreprise.nbreprobablementnon" />
+                </td>
+                <td>
+                    <input type="text" [(ngModel)]="entreprise.non" />
+                </td>
+            </tr>
+        </table>
+        <div>
+            <button (click)="Modifier()">Modifier</button>
+            <button (click)="Supprimer()">Supprimer</button>
+            <button (click)="AjouterAnnee()">Ajouter </button>
+        </div>
+        <div *Ngif>
+            
+        </div>
+    </form>
+</body>
+</html>

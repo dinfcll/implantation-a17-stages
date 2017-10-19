@@ -11,13 +11,13 @@ var AppComponent = (function () {
     function AppComponent() {
         this.name = 'Romy Steve';
     }
+    AppComponent = __decorate([
+        core_1.Component({
+            selector: 'my-app',
+            template: "\n <router-outlet></router-outlet>\n  \n \n",
+        })
+    ], AppComponent);
     return AppComponent;
 }());
-AppComponent = __decorate([
-    core_1.Component({
-        selector: 'my-app',
-        template: "\n <router-outlet></router-outlet>\n  \n \n",
-    })
-], AppComponent);
 exports.AppComponent = AppComponent;
 //# sourceMappingURL=app.component.js.map
