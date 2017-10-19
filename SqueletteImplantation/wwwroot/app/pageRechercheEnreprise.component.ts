@@ -1,4 +1,3 @@
-
 import { Http } from '@angular/http';
 
 import { Entreprise } from './models/entreprise.class';
@@ -11,35 +10,35 @@ import {  Router, RouterModule, Routes}   from '@angular/router';
 
 
 @Component({
-    selector: 'accueil_enseignant',
-
-    templateUrl: `./../html/AccueilEnseignant.html`,
+    selector: 'recherche_entreprise',
+    //template:`allo muaaaaaaaaaaaaaa`,
+    templateUrl: `./../html/RechercheEntreprise.html`,
     styleUrls: [`./../css/accueil_enseignant.css`],
 })
 
-export class pageAccueilEnseignantComponent
+export class pageRechercheEntrepriseComponent
 {
   
-   /*  entreprises: Entreprise[];
+     entreprises: Entreprise[];
     annees: string;
     Recherche: string;
-    TAnnees: String[];*/
+    TAnnees: String[];
     
     constructor(private http: Http, private router: Router)
     {
-       /* this.annees = "";
+        this.annees = "";
         this.Recherche = "";
         this.getEntreprise("", "");
-        this.RemplirCombo();*/
+        this.RemplirCombo();
         
     }
     
 
-    Deconnexion() {
+   /* Deconnexion() {
         localStorage.removeItem('currentUser');
         this.router.navigate(['/Login']);
-    }
-  /*  RemplirCombo() {
+    }*/
+    RemplirCombo() {
         this.http.get("api/Entreprise/RemplirCombo").subscribe(
             donnees => {
                 this.TAnnees = donnees.json() as String[]
@@ -75,7 +74,7 @@ export class pageAccueilEnseignantComponent
             }
         );
 
-    }*/
+    }
 
    
 
@@ -83,7 +82,3 @@ export class pageAccueilEnseignantComponent
 
      
 }
-
-
-
-      

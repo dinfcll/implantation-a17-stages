@@ -1,0 +1,55 @@
+<div *ngIf="UnEntrepriseID">
+    
+    <div>
+      
+      <h2>Information sur l'entreprise {{UnEntrepriseID.nomEntreprise}}</h2>
+    <div>
+        <p>
+      <label>Nom: </label>
+      <input [(ngModel)]="UnEntrepriseID.nomEntreprise" placeholder="name" />
+        </p>
+        <p>
+      <label>Lieu: </label>
+      <input [(ngModel)]="UnEntrepriseID.lieu" placeholder="name" />
+       </p>
+        <p>
+      <label>Numéro de téléphone: </label>
+      <input [(ngModel)]="UnEntrepriseID.noTel" placeholder="name" />
+        </p>
+        <p>
+      <label>Poste: </label>
+      <input [(ngModel)]="UnEntrepriseID.poste" placeholder="name" />
+         </p>
+         <p>
+      <label>Nombre de "confirmation": </label>
+      <input [(ngModel)]="UnEntrepriseID.nbreConfirmation" placeholder="name" />
+         </p>  
+        <p>
+      <label>Nombre de "peut-être": </label>
+      <input [(ngModel)]="UnEntrepriseID.nbPeutEtre" placeholder="name" />
+         </p>
+         <p>
+      <label>Nombre de "problablement Non": </label>
+      <input [(ngModel)]="UnEntrepriseID.nbreProbablementNon" placeholder="name" />
+         </p>
+         <p>
+      <label>Nombre de "Oui": </label>
+      <input [(ngModel)]="UnEntrepriseID.nbreOui" placeholder="name" />
+         </p>
+         <p>
+      
+      <label>Nombre de "Non": </label>
+      <input [(ngModel)]="UnEntrepriseID.nbreNon" placeholder="name" />
+         </p>
+         <p>
+      <label>Date: </label>
+      <input [(ngModel)]="UnEntrepriseID.date" placeholder="name" />
+         </p>
+         <p>
+      <label>Courriel Responsable: </label>
+      <input [(ngModel)]="UnEntrepriseID.courrielRes" placeholder="name" />
+        </p>
+    </div>
+    <button (click)="goBack()"> Retour </button>
+  </div>
+  

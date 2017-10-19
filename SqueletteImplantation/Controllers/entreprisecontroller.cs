@@ -51,6 +51,7 @@ namespace SqueletteImplantation.Controllers
             orderby b.date
             select new 
             {b.NomEntreprise,
+             b.NoEntreprise,
             b.Lieu,
             b.NoTel,
             b.Poste,
@@ -75,6 +76,7 @@ namespace SqueletteImplantation.Controllers
                    orderby b.date
                    select new
                    { b.NomEntreprise,
+                       b.NoEntreprise,
                        b.Lieu,
                        b.NoTel,
                        b.Poste,
@@ -93,6 +95,20 @@ namespace SqueletteImplantation.Controllers
             return (from b in _maBd.Entreprise
                     orderby b.date descending
                     select b.date).Distinct();
+        }
+
+         [HttpGet]
+        [Route("api/Entreprise/{NoEnt}")]
+        public IActionResult GetEntrepriseParNoEnt(int NoEnt)
+        {
+            var entreprise = _maBd.Entreprise.FirstOrDefault(m => m.NoEntreprise == NoEnt);
+
+            if (entreprise == null)
+            {
+                return NotFound();
+            }
+
+            return new OkObjectResult(entreprise);
         }
      
         

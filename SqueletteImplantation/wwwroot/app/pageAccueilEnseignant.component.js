@@ -13,48 +13,21 @@ var http_1 = require("@angular/http");
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var pageAccueilEnseignantComponent = (function () {
+    /*  entreprises: Entreprise[];
+     annees: string;
+     Recherche: string;
+     TAnnees: String[];*/
     function pageAccueilEnseignantComponent(http, router) {
+        /* this.annees = "";
+         this.Recherche = "";
+         this.getEntreprise("", "");
+         this.RemplirCombo();*/
         this.http = http;
         this.router = router;
-        this.annees = "";
-        this.Recherche = "";
-        this.getEntreprise("", "");
-        this.RemplirCombo();
     }
     pageAccueilEnseignantComponent.prototype.Deconnexion = function () {
         localStorage.removeItem('currentUser');
         this.router.navigate(['/Login']);
-    };
-    pageAccueilEnseignantComponent.prototype.RemplirCombo = function () {
-        var _this = this;
-        this.http.get("api/Entreprise/RemplirCombo").subscribe(function (donnees) {
-            _this.TAnnees = donnees.json();
-            console.log(_this.TAnnees);
-        });
-    };
-    pageAccueilEnseignantComponent.prototype.getEntreprise = function (Recherche, annees) {
-        var _this = this;
-        var url;
-        if ((Recherche == "" && annees == "")) {
-            url = "api/Entreprise/annees";
-        }
-        else {
-            if (Recherche != "" && annees == "") {
-                url = " api/Entreprise/RechercheSansAnnee/" + Recherche;
-            }
-            else {
-                if (Recherche == "" && annees != "") {
-                    url = "api/Entreprise/RechercheAnnee/" + annees;
-                }
-                else {
-                    url = "api/Entreprise/" + annees + "/" + Recherche;
-                }
-            }
-        }
-        this.http.get(url).subscribe(function (donnees) {
-            _this.entreprises = donnees.json();
-            console.log(_this.entreprises);
-        });
     };
     pageAccueilEnseignantComponent = __decorate([
         core_1.Component({

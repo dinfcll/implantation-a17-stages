@@ -16,6 +16,7 @@ var loginenseignant_component_1 = require("./loginenseignant.component");
 var pageRechercheEtudiant_component_1 = require("./pageRechercheEtudiant.component");
 var pageAccueilEnseignant_component_1 = require("./pageAccueilEnseignant.component");
 var pageDetailsEntreprise_component_1 = require("./pageDetailsEntreprise.component");
+var pageRechercheEnreprise_component_1 = require("./pageRechercheEnreprise.component");
 var appRoutes = [
     {
         path: '',
@@ -29,7 +30,16 @@ var appRoutes = [
             {
                 path: 'accueil-enseignant/recherche-etudiant',
                 component: pageRechercheEtudiant_component_1.PageRechercheEtudiantComponent
-            }
+            },
+            {
+                path: 'accueil-enseignant/recherche-entreprise',
+                component: pageRechercheEnreprise_component_1.pageRechercheEntrepriseComponent
+            },
+            {
+                path: '',
+                redirectTo: 'accueil-enseignant/recherche-entreprise',
+                pathMatch: 'full'
+            },
         ]
     },
     /* {
@@ -41,12 +51,12 @@ var appRoutes = [
         path: 'Login',
         component: loginenseignant_component_1.LoginEnseignantComponent
     },
+    /*{
+      path: 'recherche-entreprise',
+      component:  pageAccueilEnseignantComponent
+    },*/
     {
-        path: 'recherche-entreprise',
-        component: pageAccueilEnseignant_component_1.pageAccueilEnseignantComponent //PageRechercheEtudiantComponent 
-    },
-    {
-        path: 'detailEntreprise',
+        path: 'detailEntreprise/:noEntreprise',
         component: pageDetailsEntreprise_component_1.PageDetailEntrepriseComponent
     },
 ];
@@ -60,7 +70,8 @@ var AppModule = (function () {
                 loginenseignant_component_1.LoginEnseignantComponent,
                 pageAccueilEnseignant_component_1.pageAccueilEnseignantComponent,
                 pageRechercheEtudiant_component_1.PageRechercheEtudiantComponent,
-                pageDetailsEntreprise_component_1.PageDetailEntrepriseComponent],
+                pageDetailsEntreprise_component_1.PageDetailEntrepriseComponent,
+                pageRechercheEnreprise_component_1.pageRechercheEntrepriseComponent],
             bootstrap: [app_component_1.AppComponent]
         })
     ], AppModule);
