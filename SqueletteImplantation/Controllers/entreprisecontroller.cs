@@ -9,11 +9,11 @@ using System.Collections.Generic;
 namespace SqueletteImplantation.Controllers
 {
 
-    public class entreprisecontoller : Controller
+    public class entreprisecontroller : Controller
     {
         private readonly MaBd _maBd;
 
-        public entreprisecontoller(MaBd maBd)
+        public entreprisecontroller(MaBd maBd)
         {
             _maBd = maBd;
         }
@@ -30,6 +30,7 @@ namespace SqueletteImplantation.Controllers
                    where b.date.Contains(AnneeRecente.ToString())
                    select b;
         }
+
         [HttpGet]
         [Route("api/Entreprise/RechercheAnnee/{annees}")]
         public IEnumerable EntrepriseRechercheAnnee(string annees)
@@ -38,6 +39,7 @@ namespace SqueletteImplantation.Controllers
                    where b.date.Contains(annees.ToString())
                    select b;
         }
+
         [HttpGet]
         [Route("api/Entreprise/RechercheSansAnnee/{recherchetxtbox}")]
         public IEnumerable Recherche(string recherchetxtbox)
@@ -50,7 +52,8 @@ namespace SqueletteImplantation.Controllers
                    b.Poste.Contains(recherchetxtbox)
                    orderby b.date
                    select new
-                   { b.NomEntreprise,
+                   {
+                       b.NomEntreprise,
                        b.Lieu,
                        b.NoTel,
                        b.Poste,
@@ -74,7 +77,8 @@ namespace SqueletteImplantation.Controllers
                    b.Poste.Contains(recherchetxtbox))
                    orderby b.date
                    select new
-                   { b.NomEntreprise,
+                   {
+                       b.NomEntreprise,
                        b.Lieu,
                        b.NoTel,
                        b.Poste,
@@ -95,6 +99,7 @@ namespace SqueletteImplantation.Controllers
                     select b.date).Distinct();
         }
 
+
         [HttpGet]
         [Route("api/Entreprise/InfoParID/{ID}")]
         public object InfoParID(int ID)
@@ -103,6 +108,35 @@ namespace SqueletteImplantation.Controllers
                    where b.NoEntreprise == ID
                    select b;
         }
-    }
 
+        [HttpPost]
+        [Route("api/Entreprise/Enregistrementbd")]
+        public IActionResult Enregistrementbd(Entreprise Entreprise)
+        {
+            var resultat = _maBd.Entreprise.Add(Entreprise);
+            _maBd.SaveChanges();
+            return new OkObjectResult(Entreprise);
+
+
+        }
+        [HttpPost]
+        [Route("api/Entreprise/Modificationbd")]
+        public IActionResult Modificationbd(Entreprise Entreprise)
+        {
+            var resultat = _maBd.Entreprise.Update(Entreprise);
+            _maBd.SaveChanges();
+            return new OkObjectResult(Entreprise);
+        }
+
+        [HttpPost]
+        [Route("api/Entreprise/Modificationbd")]
+        public IActionResult SuprimeEntreprisebd(Entreprise Entreprise)
+        {
+            var resultat = _maBd.Entreprise.Remove(Entreprise);
+            _maBd.SaveChanges();
+            return new OkObjectResult(Entreprise);
+        }
+
+    }
 }
+

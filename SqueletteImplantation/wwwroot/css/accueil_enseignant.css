@@ -142,7 +142,7 @@ p {
 		}
 		thead {
 			background-color:#D0E3FA;
-			background-image:url(sky.jpg);
+			/*background-image:url(sky.jpg);*/
 			border:1px solid #6495ed;
 			}
 			tbody {
