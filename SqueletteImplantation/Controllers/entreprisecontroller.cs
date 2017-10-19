@@ -120,21 +120,21 @@ namespace SqueletteImplantation.Controllers
 
         }
         [HttpPost]
-        [Route("api/Entreprise/Modificationbd")]
-        public IActionResult Modificationbd(Entreprise Entreprise)
+        [Route("api/Entreprise/Modificationbd/{entreprise}")]
+        public IActionResult Modificationbd(Entreprise entreprise)
         {
-            var resultat = _maBd.Entreprise.Update(Entreprise);
+            var resultat = _maBd.Entreprise.Update(entreprise);
             _maBd.SaveChanges();
-            return new OkObjectResult(Entreprise);
+            return new OkObjectResult(entreprise);
         }
 
         [HttpPost]
-        [Route("api/Entreprise/Modificationbd")]
-        public IActionResult SuprimeEntreprisebd(Entreprise Entreprise)
+        [Route("api/Entreprise/Modificationbd/{entreprise}")]
+        public IActionResult SuprimeEntreprisebd(Entreprise entreprise)
         {
-            var resultat = _maBd.Entreprise.Remove(Entreprise);
+            var resultat = _maBd.Entreprise.Remove(entreprise);
             _maBd.SaveChanges();
-            return new OkObjectResult(Entreprise);
+            return new OkObjectResult(entreprise);
         }
 
     }
