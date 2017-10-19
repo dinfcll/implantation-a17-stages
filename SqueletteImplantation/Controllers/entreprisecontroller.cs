@@ -19,16 +19,16 @@ namespace SqueletteImplantation.Controllers
         }
 
 
-       
+
         [HttpGet]
         [Route("api/Entreprise/annees")]
         public IEnumerable EntrepriseAnnee()
         {
-            var AnneeRecente =(from b in _maBd.Entreprise
-             select b.date).Max();
-        return from b in _maBd.Entreprise
-         where b.date.Contains(AnneeRecente.ToString())
-         select b;
+            var AnneeRecente = (from b in _maBd.Entreprise
+                                select b.date).Max();
+            return from b in _maBd.Entreprise
+                   where b.date.Contains(AnneeRecente.ToString())
+                   select b;
         }
         [HttpGet]
         [Route("api/Entreprise/RechercheAnnee/{annees}")]
@@ -43,23 +43,23 @@ namespace SqueletteImplantation.Controllers
         public IEnumerable Recherche(string recherchetxtbox)
         {
             return from b in _maBd.Entreprise
-            where 
-            b.Lieu.Contains(recherchetxtbox)||
-            b.NoTel.Contains(recherchetxtbox) ||
-            b.PersonneResponsable.Contains(recherchetxtbox)||
-            b.Poste.Contains(recherchetxtbox)
-            orderby b.date
-            select new 
-            {b.NomEntreprise,
-            b.Lieu,
-            b.NoTel,
-            b.Poste,
-            b.PersonneResponsable,
-            b.NbreNon, 
-            b.NbreOui, 
-            b.CourrielRes,
-            b.date
-        };
+                   where
+                   b.Lieu.Contains(recherchetxtbox) ||
+                   b.NoTel.Contains(recherchetxtbox) ||
+                   b.PersonneResponsable.Contains(recherchetxtbox) ||
+                   b.Poste.Contains(recherchetxtbox)
+                   orderby b.date
+                   select new
+                   { b.NomEntreprise,
+                       b.Lieu,
+                       b.NoTel,
+                       b.Poste,
+                       b.PersonneResponsable,
+                       b.NbreNon,
+                       b.NbreOui,
+                       b.CourrielRes,
+                       b.date
+                   };
         }
 
         [HttpGet]
@@ -94,8 +94,15 @@ namespace SqueletteImplantation.Controllers
                     orderby b.date descending
                     select b.date).Distinct();
         }
-     
-        
+
+        [HttpGet]
+        [Route("api/Entreprise/InfoParID/{ID}")]
+        public object InfoParID(int ID)
+        {
+            return from b in _maBd.Entreprise
+                   where b.NoEntreprise == ID
+                   select b;
+        }
     }
 
 }

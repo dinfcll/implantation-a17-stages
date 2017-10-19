@@ -16,7 +16,11 @@ export class PageDetailEntrepriseComponent  {
 
     RemplirInfo(ID: Number)
     {
-        this.http.get("")
+        this.http.get("api/Entreprise/InfoParID/" + ID.toString()).subscribe(
+            donnees => {
+                this.entreprise = donnees.json() as Entreprise
+                console.log(this.entreprise);
+            });
     }
 
 
