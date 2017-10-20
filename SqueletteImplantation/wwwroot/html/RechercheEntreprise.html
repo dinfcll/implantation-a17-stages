@@ -53,7 +53,7 @@
             </tr>
         </tbody>
     </table>
-
+        <button [routerLink]="['/detailEntreprise', -1]"  routerLinkActive="active">ajouter</button>
         <select [(ngModel)]="annees">
             <option></option>
             <option *ngFor=" let value of TAnnees">

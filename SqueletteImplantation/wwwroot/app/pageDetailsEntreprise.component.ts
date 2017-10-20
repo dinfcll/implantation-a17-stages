@@ -15,12 +15,28 @@ import { Location }   from '@angular/common';
 
 })
 export class PageDetailEntrepriseComponent  {
-    
-   entreprise: Entreprise; 
+
+    entreprise: Entreprise;
+    ID: number;
+    ErreurModifier: boolean;
+    SuccesModifier: boolean;
+    SuccesSupprimer: boolean;
+    ErreurSupprimer: boolean;
+    PageAjouter: boolean;
     constructor(private http: Http, private router: Router,
       private location: Location)
     {
-       this.getEntrepriseParNoEnt(this.DetectionPageID())
+        this.entreprise = new Entreprise(-1,null,null,null,null,null,null,null,null,null,null);
+        this.ID = this.DetectionPageID();
+        if (this.ID != -1)
+        {
+            this.getEntrepriseParNoEnt(this.ID);
+        }
+        this.ErreurModifier = false;
+        this.ErreurSupprimer = false;
+        this.SuccesModifier = false;
+        this.SuccesSupprimer = false;
+        this.PageAjouter = false;
     }
     
     getEntrepriseParNoEnt(NoEnt: number) {
@@ -41,10 +57,40 @@ export class PageDetailEntrepriseComponent  {
     let id:number;
     Page = CheminLong.split('/');
     idStr=Page[Page.length-1]
-    id= +idStr;
+    id = +idStr;
+    if (id == -1)
+        this.PageAjouter = true;
     return id;
-  }
-    
+    }
+    Modifier(): void
+    {
+        this.http.put("api/entreprise/Modifier", this.entreprise).subscribe(
+            donne => {
+                if (donne.status !== 200)
+                    this.ErreurModifier = true;
+                else
+                    this.SuccesModifier = true;
+            });
+    }
+    Supprimer(): void {
+        this.http.delete("api/entreprise/Supprimer/" + this.DetectionPageID()).subscribe(
+            donne => {
+                if (donne.status !== 200)
+                    this.ErreurSupprimer = true;
+                else
+                    this.SuccesModifier = true;
+            });
+    }
+    Ajouter()
+    {
+        this.http.post("api/Entreprise/Ajouter", this.entreprise).subscribe(
+            Result => {
+                console.log(Result.status);
+            }
+        )
+
+
+    }
   goBack(): void {
     this.location.back();
   }

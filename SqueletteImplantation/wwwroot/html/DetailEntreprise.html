@@ -5,7 +5,9 @@
     <title></title>
 </head>
 <body>
-    <div *ngIf="entreprise">
+    <div>
+        <div *ngIf="ErreurModifier"> Erreur de modification de l'entreprise</div>
+        <div *ngIf="ErreurSupprimer">Erreur lors de la suppression de l'entrepise</div>
             <div id="DivNom">
                 Nom de l'entreprise:
                 <input type="text" [(ngModel)]="entreprise.nomEntreprise" placeholder="name"/>
@@ -65,12 +67,13 @@
                     </td>
                 </tr>
             </table>
-            <div>
+            <div *ngIf="PageAjouter">
                 <button (click)="Modifier()">Modifier</button>
                 <button (click)="Supprimer()">Supprimer</button>
-                <button (click)="AjouterAnnee()">Ajouter </button>
-                <button (click)="goBack()"> Retour </button>
+                <button (click)="AjouterAnnee()">Ajouter annee </button>
             </div>
+        <button (click)="goBack()"> Retour </button>
+        <button *ngIf="!PageAjouter"(click)="Ajouter()"> Ajouter </button>
         </div>
 </body>
 </html>
