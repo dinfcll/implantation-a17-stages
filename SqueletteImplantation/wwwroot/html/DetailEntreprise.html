@@ -8,36 +8,36 @@
     <form  >
         <div id="DivNom">
             Nom de l'entreprise:
-            <input type="text" name="txtNomEntr" />
+            <input type="text" [(ngModel)]="entreprise.noentreprise" placeholder="name" />
         </div>
         <br />
         <div id=" = DivAnnee">
             Annee :
-            <input type="text" name="txtDate" />
+            <input type="text" [(ngModel)]="entreprise.date" placeholder="name" />
         </div>
         <div id="DivLieu">
             Lieu: 
-            <input type="text" name="txtLieu" />
+            <input type="text" [(ngModel)]="entreprise.lieu" placeholder="name"/>
         </div>
         <br />
         <div id="DivPersonneRes">
             Nom de la personne responsable:
-            <input type="text" [(ngModel)]="entreprise.personneresponsable" />
+            <input type="text" [(ngModel)]="entreprise.personneresponsable" placeholder="name" />
         </div>
         <br />
         <div id="DivNotel">
             Numero de telephone de la personne responsable:
-            <input type="text" [(ngModel)]="entreprise.notel" />
+            <input type="text" [(ngModel)]="entreprise.notel" placeholder="name" />
         </div>
         <br />
         <div id=" = DivPoste">
             Poste de la personne responsable:
-            <input type="text" [(ngModel)]="entreprise.poste" />
+            <input type="text" [(ngModel)]="entreprise.poste" placeholder="name" />
         </div>
         <br />
         <div id=" = DivCourrielRes">
             Courriel de la personne responsable:
-            <input type="text" [(ngModel)]="entreprise.personneresponsable"/>
+            <input type="text" [(ngModel)]="entreprise.personneresponsable" placeholder="name"/>
         </div>
         <table title="Nombre d'étudiants par catégorie de sélection">
          <tr>
@@ -49,19 +49,19 @@
          </tr>
             <tr>
                 <td>
-                    <input type="text" [(ngModel)]="entreprise.nbreconfirmation" />
+                    <input type="text" [(ngModel)]="entreprise.nbreconfirmation" placeholder="name" />
                 </td>
                 <td>
-                    <input type="text" [(ngModel)]="entreprise.nbreoui" />
+                    <input type="text" [(ngModel)]="entreprise.nbreoui" placeholder="name" />
                 </td>
                 <td>
-                    <input type="text" [(ngModel)]="entreprise.nbrpeutetre" />
+                    <input type="text" [(ngModel)]="entreprise.nbrpeutetre" placeholder="name" />
                 </td>
                 <td>
-                    <input type="text" [(ngModel)]="entreprise.nbreprobablementnon" />
+                    <input type="text" [(ngModel)]="entreprise.nbreprobablementnon" placeholder="name" />
                 </td>
                 <td>
-                    <input type="text" [(ngModel)]="entreprise.non" />
+                    <input type="text" [(ngModel)]="entreprise.non" placeholder="name"/>
                 </td>
             </tr>
         </table>
@@ -69,6 +69,7 @@
             <button (click)="Modifier()">Modifier</button>
             <button (click)="Supprimer()">Supprimer</button>
             <button (click)="AjouterAnnee()">Ajouter </button>
+            <button (click)="goBack()"> Retour </button>
         </div>
         <div *Ngif>
             

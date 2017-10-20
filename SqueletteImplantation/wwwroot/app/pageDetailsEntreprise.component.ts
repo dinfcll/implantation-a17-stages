@@ -1,38 +1,53 @@
-import { Component } from '@angular/core';
-import { Entreprise } from './models/entreprise.class';
+import 'rxjs/add/operator/switchMap';
+import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
-import {NgModule} from '@angular/core';
+import {  Router, RouterModule, Routes, ActivatedRoute, ParamMap}   from '@angular/router';
+import { Entreprise } from './models/entreprise.class';
+import { Location }   from '@angular/common';
+
+
+
 
 @Component({
   selector: 'detail-entreprise',
   templateUrl: `./../html/DetailEntreprise.html`,
+
+
 })
 export class PageDetailEntrepriseComponent  {
-    entreprise: Entreprise;
-    ID: Number;
-    SectionSupprimer: boolean;
-    constructor(private http: Http)
+    
+   entreprise: Entreprise; 
+    constructor(private http: Http, private router: Router,
+      private location: Location)
     {
-        this.SectionSupprimer = false;
+       this.getEntrepriseParNoEnt(this.DetectionPageID())
     }
-
-    RemplirInfo(ID: Number)
+    
+    getEntrepriseParNoEnt(NoEnt: number) {
+      let url: string;
+      url = "api/Entreprise/"+NoEnt;
+       this.http.get(url).subscribe(
+           donnees => {
+               this.entreprise = donnees.json() as Entreprise
+           }
+    );
+       
+    }
+    DetectionPageID (): number 
     {
-        this.http.get("api/Entreprise/InfoParID/" + ID.toString()).subscribe(
-            donnees => {
-                this.entreprise = donnees.json() as Entreprise
-                console.log(this.entreprise);
-            });
-    }
-    AjouterAnnee() {
+    let CheminLong: string = this.router.url.toString();
+    let Page: string[];
+    let idStr:string;
+    let id:number;
+    Page = CheminLong.split('/');
+    idStr=Page[Page.length-1]
+    id= +idStr;
+    
+    return id;
+  }
+    
+  goBack(): void {
+    this.location.back();
+  }
 
-
-        }
-    Modifier() {
-        
-
-    }
-
-
-
-}
+  }

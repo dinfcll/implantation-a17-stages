@@ -1,0 +1,70 @@
+<div>
+    
+        
+
+        <input type="text" placeholder="Recherche" id="recherche" [(ngModel)]="Recherche">
+        <button class="loupe"   (click)="getEntreprise(Recherche,annees)" ></button>	
+        
+   <table border=1 >
+                <caption>Tableau de données des entreprises</caption>
+    <thead>	
+           <tr>
+                <th>
+                    Nom d'entreprise
+                </th>
+                <th>
+                    Lieu
+                </th>
+                <th>
+                    Numéro Téléphone
+                </th>
+                <th>
+                    Poste
+                </th>
+                <th>
+                    Personne Responsable
+                </th>
+                <th>
+                    Nombre d'étudiant acceptés 
+                </th>
+                <th>
+                    Nombre d'étudiant refusés
+                </th>
+                <th>
+                    Courriel du responsable 
+                </th>
+                <th id="date">
+                    Date(Année)
+                </th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let entreprise of entreprises">
+                <td class="nomEnt" [routerLink]="['/detailEntreprise', entreprise.noEntreprise]"  routerLinkActive="active"> {{entreprise.nomEntreprise }}</td>
+                <td> {{entreprise.lieu}}</td>
+                <td> {{entreprise.noTel }}</td>	
+                <td> {{entreprise.poste}}</td>
+                <td> {{entreprise.personneResponsable}}</td>
+                <td> {{entreprise.nbreOui}}</td>
+                <td> {{entreprise.nbreNon}}</td>
+                <td> {{entreprise.courrielRes}}</td>
+                <td> {{entreprise.date}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <select [(ngModel)]="annees">
+            <option></option>
+            <option *ngFor=" let value of TAnnees">
+                {{value}}
+            </option>
+        </select>
+</div>
+
+    
+    
+    
+
+
+
