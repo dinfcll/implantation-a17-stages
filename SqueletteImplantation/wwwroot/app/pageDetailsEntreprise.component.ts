@@ -42,7 +42,6 @@ export class PageDetailEntrepriseComponent  {
     Page = CheminLong.split('/');
     idStr=Page[Page.length-1]
     id= +idStr;
-    
     return id;
   }
     

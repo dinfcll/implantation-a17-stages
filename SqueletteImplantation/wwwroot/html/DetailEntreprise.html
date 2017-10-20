@@ -5,75 +5,72 @@
     <title></title>
 </head>
 <body>
-    <form  >
-        <div id="DivNom">
-            Nom de l'entreprise:
-            <input type="text" [(ngModel)]="entreprise.nomEntreprise" placeholder="name" />
+    <div *ngIf="entreprise">
+            <div id="DivNom">
+                Nom de l'entreprise:
+                <input type="text" [(ngModel)]="entreprise.nomEntreprise" placeholder="name"/>
+            </div>
+            <br />
+            <div id=" = DivAnnee">
+                Annee :
+                <input type="text" [(ngModel)]="entreprise.date" placeholder="name" />
+            </div>
+            <div id="DivLieu">
+                Lieu:
+                <input type="text" [(ngModel)]="entreprise.lieu" placeholder="name"/>
+            </div>
+            <br />
+            <div id="DivPersonneRes">
+                Nom de la personne responsable:
+                <input type="text" [(ngModel)]="entreprise.personneResponsable" placeholder="name"  />
+            </div>
+            <br />
+            <div id="DivNotel">
+                Numero de telephone de la personne responsable:
+                <input type="text" [(ngModel)]="entreprise.noTel" placeholder="name"/>
+            </div>
+            <br />
+            <div id=" = DivPoste">
+                Poste de la personne responsable:
+                <input type="text" [(ngModel)]="entreprise.poste" placeholder="name"/>
+            </div>
+            <br />
+            <div id=" = DivCourrielRes">
+                Courriel de la personne responsable:
+                <input type="text" [(ngModel)]="entreprise.courrielRes" placeholder="name" />
+            </div>
+            <table title="Nombre d'étudiants par catégorie de sélection">
+                <tr>
+                    <th>Vacants</th>
+                    <th>Pris</th>
+                    <th>Peut-etre</th>
+                    <th>Probablement non</th>
+                    <th>Non</th>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="text" [(ngModel)]="entreprise.nbreConfirmation" placeholder="name" />
+                    </td>
+                    <td>
+                        <input type="text" [(ngModel)]="entreprise.nbreOui" placeholder="name" />
+                    </td>
+                    <td>
+                        <input type="text" [(ngModel)]="entreprise.nbrPeutEtre" placeholder="name" />
+                    </td>
+                    <td>
+                        <input type="text" [(ngModel)]="entreprise.nbreProbablementNon" placeholder="name" />
+                    </td>
+                    <td>
+                        <input type="text" [(ngModel)]="entreprise.nbreNon" placeholder="name" />
+                    </td>
+                </tr>
+            </table>
+            <div>
+                <button (click)="Modifier()">Modifier</button>
+                <button (click)="Supprimer()">Supprimer</button>
+                <button (click)="AjouterAnnee()">Ajouter </button>
+                <button (click)="goBack()"> Retour </button>
+            </div>
         </div>
-        <br />
-        <div id=" = DivAnnee">
-            Annee :
-            <input type="text" [(ngModel)]="entreprise.date" placeholder="name" />
-        </div>
-        <div id="DivLieu">
-            Lieu: 
-            <input type="text" [(ngModel)]="entreprise.lieu" placeholder="name"/>
-        </div>
-        <br />
-        <div id="DivPersonneRes">
-            Nom de la personne responsable:
-            <input type="text" [(ngModel)]="entreprise.PersonneResponsable" placeholder="name" />
-        </div>
-        <br />
-        <div id="DivNotel">
-            Numero de telephone de la personne responsable:
-            <input type="text" [(ngModel)]="entreprise.NoTel" placeholder="name" />
-        </div>
-        <br />
-        <div id=" = DivPoste">
-            Poste de la personne responsable:
-            <input type="text" [(ngModel)]="entreprise.Poste" placeholder="name" />
-        </div>
-        <br />
-        <div id=" = DivCourrielRes">
-            Courriel de la personne responsable:
-            <input type="text" [(ngModel)]="entreprise.CourrielRes" placeholder="name"/>
-        </div>
-        <table title="Nombre d'étudiants par catégorie de sélection">
-         <tr>
-             <th>Vacants</th>
-             <th>Pris</th>
-             <th>Peut-etre</th>
-             <th>Probablement non</th>
-             <th>Non</th>
-         </tr>
-            <tr>
-                <td>
-                    <input type="text" [(ngModel)]="entreprise.NbreConfirmation" placeholder="name" />
-                </td>
-                <td>
-                    <input type="text" [(ngModel)]="entreprise.NbreOui" placeholder="name" />
-                </td>
-                <td>
-                    <input type="text" [(ngModel)]="entreprise.NbrPeutEtre" placeholder="name" />
-                </td>
-                <td>
-                    <input type="text" [(ngModel)]="entreprise.NbreProbablementNon" placeholder="name" />
-                </td>
-                <td>
-                    <input type="text" [(ngModel)]="entreprise.NbreNon" placeholder="name"/>
-                </td>
-            </tr>
-        </table>
-        <div>
-            <button (click)="Modifier()">Modifier</button>
-            <button (click)="Supprimer()">Supprimer</button>
-            <button (click)="AjouterAnnee()">Ajouter </button>
-            <button (click)="goBack()"> Retour </button>
-        </div>
-        <div *Ngif>
-            
-        </div>
-    </form>
 </body>
 </html>

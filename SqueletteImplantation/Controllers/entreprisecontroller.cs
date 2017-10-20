@@ -18,8 +18,6 @@ namespace SqueletteImplantation.Controllers
             _maBd = maBd;
         }
 
-
-
         [HttpGet]
         [Route("api/Entreprise/annees")]
         public IEnumerable EntrepriseAnnee()
