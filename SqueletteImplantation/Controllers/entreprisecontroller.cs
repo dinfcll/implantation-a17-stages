@@ -101,15 +101,20 @@ namespace SqueletteImplantation.Controllers
 
 
         [HttpGet]
-        [Route("api/Entreprise/InfoParID/{ID}")]
-        public object InfoParID(int ID)
+        [Route("api/Entreprise/{NoEnt}")]
+        public IActionResult GetEntrepriseParNoEnt(int NoEnt)
         {
-            return from b in _maBd.Entreprise
-                   where b.NoEntreprise == ID
-                   select b;
+            var entreprise = _maBd.Entreprise.FirstOrDefault(m => m.NoEntreprise == NoEnt);
+
+            if (entreprise == null)
+            {
+                return NotFound();
+            }
+
+            return new OkObjectResult(entreprise);
         }
 
-        [HttpPost]
+    [HttpPost]
         [Route("api/Entreprise/Enregistrementbd")]
         public IActionResult Enregistrementbd(Entreprise Entreprise)
         {
