@@ -67,13 +67,13 @@
                     </td>
                 </tr>
             </table>
-            <div *ngIf="PageAjouter">
+            <div *ngIf="PageAjouter == false">
                 <button (click)="Modifier()">Modifier</button>
                 <button (click)="Supprimer()">Supprimer</button>
                 <button (click)="AjouterAnnee()">Ajouter annee </button>
             </div>
         <button (click)="goBack()"> Retour </button>
-        <button *ngIf="!PageAjouter"(click)="Ajouter()"> Ajouter </button>
+        <button *ngIf="PageAjouter == true"(click)="Ajouter()"> Ajouter </button>
         </div>
 </body>
 </html>

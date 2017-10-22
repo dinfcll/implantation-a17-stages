@@ -16,6 +16,7 @@ import { Location }   from '@angular/common';
 })
 export class PageDetailEntrepriseComponent  {
 
+    entrepriseAjouter:Entreprise;
     entreprise: Entreprise;
     ID: number;
     ErreurModifier: boolean;
@@ -23,10 +24,13 @@ export class PageDetailEntrepriseComponent  {
     SuccesSupprimer: boolean;
     ErreurSupprimer: boolean;
     PageAjouter: boolean;
+    
     constructor(private http: Http, private router: Router,
       private location: Location)
     {
-        this.entreprise = new Entreprise(-1,null,null,null,null,null,null,null,null,null,null);
+        //this.entreprise = null;
+        this.entreprise = new Entreprise(null,null,null,null,null,null,null,null,null,null,null);
+        this. entrepriseAjouter=this.entreprise;
         this.ID = this.DetectionPageID();
         if (this.ID != -1)
         {
@@ -36,10 +40,11 @@ export class PageDetailEntrepriseComponent  {
         this.ErreurSupprimer = false;
         this.SuccesModifier = false;
         this.SuccesSupprimer = false;
-        this.PageAjouter = false;
+        //this.PageAjouter = false;
     }
     
     getEntrepriseParNoEnt(NoEnt: number) {
+      this.PageAjouter = false;
       let url: string;
       url = "api/Entreprise/"+NoEnt;
        this.http.get(url).subscribe(
@@ -47,7 +52,7 @@ export class PageDetailEntrepriseComponent  {
                this.entreprise = donnees.json() as Entreprise
            }
     );
-       
+    
     }
     DetectionPageID (): number 
     {
@@ -67,7 +72,10 @@ export class PageDetailEntrepriseComponent  {
         this.http.put("api/entreprise/Modifier", this.entreprise).subscribe(
             donne => {
                 if (donne.status !== 200)
+                    {
+                     console.log(this.entreprise);
                     this.ErreurModifier = true;
+                    }
                 else
                     this.SuccesModifier = true;
             });
@@ -83,7 +91,11 @@ export class PageDetailEntrepriseComponent  {
     }
     Ajouter()
     {
-        this.http.post("api/Entreprise/Ajouter", this.entreprise).subscribe(
+        //this.entreprise =null;
+        //this. entrepriseAjouter = new Entreprise(3,"aa","aa","aa","aa",0,0,0,0,0,"aa");
+       // this.entreprise=this. entrepriseAjouter;
+        this.PageAjouter = true;
+        this.http.post("api/Entreprise/Ajouter", this. entreprise).subscribe(
             Result => {
                 console.log(Result.status);
             }
