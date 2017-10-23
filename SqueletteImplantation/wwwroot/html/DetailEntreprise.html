@@ -5,7 +5,7 @@
     <title></title>
 </head>
 <body>
-    <div>
+    <div *ngIf="entreprise">
         <div *ngIf="ErreurModifier"> Erreur de modification de l'entreprise</div>
         <div *ngIf="ErreurSupprimer">Erreur lors de la suppression de l'entrepise</div>
             <div id="DivNom">
@@ -51,19 +51,19 @@
                 </tr>
                 <tr>
                     <td>
-                        <input type="text" [(ngModel)]="entreprise.nbreConfirmation" placeholder="name" />
+                        <input type="text" [(ngModel)]="entreprise.nbreConfirmation" [(ngModel)]="Confirmation" placeholder="name" />
                     </td>
                     <td>
-                        <input type="text" [(ngModel)]="entreprise.nbreOui" placeholder="name" />
+                        <input type="text" [(ngModel)]="entreprise.nbreOui" [(ngModel)]="Oui" placeholder="name" />
                     </td>
                     <td>
-                        <input type="text" [(ngModel)]="entreprise.nbrPeutEtre" placeholder="name" />
+                        <input type="text" [(ngModel)]="entreprise.nbrPeutEtre" [(ngModel)]="PeutEtre" placeholder="name" />
                     </td>
                     <td>
-                        <input type="text" [(ngModel)]="entreprise.nbreProbablementNon" placeholder="name" />
+                        <input type="text" [(ngModel)]="entreprise.nbreProbablementNon" [(ngModel)]="ProbablementNon" placeholder="name" />
                     </td>
                     <td>
-                        <input type="text" [(ngModel)]="entreprise.nbreNon" placeholder="name" />
+                        <input type="text" [(ngModel)]="entreprise.nbreNon" [(ngModel)]="Non" placeholder="name" />
                     </td>
                 </tr>
             </table>
@@ -73,7 +73,100 @@
                 <button (click)="AjouterAnnee()">Ajouter annee </button>
             </div>
         <button (click)="goBack()"> Retour </button>
-        <button *ngIf="PageAjouter == true"(click)="Ajouter()"> Ajouter </button>
-        </div>
+        <div *ngIf="invalide == true">
+             <h3 *ngIf="validation(Confirmation, Oui, PeutEtre, ProbablementNon, Non) == false">invalide</h3>
+       </div>
+    </div>
+
+
+
+
+
+
+       <div *ngIf="!entreprise">
+            <div *ngIf="ErreurModifier"> Erreur de modification de l'entreprise</div>
+            <div *ngIf="ErreurSupprimer">Erreur lors de la suppression de l'entrepise</div>
+                <div id="DivNom">
+                    Nom de l'entreprise:
+                    <input type="text" [(ngModel)]="nomEntreprise" placeholder="name"/>
+                </div>
+                <br />
+                <div id=" = DivAnnee">
+                    Annee :
+                    <input type="text" [(ngModel)]="date" placeholder="name" />
+                </div>
+                <div id="DivLieu">
+                    Lieu:
+                    <input type="text" [(ngModel)]="lieu" placeholder="name"/>
+                </div>
+                <br />
+                <div id="DivPersonneRes">
+                    Nom de la personne responsable:
+                    <input type="text" [(ngModel)]="personneResponsable" placeholder="name"  />
+                </div>
+                <br />
+                <div id="DivNotel">
+                    Numero de telephone de la personne responsable:
+                    <input type="text" [(ngModel)]="noTel" placeholder="name"/>
+                </div>
+                <br />
+                <div id=" = DivPoste">
+                    Poste de la personne responsable:
+                    <input type="text" [(ngModel)]="poste" placeholder="name"/>
+                </div>
+                <br />
+                <div id=" = DivCourrielRes">
+                    Courriel de la personne responsable:
+                    <input type="text" [(ngModel)]="courrielRes" placeholder="name" />
+                </div>
+                <table title="Nombre d'étudiants par catégorie de sélection">
+                    <tr>
+                        <th>Vacants</th>
+                        <th>Pris</th>
+                        <th>Peut-etre</th>
+                        <th>Probablement non</th>
+                        <th>Non</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" [(ngModel)]="nbreConfirmation" placeholder="name" />
+                        </td>
+                        <td>
+                            <input type="text" [(ngModel)]="nbreOui" placeholder="name" />
+                        </td>
+                        <td>
+                            <input type="text" [(ngModel)]="nbrPeutEtre" placeholder="name" />
+                        </td>
+                        <td>
+                            <input type="text" [(ngModel)]="nbreProbablementNon" placeholder="name" />
+                        </td>
+                        <td>
+                            <input type="text" [(ngModel)]="nbreNon" placeholder="name" />
+                        </td>
+                    </tr>
+                </table>
+               
+            <button (click)="goBack()"> Retour </button>
+            <div *ngIf="invalide == true">
+                <h3 *ngIf="validation(nbreConfirmation, nbreOui, nbrPeutEtre, nbreProbablementNon, nbreNon) == false">invalide</h3>
+            </div>
+            
+            <button *ngIf="PageAjouter == true"(click)="Ajouter()"> Ajouter </button>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </body>
 </html>

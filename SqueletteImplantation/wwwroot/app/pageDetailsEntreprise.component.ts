@@ -11,6 +11,7 @@ import { Location }   from '@angular/common';
 @Component({
   selector: 'detail-entreprise',
   templateUrl: `./../html/DetailEntreprise.html`,
+  styleUrls:[`./../css/detail_entreprise.css`],
 
 
 })
@@ -24,23 +25,50 @@ export class PageDetailEntrepriseComponent  {
     SuccesSupprimer: boolean;
     ErreurSupprimer: boolean;
     PageAjouter: boolean;
+    Alert: boolean;
+   /**************************** */
+    nomEntreprise:string;
+    date:string;
+    lieu:string;
+    personneResponsable:string;
+    noTel:string;
+    poste:string;
+    courrielRes:string;
+    nbreConfirmation:string;
+    nbreOui:string;
+    nbrPeutEtre:string;
+    nbreProbablementNon:string;
+    nbreNon:string;
+    /**************************** */
+    Confirmation:string;
+    Oui:string;
+    PeutEtre:string;
+    ProbablementNon:string;
+    Non:string;
+    /**************************** */
+    invalide:boolean;
+    recu:boolean;
     
     constructor(private http: Http, private router: Router,
       private location: Location)
     {
-        //this.entreprise = null;
-        this.entreprise = new Entreprise(null,null,null,null,null,null,null,null,null,null,null);
-        this. entrepriseAjouter=this.entreprise;
+        this.recu=false;
+       // this.entreprise = new Entreprise(4,null,null,null,null,null,null,null,null,null,null);
+        this.invalide=false;
         this.ID = this.DetectionPageID();
         if (this.ID != -1)
         {
+            
             this.getEntrepriseParNoEnt(this.ID);
         }
+        
+           
         this.ErreurModifier = false;
         this.ErreurSupprimer = false;
         this.SuccesModifier = false;
         this.SuccesSupprimer = false;
         //this.PageAjouter = false;
+        
     }
     
     getEntrepriseParNoEnt(NoEnt: number) {
@@ -69,7 +97,24 @@ export class PageDetailEntrepriseComponent  {
     }
     Modifier(): void
     {
-        this.http.put("api/entreprise/Modifier", this.entreprise).subscribe(
+        if(this.validation2(this.nbreConfirmation,this.nbreOui,
+            this.nbrPeutEtre,this.nbreProbablementNon,
+            this.nbreNon) == true)
+            {
+                this.recu=false;
+            }
+            
+              if(this.recu==true)
+                {
+                if( this.validation(this.Confirmation,this.Oui,
+                        this.PeutEtre,this.ProbablementNon,
+                        this.Non) == false)
+                        {
+                            return;
+                        }
+                    }
+       
+        this.http.put("api/entreprise/Modifier", this. entreprise).subscribe(
             donne => {
                 if (donne.status !== 200)
                     {
@@ -91,11 +136,21 @@ export class PageDetailEntrepriseComponent  {
     }
     Ajouter()
     {
-        //this.entreprise =null;
-        //this. entrepriseAjouter = new Entreprise(3,"aa","aa","aa","aa",0,0,0,0,0,"aa");
-       // this.entreprise=this. entrepriseAjouter;
+      
+            /*    if(this.validation(this.nbreConfirmation,this.nbreOui,
+                    this.nbrPeutEtre,this.nbreProbablementNon,
+                    this.nbreNon) == false)
+                    {
+                        return;
+                    }*/
+      
+      this. entrepriseAjouter=new Entreprise(6,this.nomEntreprise,this.date,
+        this.lieu,this.personneResponsable,
+        +this.nbreConfirmation, +this.nbreOui,
+        +this.nbrPeutEtre, +this.nbreProbablementNon,
+        +this.nbreNon,this.courrielRes);
         this.PageAjouter = true;
-        this.http.post("api/Entreprise/Ajouter", this. entreprise).subscribe(
+        this.http.post("api/Entreprise/Ajouter", this. entrepriseAjouter).subscribe(
             Result => {
                 console.log(Result.status);
             }
@@ -106,5 +161,53 @@ export class PageDetailEntrepriseComponent  {
   goBack(): void {
     this.location.back();
   }
+
+  validation(str1:string,str2:string,str3:string,str4:string,str5:string):boolean{
+      let flag:boolean;
+      flag=true;
+     
+      if(isNaN(+str1)==true ||
+        isNaN(+str2)==true ||
+      isNaN(+str3)==true ||
+      isNaN(+str4)==true||
+      isNaN(+str5)==true)
+        {
+          flag=false;
+          this.invalide=true;
+          this.recu=true;
+        }
+
+        return flag;
+  }
+
+  validation2(str1:string,str2:string,str3:string,str4:string,str5:string):boolean{
+    let flag2:boolean;
+    flag2=false;
+   if( !str1 || !str2 || !str3 || !str4 || !str5)
+      {
+          flag2=true;
+      }
+     
+      return flag2;
+    }
+  
+  /*validationModif():boolean{
+    let flag:boolean;
+    flag=true;
+    if(isNaN(+this.entreprise.NbreConfirmation)==true ||
+        isNaN(+this.entreprise.NbreOui)==true ||
+      isNaN(+this.entreprise.NbrPeutEtre)==true ||
+      isNaN(+this.entreprise.NbreProbablementNon)==true||
+      isNaN(+this.entreprise.NbreNon)==true)
+      {
+        flag=false;
+      }
+
+      return flag;
+
+  }*/
+
+
+
 
   }

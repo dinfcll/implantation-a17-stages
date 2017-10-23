@@ -8,6 +8,9 @@ namespace SqueletteImplantation.DbEntities.Mappers
         public Entreprisemap(EntityTypeBuilder<Entreprise> entityBuilder)
         {
             entityBuilder.HasKey(m => m.NoEntreprise);
+            
+
+
             entityBuilder.Property(m => m.NoTel).IsRequired();
             entityBuilder.Property(m => m.date).IsRequired();
         }

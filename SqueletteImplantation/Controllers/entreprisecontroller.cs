@@ -150,6 +150,7 @@ namespace SqueletteImplantation.Controllers
         public IActionResult AjouterEntreprise([FromBody]Entreprise entreprise)
         {
             var Result = _maBd.Entreprise.Add(entreprise);
+             _maBd.SaveChanges();
             if (Result == null)
                 return NotFound();
             return new OkResult();

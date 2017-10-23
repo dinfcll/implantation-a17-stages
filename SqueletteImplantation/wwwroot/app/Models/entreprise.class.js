@@ -10,6 +10,7 @@ var Entreprise = (function () {
         this.NbreConfirmation = NbreConfirmation;
         this.NbrPeutEtre = NbrPeutEtre;
         this.NbreProbablementNon = NbreProbablementNon;
+        this.NbreNon = NbreNon;
         this.NbreOui = NbreOui;
         this.date = date;
     }

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,8 +9,12 @@ namespace SqueletteImplantation.DbEntities.Models
 {
     public class Entreprise
     {
-        public string NomEntreprise {get; set;}
+        
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int NoEntreprise {get; set; }
+
+        public string NomEntreprise { get; set; }
         public string Lieu { get; set; }
         public string NoTel { get; set; }
         public string Poste { get; set; }
