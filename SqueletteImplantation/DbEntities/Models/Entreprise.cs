@@ -12,7 +12,7 @@ namespace SqueletteImplantation.DbEntities.Models
         
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int NoEntreprise {get; set; }
+        public int Id {get; set; }
 
         public string NomEntreprise { get; set; }
         public string Lieu { get; set; }

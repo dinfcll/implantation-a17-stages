@@ -102,7 +102,7 @@ namespace SqueletteImplantation.Controllers
         [Route("api/Entreprise/{NoEnt}")]
         public IActionResult GetEntrepriseParNoEnt(int NoEnt)
         {
-            var entreprise = _maBd.Entreprise.FirstOrDefault(m => m.NoEntreprise == NoEnt);
+            var entreprise = _maBd.Entreprise.FirstOrDefault(m => m.Id == NoEnt);
 
             if (entreprise == null)
             {
@@ -137,7 +137,7 @@ namespace SqueletteImplantation.Controllers
         [Route("api/Entreprise/Supprimer/{ID}")]
         public IActionResult SuprimeEntreprisebd(int ID)
         {
-            Entreprise entreprise = new Entreprise() { NoEntreprise = ID };
+            Entreprise entreprise = new Entreprise() { Id = ID };
             _maBd.Entreprise.Attach(entreprise);
            var resultat= _maBd.Entreprise.Remove(entreprise);
             _maBd.SaveChanges();

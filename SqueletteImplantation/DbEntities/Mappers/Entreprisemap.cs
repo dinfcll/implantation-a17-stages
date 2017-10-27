@@ -7,7 +7,7 @@ namespace SqueletteImplantation.DbEntities.Mappers
     {
         public Entreprisemap(EntityTypeBuilder<Entreprise> entityBuilder)
         {
-            entityBuilder.HasKey(m => m.NoEntreprise);
+            entityBuilder.HasKey(m => m.Id);
             
 
 
