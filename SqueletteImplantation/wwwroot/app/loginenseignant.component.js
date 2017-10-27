@@ -49,20 +49,25 @@ var LoginEnseignantComponent = (function () {
                 if (r.status == 204) {
                     _this.isValid = false;
                     console.log("desolé, je n ai rien trouvé");
+                    new jBox('Notice', {
+                        content: 'desolé, je n ai rien trouvé',
+                        color: 'red',
+                        autoClose: 5000
+                    });
                     console.log(_this.isValid);
                 }
             }
         });
     };
+    LoginEnseignantComponent = __decorate([
+        core_1.Component({
+            selector: 'loginEnseignant',
+            templateUrl: "./../html/indexConnexionEnseignantEtudiant.html",
+            styleUrls: ["./../css/style_page_accueil.css"],
+        }),
+        __metadata("design:paramtypes", [http_1.Http, router_1.Router])
+    ], LoginEnseignantComponent);
     return LoginEnseignantComponent;
 }());
-LoginEnseignantComponent = __decorate([
-    core_1.Component({
-        selector: 'loginEnseignant',
-        templateUrl: "./../html/indexConnexionEnseignantEtudiant.html",
-        styleUrls: ["./../css/style_page_accueil.css"],
-    }),
-    __metadata("design:paramtypes", [http_1.Http, router_1.Router])
-], LoginEnseignantComponent);
 exports.LoginEnseignantComponent = LoginEnseignantComponent;
 //# sourceMappingURL=loginenseignant.component.js.map

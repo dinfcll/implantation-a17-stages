@@ -10,7 +10,7 @@ import { Machin } from './models/machin.class';
 import {  Router }   from '@angular/router';
 
 import 'rxjs/add/operator/map'
-
+declare var jBox:any;
 @Component({
     selector: 'loginEnseignant',
     templateUrl: `./../html/indexConnexionEnseignantEtudiant.html`,
@@ -65,6 +65,11 @@ export class LoginEnseignantComponent {
                             {
                                 this.isValid=false;
                                 console.log("desolé, je n ai rien trouvé");
+                                new jBox('Notice', {
+                                    content: 'desolé, je n ai rien trouvé',
+                                    color: 'red',
+                                    autoClose: 5000
+                                    }); 
                                 console.log(this.isValid);
                             }
                          

@@ -97,22 +97,26 @@ export class PageDetailEntrepriseComponent  {
     }
     Modifier(): void
     {
-        if(this.validation2(this.nbreConfirmation,this.nbreOui,
-            this.nbrPeutEtre,this.nbreProbablementNon,
-            this.nbreNon) == true)
-            {
-                this.recu=false;
+        
+                if( this.validation(this.Confirmation,this.Oui,
+                    this.PeutEtre,this.ProbablementNon,
+                    this.Non)===true)
+                    {
+                        this.invalide=true;
+                        //return;
+                    }
+            
+            else{
+                this.invalide=false;
             }
             
-              if(this.recu==true)
-                {
-                if( this.validation(this.Confirmation,this.Oui,
-                        this.PeutEtre,this.ProbablementNon,
-                        this.Non) == false)
-                        {
-                            return;
-                        }
-                    }
+           if(this.invalide===true)
+            {
+                return;
+            }
+            else{
+
+            
        
         this.http.put("api/entreprise/Modifier", this. entreprise).subscribe(
             donne => {
@@ -124,6 +128,8 @@ export class PageDetailEntrepriseComponent  {
                 else
                     this.SuccesModifier = true;
             });
+
+        }  
     }
     Supprimer(): void {
         this.http.delete("api/entreprise/Supprimer/" + this.DetectionPageID()).subscribe(
@@ -137,14 +143,25 @@ export class PageDetailEntrepriseComponent  {
     Ajouter()
     {
       
-            /*    if(this.validation(this.nbreConfirmation,this.nbreOui,
+              if(this.validation(this.nbreConfirmation,this.nbreOui,
                     this.nbrPeutEtre,this.nbreProbablementNon,
-                    this.nbreNon) == false)
+                    this.nbreNon) ===true)
                     {
-                        return;
-                    }*/
+                        this.invalide=true;
+                        //return;
+                    }
+            
+            else{
+                this.invalide=false;
+            }
+            
+           if(this.invalide===true)
+            {
+                return;
+            }
+            else{
       
-      this. entrepriseAjouter=new Entreprise(6,this.nomEntreprise,this.date,
+      this. entrepriseAjouter=new Entreprise(9,this.nomEntreprise,this.date,
         this.lieu,this.personneResponsable,
         +this.nbreConfirmation, +this.nbreOui,
         +this.nbrPeutEtre, +this.nbreProbablementNon,
@@ -156,7 +173,7 @@ export class PageDetailEntrepriseComponent  {
             }
         )
 
-
+    }
     }
   goBack(): void {
     this.location.back();
@@ -165,47 +182,28 @@ export class PageDetailEntrepriseComponent  {
   validation(str1:string,str2:string,str3:string,str4:string,str5:string):boolean{
       let flag:boolean;
       flag=true;
+      let tab : string[]=[str1, str2, str3, str4, str5];
+    
+           let a:boolean;
+           a=isNaN(+tab[0]);
+           console.log(a);
+            let i:number=0;
+            while(i<tab.length && (tab[i]===undefined || (a=isNaN(+tab[i])) !== true))
+                {
+                    i++;
+                    flag=false;
+                }
+                if(i<tab.length)
+                    {
+                        flag=true;
+                    }
+
      
-      if(isNaN(+str1)==true ||
-        isNaN(+str2)==true ||
-      isNaN(+str3)==true ||
-      isNaN(+str4)==true||
-      isNaN(+str5)==true)
-        {
-          flag=false;
-          this.invalide=true;
-          this.recu=true;
-        }
 
         return flag;
   }
 
-  validation2(str1:string,str2:string,str3:string,str4:string,str5:string):boolean{
-    let flag2:boolean;
-    flag2=false;
-   if( !str1 || !str2 || !str3 || !str4 || !str5)
-      {
-          flag2=true;
-      }
-     
-      return flag2;
-    }
   
-  /*validationModif():boolean{
-    let flag:boolean;
-    flag=true;
-    if(isNaN(+this.entreprise.NbreConfirmation)==true ||
-        isNaN(+this.entreprise.NbreOui)==true ||
-      isNaN(+this.entreprise.NbrPeutEtre)==true ||
-      isNaN(+this.entreprise.NbreProbablementNon)==true||
-      isNaN(+this.entreprise.NbreNon)==true)
-      {
-        flag=false;
-      }
-
-      return flag;
-
-  }*/
 
 
 

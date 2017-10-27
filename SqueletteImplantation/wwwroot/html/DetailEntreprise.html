@@ -5,7 +5,7 @@
     <title></title>
 </head>
 <body>
-    <div *ngIf="entreprise">
+    <div *ngIf="entreprise" >
         <div *ngIf="ErreurModifier"> Erreur de modification de l'entreprise</div>
         <div *ngIf="ErreurSupprimer">Erreur lors de la suppression de l'entrepise</div>
             <div id="DivNom">
@@ -74,7 +74,7 @@
             </div>
         <button (click)="goBack()"> Retour </button>
         <div *ngIf="invalide == true">
-             <h3 *ngIf="validation(Confirmation, Oui, PeutEtre, ProbablementNon, Non) == false">invalide</h3>
+             <h3 >invalide</h3>
        </div>
     </div>
 
@@ -148,7 +148,7 @@
                
             <button (click)="goBack()"> Retour </button>
             <div *ngIf="invalide == true">
-                <h3 *ngIf="validation(nbreConfirmation, nbreOui, nbrPeutEtre, nbreProbablementNon, nbreNon) == false">invalide</h3>
+                <h3>invalide</h3>
             </div>
             
             <button *ngIf="PageAjouter == true"(click)="Ajouter()"> Ajouter </button>
