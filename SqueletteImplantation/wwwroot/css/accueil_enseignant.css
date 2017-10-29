@@ -127,7 +127,15 @@ p {
 	right: 50px;
 }
 
-
+#btn {
+	top: 25%;
+	left: 5%;
+	position: fixed;
+	cursor: pointer;
+	text-decoration: none;
+	color: wheat;
+	font-size:100%;
+}
 
 
 	table {

@@ -1,3 +1,213 @@
-#principal {
-    background-color:rgb(63,63,63);
+#Principal {
+	background-color:rgb(63,63,63);
+	width: 100%;
+	height: 100%;
+	position:fixed;
+	left: 0;
+	top: 0;
+	right: 0;
+	
+}
+#info {
+    position: fixed;
+    left: 25%;
+    top: 1%;
+    font-family:sans-serif;
+    color: rgb(213, 197, 41);
+}
+
+#labelnom {
+    position: fixed;
+    left: 10%;
+    top: 10%;
+    font-family:sans-serif;
+    color: rgb(213, 197, 41);
+}
+
+#inputnom {
+    position: fixed;
+    left: 40%;
+    top: 10%;
+    border-radius: 15px;
+    text-align: center;
+    width: 250px;
+}
+
+#labelannee {
+    position: fixed;
+    left: 10%;
+    top: 15%;
+    font-family:sans-serif;
+    color:rgb(213, 197, 41);
+}
+
+#inputannee {
+    position: fixed;
+    left: 40%;
+    top: 15%;
+    border-radius: 15px;
+    text-align: center;
+    width: 250px;
+}
+
+#labellieu {
+    position: fixed;
+    left: 10%;
+    top: 20%;
+    font-family:sans-serif;
+    color:rgb(213, 197, 41);
+}
+
+#inputlieu {
+    position: fixed;
+    left: 40%;
+    top: 20%;
+    border-radius: 15px;
+    text-align: center;
+    width: 250px;
+}
+
+#labelPersRes {
+    position: fixed;
+    left: 10%;
+    top: 25%;
+    font-family:sans-serif;
+    color:rgb(213, 197, 41);
+}
+
+#inputPersRes {
+    position: fixed;
+    left: 40%;
+    top: 25%;
+    border-radius: 15px;
+    text-align: center;
+    width: 250px;
+}
+
+#labelNoTel {
+    position: fixed;
+    left: 10%;
+    top: 30%;
+    font-family:sans-serif;
+    color:rgb(213, 197, 41);
+}
+
+#inputNoTel {
+    position: fixed;
+    left: 40%;
+    top: 30%;
+    border-radius: 15px;
+    text-align: center;
+    width: 250px;
+}
+
+#labelPoste {
+    position: fixed;
+    left: 10%;
+    top: 35%;
+    font-family:sans-serif;
+    color:rgb(213, 197, 41);
+}
+
+#inputPoste {
+    position: fixed;
+    left: 40%;
+    top: 35%;
+    border-radius: 15px;
+    text-align: center;
+    width: 250px;
+}
+
+#labelcourriel {
+    position: fixed;
+    left: 10%;
+    top: 40%;
+    font-family:sans-serif;
+    color:rgb(213, 197, 41);
+}
+
+#inputcourriel {
+    position: fixed;
+    left: 40%;
+    top: 40%;
+    border-radius: 15px;
+    text-align: center;
+    width: 250px;
+}
+
+#Modifier {
+    position: fixed;
+    left: 10%;
+    top: 65%;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+#Supprimer {
+    position: fixed;
+    left: 25%;
+    top: 65%;
+    border-radius: 25px;
+    cursor: pointer;
+}
+#retour {
+    position: fixed;
+    left: 10%;
+    top: 80%;
+    border-radius: 25px;
+    cursor: pointer;
+}
+#btnA {
+    position: fixed;
+    left: 10%;
+    top: 65%;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+
+table {
+    border: medium solid #6495ed;
+    border-collapse: collapse;
+    width:20%;
+    margin:auto;
+    position: fixed;
+    border-radius: 5px;
+    top: 50%;
+    left: 10%;
+    }
+    thead {
+        background-color:#D0E3FA;
+        
+        border:1px solid #6495ed;
+        }
+        tbody {
+            background-color:#FFFFFF;
+            border:1px solid  #6495ed;
+            }
+            th {
+                font-family:monospace;
+                border:1px dotted #6495ed;
+                padding:5px;
+                background-color:#EFF6FF;
+                width:25%;
+                }
+                td {
+                font-family:sans-serif;
+                font-size:80%;
+                border:1px solid #6495ed;
+                padding:5px;
+                text-align:left;
+                }
+                caption {
+                font-family:sans-serif;
+                color: rgb(213, 197, 41);
+                font-size: bold;
+                }
+td input {
+    text-align: center; 
+    border-radius: 15px;
+}
+.th{
+    color: black;
 }

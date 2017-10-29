@@ -41,7 +41,7 @@
 
         <tbody>
             <tr *ngFor="let entreprise of entreprises">
-                <td class="nomEnt" [routerLink]="['/detailEntreprise', entreprise.noEntreprise]"  routerLinkActive="active"> {{entreprise.nomEntreprise }}</td>
+                <td class="nomEnt" [routerLink]="['/detailEntreprise', entreprise.id]"  routerLinkActive="active"> {{entreprise.nomEntreprise }}</td>
                 <td> {{entreprise.lieu}}</td>
                 <td> {{entreprise.noTel }}</td>	
                 <td> {{entreprise.poste}}</td>
@@ -53,7 +53,7 @@
             </tr>
         </tbody>
     </table>
-        <button [routerLink]="['/detailEntreprise', -1]"  routerLinkActive="active">ajouter</button>
+        <a [routerLink]="['/detailEntreprise', -1]"  routerLinkActive="active" id="btn">ajouter une entreprise</a>
         <select [(ngModel)]="annees">
             <option></option>
             <option *ngFor=" let value of TAnnees">

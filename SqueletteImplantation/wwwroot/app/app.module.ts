@@ -56,7 +56,7 @@ const appRoutes: Routes=[
   },*/
 
   {
-    path: 'detailEntreprise/:noEntreprise', 
+    path: 'detailEntreprise/:id', 
     component:  PageDetailEntrepriseComponent
   },
  

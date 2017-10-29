@@ -4,7 +4,7 @@ import { Http } from '@angular/http';
 import {  Router, RouterModule, Routes, ActivatedRoute, ParamMap}   from '@angular/router';
 import { Entreprise } from './models/entreprise.class';
 import { Location }   from '@angular/common';
-
+declare var jBox:any;
 
 
 
@@ -112,11 +112,20 @@ export class PageDetailEntrepriseComponent  {
             
            if(this.invalide===true)
             {
+                new jBox('Notice', {
+                    content: 'Attention!!! Vous avez saisi un carectère non valide dans statistique de confirmation.',
+                    color: 'red',
+                    autoClose: 5000
+                    }); 
                 return;
             }
             else{
 
-            
+                new jBox('Notice', {
+                    content: 'Modification éffectuée',
+                    color: 'yellow',
+                    autoClose: 5000
+                    }); 
        
         this.http.put("api/entreprise/Modifier", this. entreprise).subscribe(
             donne => {
@@ -132,6 +141,11 @@ export class PageDetailEntrepriseComponent  {
         }  
     }
     Supprimer(): void {
+
+       /* new jBox('Confirm', {
+            confirmButton: 'Do it!',
+            cancelButton: 'Nope'
+        });*/
         this.http.delete("api/entreprise/Supprimer/" + this.DetectionPageID()).subscribe(
             donne => {
                 if (donne.status !== 200)
@@ -139,6 +153,11 @@ export class PageDetailEntrepriseComponent  {
                 else
                     this.SuccesModifier = true;
             });
+            new jBox('Notice', {
+                content: 'Suppression réussie',
+                color: 'yellow',
+                autoClose: 5000
+                }); 
     }
     Ajouter()
     {
@@ -148,7 +167,7 @@ export class PageDetailEntrepriseComponent  {
                     this.nbreNon) ===true)
                     {
                         this.invalide=true;
-                        //return;
+                        
                     }
             
             else{
@@ -157,9 +176,19 @@ export class PageDetailEntrepriseComponent  {
             
            if(this.invalide===true)
             {
+                new jBox('Notice', {
+                    content: 'Attention!!! Vous avez saisi un carectère non valide dans statistique de confirmation.',
+                    color: 'red',
+                    autoClose: 5000
+                    }); 
                 return;
             }
             else{
+                new jBox('Notice', {
+                    content: 'Entreprise ajoutée !!!',
+                    color: 'yellow',
+                    autoClose: 5000
+                    }); 
       
       this. entrepriseAjouter=new Entreprise(9,this.nomEntreprise,this.date,
         this.lieu,this.personneResponsable,
@@ -204,7 +233,7 @@ export class PageDetailEntrepriseComponent  {
   }
 
   
-
+ 
 
 
 
