@@ -16,14 +16,9 @@ declare var jBox:any;
 
 })
 export class PageDetailEntrepriseComponent  {
-
     entrepriseAjouter:Entreprise;
     entreprise: Entreprise;
     ID: number;
-    ErreurModifier: boolean;
-    SuccesModifier: boolean;
-    SuccesSupprimer: boolean;
-    ErreurSupprimer: boolean;
     PageAjouter: boolean;
     Alert: boolean;
    /**************************** */
@@ -47,167 +42,124 @@ export class PageDetailEntrepriseComponent  {
     Non:string;
     /**************************** */
     invalide:boolean;
-    recu:boolean;
     
     constructor(private http: Http, private router: Router,
       private location: Location)
     {
-        this.recu=false;
-       // this.entreprise = new Entreprise(4,null,null,null,null,null,null,null,null,null,null);
         this.invalide=false;
         this.ID = this.DetectionPageID();
         if (this.ID != -1)
         {
             
             this.getEntrepriseParNoEnt(this.ID);
-        }
-        
-           
-        this.ErreurModifier = false;
-        this.ErreurSupprimer = false;
-        this.SuccesModifier = false;
-        this.SuccesSupprimer = false;
-        //this.PageAjouter = false;
-        
+        }       
     }
-    
-    getEntrepriseParNoEnt(NoEnt: number) {
+    //Récupère l'entreprise choisie par l'ID
+    getEntrepriseParNoEnt(NoEnt: number)
+    {
       this.PageAjouter = false;
       let url: string;
       url = "api/Entreprise/"+NoEnt;
-       this.http.get(url).subscribe(
-           donnees => {
-               this.entreprise = donnees.json() as Entreprise
-           }
-    );
+      this.http.get(url).subscribe(donnees =>
+         {
+            this.entreprise = donnees.json() as Entreprise
+         });
     
     }
+    //Récupère l'ID de l'entreprise choisie
     DetectionPageID (): number 
     {
-    let CheminLong: string = this.router.url.toString();
-    let Page: string[];
-    let idStr:string;
-    let id:number;
-    Page = CheminLong.split('/');
-    idStr=Page[Page.length-1]
-    id = +idStr;
-    if (id == -1)
-        this.PageAjouter = true;
-    return id;
+        let CheminLong: string = this.router.url.toString();
+        let Page: string[];
+        let idStr:string;
+        let id:number;
+        Page = CheminLong.split('/');
+        idStr=Page[Page.length-1]
+        id = +idStr;
+        if (id == -1)
+            this.PageAjouter = true;
+        return id;
     }
+
     Modifier(): void
     {
         
-                if( this.validation(this.Confirmation,this.Oui,
-                    this.PeutEtre,this.ProbablementNon,
-                    this.Non)===true)
-                    {
-                        this.invalide=true;
-                        //return;
-                    }
-            
-            else{
+        if( this.validation(this.Confirmation,this.Oui,this.PeutEtre,this.ProbablementNon,this.Non)===true){
+           this.invalide=true;
+        }
+        else
+            {
                 this.invalide=false;
             }
-            
-           if(this.invalide===true)
-            {
-                new jBox('Notice', {
-                    content: 'Attention!!! Vous avez saisi un carectère non valide dans statistique de confirmation.',
-                    color: 'red',
-                    autoClose: 5000
-                    }); 
-                return;
-            }
-            else{
 
-                new jBox('Notice', {
-                    content: 'Modification éffectuée',
-                    color: 'yellow',
-                    autoClose: 5000
-                    }); 
-       
-        this.http.put("api/entreprise/Modifier", this. entreprise).subscribe(
-            donne => {
-                if (donne.status !== 200)
-                    {
-                     console.log(this.entreprise);
-                    this.ErreurModifier = true;
-                    }
-                else
-                    this.SuccesModifier = true;
-            });
-
-        }  
+        if(this.invalide===true)
+        {
+            this.jBoxMessage("red", "Attention!!! Vous avez saisi un caractère non valide dans statistique de confirmation.");
+            return;
+        }
+        else
+        {
+            this.jBoxMessage("green", "Modification effectuée");           
+                this.http.put("api/entreprise/Modifier", this. entreprise).subscribe(donne =>
+                {
+                        if (donne.status !== 200)
+                        {
+                            this.jBoxMessage("red", "Erreur lors de la modification de l'entreprise.");
+                        }
+                        else
+                            this.jBoxMessage("green","Modification effectuée avec succès!");
+                });
+            }  
     }
+
     Supprimer(): void {
 
-       /* new jBox('Confirm', {
-            confirmButton: 'Do it!',
-            cancelButton: 'Nope'
-        });*/
-        this.http.delete("api/entreprise/Supprimer/" + this.DetectionPageID()).subscribe(
-            donne => {
-                if (donne.status !== 200)
-                    this.ErreurSupprimer = true;
-                else
-                    this.SuccesModifier = true;
-            });
-            new jBox('Notice', {
-                content: 'Suppression réussie',
-                color: 'yellow',
-                autoClose: 5000
-                }); 
+        this.http.delete("api/entreprise/Supprimer/" + this.DetectionPageID()).subscribe(donne =>
+        {
+            if (donne.status !== 200)
+                this.jBoxMessage("green","Supression effectuée avec succès!");
+            else
+                this.jBoxMessage("red","Erreur lors de la suppression de l'entreprise.")
+        });
     }
+
     Ajouter()
     {
       
-              if(this.validation(this.nbreConfirmation,this.nbreOui,
-                    this.nbrPeutEtre,this.nbreProbablementNon,
-                    this.nbreNon) ===true)
-                    {
-                        this.invalide=true;
-                        
-                    }
-            
-            else{
-                this.invalide=false;
-            }
-            
-           if(this.invalide===true)
+        if(this.validation(this.nbreConfirmation,this.nbreOui,this.nbrPeutEtre,this.nbreProbablementNon,this.nbreNon) ===true)
+        {
+           this.invalide=true;           
+        }
+        else
             {
-                new jBox('Notice', {
-                    content: 'Attention!!! Vous avez saisi un carectère non valide dans statistique de confirmation.',
-                    color: 'red',
-                    autoClose: 5000
-                    }); 
-                return;
+               this.invalide=false;
             }
-            else{
-                new jBox('Notice', {
-                    content: 'Entreprise ajoutée !!!',
-                    color: 'yellow',
-                    autoClose: 5000
-                    }); 
-      
-      this. entrepriseAjouter=new Entreprise(9,this.nomEntreprise,this.date,
-        this.lieu,this.personneResponsable,
-        +this.nbreConfirmation, +this.nbreOui,
-        +this.nbrPeutEtre, +this.nbreProbablementNon,
-        +this.nbreNon,this.courrielRes);
-        this.PageAjouter = true;
-        this.http.post("api/Entreprise/Ajouter", this. entrepriseAjouter).subscribe(
-            Result => {
-                console.log(Result.status);
+            
+        if(this.invalide===true)
+        {
+            this.jBoxMessage("red", "Attention!!! Vous avez saisi un caractère non valide dans statistique de confirmation.");
+        }
+        else
+            {
+                
+                this. entrepriseAjouter=new Entreprise(9,this.nomEntreprise,this.date,
+                this.lieu,this.personneResponsable,
+                +this.nbreConfirmation, +this.nbreOui,
+                +this.nbrPeutEtre, +this.nbreProbablementNon,
+                +this.nbreNon,this.courrielRes);
+                this.PageAjouter = true;
+                this.http.post("api/Entreprise/Ajouter", this.entrepriseAjouter).subscribe(Result =>
+                {
+                    this.jBoxMessage("green", "Entreprise ajoutée!");
+                });
             }
-        )
-
     }
-    }
-  goBack(): void {
-    this.location.back();
-  }
 
+    goBack(): void
+    {
+        this.location.back();
+    }
+//Valide si chaque champ est valide
   validation(str1:string,str2:string,str3:string,str4:string,str5:string):boolean{
       let flag:boolean;
       flag=true;
@@ -226,15 +178,17 @@ export class PageDetailEntrepriseComponent  {
                     {
                         flag=true;
                     }
-
-     
-
         return flag;
   }
+//Messages d'erreurs / succès
+  jBoxMessage(couleur: string, message: string) {
 
-  
- 
-
-
-
+      new jBox('Notice', {
+          content: message,
+          color: couleur,
+          autoClose: 5000
+      });
   }
+
+
+}
