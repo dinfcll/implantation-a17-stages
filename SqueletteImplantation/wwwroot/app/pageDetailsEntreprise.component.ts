@@ -28,7 +28,7 @@ export class PageDetailEntrepriseComponent  {
         }
         else
         {
-            this.entrepriseAjouter = new Entreprise(-1,"q","q","q","q","q","q",0,0,0,0,0,"2009");
+            this.entrepriseAjouter = new Entreprise(-1,"","","","","","",0,0,0,0,0,"");
         }
 
     }

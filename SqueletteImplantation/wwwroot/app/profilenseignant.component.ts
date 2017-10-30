@@ -8,27 +8,27 @@ import { Http } from '@angular/http';
 @Component({
   selector: 'profil-enseignant',
   template: `page profil enseignant allo
-     {{user.noEnseignant}}
+     {{ens.noEnseignant}}
      <br/>
-     {{user.nomUtil}}
+     {{ens.nomUtil}}
      <br/>
-     {{user.nom}}
+     {{ens.prenom}}
      <br/>
-     {{user.prenom}}
+     {{ens.courriel}}
      <br/>
-     {{user.courriel}}
-     <br/>
-     {{user.motDePasse}}
+     {{ens.motDePasse}}
+    
   
   `
 })
 export class ProfilEnseignantComponent  { 
-    private ens: Enseignant;
-    user:any;
+    ens: any;
+    user:string;
     constructor(private http: Http,  private router: Router){
-        // set token if saved in local storage
-        //this.ens=new LoginEnseignantComponent(http, router).getEnseignantConnecte();
-        this.user=localStorage.getItem('var');
+        
+        this.user=localStorage.getItem('var') ;
+        this. ens = JSON.parse(this.user);
+        console.log(this.ens);
     }
     
 
