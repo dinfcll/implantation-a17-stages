@@ -22,7 +22,7 @@ namespace SqueletteTests
         {
             ent = new Entreprise();
             ent.personneresponsable = "6";
-            ent.NoEntreprise = 0;
+            ent.Id = 0;
             ent.lieu = "levis";
             ent.notel = "trolo";
             ent.date = "2017";
