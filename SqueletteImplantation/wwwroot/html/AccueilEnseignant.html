@@ -3,86 +3,30 @@
 
             
 					
-						<nav>
-							<ul>
-								<li><a routerLink="accueil-enseignant/recherche-etudiant" routerLinkActive="active">Etudiants</a></li>
-								<li><a routerLink="/accueil-enseignant" routerLinkActive="active">Entreprises</a></li>
-								
-							</ul>
-						</nav>
+					<nav>
+						<ul id="ul">
+							<li class="li"><a class="a" routerLink="accueil-enseignant/recherche-etudiant" routerLinkActive="active">Etudiants</a></li>
+							<li class="li"><a class="a" routerLink="accueil-enseignant/recherche-entreprise" routerLinkActive="active">Entreprises</a></li>
+							
+						</ul>
+					</nav>
 						<div id="principal">
 						<router-outlet></router-outlet>
 							<p id="dec" (click)="Deconnexion()">Déconnexion</p>
 							
-							<div>
-								
-									
-							
-									<input type="text" placeholder="Recherche" id="recherche" [(ngModel)]="Recherche">
-									<button class="loupe"   (click)="getEntreprise(Recherche,annees)" ></button>	
-									
-							<table border=1 >
-											<caption>Tableau de données des entreprises</caption>
-								<thead>	
-								       <tr>
-											<th>
-												Nom d'entreprise
-											</th>
-											<th>
-												Lieu
-											</th>
-											<th>
-												Numéro Téléphone
-											</th>
-											<th>
-												Poste
-											</th>
-											<th>
-												Personne Responsable
-											</th>
-											<th>
-												Nombre d'étudiant acceptés 
-											</th>
-											<th>
-												Nombre d'étudiant refusés
-											</th>
-											<th>
-												Courriel du responsable 
-											</th>
-											<th id="date">
-												Date(Année)
-											</th>
-										</tr>
-									</thead>
 
-									<tbody>
-										<tr *ngFor="let entreprise of entreprises">
-											<td> {{entreprise.nomEntreprise }}</td>
-											<td> {{entreprise.lieu}}</td>
-											<td> {{entreprise.noTel }}</td>	
-											<td> {{entreprise.poste}}</td>
-											<td> {{entreprise.personneResponsable}}</td>
-											<td> {{entreprise.nbreOui}}</td>
-											<td> {{entreprise.nbreNon}}</td>
-											<td> {{entreprise.courrielRes}}</td>
-											<td> {{entreprise.date}}</td>
-										</tr>
-									</tbody>
-								</table>
-
-									<select [(ngModel)]="annees">
-										<option></option>
-										<option *ngFor=" let value of TAnnees">
-											{{value}}
-										</option>
-									</select>
-							</div>
-		
-								
-								
-								
-
-							
-					</div>
 					
 
+							<div class="dropdown" id="menu">
+								<a class="btn btn-primary" ><i class="fa fa-user fa-fw"></i> User</a>
+								<a class="btn btn-primary dropdown-toggle"   data-toggle="dropdown" >
+								  <span class="fa fa-caret-down" title="Toggle dropdown menu"></span>
+								</a>
+								<ul class="dropdown-menu">
+								  <li><a routerLink="/profil-enseignant" routerLinkActive="active"><i class="fa fa-eye" aria-hidden="true"></i> Voir mon profil</a></li>
+								  <li><a (click)="Deconnexion()"><i class="fa fa-sign-out" aria-hidden="true"></i> Déconnexion</a></li>
+								  
+								 
+								  
+								</ul>
+							  </div>

@@ -1,0 +1,74 @@
+<div>
+    
+        
+
+        <input type="text" placeholder="Recherche" id="recherche" [(ngModel)]="Recherche">
+        <button class="loupe"   (click)="getEntreprise(Recherche,annees)" ></button>	
+        
+   <table border=1 >
+                <caption>Tableau de données des entreprises</caption>
+    <thead>	
+           <tr>
+                <th>
+                    Nom d'entreprise
+                </th>
+                <th>
+                    Lieu
+                </th>
+                <th>
+                    Numéro Téléphone
+                </th>
+                <th>
+                    Poste
+                </th>
+                <th>
+                    Personne Responsable
+                </th>
+                <th>
+                    Nombre d'étudiant acceptés 
+                </th>
+                <th>
+                    Nombre d'étudiant refusés
+                </th>
+                <th>
+                    Courriel du responsable 
+                </th>
+                <th id="date">
+                    Date(Année)
+                </th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let entreprise of entreprises">
+                <td class="nomEnt" [routerLink]="['/detailEntreprise', entreprise.id]"  routerLinkActive="active"> {{entreprise.nomentreprise }}</td>
+                <td> {{entreprise.lieu}}</td>
+                <td> {{entreprise.notel }}</td>	
+                <td> {{entreprise.poste}}</td>
+                <td> {{entreprise.personneresponsable}}</td>
+                <td> {{entreprise.nbreoui}}</td>
+                <td> {{entreprise.nbrenon}}</td>
+                <td> {{entreprise.courrielres}}</td>
+                <td> {{entreprise.date}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <a class="btn icon-btn btn-success" [routerLink]="['/detailEntreprise', -1]"  routerLinkActive="active" id="btn">
+        <span class="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"></span>
+        ajouter une entreprise
+    
+    </a>
+        <select [(ngModel)]="annees">
+            <option></option>
+            <option *ngFor=" let value of TAnnees">
+                {{value}}
+            </option>
+        </select>
+</div>
+
+    
+    
+    
+
+
+

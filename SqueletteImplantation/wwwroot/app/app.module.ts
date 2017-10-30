@@ -10,6 +10,9 @@ import { PageRechercheEtudiantComponent } from "./pageRechercheEtudiant.componen
 
 import { pageAccueilEnseignantComponent } from "./pageAccueilEnseignant.component";
 
+import { PageDetailEntrepriseComponent } from "./pageDetailsEntreprise.component";
+
+import { pageRechercheEntrepriseComponent } from "./pageRechercheEnreprise.component";
 
 const appRoutes: Routes=[
   {
@@ -26,7 +29,16 @@ const appRoutes: Routes=[
       {
           path: 'accueil-enseignant/recherche-etudiant',
           component: PageRechercheEtudiantComponent
-      }]
+      },
+      {
+        path: 'accueil-enseignant/recherche-entreprise', 
+        component:  pageRechercheEntrepriseComponent
+      },
+      { 
+        path: '', 
+        redirectTo: 'accueil-enseignant/recherche-entreprise', 
+        pathMatch: 'full'
+       },]
   },
  /* {
      path: '**', 
@@ -38,9 +50,14 @@ const appRoutes: Routes=[
     component: LoginEnseignantComponent 
   },
   
-  {
+  /*{
     path: 'recherche-entreprise', 
-    component:  pageAccueilEnseignantComponent//PageRechercheEtudiantComponent 
+    component:  pageAccueilEnseignantComponent
+  },*/
+
+  {
+    path: 'detailEntreprise/:id', 
+    component:  PageDetailEntrepriseComponent
   },
  
   
@@ -53,7 +70,10 @@ const appRoutes: Routes=[
                    LoginEnseignantComponent,
                  
                   pageAccueilEnseignantComponent,
-  PageRechercheEtudiantComponent ],
+                  PageRechercheEtudiantComponent,
+                  PageDetailEntrepriseComponent,
+                  pageRechercheEntrepriseComponent ],
+   
   bootstrap:    [ AppComponent ]
 })
 

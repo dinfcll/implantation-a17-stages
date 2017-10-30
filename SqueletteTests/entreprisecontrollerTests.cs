@@ -21,10 +21,10 @@ namespace SqueletteTests
         public entreprisecontrollerTests()
         {
             ent = new Entreprise();
-            ent.PersonneResponsable = "6";
-            ent.NoEntreprise = 0;
-            ent.Lieu = "levis";
-            ent.NoTel = "trolo";
+            ent.personneresponsable = "6";
+            ent.Id = 0;
+            ent.lieu = "levis";
+            ent.notel = "trolo";
             ent.date = "2017";
             var options = new DbContextOptionsBuilder<MaBd>()
                 .UseInMemoryDatabase("DatabaseEntreprise-" + $"{Guid.NewGuid()}")
@@ -39,8 +39,8 @@ namespace SqueletteTests
         public void EnregistrementbdTests()
         {
             var resultat = _entreprisecontroller.Enregistrementbd(ent);
-            Assert.Equal("trolo", ((resultat as OkObjectResult).Value as Entreprise).NoTel);
-            Assert.Equal("levis", ((resultat as OkObjectResult).Value as Entreprise).Lieu);
+            Assert.Equal("trolo", ((resultat as OkObjectResult).Value as Entreprise).notel);
+            Assert.Equal("levis", ((resultat as OkObjectResult).Value as Entreprise).lieu);
         }
 
         [Fact]
@@ -53,7 +53,7 @@ namespace SqueletteTests
         [Fact]
         public void RetourListeAnneeUnique()
         {
-            ent.NoEntreprise = 1;
+            ent.Id = 1;
             _entreprisecontroller.Enregistrementbd(ent);
             var _vartest = (IEnumerable<string>)_entreprisecontroller.ListeAnnees();
             Assert.Equal(1, _vartest.Count());
@@ -61,10 +61,10 @@ namespace SqueletteTests
         [Fact]
         public void RechercheAnneee()
         {
-            ent.NoEntreprise = 2;
+            ent.Id = 2;
             ent.date = "1997";
             _entreprisecontroller.Enregistrementbd(ent);
-            ent.NoEntreprise = 3;
+            ent.Id = 3;
             _entreprisecontroller.Enregistrementbd(ent);
             var result = (IEnumerable<Entreprise>)_entreprisecontroller.EntrepriseRechercheAnnee("1997");
             Assert.Equal(2, (result).Count());

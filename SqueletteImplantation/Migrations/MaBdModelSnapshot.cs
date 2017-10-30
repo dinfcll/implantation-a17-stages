@@ -40,36 +40,37 @@ namespace squeletteimplantation.Migrations
 
             modelBuilder.Entity("SqueletteImplantation.DbEntities.Models.Entreprise", b =>
                 {
-                    b.Property<int>("NoEntreprise")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
 
-                    b.Property<string>("CourrielRes");
-
-                    b.Property<string>("Lieu");
-
-                    b.Property<int>("NbrPeutEtre");
-
-                    b.Property<int>("NbreConfirmation");
-
-                    b.Property<int>("NbreNon");
-
-                    b.Property<int>("NbreOui");
-
-                    b.Property<int>("NbreProbablementNon");
-
-                    b.Property<string>("NoTel")
-                        .IsRequired();
-
-                    b.Property<string>("NomEntreprise");
-
-                    b.Property<string>("PersonneResponsable");
-
-                    b.Property<string>("Poste");
+                    b.Property<string>("courrielres");
 
                     b.Property<string>("date")
                         .IsRequired();
 
-                    b.HasKey("NoEntreprise");
+                    b.Property<string>("lieu");
+
+                    b.Property<int>("nbreconfirmation");
+
+                    b.Property<int>("nbrenon");
+
+                    b.Property<int>("nbreoui");
+
+                    b.Property<int>("nbreprobablementnon");
+
+                    b.Property<int>("nbrpeutetre");
+
+                    b.Property<string>("nomentreprise");
+
+                    b.Property<string>("notel")
+                        .IsRequired();
+
+                    b.Property<string>("personneresponsable");
+
+                    b.Property<string>("poste");
+
+                    b.HasKey("Id");
 
                     b.ToTable("Entreprise");
                 });
@@ -82,7 +83,7 @@ namespace squeletteimplantation.Migrations
 
                     b.Property<string>("AddresseCourriel");
 
-                    b.Property<int?>("EntrepriseNoEntreprise");
+                    b.Property<int?>("EntrepriseId");
 
                     b.Property<string>("MotPasse")
                         .IsRequired();
@@ -95,7 +96,7 @@ namespace squeletteimplantation.Migrations
 
                     b.HasKey("NoDa");
 
-                    b.HasIndex("EntrepriseNoEntreprise");
+                    b.HasIndex("EntrepriseId");
 
                     b.ToTable("Etudiant");
                 });
@@ -145,7 +146,7 @@ namespace squeletteimplantation.Migrations
                 {
                     b.HasOne("SqueletteImplantation.DbEntities.Models.Entreprise", "Entreprise")
                         .WithMany()
-                        .HasForeignKey("EntrepriseNoEntreprise");
+                        .HasForeignKey("EntrepriseId");
                 });
 
             modelBuilder.Entity("SqueletteImplantation.DbEntities.Models.RelEnseignantEntreprise", b =>
@@ -156,7 +157,7 @@ namespace squeletteimplantation.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("SqueletteImplantation.DbEntities.Models.Entreprise", "Entreprise")
-                        .WithMany("RelEnseignantEntreprises")
+                        .WithMany("relenseignantentreprises")
                         .HasForeignKey("NoEntreprise")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

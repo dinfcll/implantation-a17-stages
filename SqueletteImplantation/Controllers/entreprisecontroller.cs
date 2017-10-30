@@ -18,19 +18,17 @@ namespace SqueletteImplantation.Controllers
             _maBd = maBd;
         }
 
-
-       
         [HttpGet]
         [Route("api/Entreprise/annees")]
         public IEnumerable EntrepriseAnnee()
         {
-            var AnneeRecente =(from b in _maBd.Entreprise
-             select b.date).Max();
-        return from b in _maBd.Entreprise
-         where b.date.Contains(AnneeRecente.ToString())
-         select b;
+            var AnneeRecente = (from b in _maBd.Entreprise
+                                select b.date).Max();
+            return from b in _maBd.Entreprise
+                   where b.date.Contains(AnneeRecente.ToString())
+                   select b;
         }
-        
+
         [HttpGet]
         [Route("api/Entreprise/RechercheAnnee/{annees}")]
         public IEnumerable EntrepriseRechercheAnnee(string annees)
@@ -39,29 +37,30 @@ namespace SqueletteImplantation.Controllers
                    where b.date.Contains(annees.ToString())
                    select b;
         }
-        
+
         [HttpGet]
         [Route("api/Entreprise/RechercheSansAnnee/{recherchetxtbox}")]
         public IEnumerable Recherche(string recherchetxtbox)
         {
             return from b in _maBd.Entreprise
-            where 
-            b.Lieu.Contains(recherchetxtbox)||
-            b.NoTel.Contains(recherchetxtbox) ||
-            b.PersonneResponsable.Contains(recherchetxtbox)||
-            b.Poste.Contains(recherchetxtbox)
-            orderby b.date
-            select new 
-            {b.NomEntreprise,
-            b.Lieu,
-            b.NoTel,
-            b.Poste,
-            b.PersonneResponsable,
-            b.NbreNon, 
-            b.NbreOui, 
-            b.CourrielRes,
-            b.date
-        };
+                   where
+                   b.lieu.Contains(recherchetxtbox) ||
+                   b.notel.Contains(recherchetxtbox) ||
+                   b.personneresponsable.Contains(recherchetxtbox) ||
+                   b.poste.Contains(recherchetxtbox)
+                   orderby b.date
+                   select new
+                   {
+                       b.nomentreprise,
+                       b.lieu,
+                       b.notel,
+                       b.poste,
+                       b.personneresponsable,
+                       b.nbrenon,
+                       b.nbreoui,
+                       b.courrielres,
+                       b.date
+                   };
         }
 
         [HttpGet]
@@ -70,20 +69,21 @@ namespace SqueletteImplantation.Controllers
         {
             return from b in _maBd.Entreprise
                    where b.date.Contains(annees) && (
-                   b.Lieu.Contains(recherchetxtbox) ||
-                   b.NoTel.Contains(recherchetxtbox) ||
-                   b.PersonneResponsable.Contains(recherchetxtbox) ||
-                   b.Poste.Contains(recherchetxtbox))
+                   b.lieu.Contains(recherchetxtbox) ||
+                   b.notel.Contains(recherchetxtbox) ||
+                   b.personneresponsable.Contains(recherchetxtbox) ||
+                   b.poste.Contains(recherchetxtbox))
                    orderby b.date
                    select new
-                   { b.NomEntreprise,
-                       b.Lieu,
-                       b.NoTel,
-                       b.Poste,
-                       b.PersonneResponsable,
-                       b.NbreNon,
-                       b.NbreOui,
-                       b.CourrielRes,
+                   {
+                       b.nomentreprise,
+                       b.lieu,
+                       b.notel,
+                       b.poste,
+                       b.personneresponsable,
+                       b.nbrenon,
+                       b.nbreoui,
+                       b.courrielres,
                        b.date
                    };
         }
@@ -97,7 +97,22 @@ namespace SqueletteImplantation.Controllers
                     select b.date).Distinct();
         }
 
-        [HttpPost]
+
+        [HttpGet]
+        [Route("api/Entreprise/{NoEnt}")]
+        public IActionResult GetEntrepriseParNoEnt(int NoEnt)
+        {
+            var entreprise = _maBd.Entreprise.FirstOrDefault(m => m.Id == NoEnt);
+
+            if (entreprise == null)
+            {
+                return NotFound();
+            }
+
+            return new OkObjectResult(entreprise);
+        }
+
+    [HttpPost]
         [Route("api/Entreprise/Enregistrementbd")]
         public IActionResult Enregistrementbd(Entreprise Entreprise)
         {
@@ -106,9 +121,42 @@ namespace SqueletteImplantation.Controllers
             return new OkObjectResult(Entreprise);
 
 
+        }       
+        [HttpPut]
+        [Route("api/Entreprise/Modifier")]
+        public IActionResult Modificationbd([FromBody]Entreprise entreprise)
+        {
+            var resultat = _maBd.Entreprise.Update(entreprise);
+            _maBd.SaveChanges();
+            if (resultat == null)
+                return NotFound();
+            return new OkResult();
         }
-     
-        
-    }
 
+        [HttpDelete]
+        [Route("api/Entreprise/Supprimer/{ID}")]
+        public IActionResult SuprimeEntreprisebd(int ID)
+        {
+            Entreprise entreprise = new Entreprise() { Id = ID };
+            _maBd.Entreprise.Attach(entreprise);
+           var resultat= _maBd.Entreprise.Remove(entreprise);
+            _maBd.SaveChanges();
+            if (resultat == null)
+                return NotFound();
+            return new OkResult();
+        }
+        [HttpPost]
+        [Route("api/Entreprise/Ajouter")]
+        public IActionResult AjouterEntreprise([FromBody]Entreprise entreprise)
+        {
+            var Result = _maBd.Entreprise.Add(entreprise);
+             _maBd.SaveChanges();
+            if (Result == null)
+                return NotFound();
+            return new OkResult();
+
+        }
+
+    }
 }
+

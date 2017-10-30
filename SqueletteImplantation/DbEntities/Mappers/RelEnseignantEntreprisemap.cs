@@ -21,7 +21,7 @@ namespace SqueletteImplantation.DbEntities.Mappers
             //Clé étrangère NoEntreprise
             entityBuilder
             .HasOne(ee=>ee.Entreprise)
-            .WithMany(ee=>ee.RelEnseignantEntreprises)
+            .WithMany(ee=>ee.relenseignantentreprises)
             .HasForeignKey(ee=>ee.NoEntreprise);
         }
     }
