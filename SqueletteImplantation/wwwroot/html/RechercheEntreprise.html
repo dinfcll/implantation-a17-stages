@@ -53,7 +53,11 @@
             </tr>
         </tbody>
     </table>
-        <a [routerLink]="['/detailEntreprise', -1]"  routerLinkActive="active" id="btn">ajouter une entreprise</a>
+    <a class="btn icon-btn btn-success" [routerLink]="['/detailEntreprise', -1]"  routerLinkActive="active" id="btn">
+        <span class="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"></span>
+        ajouter une entreprise
+    
+    </a>
         <select [(ngModel)]="annees">
             <option></option>
             <option *ngFor=" let value of TAnnees">

@@ -13,7 +13,7 @@
     left: 25%;
     top: 1%;
     font-family:sans-serif;
-    color: rgb(213, 197, 41);
+    color:wheat;
 }
 
 #labelnom {
@@ -21,7 +21,7 @@
     left: 10%;
     top: 10%;
     font-family:sans-serif;
-    color: rgb(213, 197, 41);
+    color:wheat;
 }
 
 #inputnom {
@@ -38,7 +38,7 @@
     left: 10%;
     top: 15%;
     font-family:sans-serif;
-    color:rgb(213, 197, 41);
+    color:wheat;
 }
 
 #inputannee {
@@ -55,7 +55,7 @@
     left: 10%;
     top: 20%;
     font-family:sans-serif;
-    color:rgb(213, 197, 41);
+    color:wheat;
 }
 
 #inputlieu {
@@ -72,7 +72,7 @@
     left: 10%;
     top: 25%;
     font-family:sans-serif;
-    color:rgb(213, 197, 41);
+    color:wheat;
 }
 
 #inputPersRes {
@@ -89,7 +89,7 @@
     left: 10%;
     top: 30%;
     font-family:sans-serif;
-    color:rgb(213, 197, 41);
+    color:wheat;
 }
 
 #inputNoTel {
@@ -106,7 +106,7 @@
     left: 10%;
     top: 35%;
     font-family:sans-serif;
-    color:rgb(213, 197, 41);
+    color:wheat;
 }
 
 #inputPoste {
@@ -123,7 +123,7 @@
     left: 10%;
     top: 40%;
     font-family:sans-serif;
-    color:rgb(213, 197, 41);
+    color:wheat;
 }
 
 #inputcourriel {
@@ -138,7 +138,7 @@
 #Modifier {
     position: fixed;
     left: 10%;
-    top: 65%;
+    top: 70%;
     border-radius: 25px;
     cursor: pointer;
 }
@@ -146,21 +146,21 @@
 #Supprimer {
     position: fixed;
     left: 25%;
-    top: 65%;
+    top: 70%;
     border-radius: 25px;
     cursor: pointer;
 }
 #retour {
     position: fixed;
-    left: 10%;
-    top: 80%;
+    left: 2%;
+    top: 5%;
     border-radius: 25px;
     cursor: pointer;
 }
 #btnA {
     position: fixed;
     left: 10%;
-    top: 65%;
+    top: 70%;
     border-radius: 25px;
     cursor: pointer;
 }
@@ -201,8 +201,9 @@ table {
                 }
                 caption {
                 font-family:sans-serif;
-                color: rgb(213, 197, 41);
+                color:wheat;
                 font-size: bold;
+                text-align: center;
                 }
 td input {
     text-align: center; 
