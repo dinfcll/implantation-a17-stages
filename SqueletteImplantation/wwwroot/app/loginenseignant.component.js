@@ -29,6 +29,7 @@ var LoginEnseignantComponent = (function () {
         this.http
             .post("api/Enseignant", JSON.stringify({ courriel: courriel, motDePasse: mdp }), { headers: headers })
             .subscribe(function (r) {
+            _this.enseignant = r.json();
             console.log(r);
             var patate = r.json();
             console.log(patate);
@@ -41,8 +42,9 @@ var LoginEnseignantComponent = (function () {
                 // set token property
                 _this.token = token;
                 // store courriel and jwt token in local storage to keep user logged in between page refreshes
-                localStorage.setItem('currentUser', JSON.stringify({ courriel: courriel, token: token }));
+                //localStorage.setItem('currentUser', JSON.stringify({ courriel: courriel, token: token }));
                 /*************************** */
+                localStorage.setItem('var', JSON.stringify(_this.enseignant));
             }
             else {
                 //message erreur
@@ -58,6 +60,9 @@ var LoginEnseignantComponent = (function () {
                 }
             }
         });
+    };
+    LoginEnseignantComponent.prototype.getEnseignantConnecte = function () {
+        return this.enseignant;
     };
     LoginEnseignantComponent = __decorate([
         core_1.Component({
