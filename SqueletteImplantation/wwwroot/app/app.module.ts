@@ -14,6 +14,7 @@ import { PageDetailEntrepriseComponent } from "./pageDetailsEntreprise.component
 
 import { pageRechercheEntrepriseComponent } from "./pageRechercheEnreprise.component";
 
+import { ProfilEnseignantComponent} from "./profilenseignant.component";
 const appRoutes: Routes=[
   {
     path:'',
@@ -50,10 +51,10 @@ const appRoutes: Routes=[
     component: LoginEnseignantComponent 
   },
   
-  /*{
-    path: 'recherche-entreprise', 
-    component:  pageAccueilEnseignantComponent
-  },*/
+  {
+    path: 'profil-enseignant',
+    component:  ProfilEnseignantComponent
+},
 
   {
     path: 'detailEntreprise/:id', 
@@ -72,7 +73,8 @@ const appRoutes: Routes=[
                   pageAccueilEnseignantComponent,
                   PageRechercheEtudiantComponent,
                   PageDetailEntrepriseComponent,
-                  pageRechercheEntrepriseComponent ],
+                  pageRechercheEntrepriseComponent,
+                  ProfilEnseignantComponent ],
    
   bootstrap:    [ AppComponent ]
 })

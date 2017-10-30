@@ -4,7 +4,7 @@ function myFunction(){
     $(document).ready(function() {
         
   new jBox('Confirm', {
-    attach:'button',
+    attach:'#Supprimer',
     content: 'Do you really want to do this?',
     cancelButton: 'Nope',
     confirmButton: 'Sure do!'

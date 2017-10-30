@@ -20,9 +20,10 @@ declare var jBox:any;
 
 })
 
-export class LoginEnseignantComponent { 
+export  class LoginEnseignantComponent { 
     isValid=true;
     public token: string;
+    enseignant: Enseignant;
     constructor(private http: Http,  private router: Router){
         // set token if saved in local storage
         var currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -39,6 +40,7 @@ export class LoginEnseignantComponent {
             .post("api/Enseignant", JSON.stringify({courriel: courriel, motDePasse: mdp}), { headers: headers })
             .subscribe(r=>
             {
+                this.enseignant = r.json() as Enseignant;
                 console.log(r);
                 var patate = r.json();
                 console.log(patate);
@@ -54,8 +56,9 @@ export class LoginEnseignantComponent {
                            this.token = token;
                     
                             // store courriel and jwt token in local storage to keep user logged in between page refreshes
-                            localStorage.setItem('currentUser', JSON.stringify({ courriel: courriel, token: token }));
+                            //localStorage.setItem('currentUser', JSON.stringify({ courriel: courriel, token: token }));
                          /*************************** */
+                         localStorage.setItem('var', JSON.stringify(this.enseignant));
                     }
                    
                 else
@@ -79,7 +82,9 @@ export class LoginEnseignantComponent {
     }
     
     
-    
+    getEnseignantConnecte(): Enseignant{
+        return this.enseignant;
+    }
 
  }
 
