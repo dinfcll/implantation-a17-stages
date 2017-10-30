@@ -11,7 +11,7 @@ namespace SqueletteImplantation.DbEntities.Mappers
             
 
 
-            entityBuilder.Property(m => m.NoTel).IsRequired();
+            entityBuilder.Property(m => m.notel).IsRequired();
             entityBuilder.Property(m => m.date).IsRequired();
         }
     }

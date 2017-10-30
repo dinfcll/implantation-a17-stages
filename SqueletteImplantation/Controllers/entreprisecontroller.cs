@@ -44,21 +44,21 @@ namespace SqueletteImplantation.Controllers
         {
             return from b in _maBd.Entreprise
                    where
-                   b.Lieu.Contains(recherchetxtbox) ||
-                   b.NoTel.Contains(recherchetxtbox) ||
-                   b.PersonneResponsable.Contains(recherchetxtbox) ||
-                   b.Poste.Contains(recherchetxtbox)
+                   b.lieu.Contains(recherchetxtbox) ||
+                   b.notel.Contains(recherchetxtbox) ||
+                   b.personneresponsable.Contains(recherchetxtbox) ||
+                   b.poste.Contains(recherchetxtbox)
                    orderby b.date
                    select new
                    {
-                       b.NomEntreprise,
-                       b.Lieu,
-                       b.NoTel,
-                       b.Poste,
-                       b.PersonneResponsable,
-                       b.NbreNon,
-                       b.NbreOui,
-                       b.CourrielRes,
+                       b.nomentreprise,
+                       b.lieu,
+                       b.notel,
+                       b.poste,
+                       b.personneresponsable,
+                       b.nbrenon,
+                       b.nbreoui,
+                       b.courrielres,
                        b.date
                    };
         }
@@ -69,21 +69,21 @@ namespace SqueletteImplantation.Controllers
         {
             return from b in _maBd.Entreprise
                    where b.date.Contains(annees) && (
-                   b.Lieu.Contains(recherchetxtbox) ||
-                   b.NoTel.Contains(recherchetxtbox) ||
-                   b.PersonneResponsable.Contains(recherchetxtbox) ||
-                   b.Poste.Contains(recherchetxtbox))
+                   b.lieu.Contains(recherchetxtbox) ||
+                   b.notel.Contains(recherchetxtbox) ||
+                   b.personneresponsable.Contains(recherchetxtbox) ||
+                   b.poste.Contains(recherchetxtbox))
                    orderby b.date
                    select new
                    {
-                       b.NomEntreprise,
-                       b.Lieu,
-                       b.NoTel,
-                       b.Poste,
-                       b.PersonneResponsable,
-                       b.NbreNon,
-                       b.NbreOui,
-                       b.CourrielRes,
+                       b.nomentreprise,
+                       b.lieu,
+                       b.notel,
+                       b.poste,
+                       b.personneresponsable,
+                       b.nbrenon,
+                       b.nbreoui,
+                       b.courrielres,
                        b.date
                    };
         }

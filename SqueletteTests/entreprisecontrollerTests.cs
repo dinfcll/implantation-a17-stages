@@ -21,10 +21,10 @@ namespace SqueletteTests
         public entreprisecontrollerTests()
         {
             ent = new Entreprise();
-            ent.PersonneResponsable = "6";
+            ent.personneresponsable = "6";
             ent.NoEntreprise = 0;
-            ent.Lieu = "levis";
-            ent.NoTel = "trolo";
+            ent.lieu = "levis";
+            ent.notel = "trolo";
             ent.date = "2017";
             var options = new DbContextOptionsBuilder<MaBd>()
                 .UseInMemoryDatabase("DatabaseEntreprise-" + $"{Guid.NewGuid()}")
@@ -39,8 +39,8 @@ namespace SqueletteTests
         public void EnregistrementbdTests()
         {
             var resultat = _entreprisecontroller.Enregistrementbd(ent);
-            Assert.Equal("trolo", ((resultat as OkObjectResult).Value as Entreprise).NoTel);
-            Assert.Equal("levis", ((resultat as OkObjectResult).Value as Entreprise).Lieu);
+            Assert.Equal("trolo", ((resultat as OkObjectResult).Value as Entreprise).notel);
+            Assert.Equal("levis", ((resultat as OkObjectResult).Value as Entreprise).lieu);
         }
 
         [Fact]

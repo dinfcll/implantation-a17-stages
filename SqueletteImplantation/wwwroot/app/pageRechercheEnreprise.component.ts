@@ -11,7 +11,6 @@ import {  Router, RouterModule, Routes}   from '@angular/router';
 
 @Component({
     selector: 'recherche_entreprise',
-    //template:`allo muaaaaaaaaaaaaaa`,
     templateUrl: `./../html/RechercheEntreprise.html`,
     styleUrls: [`./../css/accueil_enseignant.css`],
 })
@@ -33,11 +32,6 @@ export class pageRechercheEntrepriseComponent
         
     }
     
-
-   /* Deconnexion() {
-        localStorage.removeItem('currentUser');
-        this.router.navigate(['/Login']);
-    }*/
     RemplirCombo() {
         this.http.get("api/Entreprise/RemplirCombo").subscribe(
             donnees => {

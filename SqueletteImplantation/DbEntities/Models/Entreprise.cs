@@ -9,25 +9,24 @@ namespace SqueletteImplantation.DbEntities.Models
 {
     public class Entreprise
     {
-        
+
+        public string nomentreprise { get; set; }
+        public string lieu { get; set; }
+        public string notel { get; set; }
+        public string poste { get; set; }
+        public string personneresponsable { get; set; }
+        public int nbreconfirmation { get; set; }
+        public int nbrpeutetre { get; set; }
+        public int nbreprobablementnon { get; set; }
+        public int nbrenon { get; set; }
+        public int nbreoui { get; set; }
+        public string date { get; set; }
+        public string courrielres {get; set;}
+        public ICollection<Etudiant>etudiants;
+        public ICollection<RelEnseignantEntreprise>relenseignantentreprises{get;set;}
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id {get; set; }
-
-        public string NomEntreprise { get; set; }
-        public string Lieu { get; set; }
-        public string NoTel { get; set; }
-        public string Poste { get; set; }
-        public string PersonneResponsable { get; set; }
-        public int NbreConfirmation { get; set; }
-        public int NbrPeutEtre { get; set; }
-        public int NbreProbablementNon { get; set; }
-        public int NbreNon { get; set; }
-        public int NbreOui { get; set; }
-        public string date { get; set; }
-        public string CourrielRes {get; set;}
-        public ICollection<Etudiant>Etudiants;
-        public ICollection<RelEnseignantEntreprise>RelEnseignantEntreprises{get;set;}
+        public int Id { get; set; }
         // ajouter du sel *
 
     }

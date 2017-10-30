@@ -1,13 +1,9 @@
 
 export class Entreprise  {
- 
-
-
-
-   constructor(public NoEntreprise: number, 
-public Lieu: string,public NoTel: string,public Poste: string,public PersonneResponsable: string,
- public NbreConfirmation: number, public NbrPeutEtre: number,public NbreProbablementNon: number, public NbreNon: number,
- public NbreOui: number, public date: string
+   constructor(public noentreprise: number,public nomentreprise:string,
+       public lieu: string, public notel: string, public poste: string, public personneresponsable: string, public courrielres:string,
+ public nbreconfirmation: number, public nbrpeutetre: number,public nbreprobablementnon: number, public nbrenon: number,
+ public nbreoui: number, public date: string
   ){}
 
 

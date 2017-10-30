@@ -41,14 +41,14 @@
 
         <tbody>
             <tr *ngFor="let entreprise of entreprises">
-                <td class="nomEnt" [routerLink]="['/detailEntreprise', entreprise.id]"  routerLinkActive="active"> {{entreprise.nomEntreprise }}</td>
+                <td class="nomEnt" [routerLink]="['/detailEntreprise', entreprise.id]"  routerLinkActive="active"> {{entreprise.nomentreprise }}</td>
                 <td> {{entreprise.lieu}}</td>
-                <td> {{entreprise.noTel }}</td>	
+                <td> {{entreprise.notel }}</td>	
                 <td> {{entreprise.poste}}</td>
-                <td> {{entreprise.personneResponsable}}</td>
-                <td> {{entreprise.nbreOui}}</td>
-                <td> {{entreprise.nbreNon}}</td>
-                <td> {{entreprise.courrielRes}}</td>
+                <td> {{entreprise.personneresponsable}}</td>
+                <td> {{entreprise.nbreoui}}</td>
+                <td> {{entreprise.nbrenon}}</td>
+                <td> {{entreprise.courrielres}}</td>
                 <td> {{entreprise.date}}</td>
             </tr>
         </tbody>
