@@ -13,7 +13,8 @@ namespace SqueletteImplantation.DbEntities.Models
         public string AddresseCourriel { get; set; }
         public string MotPasse { get; set; }
         public string NoTel{get;set;}
-        public Entreprise Entreprise { get; set; }
-        public ICollection<RelEnseignantEtudiant>RelEnseignantEtudiants{get;set;}
+        public int Id { get; set; }
+        public Entreprise entreprise { get; set; }
+        public List<RelEnseignantEtudiant>RelEnseignantEtudiant{get;set;}
     }
 }

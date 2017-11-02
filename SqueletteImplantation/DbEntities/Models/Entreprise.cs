@@ -22,11 +22,9 @@ namespace SqueletteImplantation.DbEntities.Models
         public int nbreoui { get; set; }
         public string date { get; set; }
         public string courrielres {get; set;}
-        public ICollection<Etudiant>etudiants;
-        public ICollection<RelEnseignantEntreprise>relenseignantentreprises{get;set;}
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public List<RelEnseignantEntreprise>relenseignantentreprises{get;set;}
         public int Id { get; set; }
+        public List<Etudiant> Etudiants { get; set; }
         // ajouter du sel *
 
     }
