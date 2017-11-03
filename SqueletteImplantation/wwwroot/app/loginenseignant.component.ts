@@ -40,10 +40,7 @@ export  class LoginEnseignantComponent {
             .post("api/Enseignant", JSON.stringify({courriel: courriel, motDePasse: mdp}), { headers: headers })
             .subscribe(r=>
             {
-                this.enseignant = r.json() as Enseignant;
-                console.log(r);
-                var patate = r.json();
-                console.log(patate);
+                this.enseignant = r.json() as Enseignant; 
                 // login successful if there's a jwt token in the response
                 let token = r.json() && r.json().token;
 
@@ -64,17 +61,12 @@ export  class LoginEnseignantComponent {
                 else
                     {
                         //message erreur
-                        if(r.status == 204)
-                            {
                                 this.isValid=false;
-                                console.log("desolé, je n ai rien trouvé");
                                 new jBox('Notice', {
                                     content: 'desolé, je n ai rien trouvé',
                                     color: 'red',
                                     autoClose: 5000
                                     }); 
-                                console.log(this.isValid);
-                            }
                          
                     }
                     
