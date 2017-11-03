@@ -25,16 +25,22 @@
                     Personne Responsable
                 </th>
                 <th>
-                    Nombre d'étudiant acceptés 
+                    Nombre d'étudiants acceptés 
                 </th>
                 <th>
-                    Nombre d'étudiant refusés
+                    Nombre d'étudiants refusés
                 </th>
                 <th>
                     Courriel du responsable 
                 </th>
                 <th id="date">
                     Date(Année)
+                </th>
+                <th>
+                    Sélection
+                </th>
+                <th>
+                    Voir l'entreprise
                 </th>
             </tr>
         </thead>
@@ -50,13 +56,14 @@
                 <td> {{entreprise.nbrenon}}</td>
                 <td> {{entreprise.courrielres}}</td>
                 <td> {{entreprise.date}}</td>
+                <td><input  type="checkbox" [value]="entreprise.id"  (change)="CheckBoxChange($event)" /> </td>
+                <td class="nomEnt"><button [value]="entreprise.nomentreprise" (click)='getEntreprise($event.target.value,"")'  >Consulter toutes les années</button></td>
             </tr>
         </tbody>
     </table>
     <a class="btn icon-btn btn-success" [routerLink]="['/detailEntreprise', -1]"  routerLinkActive="active" id="btn">
         <span class="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"></span>
         ajouter une entreprise
-    
     </a>
         <select [(ngModel)]="annees">
             <option></option>

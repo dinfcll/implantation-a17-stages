@@ -42,12 +42,13 @@ namespace SqueletteImplantation.Controllers
         [Route("api/Entreprise/RechercheSansAnnee/{recherchetxtbox}")]
         public IEnumerable Recherche(string recherchetxtbox)
         {
+            recherchetxtbox = recherchetxtbox.ToUpper();
             return from b in _maBd.Entreprise
                    where
-                   b.lieu.Contains(recherchetxtbox) ||
-                   b.notel.Contains(recherchetxtbox) ||
-                   b.personneresponsable.Contains(recherchetxtbox) ||
-                   b.poste.Contains(recherchetxtbox)
+                   b.lieu.ToUpper().Contains(recherchetxtbox) ||
+                   b.notel.ToUpper().Contains(recherchetxtbox) ||
+                   b.personneresponsable.ToUpper().Contains(recherchetxtbox) ||
+                   b.poste.ToUpper().Contains(recherchetxtbox)
                    orderby b.date
                    select new
                    {
@@ -67,12 +68,13 @@ namespace SqueletteImplantation.Controllers
         [Route("api/Entreprise/{annees}/{recherchetxtbox}")]
         public IEnumerable Recherche(string recherchetxtbox, string annees)
         {
+            recherchetxtbox = recherchetxtbox.ToUpper();
             return from b in _maBd.Entreprise
                    where b.date.Contains(annees) && (
-                   b.lieu.Contains(recherchetxtbox) ||
-                   b.notel.Contains(recherchetxtbox) ||
-                   b.personneresponsable.Contains(recherchetxtbox) ||
-                   b.poste.Contains(recherchetxtbox))
+                   b.lieu.ToUpper().Contains(recherchetxtbox) ||
+                   b.notel.ToUpper().Contains(recherchetxtbox) ||
+                   b.personneresponsable.ToUpper().Contains(recherchetxtbox) ||
+                   b.poste.ToUpper().Contains(recherchetxtbox))
                    orderby b.date
                    select new
                    {
@@ -149,6 +151,7 @@ namespace SqueletteImplantation.Controllers
         [Route("api/Entreprise/Ajouter")]
         public IActionResult AjouterEntreprise([FromBody]Entreprise entreprise)
         {
+            entreprise.Id = null;
             var Result = _maBd.Entreprise.Add(entreprise);
              _maBd.SaveChanges();
             if (Result == null)

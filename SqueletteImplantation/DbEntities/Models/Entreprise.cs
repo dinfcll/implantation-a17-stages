@@ -23,7 +23,7 @@ namespace SqueletteImplantation.DbEntities.Models
         public string date { get; set; }
         public string courrielres {get; set;}
         public List<RelEnseignantEntreprise>relenseignantentreprises{get;set;}
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public List<Etudiant> Etudiants { get; set; }
         // ajouter du sel *
 
