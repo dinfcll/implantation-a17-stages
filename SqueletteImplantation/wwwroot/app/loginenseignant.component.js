@@ -30,9 +30,6 @@ var LoginEnseignantComponent = (function () {
             .post("api/Enseignant", JSON.stringify({ courriel: courriel, motDePasse: mdp }), { headers: headers })
             .subscribe(function (r) {
             _this.enseignant = r.json();
-            console.log(r);
-            var patate = r.json();
-            console.log(patate);
             // login successful if there's a jwt token in the response
             var token = r.json() && r.json().token;
             if (r.status == 200) {
@@ -48,16 +45,12 @@ var LoginEnseignantComponent = (function () {
             }
             else {
                 //message erreur
-                if (r.status == 204) {
-                    _this.isValid = false;
-                    console.log("desolé, je n ai rien trouvé");
-                    new jBox('Notice', {
-                        content: 'desolé, je n ai rien trouvé',
-                        color: 'red',
-                        autoClose: 5000
-                    });
-                    console.log(_this.isValid);
-                }
+                _this.isValid = false;
+                new jBox('Notice', {
+                    content: 'desolé, je n ai rien trouvé',
+                    color: 'red',
+                    autoClose: 5000
+                });
             }
         });
     };
