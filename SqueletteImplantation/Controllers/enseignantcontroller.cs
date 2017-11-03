@@ -27,7 +27,16 @@ namespace SqueletteImplantation.Controllers
             return from b in _maBd.Etudiant
                    join ent in _maBd.Entreprise on b.Id equals ent.Id//nouvelle ligne
                    where b.Annee.Contains(AnneeRecente.ToString())
-                   select b;
+                   select new
+                   {
+                       b.Nom,
+                       b.Prenom,
+                       b.Profil,
+                       b.Annee,
+                       ent.nomentreprise,
+
+                   };
+                  
         }
 
 
@@ -96,26 +105,27 @@ namespace SqueletteImplantation.Controllers
 
         [HttpGet]
         [Route("api/Enseignant/{NoEns}")]
-        public IEnumerable ListeEtudiantSuiviParUnEnseignant( int  NoEns)
+        public IEnumerable ListeEtudiantSuiviParUnEnseignant( int  NoEns)//liste étudiant suivi par un enseignant
         {
             return from b in _maBd.RelEnseignantEtudiant
-                   join etud in _maBd.Etudiant on b.NoDa equals etud.NoDa//nouvelle ligne
-                   where
-                   b.NoEnseignant == NoEns
+                    join etud in _maBd.Etudiant on b.NoDa equals etud.NoDa//nouvelle ligne
+                    where
+                    b.NoEnseignant == NoEns
 
-                  
-                   select new
-                   {
-                       etud.NoDa,
-                       etud.Nom,
-                      
 
-                   };
+                    select new
+                    {
+                        etud.NoDa,
+                        etud.Nom,
+
+
+                    };
+            
         }
 
         [HttpGet]
-        [Route("api/Enseignant/{NoDa}")]
-        public IEnumerable ListeEnseignantQuiSuitUnEtudiant(int NoDa)
+        [Route("api/Enseignant/Etudiant/{NoDa}")]
+        public IEnumerable ListeEnseignantQuiSuitUnEtudiant(int NoDa)//liste des enseignant qui suit un étudiant
         {
             return from b in _maBd.RelEnseignantEtudiant
                    join ens in _maBd.Enseignant on b.NoEnseignant equals ens.NoEnseignant//nouvelle ligne
