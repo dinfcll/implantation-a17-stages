@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var Enseignant = (function () {
-    function Enseignant(NoProfesseur, NomUti, Nom, Prenom, Courriel, MotDePasse) {
-        this.NoProfesseur = NoProfesseur;
+    function Enseignant(NoEnseignant, NomUti, Nom, Prenom, Courriel, MotDePasse) {
+        this.NoEnseignant = NoEnseignant;
         this.NomUti = NomUti;
         this.Nom = Nom;
         this.Prenom = Prenom;

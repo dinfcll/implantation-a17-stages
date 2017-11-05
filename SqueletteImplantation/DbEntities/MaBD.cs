@@ -48,7 +48,7 @@ namespace SqueletteImplantation.DbEntities
                  .HasConstraintName("fk_Etudiant_relEnseignantEtudiant");
 
             modelBuilder.Entity<RelEnseignantEntreprise>()
-              .HasKey(m => new { m.NoEntreprise, m.NoEnseignant });
+              .HasKey(m => new { m.Id, m.NoEnseignant });
 
             modelBuilder.Entity<RelEnseignantEntreprise>()
                 .HasOne(m => m.enseignant)
@@ -59,7 +59,7 @@ namespace SqueletteImplantation.DbEntities
             modelBuilder.Entity<RelEnseignantEntreprise>()
                 .HasOne(m => m.entreprise)
                 .WithMany(m => m.relenseignantentreprises)
-                .HasForeignKey(m => m.NoEntreprise)
+                .HasForeignKey(m => m.Id)
                 .HasConstraintName("fk_Entreprise_relEnseignantEtudiant");
 
             modelBuilder.Entity<Etudiant>()

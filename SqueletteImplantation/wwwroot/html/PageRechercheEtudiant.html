@@ -1,0 +1,56 @@
+<div id="d1">
+    
+       
+        <input type="text" placeholder="Recherche" id="recherche" [(ngModel)]="Recherche">
+        <button class="loupe"   (click)="getEtudiant(Recherche,annees)" ></button>	
+       	
+   <table border=1 >
+                <caption>Tableau de données des étudiants(es)</caption>
+    <thead>	
+           <tr>
+                <th>
+                    Nom d'étudiant
+                </th>
+                <th>
+                    Prénom
+                </th>
+                <th>
+                   Profil
+                </th>
+                <th>
+                    Nom Compagnie
+                </th>
+               
+                <th id="date">
+                   Année
+                </th>
+                <th>
+                    
+                </th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let etudiant of etudiants">
+                <td class="nomEnt" > {{etudiant.nom }}</td>
+                <td> {{etudiant.prenom}}</td>
+                <td> {{etudiant.profil }}</td>	
+                <td> {{etudiant.nomentreprise}}</td>
+                <td> {{etudiant.annee}}</td>
+                <td><input id="checkBox" type="checkbox" (change)="supprimerEtudiant(etudiant, $event)" ></td>
+                
+            </tr>
+        </tbody>
+    </table>
+    <a class="btn icon-btn btn-success"  id="btn">
+        <span class="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"></span>
+        ajouter un étudiant
+    
+    </a>
+        <select [(ngModel)]="annees">
+            <option></option>
+            <option *ngFor=" let value of TAnnees">
+                {{value}}
+            </option>
+        </select>
+</div>

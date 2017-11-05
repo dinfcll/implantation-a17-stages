@@ -8,37 +8,87 @@ import { Component } from '@angular/core';
 import {  Router, RouterModule, Routes}   from '@angular/router';
 
 @Component({
-  selector: 'recherche-etudiant',
-  template: `page recherche etudiant`
+  templateUrl: `./../html/PageRechercheEtudiant.html`,
+  styleUrls:[`./../css/accueil_enseignant.css`],
 })
 export class PageRechercheEtudiantComponent  {  
 
-  etudiant: Etudiant[];
+  etudiants: Etudiant[];
+  selectedItems: any = [];
+  annees: string;
+  Recherche: string;
+  TAnnees: String[];
   constructor(private http: Http, private router: Router)
   {
-      //this.Test1();
-      //this.Test2();
-      this.Test3();
+    this.annees = "";
+    this.Recherche = "";
+     this.getEtudiant("","");
+     /* this.Test2();
+      this.Test3();*/
+      this.RemplirComboAnneeEtudiant();
       
   }
-//juste un test
-  Test1() {
-    this.http.get("api/Enseignant/Etudiant/annees").subscribe(
+
+  getEtudiant(Recherche: string, annees: string) {
+    let url: string;
+    if ((Recherche == "" && annees == "")) {
+        url = "api/Etudiant/annees";
+    }
+    else {
+        if (Recherche != "" && annees == "") {
+            url = " api/Etudiant/RechercheSansAnnee/" + Recherche;
+        }
+        else {
+            if (Recherche == "" && annees != "") {
+                url = "api/Etudiant/RechercheAnnee/" + annees
+            }
+            else {
+                url = "api/Etudiant/" + annees + "/" + Recherche;
+            }
+
+        }
+    }
+
+    this.http.get(url).subscribe(
         donnees => {
-            this.etudiant = donnees.json() as Etudiant[]
-            console.log(this.etudiant);
-        });
+            this.etudiants = donnees.json() as Etudiant[]
+            console.log(this.etudiants);
+           
+            
+        }
+    );
 
       }
+      RemplirComboAnneeEtudiant() {
+        this.http.get("api/Etudiant/RemplirComboAnneeEtudiant").subscribe(
+            donnees => {
+                this.TAnnees = donnees.json() as String[]
+                console.log(this.TAnnees);
+            });
+        } 
 
+        supprimerEtudiant(etudiant : Etudiant, e : any) {
+          
+                  var index = this.selectedItems.indexOf(etudiant.NoDa);
+                  if (e.target.checked) {
+                      if (index === -1) {
+                          this.selectedItems.push(etudiant.NoDa);
+                      }
+                  } else {
+                      if (index !== -1) {
+                          this.selectedItems.splice(index, 1);
+                      }
+                  }
+                  console.log(this.selectedItems);
+              }
 
-      Test2() {
+  /*    Test2() {
         let no:number;
         no=1212;
         this.http.get("api/Enseignant/"+no).subscribe(
             donnees => {
-                this.etudiant = donnees.json() as Etudiant[]
-                console.log(this.etudiant);
+                this.etudiants = donnees.json() as Etudiant[]
+                console.log(this.etudiants);
             });
     
           }
@@ -47,13 +97,13 @@ export class PageRechercheEtudiantComponent  {
           Test3() {
             let no:number;
             no=1443434;
-            this.http.get("api/Enseignant/Etudiant/"+no).subscribe(
+            this.http.get("api/Etudiant/"+no).subscribe(
                 donnees => {
-                    this.etudiant = donnees.json() as Etudiant[]
-                    console.log(this.etudiant);
+                    this.etudiants = donnees.json() as Etudiant[]
+                    console.log(this.etudiants);
                 });
         
-              }
+              }*/
     
 
 

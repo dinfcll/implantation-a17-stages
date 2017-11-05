@@ -19,7 +19,7 @@ namespace SqueletteImplantation.Controllers
 
 
         [HttpGet]
-        [Route("api/Enseignant/Etudiant/annees")]
+        [Route("api/Etudiant/annees")]
         public IEnumerable EtudiantAnnee()//retourne tout les etudiant de l ann�e en cours
         {
             var AnneeRecente = (from b in _maBd.Etudiant 
@@ -39,9 +39,27 @@ namespace SqueletteImplantation.Controllers
                   
         }
 
+        [HttpGet]
+        [Route("api/Etudiant/RechercheAnnee/{annees}")]
+        public IEnumerable EntrepriseRechercheAnnee(string annees)
+        {
+            return from b in _maBd.Etudiant
+                   join ent in _maBd.Entreprise on b.Id equals ent.Id//nouvelle ligne
+                   where b.Annee.Contains(annees.ToString())
+                   select new
+                   {
+                       b.NoDa,
+                       b.Nom,
+                       b.Prenom,
+                       b.Profil,
+                       b.Annee,
+                       ent.nomentreprise,
+
+                   };
+        }
 
         [HttpGet]
-        [Route("api/Enseignant/Etudiant/RechercheSansAnnee/{recherchetxtbox}")]
+        [Route("api/Etudiant/RechercheSansAnnee/{recherchetxtbox}")]
         public IEnumerable Recherche(string recherchetxtbox)
         {
             return from b in _maBd.Etudiant
@@ -54,6 +72,7 @@ namespace SqueletteImplantation.Controllers
                    orderby b.Annee
                    select new
                    {
+                       b.NoDa,
                        b.Nom,
                        b.Prenom,
                        b.Profil,
@@ -67,7 +86,7 @@ namespace SqueletteImplantation.Controllers
 
 
         [HttpGet]
-        [Route("api/Enseignant/Etudiant/{annees}/{recherchetxtbox}")]
+        [Route("api/Etudiant/{annees}/{recherchetxtbox}")]
         public IEnumerable Recherche(string recherchetxtbox, string annees)
         {
             return from b in _maBd.Etudiant
@@ -81,6 +100,7 @@ namespace SqueletteImplantation.Controllers
                    orderby b.Annee
                    select new
                    {
+                       b.NoDa,
                        b.Nom,
                        b.Prenom,
                        b.Profil,
@@ -94,7 +114,7 @@ namespace SqueletteImplantation.Controllers
 
 
         [HttpGet]
-        [Route("api/Enseignant/Etudiant/RemplirComboAnnee")]
+        [Route("api/Etudiant/RemplirComboAnnee")]
         public IEnumerable ListeAnnees()
         {
             return (from b in _maBd.Etudiant
@@ -124,7 +144,7 @@ namespace SqueletteImplantation.Controllers
         }
 
         [HttpGet]
-        [Route("api/Enseignant/Etudiant/{NoDa}")]
+        [Route("api/Etudiant/{NoDa}")]
         public IEnumerable ListeEnseignantQuiSuitUnEtudiant(int NoDa)//liste des enseignant qui suit un étudiant
         {
             return from b in _maBd.RelEnseignantEtudiant
@@ -144,7 +164,7 @@ namespace SqueletteImplantation.Controllers
 
 
         [HttpPost]
-        [Route("api/Enseignant/EnregistrementEtudiantbd")]
+        [Route("api/Etudiant/EnregistrementEtudiantbd")]
         public IActionResult EnregistrementEtudiantbd(Etudiant Etudiant)
         {
             var resultat = _maBd.Etudiant.Add(Etudiant);
@@ -156,7 +176,7 @@ namespace SqueletteImplantation.Controllers
 
 
         [HttpPut]
-        [Route("api/Enseignant/ModifierEtudiant")]
+        [Route("api/Etudiant/ModifierEtudiant")]
         public IActionResult ModificationEtudiantbd([FromBody]Etudiant etudiant)
         {
             var resultat = _maBd.Etudiant.Update(etudiant);
@@ -168,7 +188,7 @@ namespace SqueletteImplantation.Controllers
 
 
         [HttpDelete]
-        [Route("api/Enseignant/SupprimerEtudiant/{ID}")]
+        [Route("api/Etudiant/SupprimerEtudiant/{ID}")]
         public IActionResult SuprimeEtudiantbd(int ID)
         {
             Etudiant etudiant = new Etudiant() { NoDa = ID };
@@ -184,7 +204,7 @@ namespace SqueletteImplantation.Controllers
 
 
         [HttpGet]
-        [Route("api/Enseignant/Etudiant/RemplirComboEntreprise")]//pour le dropdown qui affectera un etudiant dans une entreprise
+        [Route("api/Etudiant/RemplirComboEntreprise")]//pour le dropdown qui affectera un etudiant dans une entreprise
         public IEnumerable ListeEntreprise()
         {
             return (from b in _maBd.Entreprise
@@ -193,7 +213,16 @@ namespace SqueletteImplantation.Controllers
         }
 
         [HttpGet]
-        [Route("api/Enseignant/Etudiant/ObtenirIDentrepriseApartirDeSonNom")]
+        [Route("api/Etudiant/RemplirComboAnneeEtudiant")]//pour le dropdown qui affectera un etudiant dans une entreprise
+        public IEnumerable ListeAnnee()
+        {
+            return (from b in _maBd.Etudiant
+                    orderby b.Annee descending
+                    select b.Annee).Distinct();
+        }
+
+        [HttpGet]
+        [Route("api/Etudiant/ObtenirIDentrepriseApartirDeSonNom")]
         public IActionResult GetEntreprise(string NomEntr)
         {
             var entreprise = _maBd.Entreprise.FirstOrDefault(m => m.nomentreprise == NomEntr);
@@ -248,6 +277,27 @@ namespace SqueletteImplantation.Controllers
 
         /****************************************************/
 
+        [HttpPost]
+        [Route("api/Enseignant/EnregistrementRelEnseignantEtudiantbd")]
+        public IActionResult EnregistrementRelEnseignantEtudiantbd(RelEnseignantEtudiant EnsEtu)
+        {
+            var resultat = _maBd.RelEnseignantEtudiant.Add(EnsEtu);
+            _maBd.SaveChanges();
+            return new OkObjectResult(EnsEtu);
+
+
+        }
+
+        [HttpPost]
+        [Route("api/Enseignant/EnregistrementRelEnseignantEtudiantbd")]
+        public IActionResult EnregistrementRelEnseignantEntreprisetbd(RelEnseignantEntreprise EnsEnt)
+        {
+            var resultat = _maBd.RelEnseignantEntreprise.Add(EnsEnt);
+            _maBd.SaveChanges();
+            return new OkObjectResult(EnsEnt);
+
+
+        }
 
 
 

@@ -11,7 +11,7 @@ namespace SqueletteImplantation.DbEntities.Mappers
         public RelEnseignantEntreprisemap(EntityTypeBuilder<RelEnseignantEntreprise> entityBuilder)
         {
             entityBuilder.Property(m => m.NoEnseignant).IsRequired();
-            entityBuilder.Property(m => m.NoEntreprise).IsRequired();
+            entityBuilder.Property(m => m.Id).IsRequired();
         }
     }
 }

@@ -116,6 +116,7 @@ namespace SqueletteImplantation.Controllers
         [Route("api/Entreprise/Enregistrementbd")]
         public IActionResult Enregistrementbd(Entreprise Entreprise)
         {
+            Entreprise.Id = null;
             var resultat = _maBd.Entreprise.Add(Entreprise);
             _maBd.SaveChanges();
             return new OkObjectResult(Entreprise);
