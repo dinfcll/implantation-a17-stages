@@ -226,3 +226,11 @@ nav {
 			cursor: pointer;
 			font-size: x-large;
 		}
+
+		#Supprimer {
+			position: fixed;
+			left: 85%;
+			top: 27%;
+			border-radius: 25px;
+			cursor: pointer;
+		}

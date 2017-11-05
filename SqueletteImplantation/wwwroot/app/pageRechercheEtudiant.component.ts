@@ -4,7 +4,7 @@ import { Http } from '@angular/http';
 import { Etudiant } from './models/etudiant.class';
 
 import { Component } from '@angular/core';
-
+declare var jBox:any;
 import {  Router, RouterModule, Routes}   from '@angular/router';
 
 @Component({
@@ -67,12 +67,12 @@ export class PageRechercheEtudiantComponent  {
             });
         } 
 
-        supprimerEtudiant(etudiant : Etudiant, e : any) {
+        selectEtudiant(etudiant : Etudiant, e : any) {
           
-                  var index = this.selectedItems.indexOf(etudiant.NoDa);
+                  var index = this.selectedItems.indexOf(etudiant.noDa);
                   if (e.target.checked) {
                       if (index === -1) {
-                          this.selectedItems.push(etudiant.NoDa);
+                          this.selectedItems.push(etudiant.noDa);
                       }
                   } else {
                       if (index !== -1) {
@@ -81,6 +81,32 @@ export class PageRechercheEtudiantComponent  {
                   }
                   console.log(this.selectedItems);
               }
+
+              DeleteParNo(no : number): void {
+                
+                        this.http.delete("api/Etudiant/SupprimerEtudiant/" + no).subscribe(donne =>
+                        {
+                            if (donne.status !== 200)
+                            {
+                                this.jBoxMessage("red", "Erreur lors de la suppression de l'entreprise.")
+                            }
+                            else
+                            this.jBoxMessage("green", "Supression effectuée avec succès!");
+                        });
+                    }
+
+
+                    SupprimerEtudiantSelect(){
+
+                         var i=0;
+                         while(i < this.selectedItems.length){
+                             this.DeleteParNo(this.selectedItems[i]);
+                             i++;
+                         }
+
+
+
+                    }
 
   /*    Test2() {
         let no:number;
@@ -107,7 +133,15 @@ export class PageRechercheEtudiantComponent  {
     
 
 
-
+//Messages d'erreurs/succès
+jBoxMessage(couleur: string, message: string) {
+    
+          new jBox('Notice', {
+              content: message,
+              color: couleur,
+              autoClose: 5000
+          });
+      }
 
 
 

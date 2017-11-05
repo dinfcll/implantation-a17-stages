@@ -29,6 +29,7 @@ namespace SqueletteImplantation.Controllers
                    where b.Annee.Contains(AnneeRecente.ToString())
                    select new
                    {
+                       b.NoDa,
                        b.Nom,
                        b.Prenom,
                        b.Profil,

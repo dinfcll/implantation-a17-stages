@@ -4,9 +4,9 @@ export class Etudiant {
        
 
 
-        constructor(public NoDa: number, 
-public Nom: string,public Prenom: string,public  AddresseCourriel: string,public MotPasse: string,
- public NoTel: number, public Id: number
+        constructor(public noDa: number, 
+public nom: string,public prenom: string,public  addresseCourriel: string,public motPasse: string,
+ public noTel: number, public Id: number
   ){}
 
 

@@ -3,7 +3,7 @@
        
         <input type="text" placeholder="Recherche" id="recherche" [(ngModel)]="Recherche">
         <button class="loupe"   (click)="getEtudiant(Recherche,annees)" ></button>	
-       	
+        <a  class="btn icon-btn btn-danger" id="Supprimer" (click)="SupprimerEtudiantSelect()"><span class="glyphicon btn-glyphicon glyphicon-trash img-circle text-danger"></span>Supprimer</a>
    <table border=1 >
                 <caption>Tableau de données des étudiants(es)</caption>
     <thead>	
@@ -27,6 +27,9 @@
                 <th>
                     
                 </th>
+                <th>
+
+                </th>
             </tr>
         </thead>
 
@@ -37,8 +40,8 @@
                 <td> {{etudiant.profil }}</td>	
                 <td> {{etudiant.nomentreprise}}</td>
                 <td> {{etudiant.annee}}</td>
-                <td><input id="checkBox" type="checkbox" (change)="supprimerEtudiant(etudiant, $event)" ></td>
-                
+                <td><input id="checkBox" type="checkbox" (change)="selectEtudiant(etudiant, $event)" ></td>
+                <td><a  class="btn icon-btn btn-primary" id="Modifier" (click)="Modifier()"><li><i class="fa fa-pencil fa-fw"></i>Modifier</a></td>
             </tr>
         </tbody>
     </table>
