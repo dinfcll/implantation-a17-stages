@@ -16,7 +16,19 @@ namespace SqueletteImplantation.Controllers
             _maBd = maBd;
         }
 
+        [HttpGet]
+        [Route("api/EtudiantParNoDa/{NoDa}")]
+        public IActionResult GetEntrepriseParNoEnt(int NoDa)
+        {
+            var etudiant = _maBd.Etudiant.FirstOrDefault(m => m.NoDa == NoDa);
 
+            if (etudiant == null)
+            {
+                return NotFound();
+            }
+
+            return new OkObjectResult(etudiant);
+        }
 
         [HttpGet]
         [Route("api/Etudiant/annees")]
@@ -145,7 +157,7 @@ namespace SqueletteImplantation.Controllers
         }
 
         [HttpGet]
-        [Route("api/Etudiant/{NoDa}")]
+        [Route("api/EtudiantList/{NoDa}")]
         public IEnumerable ListeEnseignantQuiSuitUnEtudiant(int NoDa)//liste des enseignant qui suit un étudiant
         {
             return from b in _maBd.RelEnseignantEtudiant
@@ -161,6 +173,8 @@ namespace SqueletteImplantation.Controllers
 
 
                    };
+            
+
         }
 
 

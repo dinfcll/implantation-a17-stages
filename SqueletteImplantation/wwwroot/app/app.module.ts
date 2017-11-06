@@ -15,6 +15,8 @@ import { PageDetailEntrepriseComponent } from "./pageDetailsEntreprise.component
 import { pageRechercheEntrepriseComponent } from "./pageRechercheEnreprise.component";
 
 import { ProfilEnseignantComponent} from "./profilenseignant.component";
+
+import {PageDetailEtudiantComponent} from "./pageDetailEtudiant.component"
 const appRoutes: Routes=[
   {
     path:'',
@@ -60,6 +62,12 @@ const appRoutes: Routes=[
     path: 'detailEntreprise/:id', 
     component:  PageDetailEntrepriseComponent
   },
+  
+  
+    {
+      path: 'detailEtudiant/:noDa', 
+      component:  PageDetailEtudiantComponent
+    },
  
   
 ]
@@ -74,7 +82,8 @@ const appRoutes: Routes=[
                   PageRechercheEtudiantComponent,
                   PageDetailEntrepriseComponent,
                   pageRechercheEntrepriseComponent,
-                  ProfilEnseignantComponent ],
+                  ProfilEnseignantComponent,
+                  PageDetailEtudiantComponent ],
    
   bootstrap:    [ AppComponent ]
 })

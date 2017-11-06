@@ -1,0 +1,64 @@
+<div  id="Principal">
+       
+       
+       <label id="labelnom">Nom de l'étudiant:</label>
+        <input id="inputnom" type="text" [(ngModel)]="etudiant.nom" placeholder="nom"/>
+    
+<br/>
+        <label id="labelprenom">Prénom de l'étudiant:</label>
+        <input id="inputprenom" type="text" [(ngModel)]="etudiant.prenom" placeholder="prénom"/>
+
+<br/>
+   
+        <label id="labelannee">Annee :</label>
+        <input id="inputannee" type="text" [(ngModel)]="etudiant.annee" placeholder="Annee" />
+    
+  <br/>  
+        <label id="labelMotpasse">Mot de passe:</label>
+        <input id="inputMotpasse" type="text" [(ngModel)]="etudiant.motPasse" placeholder="etudiant"/>
+    
+<br/>  
+    
+        <label id="labelCourriel">Courriel:</label>
+        <input id="inputCourriel" type="text" [(ngModel)]="etudiant. addresseCourriel" placeholder="Courriel"  />
+   
+ <br/>   
+   
+        <label id="labelNoTel">Numero de telephone :</label>
+        <input id="inputNoTel" type="text" [(ngModel)]="etudiant.noTel" placeholder="numéro de téléphone"/>
+   
+ <br/>  
+   
+        <label id="labelProfil">Profil:</label>
+        <input id="inputProfil" type="text" [(ngModel)]="etudiant.profil" placeholder="profil"/>
+    
+  <br/>   
+   
+  <label id="labelcompagnie">compagnie:</label>
+  <input id="inputcompagnie" type="text" [(ngModel)]="entreprise.nomentreprise" placeholder="profil"/>
+   
+  <br/>   
+  
+ <label id="labelenseignantencharge">enseignant(s) en charge:</label>
+            
+  <br/>
+  <ul *ngFor="let enseignant of enseignants">
+               
+                <li> {{enseignant.nom}}</li>
+                
+</ul>       
+    <!--<div *ngIf="PageAjouter == false">
+        <a  class="btn icon-btn btn-primary" id="Modifier" (click)="Modifier()"><li><i class="fa fa-pencil fa-fw"></i>Modifier</a>
+            
+            <a data-confirm="Do you really want to leave this page?" class="btn icon-btn btn-danger" id="Supprimer" (click)="Supprimer(); myFunction();"><span class="glyphicon btn-glyphicon glyphicon-trash img-circle text-danger"></span>Supprimer</a>
+
+    </div>
+    <a class="btn icon-btn btn-success" *ngIf="PageAjouter == true"(click)="Ajouter()" id="btnA"> 
+        <span class="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"></span>
+    Ajouter 
+</a>
+   
+
+<a class="btn icon-btn btn-warning"  id="retour" (click)="goBack()"><li><i class="fa fa-arrow-left" aria-hidden="true"></i> Retour </a>-->
+
+</div>
