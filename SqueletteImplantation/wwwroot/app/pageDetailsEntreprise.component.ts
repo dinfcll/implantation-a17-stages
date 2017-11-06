@@ -79,18 +79,6 @@ export class PageDetailEntrepriseComponent  {
         }  
     }
 
-    Supprimer(): void {
-
-        this.http.delete("api/entreprise/Supprimer/" + this.DetectionPageID()).subscribe(donne =>
-        {
-            if (donne.status !== 200)
-            {
-                this.jBoxMessage("red", "Erreur lors de la suppression de l'entreprise.")
-            }
-            else
-            this.jBoxMessage("green", "Supression effectuée avec succès!");
-        });
-    }
 
     Ajouter()
     {

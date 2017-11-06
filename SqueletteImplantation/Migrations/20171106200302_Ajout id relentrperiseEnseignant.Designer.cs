@@ -8,9 +8,10 @@ using SqueletteImplantation.DbEntities;
 namespace squeletteimplantation.Migrations
 {
     [DbContext(typeof(MaBd))]
-    partial class MaBdModelSnapshot : ModelSnapshot
+    [Migration("20171106200302_Ajout id relentrperiseEnseignant")]
+    partial class AjoutidrelentrperiseEnseignant
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)

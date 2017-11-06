@@ -49,6 +49,7 @@ namespace SqueletteImplantation.Controllers
                    b.notel.ToUpper().Contains(recherchetxtbox) ||
                    b.personneresponsable.ToUpper().Contains(recherchetxtbox) ||
                    b.poste.ToUpper().Contains(recherchetxtbox)
+                   || b.nomentreprise.ToUpper().Contains(recherchetxtbox)
                    orderby b.date
                    select new
                    {
@@ -75,6 +76,7 @@ namespace SqueletteImplantation.Controllers
                    b.notel.ToUpper().Contains(recherchetxtbox) ||
                    b.personneresponsable.ToUpper().Contains(recherchetxtbox) ||
                    b.poste.ToUpper().Contains(recherchetxtbox))
+                   || b.nomentreprise.ToUpper().Contains(recherchetxtbox)
                    orderby b.date
                    select new
                    {
@@ -157,7 +159,6 @@ namespace SqueletteImplantation.Controllers
             if (Result == null)
                 return NotFound();
             return new OkResult();
-
         }
 
     }
