@@ -96,7 +96,27 @@ namespace SqueletteImplantation.Controllers
                     orderby b.date descending
                     select b.date).Distinct();
         }
+        [HttpGet]
+        [Route("api/EntrepriseNomEnt/{NomEnt}")]
+        public IActionResult GetEntrepriseParNom(string NomEnt)
+        {
+            var entreprise = _maBd.Entreprise.FirstOrDefault(m => m.nomentreprise == NomEnt);
 
+            if (entreprise == null)
+            {
+                return NotFound();
+            }
+            
+            return new OkObjectResult(entreprise);
+        }
+        [HttpGet]
+        [Route("api/Etudiant/RemplirComboEntreprise")]//pour le dropdown qui affectera un etudiant dans une entreprise
+        public IEnumerable ListeEntreprise()
+        {
+            return (from b in _maBd.Entreprise
+                    orderby b.date descending
+                    select b.nomentreprise).Distinct();
+        }
 
         [HttpGet]
         [Route("api/Entreprise/{NoEnt}")]

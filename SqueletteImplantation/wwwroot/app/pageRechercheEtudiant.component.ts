@@ -2,30 +2,32 @@
 import { Http } from '@angular/http';
 
 import { Etudiant } from './models/etudiant.class';
-
+import {AppService} from "./app.service";
 import { Component } from '@angular/core';
-declare var jBox:any;
-import {  Router, RouterModule, Routes}   from '@angular/router';
 
+import {  Router, RouterModule, Routes}   from '@angular/router';
+declare var jBox:any;
 @Component({
   templateUrl: `./../html/PageRechercheEtudiant.html`,
   styleUrls:[`./../css/accueil_enseignant.css`],
 })
 export class PageRechercheEtudiantComponent  {  
-
+// PageModifier:boolean;
   etudiants: Etudiant[];
   selectedItems: any = [];
   annees: string;
   Recherche: string;
   TAnnees: String[];
-  constructor(private http: Http, private router: Router)
+  constructor(private service: AppService,private http: Http, private router: Router)
   {
+    
     this.annees = "";
     this.Recherche = "";
      this.getEtudiant("","");
      /* this.Test2();
       this.Test3();*/
       this.RemplirComboAnneeEtudiant();
+     // this.testModifier();
       
   }
 
@@ -144,10 +146,20 @@ jBoxMessage(couleur: string, message: string) {
       }
 
 
+/*testModifier():void
+{
+    this.service.currentPageModif.subscribe(pageModifier=>this.PageModifier=pageModifier);
+    console.log(this.PageModifier)
+}*/
 
-
-
-
+PageModif():void
+{
+    this.service.changeFlag(true);
+}
+PageInfo():void
+{
+    this.service.changeFlag(false);
+}
 
 
 

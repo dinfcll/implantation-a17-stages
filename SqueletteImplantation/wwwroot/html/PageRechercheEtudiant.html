@@ -35,13 +35,13 @@
 
         <tbody>
             <tr *ngFor="let etudiant of etudiants">
-                <td class="nomEnt"  [routerLink]="['/detailEtudiant', etudiant.noDa]"  routerLinkActive="active"> {{etudiant.nom }}</td>
+                <td class="nomEnt"  [routerLink]="['/detailEtudiant', etudiant.noDa]"  routerLinkActive="active" (click)="PageInfo()"> {{etudiant.nom }}</td>
                 <td> {{etudiant.prenom}}</td>
                 <td> {{etudiant.profil }}</td>	
                 <td> {{etudiant.nomentreprise}}</td>
                 <td> {{etudiant.annee}}</td>
                 <td><input id="checkBox" type="checkbox" (change)="selectEtudiant(etudiant, $event)" ></td>
-                <td><a [routerLink]="['/detailEtudiant', etudiant.noDa]"  routerLinkActive="active"  class="btn icon-btn btn-primary" id="Modifier" (click)="Modifier()"><li><i class="fa fa-pencil fa-fw"></i>Modifier</a></td>
+                <td><a [routerLink]="['/detailEtudiant', etudiant.noDa]"  routerLinkActive="active"  class="btn icon-btn btn-primary" id="Modifier" (click)="PageModif()"><li><i class="fa fa-pencil fa-fw"></i>Modifier</a></td>
             </tr>
         </tbody>
     </table>
@@ -56,4 +56,5 @@
                 {{value}}
             </option>
         </select>
+       
 </div>

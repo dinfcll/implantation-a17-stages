@@ -16,7 +16,8 @@ import { pageRechercheEntrepriseComponent } from "./pageRechercheEnreprise.compo
 
 import { ProfilEnseignantComponent} from "./profilenseignant.component";
 
-import {PageDetailEtudiantComponent} from "./pageDetailEtudiant.component"
+import {PageDetailEtudiantComponent} from "./pageDetailEtudiant.component";
+import {AppService} from "./app.service";
 const appRoutes: Routes=[
   {
     path:'',
@@ -85,7 +86,8 @@ const appRoutes: Routes=[
                   ProfilEnseignantComponent,
                   PageDetailEtudiantComponent ],
    
-  bootstrap:    [ AppComponent ]
+  bootstrap:    [ AppComponent ],
+  providers:[AppService]
 })
 
 
