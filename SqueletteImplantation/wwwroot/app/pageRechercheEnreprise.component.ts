@@ -5,7 +5,7 @@ import { Entreprise } from './models/entreprise.class';
 import { Component } from '@angular/core';
 
 import {  Router, RouterModule, Routes}   from '@angular/router';
-
+declare var jBox: any;
 
 
 
@@ -18,12 +18,14 @@ import {  Router, RouterModule, Routes}   from '@angular/router';
 export class pageRechercheEntrepriseComponent
 {
     entreprises: Entreprise[];
-    annees: string;
+    AnneeRecherche: string;
+    AnneeCourante: string;
     Recherche: string;
     TAnnees: String[];
     constructor(private http: Http, private router: Router)
     {
-        this.annees = "";
+        this.AnneeCourante = (new Date()).getFullYear().toString();
+        this.AnneeRecherche = "";
         this.Recherche = "";
         this.getEntreprise("", "");
         this.RemplirCombo();
@@ -68,11 +70,35 @@ export class pageRechercheEntrepriseComponent
     {
         this.http.delete("api/Entreprise/Supprimer/" + ID.toString()).subscribe(
             donnee => {
-                if (donnee.status != 200)
-                    console.log("TEST FAIL");
+                if (donnee.status != 200) {
+                    this.jBoxMessage("green", "Entreprise supprimée avec succès!")
+                }
+                else
+                {
+                    this.jBoxMessage("red", "Erreur lors de la modification de l'entreprise!");
+                }
             });
+        this.getEntreprise(this.Recherche, this.AnneeRecherche);
     }
-    AjouterAnnee(ID:number)
+    AjouterAnnee(entreprise: Entreprise)
     {
+        entreprise.date = this.AnneeCourante;
+        this.http.post("api/Entreprise/Ajouter", entreprise).subscribe(Result => {
+            if (Result.status == 200) {
+                this.jBoxMessage("green", "Entreprise ajoutée à l'année courante!");
+            }
+            else {
+                this.jBoxMessage("red", "Erreur lors de l'ajout de l'entreprise à l'année courante!");
+            }
+        });
+        
+    }
+    jBoxMessage(couleur: string, message: string) {
+
+        new jBox('Notice', {
+            content: message,
+            color: couleur,
+            autoClose: 5000
+        });
     }
 }

@@ -93,7 +93,14 @@ export class PageDetailEntrepriseComponent  {
                 this.PageAjouter = true;
                 this.http.post("api/Entreprise/Ajouter", this.entrepriseAjouter).subscribe(Result =>
                 {
-                    this.jBoxMessage("green", "Entreprise ajoutée!");
+                    if (Result.status == 200) {
+                        this.jBoxMessage("green", "Entreprise ajoutée!");
+                    }
+                    else
+                    {
+                        this.jBoxMessage("red", "Erreur lors de l'ajout de l'entreprise");
+                    }
+                    
                 });
             }
     }
@@ -128,16 +135,15 @@ export class PageDetailEntrepriseComponent  {
             return false;
 
         return true;
-  }
+    }
 //Messages d'erreurs/succès
-  jBoxMessage(couleur: string, message: string) {
+      jBoxMessage(couleur: string, message: string) {
 
-      new jBox('Notice', {
-          content: message,
-          color: couleur,
-          autoClose: 5000
-      });
-  }
-
+          new jBox('Notice', {
+              content: message,
+              color: couleur,
+              autoClose: 5000
+          });
+      }
 
 }
