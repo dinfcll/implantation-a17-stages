@@ -23,26 +23,23 @@ export class PageDetailEtudiantComponent  {
     enseignants: Enseignant[];
     enseignants2: Enseignant[];
     ID: number;
-    PageAjouter: boolean;
+   
     PageModifier:boolean;
     TabisChecked: boolean[];
     TabCheckedNomEns:any[];
     selectedItems: any = [];
      TabRelEnsEtu:RelEnseignantEtudiant[]; 
      relEnsEtu:RelEnseignantEtudiant;
-    //enseignantAjouterOUModif:Enseignant;
     
-   //@Input('recupPageModifier') testModif: boolean;
+    
+   
     constructor(private service: AppService, private http: Http,  private router: Router){
-        //this.PageModifier=false;
-        //selectedItems: any = [];
-        this.TabRelEnsEtu=[];
+        
         this.enseignants=[];
-        this.enseignants2=[];
-        this.TabisChecked=[];
+      
         this.TabCheckedNomEns=[];
         this.testModifier();
-        this.relEnsEtu=new RelEnseignantEtudiant(-1, -1);
+       
         this.etudiant = new Etudiant(-1,"","","","","",0);
         this.entreprise = new Entreprise(-1,"","","","","","",0,0,0,0,0,"");
         this.entreprise2 = new Entreprise(-1,"","","","","","",0,0,0,0,0,"");
@@ -51,11 +48,7 @@ export class PageDetailEtudiantComponent  {
             this.getEtudiantParNoEnt(this.ID);
             this.getListeEnseignantParEtudiant(this.ID);
             this.getListeEnseignant();
-           /* if(this.enseignants2.length != 0)
-                {
-                        this.remplirTabIsChecked();
-                        this.createTabCheckedNomEnseignant();
-                }*/
+         
         }
         else
         {
@@ -67,7 +60,7 @@ export class PageDetailEtudiantComponent  {
      //Récupère l'etudiant choisie par le NoDA
      getEtudiantParNoEnt(NoDA: number)
      {
-       this.PageAjouter = false;
+      // this.PageAjouter = false;
        let url: string;
        url = "api/EtudiantParNoDa/"+NoDA;
        this.http.get(url).subscribe(donnees =>
@@ -100,7 +93,7 @@ export class PageDetailEtudiantComponent  {
     getEntrepriseParNoEnt(NoEnt: number)
     {
         
-      this.PageAjouter = false;
+     // this.PageAjouter = false;
       let url: string;
       url = "api/Entreprise/"+NoEnt;
       this.http.get(url).subscribe(donnees =>
@@ -196,8 +189,7 @@ export class PageDetailEtudiantComponent  {
 
      createTabCheckedNomEnseignant()
      {
-        /*this.getListeEnseignant();
-         this.remplirTabIsChecked();*/
+        
         for (var i = 0; i < this.enseignants2.length; i++) {
             this.TabCheckedNomEns.push({
                                  no: this.enseignants2[i].noEnseignant,
@@ -222,72 +214,7 @@ export class PageDetailEtudiantComponent  {
                 console.log(this.selectedItems);
             }
 
-            remplirTabEnsEtu(){
-                for(var i=0; i<this.selectedItems.length; i++)
-                    {
-                        this.relEnsEtu=new RelEnseignantEtudiant(this.etudiant.noDa, this.selectedItems[i])
-                        this.TabRelEnsEtu.push( this.relEnsEtu);
-                    }
-            }
-            suppressionRelEnsEtuBD(){
-                
-                       
-                            
-                        this.http.delete("api/relEnseignantEtudiant/SupprimerPlusieurRelensetu/" + this.etudiant.noDa).subscribe(donne =>
-                                    {
-                                       console.log(donne.status);
-                                    });
-                                
-                   
-            }
-            AddRelEnsEtuBD(){
-                for(var i=0; i<this.TabRelEnsEtu.length; i++)
-                    {
-                        this.http.post("api/Enseignant/EnregistrementRelEnseignantEtudiantbd", this.TabRelEnsEtu[i]).subscribe(Result =>
-                            {
-                                console.log(Result.status);
-                            });
-                    }
-                       
-            }
-/***************************************************************************************************** */
-
-SaveModifEtudiant(){
-    this.SaveModifRelEnsEtu();
-    this.getEntrepriseParNomEnt(this.entreprise.nomentreprise);
-    if(this.entreprise2.id != -1)
-        {
-          this.etudiant.id=this.entreprise2.id;
-        }
-
-        this.http.put("api/Etudiant/ModifierEtudiant", this.etudiant).subscribe(donne =>
-            {
-                    if (donne.status !== 200)
-                    {
-                        this.jBoxMessage("red", "Erreur lors de la modification de l'étudiant.");
-                    }
-                    else
-                        this.jBoxMessage("green","Modification effectuée avec succès!");
-            });
-        }  
-
-
-
-        SaveModifRelEnsEtu(){
-            this.remplirTabEnsEtu();
-            this.suppressionRelEnsEtuBD();
-            this. AddRelEnsEtuBD();
-       }
-
-       //Messages d'erreurs/succès
-jBoxMessage(couleur: string, message: string) {
-    
-          new jBox('Notice', {
-              content: message,
-              color: couleur,
-              autoClose: 5000
-          });
-      }
+   
 
 }
 
