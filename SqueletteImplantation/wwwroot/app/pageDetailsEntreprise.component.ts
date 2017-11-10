@@ -69,12 +69,14 @@ export class PageDetailEntrepriseComponent  {
         {          
             this.http.put("api/entreprise/Modifier", this.entrepriseAjouter).subscribe(donne =>
             {
-                    if (donne.status !== 200)
-                    {
-                        this.jBoxMessage("red", "Erreur lors de la modification de l'entreprise.");
-                    }
-                    else
-                        this.jBoxMessage("green","Modification effectuée avec succès!");
+                if (donne.status !== 200) {
+                    this.jBoxMessage("red", "Erreur lors de la modification de l'entreprise.");
+                }
+                else
+                {
+                    this.jBoxMessage("green", "Modification effectuée avec succès!");
+                }
+                        
             });
         }  
     }
@@ -82,15 +84,13 @@ export class PageDetailEntrepriseComponent  {
 
     Ajouter()
     {
-        this.validation();
-        console.log()
+        this.entrepriseAjouter.date = (new Date()).getFullYear().toString();
         if(!this.validation())
         {
             this.jBoxMessage("red", "Attention!!! Vous avez saisi un caractère non valide dans statistique de confirmation.");
         }
         else
            {
-                this.PageAjouter = true;
                 this.http.post("api/Entreprise/Ajouter", this.entrepriseAjouter).subscribe(Result =>
                 {
                     if (Result.status == 200) {
@@ -100,7 +100,6 @@ export class PageDetailEntrepriseComponent  {
                     {
                         this.jBoxMessage("red", "Erreur lors de l'ajout de l'entreprise");
                     }
-                    
                 });
             }
     }

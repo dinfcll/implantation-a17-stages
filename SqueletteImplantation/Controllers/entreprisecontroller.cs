@@ -20,30 +20,37 @@ namespace SqueletteImplantation.Controllers
 
         [HttpGet]
         [Route("api/Entreprise/annees")]
-        public IEnumerable EntrepriseAnnee()
+        public IActionResult EntrepriseAnnee()
         {
-            var AnneeRecente = (from b in _maBd.Entreprise
-                                select b.date).Max();
-            return from b in _maBd.Entreprise
+            var AnneeRecente = (from b in _maBd.Entreprise select b.date).Max();
+            var resultat =from b in _maBd.Entreprise
                    where b.date.Contains(AnneeRecente.ToString())
                    select b;
+            if (resultat == null)
+                return NotFound();
+            else
+                return new OkObjectResult(resultat);
         }
 
         [HttpGet]
         [Route("api/Entreprise/RechercheAnnee/{annees}")]
-        public IEnumerable EntrepriseRechercheAnnee(string annees)
+        public IActionResult EntrepriseRechercheAnnee(string annees)
         {
-            return from b in _maBd.Entreprise
+                var Resultat = from b in _maBd.Entreprise
                    where b.date.Contains(annees.ToString())
                    select b;
+            if (Resultat == null)
+                return NotFound();
+            else
+                return new OkObjectResult(Resultat);
         }
 
         [HttpGet]
         [Route("api/Entreprise/RechercheSansAnnee/{recherchetxtbox}")]
-        public IEnumerable Recherche(string recherchetxtbox)
+        public IActionResult Recherche(string recherchetxtbox)
         {
             recherchetxtbox = recherchetxtbox.ToUpper();
-            return from b in _maBd.Entreprise
+            var Resultat = from b in _maBd.Entreprise
                    where
                    b.lieu.ToUpper().Contains(recherchetxtbox) ||
                    b.notel.ToUpper().Contains(recherchetxtbox) ||
@@ -63,14 +70,17 @@ namespace SqueletteImplantation.Controllers
                        b.courrielres,
                        b.date
                    };
+            if (Resultat == null)
+                return NotFound();
+            return new OkObjectResult(Resultat);
         }
 
         [HttpGet]
         [Route("api/Entreprise/{annees}/{recherchetxtbox}")]
-        public IEnumerable Recherche(string recherchetxtbox, string annees)
+        public IActionResult Recherche(string recherchetxtbox, string annees)
         {
             recherchetxtbox = recherchetxtbox.ToUpper();
-            return from b in _maBd.Entreprise
+            var Resultat= from b in _maBd.Entreprise
                    where b.date.Contains(annees) && (
                    b.lieu.ToUpper().Contains(recherchetxtbox) ||
                    b.notel.ToUpper().Contains(recherchetxtbox) ||
@@ -90,15 +100,21 @@ namespace SqueletteImplantation.Controllers
                        b.courrielres,
                        b.date
                    };
+            if (Resultat == null)
+                return NotFound();
+            return new OkObjectResult(Resultat);
         }
 
         [HttpGet]
         [Route("api/Entreprise/RemplirCombo")]
-        public IEnumerable ListeAnnees()
+        public IActionResult ListeAnnees()
         {
-            return (from b in _maBd.Entreprise
+            var Resultat = (from b in _maBd.Entreprise
                     orderby b.date descending
                     select b.date).Distinct();
+            if (Resultat == null)
+                return NotFound();
+            return new OkObjectResult(Resultat);
         }
 
 
@@ -141,13 +157,13 @@ namespace SqueletteImplantation.Controllers
         [Route("api/Entreprise/Supprimer/{ID}")]
         public IActionResult SuprimeEntreprisebd(int ID)
         {
-            Entreprise entreprise = new Entreprise() { Id = ID };
-            _maBd.Entreprise.Attach(entreprise);
-           var resultat= _maBd.Entreprise.Remove(entreprise);
+            var entreprise = _maBd.Entreprise.FirstOrDefault(x => x.Id == ID);
+            var resultat = _maBd.Entreprise.Remove(entreprise);
             _maBd.SaveChanges();
             if (resultat == null)
                 return NotFound();
             return new OkResult();
+
         }
         [HttpPost]
         [Route("api/Entreprise/Ajouter")]

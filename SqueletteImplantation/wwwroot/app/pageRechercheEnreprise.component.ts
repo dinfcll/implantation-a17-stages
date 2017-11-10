@@ -41,6 +41,8 @@ export class pageRechercheEntrepriseComponent
         
     getEntreprise(Recherche: string, annees: string) {
         let url: string;
+        this.Recherche = Recherche;
+        this.AnneeRecherche = annees;
         if ((Recherche == "" && annees == "")) {
             url = "api/Entreprise/annees";
         }
@@ -60,8 +62,11 @@ export class pageRechercheEntrepriseComponent
 
         this.http.get(url).subscribe(
             donnees => {
-                this.entreprises = donnees.json() as Entreprise[]
-                console.log(this.entreprises);
+                if (donnees.status != 200) {
+                    this.entreprises = donnees.json() as Entreprise[];
+                    this.jBoxMessage("red", "Aucune occurence ne peux être affichée!");
+
+                }             
             }
         );
     }
@@ -70,15 +75,16 @@ export class pageRechercheEntrepriseComponent
     {
         this.http.delete("api/Entreprise/Supprimer/" + ID.toString()).subscribe(
             donnee => {
-                if (donnee.status != 200) {
+                if (donnee.status == 200) {
                     this.jBoxMessage("green", "Entreprise supprimée avec succès!")
+                    this.getEntreprise(this.Recherche, this.AnneeRecherche);
                 }
                 else
                 {
-                    this.jBoxMessage("red", "Erreur lors de la modification de l'entreprise!");
+                    this.jBoxMessage("red", "Erreur lors de la suppression de l'entreprise!");
                 }
             });
-        this.getEntreprise(this.Recherche, this.AnneeRecherche);
+       
     }
     AjouterAnnee(entreprise: Entreprise)
     {
@@ -87,7 +93,8 @@ export class pageRechercheEntrepriseComponent
             if (Result.status == 200) {
                 this.jBoxMessage("green", "Entreprise ajoutée à l'année courante!");
             }
-            else {
+            else
+            {
                 this.jBoxMessage("red", "Erreur lors de l'ajout de l'entreprise à l'année courante!");
             }
         });

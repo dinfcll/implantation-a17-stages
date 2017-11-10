@@ -1,7 +1,4 @@
 <div>
-    
-        
-
         <input type="text" placeholder="Recherche" id="recherche" [(ngModel)]="Recherche">
         <button class="loupe"   (click)="getEntreprise(Recherche,AnneeRecherche)" ></button>	
         
@@ -62,10 +59,10 @@
                 <td> {{entreprise.nbrenon}}</td>
                 <td> {{entreprise.courrielres}}</td>
                 <td> {{entreprise.date}}</td>
-                <td><button class="btn icon-btn btn-danger" id="Supprimer" [value]="entreprise.id" (click)="Supprimer($event.target.value);"><span class="glyphicon btn-glyphicon glyphicon-trash img-circle"></span>Supprimer</button></td>
-                <td><button class="btn icon-btn btn-primary" *ngIf="entreprise.date=={{AnneeCourante}}" [routerLink]="['/detailEntreprise', entreprise.id]"  routerLinkActive="active" id="Modifier" ><i class="fa fa-pencil fa-fw"></i>Modifier</button> </td>                
-                <td><button class="btn icon-btn btn-info" *ngIf="entreprise.date!={{AnneeCourante}}"[value]="entreprise" id="AjouterAnnee"(click)="AjouterAnnee($event.target.value)">Ajouter à l'année courante</button></td>
-                <td><button class ="btn icon-btn btn-block"[value]="entreprise.id" (click)='getEntreprise($event.target.value,"")'>Consulter toutes les années</button></td>
+                <td><button class="btn icon-btn btn-danger" id="Supprimer" (click)="Supprimer(entreprise.id);"><span class="glyphicon btn-glyphicon glyphicon-trash img-circle"></span>Supprimer</button></td>
+                <td><button class="btn icon-btn btn-primary" *ngIf="entreprise.date==AnneeCourante" [routerLink]="['/detailEntreprise', entreprise.id]"  routerLinkActive="active" ><i class="fa fa-pencil fa-fw"></i>Modifier</button> </td>                
+                <td><button class="btn icon-btn btn-info" *ngIf="entreprise.date!=AnneeCourante" id="AjouterAnnee"(click)="AjouterAnnee(entreprise)">Ajouter à l'année courante</button></td>
+                <td><button class ="btn icon-btn btn-block" (click)='getEntreprise(entreprise.id,"")'>Consulter toutes les années</button></td>
             </tr>
         </tbody>
     </table>
@@ -73,7 +70,7 @@
         <span class="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"></span>
         ajouter une entreprise
     </a>    
-        <select [(ngModel)]="annees">
+        <select [(ngModel)]="AnneeRecherche">
             <option></option>
             <option *ngFor=" let value of TAnnees">
                 {{value}}
