@@ -1,13 +1,10 @@
 import { Http } from '@angular/http';
-
 import { Entreprise } from './models/entreprise.class';
-
 import { Component } from '@angular/core';
-
-import {  Router, RouterModule, Routes}   from '@angular/router';
+import { Router, RouterModule, Routes } from '@angular/router';
+import { ConfirmationDialog } from './confirmation-dialog';
+import {MatDialog} from '@angular/material';
 declare var jBox: any;
-
-
 
 @Component({
     selector: 'recherche_entreprise',
@@ -17,25 +14,32 @@ declare var jBox: any;
 
 export class pageRechercheEntrepriseComponent
 {
+    DialogSuppression:ConfirmationDialog;
     entreprises: Entreprise[];
     AnneeRecherche: string;
     AnneeCourante: string;
     Recherche: string;
-    TAnnees: String[];
-    constructor(private http: Http, private router: Router)
+    TAnnees: string[];
+    constructor(private http: Http, private router: Router,public dialog:MatDialog)
     {
         this.AnneeCourante = (new Date()).getFullYear().toString();
         this.AnneeRecherche = "";
         this.Recherche = "";
-        this.getEntreprise("", "");
         this.RemplirCombo();
     }
     
     RemplirCombo() {
         this.http.get("api/Entreprise/RemplirCombo").subscribe(
             donnees => {
-                this.TAnnees = donnees.json() as String[]
-                console.log(this.TAnnees);
+              
+                if (donnees.status == 200) {
+                    this.TAnnees = donnees.json() as string[]
+                    this.getEntreprise(this.Recherche, this.AnneeRecherche);
+                }
+                else
+                {
+                    this.jBoxMessage("red", "Aucune annï¿½e trouvï¿½e!");
+                }
             });
     }
         
@@ -59,53 +63,71 @@ export class pageRechercheEntrepriseComponent
                 }
             }
         }
-
-        this.http.get(url).subscribe(
-            donnees => {
-                if (donnees.status != 200) {
-                    this.entreprises = donnees.json() as Entreprise[];
-                    this.jBoxMessage("red", "Aucune occurence ne peux être affichée!");
-
-                }             
-            }
-        );
+        if (this.TAnnees.length != 0) {
+            this.http.get(url).subscribe(
+                donnees => 
+                {
+                    if (donnees.status == 200) {
+                        this.entreprises = donnees.json() as Entreprise[];
+                    }
+                    else
+                    {
+                        this.jBoxMessage("red", "Aucune occurence ne peux ï¿½tre affichï¿½e!");
+                    }
+                });
+        }
+        else
+        {
+            this.jBoxMessage("yellow", "Aucune entreprise dans la base de donnï¿½e");
+            this.entreprises = null;
+        }
     }
    
     Supprimer(ID:number)
     {
+    const dialogRef = this.dialog.open(ConfirmationDialog, {
+      height: '350px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+    
         this.http.delete("api/Entreprise/Supprimer/" + ID.toString()).subscribe(
             donnee => {
-                if (donnee.status == 200) {
-                    this.jBoxMessage("green", "Entreprise supprimée avec succès!")
-                    this.getEntreprise(this.Recherche, this.AnneeRecherche);
+                if (donnee.status == 200)
+                {
+                    this.jBoxMessage("green", "Entreprise supprimï¿½e avec succï¿½s!");
+                    this.RemplirCombo();
                 }
                 else
                 {
                     this.jBoxMessage("red", "Erreur lors de la suppression de l'entreprise!");
                 }
             });
-       
     }
+
     AjouterAnnee(entreprise: Entreprise)
     {
         entreprise.date = this.AnneeCourante;
         this.http.post("api/Entreprise/Ajouter", entreprise).subscribe(Result => {
             if (Result.status == 200) {
-                this.jBoxMessage("green", "Entreprise ajoutée à l'année courante!");
+                this.jBoxMessage("green", "Entreprise ajoutï¿½e ï¿½ l'annï¿½e courante!");
             }
             else
             {
-                this.jBoxMessage("red", "Erreur lors de l'ajout de l'entreprise à l'année courante!");
+                this.jBoxMessage("red", "Erreur lors de l'ajout de l'entreprise ï¿½ l'annï¿½e courante!");
             }
         });
-        
     }
-    jBoxMessage(couleur: string, message: string) {
 
-        new jBox('Notice', {
-            content: message,
-            color: couleur,
-            autoClose: 5000
+    jBoxMessage(couleur: string, message: string)
+    {
+        new jBox('Notice',
+            {
+                content: message,
+                color: couleur,
+                autoClose: 5000
         });
-    }
+    }   
 }

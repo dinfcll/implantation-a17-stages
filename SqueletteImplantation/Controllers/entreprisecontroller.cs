@@ -28,8 +28,7 @@ namespace SqueletteImplantation.Controllers
                    select b;
             if (resultat == null)
                 return NotFound();
-            else
-                return new OkObjectResult(resultat);
+            return new OkObjectResult(resultat);
         }
 
         [HttpGet]
@@ -41,8 +40,7 @@ namespace SqueletteImplantation.Controllers
                    select b;
             if (Resultat == null)
                 return NotFound();
-            else
-                return new OkObjectResult(Resultat);
+            return new OkObjectResult(Resultat);
         }
 
         [HttpGet]
@@ -101,7 +99,9 @@ namespace SqueletteImplantation.Controllers
                        b.date
                    };
             if (Resultat == null)
+            {
                 return NotFound();
+            }
             return new OkObjectResult(Resultat);
         }
 
@@ -113,8 +113,10 @@ namespace SqueletteImplantation.Controllers
                     orderby b.date descending
                     select b.date).Distinct();
             if (Resultat == null)
+            {
                 return NotFound();
-            return new OkObjectResult(Resultat);
+            }
+             return new OkObjectResult(Resultat);
         }
 
 
@@ -132,7 +134,7 @@ namespace SqueletteImplantation.Controllers
             return new OkObjectResult(entreprise);
         }
 
-    [HttpPost]
+        [HttpPost]
         [Route("api/Entreprise/Enregistrementbd")]
         public IActionResult Enregistrementbd(Entreprise Entreprise)
         {

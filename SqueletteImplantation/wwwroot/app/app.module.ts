@@ -1,20 +1,18 @@
-import { NgModule }      from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog';
 import { HttpModule } from '@angular/http';
-
+import { FormsModule } from '@angular/forms';
+import { ConfirmationDialog } from './confirmation-dialog';
 import { AppComponent }  from './app.component';
 import { RouterModule, Routes }   from '@angular/router';
 import {  LoginEnseignantComponent }  from './loginenseignant.component';
 import { PageRechercheEtudiantComponent } from "./pageRechercheEtudiant.component";
-
 import { pageAccueilEnseignantComponent } from "./pageAccueilEnseignant.component";
-
 import { PageDetailEntrepriseComponent } from "./pageDetailsEntreprise.component";
-
 import { pageRechercheEntrepriseComponent } from "./pageRechercheEnreprise.component";
+import { ProfilEnseignantComponent } from "./profilenseignant.component";
 
-import { ProfilEnseignantComponent} from "./profilenseignant.component";
 const appRoutes: Routes=[
   {
     path:'',
@@ -67,16 +65,17 @@ const appRoutes: Routes=[
 
 @NgModule({
   imports:      [ BrowserModule, FormsModule,HttpModule,  RouterModule.forRoot(appRoutes) ],
+  exports: [MatDialogModule],
   declarations: [ AppComponent,
-                   LoginEnseignantComponent,
-                 
+                  LoginEnseignantComponent,
+                  ConfirmationDialog,
                   pageAccueilEnseignantComponent,
                   PageRechercheEtudiantComponent,
                   PageDetailEntrepriseComponent,
                   pageRechercheEntrepriseComponent,
-                  ProfilEnseignantComponent ],
-   
-  bootstrap:    [ AppComponent ]
+                  ProfilEnseignantComponent],
+  bootstrap: [AppComponent],
+  entryComponents: [ConfirmationDialog]
 })
 
 
