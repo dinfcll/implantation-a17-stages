@@ -44,20 +44,13 @@ export  class LoginEnseignantComponent {
                 console.log(r);
                 var patate = r.json();
                 console.log(patate);
-                // login successful if there's a jwt token in the response
-                let token = r.json() && r.json().token;
+               
 
                 if(r.status == 200)
                     {
                          //naviguer plus loin
                          this.router.navigate(['/accueil-enseignant']);
-                         /************************** */
-                           // set token property
-                           this.token = token;
-                    
-                            // store courriel and jwt token in local storage to keep user logged in between page refreshes
-                            //localStorage.setItem('currentUser', JSON.stringify({ courriel: courriel, token: token }));
-                         /*************************** */
+                         
                          localStorage.setItem('var', JSON.stringify(this.enseignant));
                     }
                    
@@ -67,9 +60,9 @@ export  class LoginEnseignantComponent {
                         if(r.status == 204)
                             {
                                 this.isValid=false;
-                                console.log("desolé, je n ai rien trouvé");
+                                
                                 new jBox('Notice', {
-                                    content: 'desolé, je n ai rien trouvé',
+                                    content: 'Mot de passe invalide',
                                     color: 'red',
                                     autoClose: 5000
                                     }); 
@@ -82,9 +75,6 @@ export  class LoginEnseignantComponent {
     }
     
     
-    getEnseignantConnecte(): Enseignant{
-        return this.enseignant;
-    }
-
+   
  }
 

@@ -17,39 +17,46 @@ namespace SqueletteImplantation.Controllers
         }
 
         [HttpDelete]
-        [Route("api/relEnseignantEtudiant/SupprimerPlusieurRelensetu/{ID}")]
-        public IActionResult SupprimerelEnseignantEtudiant(int ID)
+        [Route("api/relEnseignantEtudiant/SupprimerRelensetu/{ID}/{NOENS}")]
+        public IActionResult SupprimerelEnseignantEtudiant(int ID, int NOENS)
         {
-            var qry = from b in _maBd.RelEnseignantEtudiant
-                      where b.NoDa==ID
-                      select b;
-            if (qry == null)
-            {
-                return NotFound();
-            }
-            else
-            {
-
-                foreach (var p in qry)
-                {
-                    RelEnseignantEtudiant relensetu = new RelEnseignantEtudiant() { NoDa = p.NoDa };
+           
+                
+                    RelEnseignantEtudiant relensetu = new RelEnseignantEtudiant() { NoDa = ID, NoEnseignant= NOENS };
                     _maBd.RelEnseignantEtudiant.Attach(relensetu);
                     var resultat = _maBd.RelEnseignantEtudiant.Remove(relensetu);
                     _maBd.SaveChanges();
-                }
-            }
+                
             
-            if (qry == null)
+            
+            if (resultat == null)
                 return NotFound();
             return new OkResult();
         }
 
+
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
         [HttpPost]
-        [Route("api/Enseignant/EnregistrementRelEnseignantEtudiantbd")]
-        public IActionResult EnregistrementRelEnseignantEtudiantbd(RelEnseignantEtudiant EnsEtu)
+        [Route("api/Enseignant/sauvegardeRelEnseignantEtudiantbd")]
+        public IActionResult EnregistrementRelEnseignantEtudiantbd([FromBody]RelEnseignantEtudiant EnsEtu)
         {
             var resultat = _maBd.RelEnseignantEtudiant.Add(EnsEtu);
             _maBd.SaveChanges();
+            if (resultat == null)
+                return NotFound();
             return new OkObjectResult(EnsEtu);
 
 

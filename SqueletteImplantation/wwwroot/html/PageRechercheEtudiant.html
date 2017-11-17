@@ -1,10 +1,24 @@
 <div id="d1">
     
-       
-        <input type="text" placeholder="Recherche" id="recherche" [(ngModel)]="Recherche">
-        <button class="loupe"   (click)="getEtudiant(Recherche,annees)" ></button>	
-        <a  class="btn icon-btn btn-danger" id="Supprimer" (click)="SupprimerEtudiantSelect()"><span class="glyphicon btn-glyphicon glyphicon-trash img-circle text-danger"></span>Supprimer</a>
-   <table border=1 >
+       <div class="form-group row">
+            <input class="col-sm-2 col-xs-2 col-lg-2 col-md-2  col-form-label row"    type="text" placeholder="Recherche" id="recherche"  [(ngModel)]="Recherche" (keyup.enter)="getEtudiant(Recherche,annees)" (keyup)="filter()">
+            <div class="suggestions" *ngIf="filteredList.length > 0">
+                    <ul id="autocomplete" *ngFor="let item of filteredList" >
+                        <li class="liautocomplete" >
+                            <a (click)="select(item)">{{item}}</a>
+                        </li>
+                    </ul>
+                </div>
+            <button class="col-sm-2 col-xs-2 col-lg-2 col-md-2  col-form-label row"  id="loupe"   (click)="getEtudiant(Recherche,annees)" ></button>
+            <select class="custom-select" [(ngModel)]="annees">
+                <option></option>
+                <option *ngFor="let value of TAnnees">
+                    {{value}}
+                </option>
+            </select>	
+       </div>
+       <!-- <a  class="btn icon-btn btn-danger" id="Supprimer" (click)="SupprimerEtudiantSelect()"><span class="glyphicon btn-glyphicon glyphicon-trash img-circle text-danger"></span>Supprimer</a>-->
+   <table border=1 class="table table-hover">
                 <caption>Tableau de données des étudiants(es)</caption>
     <thead>	
            <tr>
@@ -40,21 +54,16 @@
                 <td> {{etudiant.profil }}</td>	
                 <td> {{etudiant.nomentreprise}}</td>
                 <td> {{etudiant.annee}}</td>
-                <td><input id="checkBox" type="checkbox" (change)="selectEtudiant(etudiant, $event)" ></td>
+                <td><button class="btn icon-btn btn-danger"  (click)="Supprimer(etudiant.noDa);"><span class="glyphicon btn-glyphicon glyphicon-trash img-circle"></span>Supprimer</button></td>
                 <td><a [routerLink]="['/detailEtudiant', etudiant.noDa]"  routerLinkActive="active"  class="btn icon-btn btn-primary" id="Modifier" (click)="PageModif()"><li><i class="fa fa-pencil fa-fw"></i>Modifier</a></td>
             </tr>
         </tbody>
     </table>
-    <a class="btn icon-btn btn-success"  id="btn">
+    <a class="btn icon-btn btn-success"  id="btn" [routerLink]="['/detailEtudiant', -1]"  routerLinkActive="active">
         <span class="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"></span>
         ajouter un étudiant
     
     </a>
-        <select [(ngModel)]="annees">
-            <option></option>
-            <option *ngFor=" let value of TAnnees">
-                {{value}}
-            </option>
-        </select>
+        
        
 </div>

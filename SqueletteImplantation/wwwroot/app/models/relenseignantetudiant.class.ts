@@ -1,3 +1,3 @@
 export class RelEnseignantEtudiant { 
-    constructor(public NoDa: number, public NoEnseignant: number){  }
+    constructor(public noDa: number, public noEnseignant: number){  }
  }

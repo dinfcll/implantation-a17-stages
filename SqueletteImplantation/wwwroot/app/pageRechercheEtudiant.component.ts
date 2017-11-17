@@ -3,31 +3,42 @@ import { Http } from '@angular/http';
 
 import { Etudiant } from './models/etudiant.class';
 import {AppService} from "./app.service";
-import { Component } from '@angular/core';
+import { Component,ElementRef  } from '@angular/core';
 
 import {  Router, RouterModule, Routes}   from '@angular/router';
 declare var jBox:any;
 @Component({
+    host: {
+        '(document:click)': 'verifClickDansComposant($event)',
+    },
   templateUrl: `./../html/PageRechercheEtudiant.html`,
   styleUrls:[`./../css/accueil_enseignant.css`],
 })
-export class PageRechercheEtudiantComponent  {  
+
+export class PageRechercheEtudiantComponent  { 
+    
+    
+    filteredList:any[];
+    Tnometudiant: string[];
+    
 // PageModifier:boolean;
   etudiants: Etudiant[];
-  selectedItems: any = [];
+  //selectedItems: any = [];
   annees: string;
   Recherche: string;
   TAnnees: String[];
-  constructor(private service: AppService,private http: Http, private router: Router)
+  
+  constructor(private elementRef: ElementRef,  private service: AppService,private http: Http, private router: Router)
   {
-    
+      this. TAnnees=[];
+    this.filteredList=[];
     this.annees = "";
     this.Recherche = "";
      this.getEtudiant("","");
-     /* this.Test2();
-      this.Test3();*/
+     
       this.RemplirComboAnneeEtudiant();
-     // this.testModifier();
+      this.AutocompleteEtudiant();
+     
       
   }
 
@@ -51,87 +62,71 @@ export class PageRechercheEtudiantComponent  {
         }
     }
 
+
+    if (this.TAnnees.length != 0) {
+
     this.http.get(url).subscribe(
         donnees => {
+            if (donnees.status == 200) {
             this.etudiants = donnees.json() as Etudiant[]
             console.log(this.etudiants);
+            }else
+            {
+                this.jBoxMessage("red", "Aucune occurence ne peux �tre affich�e!");
+            }
+
            
             
         }
-    );
+     );
+    }else
+    {
+        this.jBoxMessage("yellow", "en attente de connexion ou Aucun étudiant dans la base de donn�e");
+        this.etudiants = null;
+    }
+
+
+
 
       }
       RemplirComboAnneeEtudiant() {
         this.http.get("api/Etudiant/RemplirComboAnneeEtudiant").subscribe(
             donnees => {
-                this.TAnnees = donnees.json() as String[]
-                console.log(this.TAnnees);
+              
+                if (donnees.status == 200) {
+                    this.TAnnees = donnees.json() as string[]
+                    this.getEtudiant(this.Recherche, this.annees);
+                }
+                else
+                {
+                    this.jBoxMessage("red", "Aucune ann�e trouv�e!");
+                }
+
             });
         } 
 
-        selectEtudiant(etudiant : Etudiant, e : any) {
-          
-                  var index = this.selectedItems.indexOf(etudiant.noDa);
-                  if (e.target.checked) {
-                      if (index === -1) {
-                          this.selectedItems.push(etudiant.noDa);
-                      }
-                  } else {
-                      if (index !== -1) {
-                          this.selectedItems.splice(index, 1);
-                      }
-                  }
-                  console.log(this.selectedItems);
-              }
-
-              DeleteParNo(no : number): void {
+      
+              Supprimer(no : number): void {
                 
                         this.http.delete("api/Etudiant/SupprimerEtudiant/" + no).subscribe(donne =>
                         {
-                            if (donne.status !== 200)
+                            if (donne.status == 200)
                             {
-                                this.jBoxMessage("red", "Erreur lors de la suppression de l'entreprise.")
+                                this.jBoxMessage("green", "Supression effectuée avec succès!");
+                              
+                                this.RemplirComboAnneeEtudiant();
+                                this.getEtudiant(this.Recherche, this.annees);
                             }
                             else
-                            this.jBoxMessage("green", "Supression effectuée avec succès!");
+                                {
+                                    this.jBoxMessage("red", "Erreur lors de la suppression de l'entreprise.")
+                                }
                         });
                     }
 
 
-                    SupprimerEtudiantSelect(){
-
-                         var i=0;
-                         while(i < this.selectedItems.length){
-                             this.DeleteParNo(this.selectedItems[i]);
-                             i++;
-                         }
-
-
-
-                    }
-
-  /*    Test2() {
-        let no:number;
-        no=1212;
-        this.http.get("api/Enseignant/"+no).subscribe(
-            donnees => {
-                this.etudiants = donnees.json() as Etudiant[]
-                console.log(this.etudiants);
-            });
-    
-          }
-
-
-          Test3() {
-            let no:number;
-            no=1443434;
-            this.http.get("api/Etudiant/"+no).subscribe(
-                donnees => {
-                    this.etudiants = donnees.json() as Etudiant[]
-                    console.log(this.etudiants);
-                });
-        
-              }*/
+                  
+  
     
 
 
@@ -160,6 +155,52 @@ PageInfo():void
 {
     this.service.changeFlag(false);
 }
+
+AutocompleteEtudiant() {
+    this.http.get("api/Etudiant/autocomplete").subscribe(
+        donnees => {
+            this.Tnometudiant = donnees.json() as string[]
+            console.log(this.Tnometudiant);
+        });
+    } 
+/*listeFiltre(){
+
+}*/
+
+filter() {
+    if (this.Recherche !== ""){
+        this.filteredList = this.Tnometudiant.filter(function(el:any){
+            return el.toLowerCase().indexOf(this.Recherche.toLowerCase()) > -1;
+        }.bind(this));
+    }else{
+        this.filteredList = [];
+    }
+}
+ 
+select(item: any){
+    this.Recherche = item;
+    this.filteredList = [];
+    
+    
+}
+
+verifClickDansComposant(event: any){
+    var clickedComponent = event.target;
+    var inside = false;
+    do {
+        if (clickedComponent === this.elementRef.nativeElement) {
+            inside = true;
+        }
+       clickedComponent = clickedComponent.parentNode;
+    } while (clickedComponent);
+     if(!inside){
+         this.filteredList = [];
+     }
+ }
+
+
+ 
+
 
 
 

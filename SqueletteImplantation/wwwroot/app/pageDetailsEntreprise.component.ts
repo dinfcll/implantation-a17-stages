@@ -113,6 +113,7 @@ export class PageDetailEntrepriseComponent  {
     goBack(): void
     {
         this.location.back();
+        
     }
 
 //Valide si chaque champ est valide

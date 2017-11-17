@@ -33,26 +33,17 @@ var LoginEnseignantComponent = (function () {
             console.log(r);
             var patate = r.json();
             console.log(patate);
-            // login successful if there's a jwt token in the response
-            var token = r.json() && r.json().token;
             if (r.status == 200) {
                 //naviguer plus loin
                 _this.router.navigate(['/accueil-enseignant']);
-                /************************** */
-                // set token property
-                _this.token = token;
-                // store courriel and jwt token in local storage to keep user logged in between page refreshes
-                //localStorage.setItem('currentUser', JSON.stringify({ courriel: courriel, token: token }));
-                /*************************** */
                 localStorage.setItem('var', JSON.stringify(_this.enseignant));
             }
             else {
                 //message erreur
                 if (r.status == 204) {
                     _this.isValid = false;
-                    console.log("desolé, je n ai rien trouvé");
                     new jBox('Notice', {
-                        content: 'desolé, je n ai rien trouvé',
+                        content: 'Mot de passe invalide',
                         color: 'red',
                         autoClose: 5000
                     });
@@ -61,18 +52,15 @@ var LoginEnseignantComponent = (function () {
             }
         });
     };
-    LoginEnseignantComponent.prototype.getEnseignantConnecte = function () {
-        return this.enseignant;
-    };
+    LoginEnseignantComponent = __decorate([
+        core_1.Component({
+            selector: 'loginEnseignant',
+            templateUrl: "./../html/indexConnexionEnseignantEtudiant.html",
+            styleUrls: ["./../css/style_page_accueil.css"],
+        }),
+        __metadata("design:paramtypes", [http_1.Http, router_1.Router])
+    ], LoginEnseignantComponent);
     return LoginEnseignantComponent;
 }());
-LoginEnseignantComponent = __decorate([
-    core_1.Component({
-        selector: 'loginEnseignant',
-        templateUrl: "./../html/indexConnexionEnseignantEtudiant.html",
-        styleUrls: ["./../css/style_page_accueil.css"],
-    }),
-    __metadata("design:paramtypes", [http_1.Http, router_1.Router])
-], LoginEnseignantComponent);
 exports.LoginEnseignantComponent = LoginEnseignantComponent;
 //# sourceMappingURL=loginenseignant.component.js.map

@@ -29,7 +29,7 @@ namespace SqueletteImplantation.Controllers
 
 
 
-        //apres on fait le update de la bd etudiant pour placer l id de son entreprise
+        //apres on fait le update de la bd etudiant pour placer l'id de son entreprise
 
         /**********************************************/
         [HttpPost]
@@ -71,23 +71,16 @@ namespace SqueletteImplantation.Controllers
 
         /****************************************************/
 
-        [HttpPost]
-        [Route("api/Enseignant/EnregistrementRelEnseignantEtudiantbd")]
-        public IActionResult EnregistrementRelEnseignantEtudiantbd(RelEnseignantEtudiant EnsEtu)
-        {
-            var resultat = _maBd.RelEnseignantEtudiant.Add(EnsEtu);
-            _maBd.SaveChanges();
-            return new OkObjectResult(EnsEtu);
-
-
-        }
+        
 
         [HttpPost]
-        [Route("api/Enseignant/EnregistrementRelEnseignantEtudiantbd")]
-        public IActionResult EnregistrementRelEnseignantEntreprisetbd(RelEnseignantEntreprise EnsEnt)
+        [Route("api/Enseignant/EnregistrementRelEnseignantEntreprisebd")]
+        public IActionResult EnregistrementRelEnseignantEntreprisetbd([FromBody]RelEnseignantEntreprise EnsEnt)
         {
             var resultat = _maBd.RelEnseignantEntreprise.Add(EnsEnt);
             _maBd.SaveChanges();
+            if (resultat == null)
+                return NotFound();
             return new OkObjectResult(EnsEnt);
 
 

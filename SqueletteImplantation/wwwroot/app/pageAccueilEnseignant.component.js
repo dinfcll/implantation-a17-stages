@@ -21,15 +21,15 @@ var pageAccueilEnseignantComponent = (function () {
         localStorage.removeItem('currentUser');
         this.router.navigate(['/Login']);
     };
+    pageAccueilEnseignantComponent = __decorate([
+        core_1.Component({
+            selector: 'accueil_enseignant',
+            templateUrl: "./../html/AccueilEnseignant.html",
+            styleUrls: ["./../css/accueil_enseignant.css"],
+        }),
+        __metadata("design:paramtypes", [http_1.Http, router_1.Router])
+    ], pageAccueilEnseignantComponent);
     return pageAccueilEnseignantComponent;
 }());
-pageAccueilEnseignantComponent = __decorate([
-    core_1.Component({
-        selector: 'accueil_enseignant',
-        templateUrl: "./../html/AccueilEnseignant.html",
-        styleUrls: ["./../css/accueil_enseignant.css"],
-    }),
-    __metadata("design:paramtypes", [http_1.Http, router_1.Router])
-], pageAccueilEnseignantComponent);
 exports.pageAccueilEnseignantComponent = pageAccueilEnseignantComponent;
 //# sourceMappingURL=pageAccueilEnseignant.component.js.map

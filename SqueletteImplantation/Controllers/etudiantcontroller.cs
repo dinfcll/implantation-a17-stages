@@ -178,9 +178,22 @@ namespace SqueletteImplantation.Controllers
         }
 
 
+        [HttpGet]
+        [Route("api/Etudiant/autocomplete")]//pour le dropdown qui affectera un etudiant dans une entreprise
+        public IEnumerable ListeNomEtudiant()
+        {
+            return (from b in _maBd.Etudiant
+                    orderby b.Annee descending
+                    select b.Nom).Distinct();
+        }
+
+
+
+
+
         [HttpPost]
         [Route("api/Etudiant/EnregistrementEtudiantbd")]
-        public IActionResult EnregistrementEtudiantbd(Etudiant Etudiant)
+        public IActionResult EnregistrementEtudiantbd([FromBody] Etudiant Etudiant)
         {
             var resultat = _maBd.Etudiant.Add(Etudiant);
             _maBd.SaveChanges();
@@ -189,6 +202,17 @@ namespace SqueletteImplantation.Controllers
 
         }
 
+         [HttpPost]
+        [Route("api/EtudiantConnecte")]
+        public IActionResult LoginEnseignant([FromBody] EtudiantDto etu  )
+        {
+           var obj = _maBd.Etudiant.FirstOrDefault(m => m.NoDa == etu.NoDa);
+           if(obj == null)
+           {
+               return new OkObjectResult(null);
+           }
+            return new OkObjectResult(obj);
+        }
 
         [HttpPut]
         [Route("api/Etudiant/ModifierEtudiant")]
