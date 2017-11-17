@@ -66,7 +66,8 @@ namespace SqueletteImplantation.Controllers
                        b.nbrenon,
                        b.nbreoui,
                        b.courrielres,
-                       b.date
+                       b.date,
+                       b.Id
                    };
             if (Resultat == null)
                 return NotFound();
@@ -96,7 +97,8 @@ namespace SqueletteImplantation.Controllers
                        b.nbrenon,
                        b.nbreoui,
                        b.courrielres,
-                       b.date
+                       b.date,
+                       b.Id
                    };
             if (Resultat == null)
             {

@@ -17,52 +17,25 @@ var LoginEnseignantComponent = (function () {
     function LoginEnseignantComponent(http, router) {
         this.http = http;
         this.router = router;
-        this.isValid = true;
-        // set token if saved in local storage
-        var currentUser = JSON.parse(localStorage.getItem('currentUser'));
-        this.token = currentUser && currentUser.token;
     }
     LoginEnseignantComponent.prototype.Connexion = function (courriel, mdp) {
         var _this = this;
         var headers = new http_1.Headers();
         headers.append('Content-Type', 'application/json');
-        this.http
-            .post("api/Enseignant", JSON.stringify({ courriel: courriel, motDePasse: mdp }), { headers: headers })
-            .subscribe(function (r) {
-            _this.enseignant = r.json();
-            console.log(r);
-            var patate = r.json();
-            console.log(patate);
-            // login successful if there's a jwt token in the response
-            var token = r.json() && r.json().token;
-            if (r.status == 200) {
-                //naviguer plus loin
+        this.http.post("api/Enseignant", JSON.stringify({ courriel: courriel, motDePasse: mdp }), { headers: headers }).subscribe(function (Resultat) {
+            _this.enseignant = Resultat.json();
+            if (Resultat.status == 200) {
                 _this.router.navigate(['/accueil-enseignant']);
-                /************************** */
-                // set token property
-                _this.token = token;
-                // store courriel and jwt token in local storage to keep user logged in between page refreshes
-                //localStorage.setItem('currentUser', JSON.stringify({ courriel: courriel, token: token }));
-                /*************************** */
                 localStorage.setItem('var', JSON.stringify(_this.enseignant));
             }
             else {
-                //message erreur
-                if (r.status == 204) {
-                    _this.isValid = false;
-                    console.log("desolé, je n ai rien trouvé");
-                    new jBox('Notice', {
-                        content: 'desolé, je n ai rien trouvé',
-                        color: 'red',
-                        autoClose: 5000
-                    });
-                    console.log(_this.isValid);
-                }
+                new jBox('Notice', {
+                    content: "Mot de passe ou Nom d'utilisateur non valide",
+                    color: 'red',
+                    autoClose: 5000
+                });
             }
         });
-    };
-    LoginEnseignantComponent.prototype.getEnseignantConnecte = function () {
-        return this.enseignant;
     };
     return LoginEnseignantComponent;
 }());

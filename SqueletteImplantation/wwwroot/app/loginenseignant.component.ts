@@ -21,70 +21,32 @@ declare var jBox:any;
 })
 
 export  class LoginEnseignantComponent { 
-    isValid=true;
     public token: string;
-    enseignant: Enseignant;
-    constructor(private http: Http,  private router: Router){
-        // set token if saved in local storage
-        var currentUser = JSON.parse(localStorage.getItem('currentUser'));
-        this.token = currentUser && currentUser.token;
-    }
+    private enseignant: Enseignant;
+    constructor(private http: Http,  private router: Router){ }
 
     Connexion(courriel: string, mdp: string) {
         var headers = new Headers();
         headers.append('Content-Type', 'application/json');
-
-
-
-        this.http
-            .post("api/Enseignant", JSON.stringify({courriel: courriel, motDePasse: mdp}), { headers: headers })
-            .subscribe(r=>
+        this.http.post("api/Enseignant", JSON.stringify({courriel: courriel, motDePasse: mdp}), { headers: headers }).subscribe(
+            Resultat=>
             {
-                this.enseignant = r.json() as Enseignant;
-                console.log(r);
-                var patate = r.json();
-                console.log(patate);
-                // login successful if there's a jwt token in the response
-                let token = r.json() && r.json().token;
+                this.enseignant = Resultat.json() as Enseignant;
 
-                if(r.status == 200)
+                if(Resultat.status == 200)
                     {
-                         //naviguer plus loin
-                         this.router.navigate(['/accueil-enseignant']);
-                         /************************** */
-                           // set token property
-                           this.token = token;
-                    
-                            // store courriel and jwt token in local storage to keep user logged in between page refreshes
-                            //localStorage.setItem('currentUser', JSON.stringify({ courriel: courriel, token: token }));
-                         /*************************** */
+                         this.router.navigate(['/accueil-enseignant']);                
                          localStorage.setItem('var', JSON.stringify(this.enseignant));
                     }
-                   
                 else
                     {
-                        //message erreur
-                        if(r.status == 204)
-                            {
-                                this.isValid=false;
-                                console.log("desolé, je n ai rien trouvé");
-                                new jBox('Notice', {
-                                    content: 'desolé, je n ai rien trouvé',
-                                    color: 'red',
-                                    autoClose: 5000
-                                    }); 
-                                console.log(this.isValid);
-                            }
-                         
+                        new jBox('Notice', {
+                            content: "Mot de passe ou Nom d'utilisateur non valide",
+                            color: 'red',
+                            autoClose: 5000
+                            }); 
                     }
-                    
             })
     }
-    
-    
-    getEnseignantConnecte(): Enseignant{
-        return this.enseignant;
-    }
-
- }
+}
 

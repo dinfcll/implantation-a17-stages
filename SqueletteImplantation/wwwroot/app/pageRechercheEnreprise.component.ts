@@ -2,8 +2,6 @@ import { Http } from '@angular/http';
 import { Entreprise } from './models/entreprise.class';
 import { Component } from '@angular/core';
 import { Router, RouterModule, Routes } from '@angular/router';
-import { ConfirmationDialog } from './confirmation-dialog';
-import {MatDialog} from '@angular/material';
 declare var jBox: any;
 
 @Component({
@@ -14,13 +12,12 @@ declare var jBox: any;
 
 export class pageRechercheEntrepriseComponent
 {
-    DialogSuppression:ConfirmationDialog;
     entreprises: Entreprise[];
     AnneeRecherche: string;
     AnneeCourante: string;
     Recherche: string;
     TAnnees: string[];
-    constructor(private http: Http, private router: Router,public dialog:MatDialog)
+    constructor(private http: Http, private router: Router)
     {
         this.AnneeCourante = (new Date()).getFullYear().toString();
         this.AnneeRecherche = "";
@@ -38,7 +35,7 @@ export class pageRechercheEntrepriseComponent
                 }
                 else
                 {
-                    this.jBoxMessage("red", "Aucune ann�e trouv�e!");
+                    this.jBoxMessage("red", "Aucune année trouvée!");
                 }
             });
     }
@@ -68,36 +65,29 @@ export class pageRechercheEntrepriseComponent
                 donnees => 
                 {
                     if (donnees.status == 200) {
+                        console.log(this.entreprises);
                         this.entreprises = donnees.json() as Entreprise[];
                     }
                     else
                     {
-                        this.jBoxMessage("red", "Aucune occurence ne peux �tre affich�e!");
+                        this.jBoxMessage("red", "Aucune occurence ne peux être affichée!");
                     }
                 });
         }
         else
         {
-            this.jBoxMessage("yellow", "Aucune entreprise dans la base de donn�e");
+            this.jBoxMessage("yellow", "Aucune entreprise dans la base de donnée");
             this.entreprises = null;
         }
     }
    
     Supprimer(ID:number)
     {
-    const dialogRef = this.dialog.open(ConfirmationDialog, {
-      height: '350px'
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
-    
         this.http.delete("api/Entreprise/Supprimer/" + ID.toString()).subscribe(
             donnee => {
                 if (donnee.status == 200)
                 {
-                    this.jBoxMessage("green", "Entreprise supprim�e avec succ�s!");
+                    this.jBoxMessage("green", "Entreprise supprimée avec succès!");
                     this.RemplirCombo();
                 }
                 else
@@ -112,11 +102,11 @@ export class pageRechercheEntrepriseComponent
         entreprise.date = this.AnneeCourante;
         this.http.post("api/Entreprise/Ajouter", entreprise).subscribe(Result => {
             if (Result.status == 200) {
-                this.jBoxMessage("green", "Entreprise ajout�e � l'ann�e courante!");
+                this.jBoxMessage("green", "Entreprise ajoutée à l'année courante!");
             }
             else
             {
-                this.jBoxMessage("red", "Erreur lors de l'ajout de l'entreprise � l'ann�e courante!");
+                this.jBoxMessage("red", "Erreur lors de l'ajout de l'entreprise à l'année courante!");
             }
         });
     }

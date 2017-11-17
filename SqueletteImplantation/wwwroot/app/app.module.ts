@@ -1,9 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { MatDialogModule } from '@angular/material/dialog';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
-import { ConfirmationDialog } from './confirmation-dialog';
 import { AppComponent }  from './app.component';
 import { RouterModule, Routes }   from '@angular/router';
 import {  LoginEnseignantComponent }  from './loginenseignant.component';
@@ -18,8 +16,6 @@ const appRoutes: Routes=[
     path:'',
     component: LoginEnseignantComponent,
     pathMatch: 'full',
-    //name: 'login';
-    //useAsDefault:true
   },
   {
     path:'accueil-enseignant',
@@ -39,45 +35,30 @@ const appRoutes: Routes=[
         pathMatch: 'full'
        },]
   },
- /* {
-     path: '**', 
-     redirectTo: '',
-     pathMatch: 'full',
-  },*/
  {
     path: 'Login', 
     component: LoginEnseignantComponent 
   },
-  
   {
     path: 'profil-enseignant',
     component:  ProfilEnseignantComponent
 },
-
   {
     path: 'detailEntreprise/:id', 
     component:  PageDetailEntrepriseComponent
-  },
- 
-  
-]
+  },]
 
 
 @NgModule({
   imports:      [ BrowserModule, FormsModule,HttpModule,  RouterModule.forRoot(appRoutes) ],
-  exports: [MatDialogModule],
   declarations: [ AppComponent,
                   LoginEnseignantComponent,
-                  ConfirmationDialog,
                   pageAccueilEnseignantComponent,
                   PageRechercheEtudiantComponent,
                   PageDetailEntrepriseComponent,
                   pageRechercheEntrepriseComponent,
                   ProfilEnseignantComponent],
   bootstrap: [AppComponent],
-  entryComponents: [ConfirmationDialog]
 })
-
-
 
 export class AppModule { }

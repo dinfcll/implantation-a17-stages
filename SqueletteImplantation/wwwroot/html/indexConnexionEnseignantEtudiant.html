@@ -1,41 +1,20 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Accueil</title>
-    
+      <title>Portail de connexion</title>
   </head>
-
   <body>
-        <img class="img_fond" src="images/bg.jpg">
-        <div class="container">
-                
-                
-                    
-                        
-                        <p id="etu">Étudiants</p>
-                        
-                             <input type="text"  placeholder="saisir votre DA" id="DA" name="noDA">
-                        
-
-                        
-                              <input type="password" placeholder="Saisir votre mot de passe" id="MdpDA" name="mdpEtu">
-                              <input type="submit" name="btnConnecEtu" value="Connexion" id="btn1"onclick="ConnexionEtudiant(this.form)">
-
-                        <hr id="trait">
-                        <p id="pro">Enseignants</p>
-                               <input type="text" placeholder="Votre courriel ou votre numéro d'employé" id="Prof" name="Courriel" [(ngModel)]="courriel" >
-                       
-                               <input type="password" placeholder="Saisir votre mot de passe" id="MdpProf" name="mdpProf" [(ngModel)]="mdp" >
-                                <button (click)="Connexion(courriel, mdp)"  id="btn2"  >Connexion</button>
-                                <p *ngIf="!isValid" id="alert">Courriel ou mot de passe invalide!!!</p>
-                                
-                           
-                
-                
-      </div>      
-            
-        
-</body>
-         
-
+    <img class="img_fond" src="images/bg.jpg">
+    <form class="container">                       
+        <p id="etu">Étudiants</p>
+        <input type="text"  placeholder="saisir votre DA" id="DA" name="noDA">
+        <input type="password" placeholder="Saisir votre mot de passe" id="MdpDA" name="mdpEtu">
+        <input type="submit" name="btnConnecEtu" value="Connexion" id="btn1"onclick="ConnexionEtudiant(this.form)">
+        <hr id="trait">
+        <p id="pro">Enseignants</p>
+        <input type="text" placeholder="Votre courriel ou votre numéro d'employé" id="Prof" name="Courriel" [(ngModel)]="courriel" >
+        <input type="password" placeholder="Saisir votre mot de passe" id="MdpProf" name="mdpProf" [(ngModel)]="mdp" >
+        <button (click)="Connexion(courriel, mdp)"  id="btn2"  >Connexion</button>>
+    </form>      
+  </body>         
 </html>
