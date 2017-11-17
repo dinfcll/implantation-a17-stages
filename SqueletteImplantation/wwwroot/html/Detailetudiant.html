@@ -29,9 +29,9 @@
         <label for="inputannee" class="col-sm-2 col-xs-2 col-lg-2 col-md-2 col-form-label" id="labelannee">Annee :</label>
         <input  class="col-sm-6 col-xs-6 col-lg-6 col-md-6" id="inputannee" type="text" [(ngModel)]="etudiant.annee" placeholder="Annee" />
     </div>
-    <div class="form-group row">
+    <div *ngIf="PageAjouter == true"  class="form-group row">
         <label for="inputMotpasse" class="col-sm-2 col-xs-2 col-lg-2 col-md-2 col-form-label" id="labelMotpasse">Mot de passe:</label>
-        <input class="col-sm-6 col-xs-6 col-lg-6 col-md-6" id="inputMotpasse" type="text" [(ngModel)]="etudiant.motPasse" placeholder="etudiant"/>
+        <input class="col-sm-6 col-xs-6 col-lg-6 col-md-6" id="inputMotpasse" type="text" [(ngModel)]="etudiant.motPasse" value="etudiant" placeholder="etudiant" disabled/>
     </div>
 
     <div class="form-group row">
@@ -57,7 +57,7 @@
  
             
   
-<div *ngIf="PageModifier == false">
+<div *ngIf="PageModifier == false && PageAjouter == false">
          <div class="form-group row">
                 <label for="inputcompagnie" class="col-sm-2 col-xs-2 col-lg-2 col-md-2 col-form-label" id="labelcompagnie">compagnie:</label>
                 <input class="col-sm-6 col-xs-6 col-lg-6 col-md-6" id="inputcompagnie" type="text" [(ngModel)]="entreprise.nomentreprise" placeholder="profil"/>

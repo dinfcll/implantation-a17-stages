@@ -55,8 +55,7 @@ export class PageDetailEtudiantComponent  {
         if (this.ID != -1) {
             this.getEtudiantParNoEnt(this.ID);
             this.getListeEnseignantParEtudiant(this.ID);
-           // this.getListeEnseignant();
-           // this.getListeNomEntreprise();
+           
             this.TabCheckedNomEns=[];
         }
         else
@@ -72,7 +71,7 @@ export class PageDetailEtudiantComponent  {
      //Récupère l'etudiant choisie par le NoDA
      getEtudiantParNoEnt(NoDA: number)
      {
-      // this.PageAjouter = false;
+      
        let url: string;
        url = "api/EtudiantParNoDa/"+NoDA;
        this.http.get(url).subscribe(donnees =>
@@ -108,7 +107,7 @@ export class PageDetailEtudiantComponent  {
     getEntrepriseParNoEnt(NoEnt: number)
     {
         
-     // this.PageAjouter = false;
+     
       let url: string;
       url = "api/Entreprise/"+NoEnt;
       this.http.get(url).subscribe(donnees =>
@@ -123,7 +122,7 @@ export class PageDetailEtudiantComponent  {
     getListeNomEntreprise()
     {
         
-     // this.PageAjouter = false;
+     
       let url: string;
       url = "api/Etudiant/RemplirComboEntreprise";
       this.http.get(url).subscribe(donnees =>
@@ -160,7 +159,7 @@ export class PageDetailEtudiantComponent  {
                     }
                     
                
-              // this.selectedItemsAsupprimer=[];
+              
             }
          
          });
@@ -429,19 +428,13 @@ export class PageDetailEtudiantComponent  {
           validationChampSaisi(): boolean
           {
              
-              let tab: string[] = [
-                  this.etudiant.noDa.toString(),
-                  this.etudiant.nom,
-                  this.etudiant.prenom,
-                  this.etudiant.addresseCourriel,
-                  this.etudiant.noTel,
-                  this.etudiant.profil,
-                  this.etudiant.annee];
+              
              
-              if (tab[0].toString().length == 0 || this.etudiant.nom === "" || 
+              if (this.etudiant.noDa.toString().length == 0 || this.etudiant.nom === "" || 
                 this.etudiant.prenom === "" || this.etudiant.addresseCourriel === ""
                   ||  this.etudiant.noTel === "" || this.etudiant.profil === "" ||
-                  this.etudiant.annee ==="" || this.etudiant.annee.length != 4 || isNaN(this.etudiant.noDa))
+                  this.etudiant.annee ==="" || this.etudiant.annee.length != 4 || isNaN(this.etudiant.noDa)
+                  || isNaN(+this.etudiant.annee))
                   {
                   return false;
                   }
@@ -465,10 +458,7 @@ export class PageDetailEtudiantComponent  {
               {
                   this.service.changeFlag(false);
               }
-            /*  PageInfo():void
-              {
-                  this.service.changeFlag(false);
-              }*/
+            
 
 
 
