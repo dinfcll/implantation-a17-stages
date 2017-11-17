@@ -10,9 +10,7 @@ namespace SqueletteImplantation.DbEntities
         public virtual DbSet<Entreprise> Entreprise {get; set;}
         public virtual DbSet<RelEnseignantEtudiant> RelEnseignantEtudiant { get; set; }
         public virtual DbSet<RelEnseignantEntreprise> RelEnseignantEntreprise { get; set; }
-
         public virtual DbSet<Etudiant> Etudiant { get; set; }
-        
         public MaBd(DbContextOptions options) : base(options)
         {
         }
@@ -42,7 +40,7 @@ namespace SqueletteImplantation.DbEntities
 
             modelBuilder.Entity<RelEnseignantEtudiant>()
                  .HasOne(m => m.etudiant)
-                 .WithMany(m => m.RelEnseignantEtudiant)
+                 .WithMany(m => m.RelEnseignantEtudiants)
                  .HasForeignKey(m => m.NoDa)
                  .HasConstraintName("fk_Etudiant_relEnseignantEtudiant");
 

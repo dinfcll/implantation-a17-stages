@@ -85,9 +85,7 @@ namespace squeletteimplantation.Migrations
                     b.Property<string>("Annee")
                         .IsRequired();
 
-                    b.Property<int?>("EntrepriseId");
-
-                    b.Property<int>("Id");
+                    b.Property<int?>("Id");
 
                     b.Property<string>("MotPasse")
                         .IsRequired();
@@ -106,21 +104,6 @@ namespace squeletteimplantation.Migrations
                     b.HasIndex("Id");
 
                     b.ToTable("Etudiant");
-                });
-
-            modelBuilder.Entity("SqueletteImplantation.DbEntities.Models.Machin", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("NombreMagique");
-
-                    b.Property<string>("Truc")
-                        .IsRequired();
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Machin");
                 });
 
             modelBuilder.Entity("SqueletteImplantation.DbEntities.Models.RelEnseignantEntreprise", b =>
@@ -154,8 +137,7 @@ namespace squeletteimplantation.Migrations
                     b.HasOne("SqueletteImplantation.DbEntities.Models.Entreprise", "entreprise")
                         .WithMany("Etudiants")
                         .HasForeignKey("Id")
-                        .HasConstraintName("fk_Entreprise_Etudiant")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasConstraintName("fk_Entreprise_Etudiant");
                 });
 
             modelBuilder.Entity("SqueletteImplantation.DbEntities.Models.RelEnseignantEntreprise", b =>
@@ -176,7 +158,7 @@ namespace squeletteimplantation.Migrations
             modelBuilder.Entity("SqueletteImplantation.DbEntities.Models.RelEnseignantEtudiant", b =>
                 {
                     b.HasOne("SqueletteImplantation.DbEntities.Models.Etudiant", "etudiant")
-                        .WithMany("RelEnseignantEtudiant")
+                        .WithMany("RelEnseignantEtudiants")
                         .HasForeignKey("NoDa")
                         .HasConstraintName("fk_Etudiant_relEnseignantEtudiant")
                         .OnDelete(DeleteBehavior.Cascade);
