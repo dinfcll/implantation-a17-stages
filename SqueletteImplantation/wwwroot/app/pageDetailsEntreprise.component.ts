@@ -32,7 +32,7 @@ export class PageDetailEntrepriseComponent  {
         }
 
     }
-    //Récupère l'entreprise choisie par l'ID
+    
     getEntrepriseParNoEnt(NoEnt: number)
     {
       this.PageAjouter = false;
@@ -44,7 +44,7 @@ export class PageDetailEntrepriseComponent  {
          });
     
     }
-    //Récupère l'ID de l'entreprise choisie
+    
     DetectionPageID (): number 
     {
         let CheminLong: string = this.router.url.toString();
@@ -54,8 +54,9 @@ export class PageDetailEntrepriseComponent  {
         Page = CheminLong.split('/');
         idStr=Page[Page.length-1]
         id = +idStr;
-        if (id == -1)
+        if (id == -1) {
             this.PageAjouter = true;
+        }
         return id;
     }
 
@@ -109,10 +110,10 @@ export class PageDetailEntrepriseComponent  {
         this.location.back();
     }
 
-//Valide si chaque champ est valide
+
     validation(): boolean
     {
-        console.log(this.entrepriseAjouter);
+       
         let tab: number[] = [
             this.entrepriseAjouter.nbreconfirmation,
             this.entrepriseAjouter.nbrenon,
@@ -134,6 +135,7 @@ export class PageDetailEntrepriseComponent  {
             return false;
 
         return true;
+<<<<<<< HEAD
     }
 //Messages d'erreurs/succès
       jBoxMessage(couleur: string, message: string) {
@@ -144,5 +146,18 @@ export class PageDetailEntrepriseComponent  {
               autoClose: 5000
           });
       }
+=======
+  }
+
+  jBoxMessage(couleur: string, message: string) {
+
+      new jBox('Notice', {
+          content: message,
+          color: couleur,
+          autoClose: 5000
+      });
+  }
+
+>>>>>>> master
 
 }

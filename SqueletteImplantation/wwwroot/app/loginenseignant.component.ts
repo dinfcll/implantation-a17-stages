@@ -5,8 +5,6 @@ import { Http, Headers } from '@angular/http';
 
 import { Enseignant } from './models/enseignant.class';
 
-import { Machin } from './models/machin.class';
-
 import {  Router }   from '@angular/router';
 
 import 'rxjs/add/operator/map'
