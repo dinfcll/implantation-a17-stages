@@ -53,10 +53,11 @@ namespace SqueletteTests
         [Fact]
         public void RetourListeAnneeUnique()
         {
-            ent.Id = 1;
+           ent.date = "2018";
             _entreprisecontroller.Enregistrementbd(ent);
-            var _vartest = (IEnumerable<string>)_entreprisecontroller.ListeAnnees();
-            Assert.Equal(1, _vartest.Count());
+            var objetok = _entreprisecontroller.ListeAnnees() as OkObjectResult;
+            var resultat = objetok.Value;
+            Assert.NotNull(resultat);
         }
         [Fact]
         public void RechercheAnneee()
@@ -66,8 +67,9 @@ namespace SqueletteTests
             _entreprisecontroller.Enregistrementbd(ent);
             ent.Id = 3;
             _entreprisecontroller.Enregistrementbd(ent);
-            var result = (IEnumerable<Entreprise>)_entreprisecontroller.EntrepriseRechercheAnnee("1997");
-            Assert.Equal(2, (result).Count());
+            var okObject = _entreprisecontroller.EntrepriseRechercheAnnee("1997") as OkObjectResult;
+            var Liste = okObject.Value;
+            Assert.NotNull(Liste);
         }
     }
 }

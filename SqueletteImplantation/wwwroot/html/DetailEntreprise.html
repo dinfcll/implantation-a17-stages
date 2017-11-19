@@ -5,13 +5,7 @@
            <label id="labelnom">Nom de l'entreprise:</label>
             <input id="inputnom" type="text" [(ngModel)]="entrepriseAjouter.nomentreprise" placeholder="name"/>
         
-         
-       
-            <label id="labelannee">Annee :</label>
-            <input id="inputannee" type="text" [(ngModel)]="entrepriseAjouter.date" placeholder="name" />
-        
-        
-            <label id="labellieu">Lieu:</label>
+            <label id="labellieu">Adresse:</label>
             <input id="inputlieu" type="text" [(ngModel)]="entrepriseAjouter.lieu" placeholder="name"/>
         
         
@@ -63,17 +57,12 @@
                 </table>
              
         <div *ngIf="PageAjouter == false">
-            <a  class="btn icon-btn btn-primary" id="Modifier" (click)="Modifier()"><li><i class="fa fa-pencil fa-fw"></i>Modifier</a>
-                
-                <a data-confirm="Do you really want to leave this page?" class="btn icon-btn btn-danger" id="Supprimer" (click)="Supprimer(); myFunction();"><span class="glyphicon btn-glyphicon glyphicon-trash img-circle text-danger"></span>Supprimer</a>
-
+            <a  class="btn icon-btn btn-primary" id="Modifier" (click)="Modifier()"><i class="fa fa-pencil fa-fw"></i>Modifier</a>
         </div>
+
         <a class="btn icon-btn btn-success" *ngIf="PageAjouter == true"(click)="Ajouter()" id="btnA"> 
-            <span class="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"></span>
-        Ajouter 
-    </a>
+            <span class="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"></span>Sauvegarder</a>
        
    
-    <a class="btn icon-btn btn-warning"  id="retour" (click)="goBack()"><li><i class="fa fa-arrow-left" aria-hidden="true"></i> Retour </a>
-    
+    <a class="btn icon-btn btn-warning"  id="retour" (click)="goBack()"><li><i class="fa fa-arrow-left" aria-hidden="true"></i>Retour</a> 
 </div>

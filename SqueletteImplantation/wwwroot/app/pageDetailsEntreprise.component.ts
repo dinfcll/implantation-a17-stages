@@ -70,43 +70,37 @@ export class PageDetailEntrepriseComponent  {
         {          
             this.http.put("api/entreprise/Modifier", this.entrepriseAjouter).subscribe(donne =>
             {
-                    if (donne.status !== 200)
-                    {
-                        this.jBoxMessage("red", "Erreur lors de la modification de l'entreprise.");
-                    }
-                    else
-                        this.jBoxMessage("green","Modification effectuée avec succès!");
+                if (donne.status !== 200) {
+                    this.jBoxMessage("red", "Erreur lors de la modification de l'entreprise.");
+                }
+                else
+                {
+                    this.jBoxMessage("green", "Modification effectuée avec succès!");
+                }
+                        
             });
         }  
     }
 
-    Supprimer(): void {
-
-        this.http.delete("api/entreprise/Supprimer/" + this.DetectionPageID()).subscribe(donne =>
-        {
-            if (donne.status !== 200)
-            {
-                this.jBoxMessage("red", "Erreur lors de la suppression de l'entreprise.")
-            }
-            else
-            this.jBoxMessage("green", "Supression effectuée avec succès!");
-        });
-    }
 
     Ajouter()
     {
-        this.validation();
-        console.log()
+        this.entrepriseAjouter.date = (new Date()).getFullYear().toString();
         if(!this.validation())
         {
             this.jBoxMessage("red", "Attention!!! Vous avez saisi un caractère non valide dans statistique de confirmation.");
         }
         else
            {
-                this.PageAjouter = true;
                 this.http.post("api/Entreprise/Ajouter", this.entrepriseAjouter).subscribe(Result =>
                 {
-                    this.jBoxMessage("green", "Entreprise ajoutée!");
+                    if (Result.status == 200) {
+                        this.jBoxMessage("green", "Entreprise ajoutée!");
+                    }
+                    else
+                    {
+                        this.jBoxMessage("red", "Erreur lors de l'ajout de l'entreprise");
+                    }
                 });
             }
     }
@@ -141,6 +135,18 @@ export class PageDetailEntrepriseComponent  {
             return false;
 
         return true;
+<<<<<<< HEAD
+    }
+//Messages d'erreurs/succès
+      jBoxMessage(couleur: string, message: string) {
+
+          new jBox('Notice', {
+              content: message,
+              color: couleur,
+              autoClose: 5000
+          });
+      }
+=======
   }
 
   jBoxMessage(couleur: string, message: string) {
@@ -152,5 +158,6 @@ export class PageDetailEntrepriseComponent  {
       });
   }
 
+>>>>>>> master
 
 }

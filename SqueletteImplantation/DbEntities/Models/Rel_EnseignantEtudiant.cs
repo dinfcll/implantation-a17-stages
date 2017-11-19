@@ -9,9 +9,9 @@ namespace SqueletteImplantation.DbEntities.Models
     {
         // Clé étrangère Étudiant
         public int NoDa { get; set; }
-        public Etudiant Etudiant { get; set; }
+        public Etudiant etudiant { get; set; }
         //Clé étrangère Enseignant
         public int NoEnseignant { get; set; }
-        public Enseignant Enseignant { get; set; }
+        public Enseignant enseignant { get; set; }
     }
 }

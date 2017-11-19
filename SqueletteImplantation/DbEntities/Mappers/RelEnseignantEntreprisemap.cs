@@ -10,19 +10,8 @@ namespace SqueletteImplantation.DbEntities.Mappers
     {
         public RelEnseignantEntreprisemap(EntityTypeBuilder<RelEnseignantEntreprise> entityBuilder)
         {
-           entityBuilder
-            .HasKey(ee=>new {ee.NoEntreprise,ee.NoEnseignant});
-
-            //Clé étrangère NoEnseignant
-            entityBuilder
-            .HasOne(ee => ee.Enseignant)
-            .WithMany(b => b.RelEnseignantEntreprises)
-            .HasForeignKey(bc => bc.NoEnseignant);
-            //Clé étrangère NoEntreprise
-            entityBuilder
-            .HasOne(ee=>ee.Entreprise)
-            .WithMany(ee=>ee.relenseignantentreprises)
-            .HasForeignKey(ee=>ee.NoEntreprise);
+            entityBuilder.Property(m => m.NoEnseignant).IsRequired();
+            entityBuilder.Property(m => m.Id).IsRequired();
         }
     }
 }

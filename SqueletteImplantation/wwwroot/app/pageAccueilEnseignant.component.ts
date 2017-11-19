@@ -22,7 +22,6 @@ export class pageAccueilEnseignantComponent
   
     constructor(private http: Http, private router: Router)
     {
-       
     }
     
 

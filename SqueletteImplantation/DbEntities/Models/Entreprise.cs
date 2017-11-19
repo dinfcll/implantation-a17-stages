@@ -9,7 +9,6 @@ namespace SqueletteImplantation.DbEntities.Models
 {
     public class Entreprise
     {
-
         public string nomentreprise { get; set; }
         public string lieu { get; set; }
         public string notel { get; set; }
@@ -22,12 +21,9 @@ namespace SqueletteImplantation.DbEntities.Models
         public int nbreoui { get; set; }
         public string date { get; set; }
         public string courrielres {get; set;}
-        public ICollection<Etudiant>etudiants;
-        public ICollection<RelEnseignantEntreprise>relenseignantentreprises{get;set;}
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-        // ajouter du sel *
+        public List<RelEnseignantEntreprise>relenseignantentreprises{get;set;}
+        public int? Id { get; set; }
+        public List<Etudiant> Etudiants { get; set; }
 
     }
 }

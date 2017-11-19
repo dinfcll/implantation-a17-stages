@@ -8,9 +8,10 @@ using SqueletteImplantation.DbEntities;
 namespace squeletteimplantation.Migrations
 {
     [DbContext(typeof(MaBd))]
-    partial class MaBdModelSnapshot : ModelSnapshot
+    [Migration("20171102005842_Foreign_Keys_termines")]
+    partial class Foreign_Keys_termines
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
@@ -40,7 +41,7 @@ namespace squeletteimplantation.Migrations
 
             modelBuilder.Entity("SqueletteImplantation.DbEntities.Models.Entreprise", b =>
                 {
-                    b.Property<int?>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("courrielres");
@@ -82,10 +83,7 @@ namespace squeletteimplantation.Migrations
 
                     b.Property<string>("AddresseCourriel");
 
-                    b.Property<string>("Annee")
-                        .IsRequired();
-
-                    b.Property<int?>("Id");
+                    b.Property<int>("Id");
 
                     b.Property<string>("MotPasse")
                         .IsRequired();
@@ -96,9 +94,6 @@ namespace squeletteimplantation.Migrations
 
                     b.Property<string>("Prenom");
 
-                    b.Property<string>("Profil")
-                        .IsRequired();
-
                     b.HasKey("NoDa");
 
                     b.HasIndex("Id");
@@ -106,13 +101,28 @@ namespace squeletteimplantation.Migrations
                     b.ToTable("Etudiant");
                 });
 
+            modelBuilder.Entity("SqueletteImplantation.DbEntities.Models.Machin", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("NombreMagique");
+
+                    b.Property<string>("Truc")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Machin");
+                });
+
             modelBuilder.Entity("SqueletteImplantation.DbEntities.Models.RelEnseignantEntreprise", b =>
                 {
-                    b.Property<int>("Id");
+                    b.Property<int>("NoEntreprise");
 
                     b.Property<int>("NoEnseignant");
 
-                    b.HasKey("Id", "NoEnseignant");
+                    b.HasKey("NoEntreprise", "NoEnseignant");
 
                     b.HasIndex("NoEnseignant");
 
@@ -137,28 +147,29 @@ namespace squeletteimplantation.Migrations
                     b.HasOne("SqueletteImplantation.DbEntities.Models.Entreprise", "entreprise")
                         .WithMany("Etudiants")
                         .HasForeignKey("Id")
-                        .HasConstraintName("fk_Entreprise_Etudiant");
+                        .HasConstraintName("fk_Entreprise_Etudiant")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("SqueletteImplantation.DbEntities.Models.RelEnseignantEntreprise", b =>
                 {
-                    b.HasOne("SqueletteImplantation.DbEntities.Models.Entreprise", "entreprise")
-                        .WithMany("relenseignantentreprises")
-                        .HasForeignKey("Id")
-                        .HasConstraintName("fk_Entreprise_relEnseignantEtudiant")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("SqueletteImplantation.DbEntities.Models.Enseignant", "enseignant")
                         .WithMany("RelEnseignantEntreprises")
                         .HasForeignKey("NoEnseignant")
                         .HasConstraintName("fk_Enseignant_relEnseignantEntreprise")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("SqueletteImplantation.DbEntities.Models.Entreprise", "entreprise")
+                        .WithMany("relenseignantentreprises")
+                        .HasForeignKey("NoEntreprise")
+                        .HasConstraintName("fk_Entreprise_relEnseignantEtudiant")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("SqueletteImplantation.DbEntities.Models.RelEnseignantEtudiant", b =>
                 {
                     b.HasOne("SqueletteImplantation.DbEntities.Models.Etudiant", "etudiant")
-                        .WithMany("RelEnseignantEtudiants")
+                        .WithMany("RelEnseignantEtudiant")
                         .HasForeignKey("NoDa")
                         .HasConstraintName("fk_Etudiant_relEnseignantEtudiant")
                         .OnDelete(DeleteBehavior.Cascade);
