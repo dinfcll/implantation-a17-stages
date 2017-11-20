@@ -22,18 +22,6 @@ namespace squeletteimplantation.Migrations
                 nullable: true,
                 oldClrType: typeof(int));
 
-            migrationBuilder.AddColumn<string>(
-                name: "Annee",
-                table: "Etudiant",
-                nullable: false,
-                defaultValue: "");
-
-            migrationBuilder.AddColumn<string>(
-                name: "Profil",
-                table: "Etudiant",
-                nullable: false,
-                defaultValue: "");
-
             migrationBuilder.AddForeignKey(
                 name: "fk_Entreprise_Etudiant",
                 table: "Etudiant",
@@ -47,14 +35,6 @@ namespace squeletteimplantation.Migrations
         {
             migrationBuilder.DropForeignKey(
                 name: "fk_Entreprise_Etudiant",
-                table: "Etudiant");
-
-            migrationBuilder.DropColumn(
-                name: "Annee",
-                table: "Etudiant");
-
-            migrationBuilder.DropColumn(
-                name: "Profil",
                 table: "Etudiant");
 
             migrationBuilder.AlterColumn<int>(
