@@ -60,7 +60,7 @@ namespace SqueletteImplantation.Controllers
                        b.nbrenon,
                        b.nbreoui,
                        b.courrielres,
-                       b.date
+                       b.date,
                        b.Id
                    };
         }
