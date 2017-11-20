@@ -1,28 +1,58 @@
 import { Http } from '@angular/http';
 import { Entreprise } from './models/entreprise.class';
-import { Component } from '@angular/core';
+
 import { Router, RouterModule, Routes } from '@angular/router';
 declare var jBox: any;
 
+import { Component,ElementRef} from '@angular/core';
+
+
+
+
+
+
 @Component({
     selector: 'recherche_entreprise',
+    host: {
+        '(document:click)': 'verifClickDansComposant($event)',
+    },
     templateUrl: `./../html/RechercheEntreprise.html`,
     styleUrls: [`./../css/accueil_enseignant.css`],
 })
 
-export class pageRechercheEntrepriseComponent
+export class pageRechercheEntrepriseComponent 
 {
     entreprises: Entreprise[];
     AnneeRecherche: string;
     AnneeCourante: string;
     Recherche: string;
     TAnnees: string[];
-    constructor(private http: Http, private router: Router)
+    filteredList:any[];
+    Tnomentreprise:string[];
+    
+     
+    annees: string;
+   
+    Tentreprise: string[];
+    constructor(private elementRef: ElementRef,private http: Http, private router: Router)
     {
+        this.Tentreprise=[];
+        this.Tnomentreprise=[];
+        this.entreprises=[];
+        this.TAnnees=[];
         this.AnneeCourante = (new Date()).getFullYear().toString();
         this.AnneeRecherche = "";
+    
+   
+        this.filteredList=[];
+       
+        this.annees = "";
         this.Recherche = "";
+        this.getEntreprise("","");
         this.RemplirCombo();
+        this.getListeNomEntreprise();
+        
+        
     }
     
     RemplirCombo() {
@@ -120,4 +150,64 @@ export class pageRechercheEntrepriseComponent
                 autoClose: 5000
         });
     }   
-}
+
+      
+
+
+          //obtenir la liste des nom d entreprise pour le dropdown
+     getListeNomEntreprise()
+     {
+         
+      // this.PageAjouter = false;
+       let url: string;
+       url = "api/Etudiant/RemplirComboEntreprise";
+       this.http.get(url).subscribe(donnees =>
+          {
+           this.Tnomentreprise = donnees.json() as string[];
+          
+          });
+          
+        
+     }
+    filter() {
+        if (this.Recherche !== ""){
+            this.filteredList = this.Tnomentreprise.filter(function(el:any){
+                return el.toLowerCase().indexOf(this.Recherche.toLowerCase()) > -1;
+            }.bind(this));
+        }else{
+            this.filteredList = [];
+        }
+    }
+     
+    select(item: any){
+        this.Recherche = item;
+        this.filteredList = [];
+       
+    }
+
+
+
+
+    verifClickDansComposant(event: any){
+        var clickedComponent = event.target;
+        var inside = false;
+        do {
+            if (clickedComponent === this.elementRef.nativeElement) {
+                inside = true;
+            }
+           clickedComponent = clickedComponent.parentNode;
+        } while (clickedComponent);
+         if(!inside){
+             this.filteredList = [];
+         }
+     }
+    
+
+
+    }
+
+     
+
+   
+     
+//}

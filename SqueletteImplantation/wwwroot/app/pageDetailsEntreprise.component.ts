@@ -10,7 +10,7 @@ import { Entreprise } from './models/entreprise.class';
 @Component({
   selector: 'detail-entreprise',
   templateUrl: `./../html/DetailEntreprise.html`,
-  styleUrls:[`./../css/detail_entreprise.css`],
+  styleUrls:[`./../css/detail_entreprise_etudiant.css`],
 
 
 })
@@ -108,6 +108,7 @@ export class PageDetailEntrepriseComponent  {
     goBack(): void
     {
         this.location.back();
+        
     }
 
 

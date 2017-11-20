@@ -1,14 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var Etudiant = (function () {
-    function Etudiant(NoDa, Nom, Prenom, AddresseCourriel, MotPasse, NoTel, NoEntreprise) {
-        this.NoDa = NoDa;
-        this.Nom = Nom;
-        this.Prenom = Prenom;
-        this.AddresseCourriel = AddresseCourriel;
-        this.MotPasse = MotPasse;
-        this.NoTel = NoTel;
-        this.NoEntreprise = NoEntreprise;
+    function Etudiant(noDa, nom, prenom, addresseCourriel, annee, profil, motPasse, noTel, id) {
+        this.noDa = noDa;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.addresseCourriel = addresseCourriel;
+        this.annee = annee;
+        this.profil = profil;
+        this.motPasse = motPasse;
+        this.noTel = noTel;
+        this.id = id;
     }
     return Etudiant;
 }());

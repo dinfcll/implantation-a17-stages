@@ -7,10 +7,7 @@ namespace SqueletteImplantation.DbEntities.DTOs
         public string Courriel { get; set; }
         public string MotDePasse { get; set; }
 
-        /*public Enseignant CreateEnseignant()
-        {
-            return new Enseignant { Email = Email, MotDePasse = MotDePasse };
-        }*/
+       
         public Enseignant Enseignant()
         {
             return new Enseignant {Courriel=Courriel, MotDePasse=MotDePasse };

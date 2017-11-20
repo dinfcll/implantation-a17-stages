@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var Enseignant = (function () {
-    function Enseignant(NoProfesseur, NomUti, Nom, Prenom, Courriel, MotDePasse) {
-        this.NoProfesseur = NoProfesseur;
-        this.NomUti = NomUti;
-        this.Nom = Nom;
-        this.Prenom = Prenom;
-        this.Courriel = Courriel;
-        this.MotDePasse = MotDePasse;
+    function Enseignant(noEnseignant, nomUti, nom, prenom, courriel, motDePasse) {
+        this.noEnseignant = noEnseignant;
+        this.nomUti = nomUti;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.courriel = courriel;
+        this.motDePasse = motDePasse;
     }
     return Enseignant;
 }());

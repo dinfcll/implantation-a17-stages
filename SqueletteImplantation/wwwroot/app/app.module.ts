@@ -11,6 +11,10 @@ import { PageDetailEntrepriseComponent } from "./pageDetailsEntreprise.component
 import { pageRechercheEntrepriseComponent } from "./pageRechercheEnreprise.component";
 import { ProfilEnseignantComponent } from "./profilenseignant.component";
 
+
+
+import {PageDetailEtudiantComponent} from "./pageDetailEtudiant.component";
+import {AppService} from "./app.service";
 const appRoutes: Routes=[
   {
     path:'',
@@ -46,7 +50,16 @@ const appRoutes: Routes=[
   {
     path: 'detailEntreprise/:id', 
     component:  PageDetailEntrepriseComponent
-  },]
+  },
+  
+  
+    {
+      path: 'detailEtudiant/:noDa', 
+      component:  PageDetailEtudiantComponent
+    },
+ 
+  
+]
 
 
 @NgModule({
@@ -57,8 +70,11 @@ const appRoutes: Routes=[
                   PageRechercheEtudiantComponent,
                   PageDetailEntrepriseComponent,
                   pageRechercheEntrepriseComponent,
-                  ProfilEnseignantComponent],
-  bootstrap: [AppComponent],
+                  ProfilEnseignantComponent,
+                  PageDetailEtudiantComponent ],
+   
+  bootstrap:    [ AppComponent ],
+  providers:[AppService]
 })
 
 export class AppModule { }

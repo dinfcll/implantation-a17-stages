@@ -1,0 +1,130 @@
+<div class="container" id="principal">
+ <div class="jumbotron scroll-area">
+    <div *ngIf="PageModifier == true" class="form-group row">  
+        <h3 class="col-sm-12 col-xs-12 col-lg-12 col-md-12 col-form-label"> Mise à jour des informations de l'étudiant {{etudiant.prenom}} {{etudiant.nom}}</h3>     
+     </div>
+
+     <div *ngIf="PageAjouter == true" class="form-group row">  
+            <h3 class="col-sm-12 col-xs-12 col-lg-12 col-md-12 col-form-label"> Ajouter un étudiant</h3>     
+            <label for="inputnoda" class="col-sm-2 col-xs-2 col-lg-2 col-md-2 col-form-label" id="labelnom">Numero de DA:</label>
+            
+             <input class="col-sm-6 col-xs-6 col-lg-6 col-md-6"  id="inputnoda" type="text" [(ngModel)]="etudiant.noDa" placeholder="numero de DA"/>
+    
+     </div>
+    <div *ngIf="PageModifier == false && PageAjouter == false" class="form-group row">  
+            <h3 class="col-sm-12 col-xs-12 col-lg-12 col-md-12 col-form-label"> informations de l'étudiant {{etudiant.prenom}} {{etudiant.nom}}</h3>     
+    </div>
+
+     <div class="form-group row">  
+       <label for="inputnom" class="col-sm-2 col-xs-2 col-lg-2 col-md-2 col-form-label" id="labelnom">Nom de l'étudiant:</label>
+       
+        <input class="col-sm-6 col-xs-6 col-lg-6 col-md-6"  id="inputnom" type="text" [(ngModel)]="etudiant.nom" placeholder="nom"/>
+     </div>
+     <div class="form-group row">
+        <label for="inputprenom" class="col-sm-2 col-xs-2 col-lg-2 col-md-2 col col-form-label" id="labelprenom">Prénom de l'étudiant:</label>
+        <input class="col-sm-6 col-xs-6 col-lg-6 col-md-6" id="inputprenom" type="text" [(ngModel)]="etudiant.prenom" placeholder="prénom"/>
+     </div>
+
+     <div class="form-group row">
+        <label for="inputannee" class="col-sm-2 col-xs-2 col-lg-2 col-md-2 col-form-label" id="labelannee">Annee :</label>
+        <input  class="col-sm-6 col-xs-6 col-lg-6 col-md-6" id="inputannee" type="text" [(ngModel)]="etudiant.annee" placeholder="Annee" />
+    </div>
+    <div *ngIf="PageAjouter == true"  class="form-group row">
+        <label for="inputMotpasse" class="col-sm-2 col-xs-2 col-lg-2 col-md-2 col-form-label" id="labelMotpasse">Mot de passe:</label>
+        <input class="col-sm-6 col-xs-6 col-lg-6 col-md-6" id="inputMotpasse" type="text" [(ngModel)]="etudiant.motPasse" value="etudiant" placeholder="etudiant" disabled/>
+    </div>
+
+    <div class="form-group row">
+        <label for="inputCourriel" class="col-sm-2 col-xs-2 col-lg-2 col-md-2 col-form-label" id="labelCourriel">Courriel:</label>
+        <input class="col-sm-6 col-xs-6 col-lg-6 col-md-6" id="inputCourriel" type="text" [(ngModel)]="etudiant. addresseCourriel" placeholder="Courriel"  />
+    </div>
+    
+    <div class="form-group row">
+        <label for="inputNoTel" class="col-sm-2 col-xs-2 col-lg-2 col-md-2 col-form-label" id="labelNoTel">Numero de telephone :</label>
+        <input class="col-sm-6 col-xs-6 col-lg-6 col-md-6" id="inputNoTel" type="text" [(ngModel)]="etudiant.noTel" placeholder="numéro de téléphone"/>
+    </div>
+ 
+    <div class="form-group row">
+        <label for="inputProfil" class="col-sm-2 col-xs-2 col-lg-2 col-md-2 col-form-label" id="labelProfil">Profil:</label>
+        <input class="col-sm-6 col-xs-6 col-lg-6 col-md-6" id="inputProfil" type="text" [(ngModel)]="etudiant.profil" placeholder="profil"/>
+    </div>
+  
+  
+ 
+   
+    
+  
+ 
+            
+  
+<div *ngIf="PageModifier == false && PageAjouter == false">
+         <div class="form-group row">
+                <label for="inputcompagnie" class="col-sm-2 col-xs-2 col-lg-2 col-md-2 col-form-label" id="labelcompagnie">compagnie:</label>
+                <input class="col-sm-6 col-xs-6 col-lg-6 col-md-6" id="inputcompagnie" type="text" [(ngModel)]="entreprise.nomentreprise" placeholder="profil"/>
+        </div>   
+                
+        <div class="form-group row">
+
+                 <label for="listeens" class="col-sm-2 col-xs-2 col-lg-2 col-md-2 col-form-label" id="labelenseignantencharge">enseignant(s) en charge:</label>
+         </div>     
+         <div class="form-group row">    
+                 <ul *ngFor="let enseignant of enseignants" id="listeens" class="list-group">
+                        
+                                <li > {{enseignant.nom}}</li>
+                        </ul> 
+        </div>          
+
+</div>
+   
+    <div *ngIf="PageModifier == true || PageAjouter == true">
+                <div class="form-group row"> 
+                        <label for="noment" class="col-sm-2 col-xs-2 col-lg-2 col-md-2 col-form-label" id="labelcompagnie">compagnie:</label>
+                        <select [(ngModel)]="entreprise.nomentreprise" class="custom-select" id="noment">
+                                <option selected></option>
+                                <option *ngFor=" let value of Tnomentreprise">
+                                        {{value}}
+                                </option>
+                        </select>
+                </div>
+    </div>  
+    <div *ngIf="PageModifier == true">        
+                        <label  class="col-sm-12 col-xs-12 col-lg-12 col-md-12 col-form-label row" id="labelenseignantencharge">enseignant(s) en charge:</label>
+                       
+                         
+                                        <div *ngFor="let item of TabCheckedNomEns" id="listeens" class="col-sm-12 col-xs-12 col-lg-12 col-md-12 row">
+                                                        <label><input type="checkbox" [checked]="item.isChecked" (change)="selectEnseignant(item.no, $event)" value="">{{item.nom}}</label>
+                                       </div>
+                               
+                
+    </div>
+
+   <div *ngIf="PageAjouter == true">
+            <label  class="col-sm-12 col-xs-12 col-lg-12 col-md-12 col-form-label row" id="labelenseignantencharge">enseignant(s) en charge:</label>
+            
+              
+                             <div *ngFor="let item of enseignants2" id="listeens" class="col-sm-12 col-xs-12 col-lg-12 col-md-12 row">
+                                             <label><input type="checkbox"  (change)="selectEnseignant(item.noEnseignant, $event)" value="">{{item.nom}}</label>
+                            </div>
+
+    </div>
+
+
+
+
+
+
+
+    <div *ngIf="PageModifier == true" class="form-group row"> 
+            <button  class="btn icon-btn btn-primary"  (click)="SaveModifEtudiant()"><li><i class="fa fa-floppy-o"></i>Sauvegarder</button>
+    </div>
+    <div *ngIf="PageAjouter == true" class="form-group row"> 
+            <button  class="btn icon-btn btn-primary"  (click)="Ajouter()"><li><i class="fa fa-floppy-o"></i>Sauvegarder</button>
+    </div>
+    
+   
+ </div>
+                    <div class="form-group row">
+                
+                                <button class="btn icon-btn btn-warning btn-circle btn-xl"   (click)="goBack()"><li><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
+                    </div>
+</div>

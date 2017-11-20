@@ -120,7 +120,27 @@ namespace SqueletteImplantation.Controllers
             }
              return new OkObjectResult(Resultat);
         }
+        [HttpGet]
+        [Route("api/EntrepriseNomEnt/{NomEnt}")]
+        public IActionResult GetEntrepriseParNom(string NomEnt)
+        {
+            var entreprise = _maBd.Entreprise.FirstOrDefault(m => m.nomentreprise == NomEnt);
 
+            if (entreprise == null)
+            {
+                return NotFound();
+            }
+            
+            return new OkObjectResult(entreprise);
+        }
+        [HttpGet]
+        [Route("api/Etudiant/RemplirComboEntreprise")]//pour le dropdown qui affectera un etudiant dans une entreprise
+        public IEnumerable ListeEntreprise()
+        {
+            return (from b in _maBd.Entreprise
+                    orderby b.date descending
+                    select b.nomentreprise).Distinct();
+        }
 
         [HttpGet]
         [Route("api/Entreprise/{NoEnt}")]
@@ -140,6 +160,7 @@ namespace SqueletteImplantation.Controllers
         [Route("api/Entreprise/Enregistrementbd")]
         public IActionResult Enregistrementbd(Entreprise Entreprise)
         {
+            Entreprise.Id = null;
             var resultat = _maBd.Entreprise.Add(Entreprise);
             _maBd.SaveChanges();
             return new OkObjectResult(Entreprise);

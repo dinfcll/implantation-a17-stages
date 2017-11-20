@@ -8,9 +8,10 @@ namespace SqueletteImplantation.DbEntities
     {        
         public virtual DbSet<Enseignant> Enseignant {get; set;}
         public virtual DbSet<Entreprise> Entreprise {get; set;}
+        public virtual DbSet<Etudiant> Etudiant { get; set; }
         public virtual DbSet<RelEnseignantEtudiant> RelEnseignantEtudiant { get; set; }
         public virtual DbSet<RelEnseignantEntreprise> RelEnseignantEntreprise { get; set; }
-        public virtual DbSet<Etudiant> Etudiant { get; set; }
+        
         public MaBd(DbContextOptions options) : base(options)
         {
         }

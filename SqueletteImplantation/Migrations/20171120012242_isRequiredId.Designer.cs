@@ -8,9 +8,10 @@ using SqueletteImplantation.DbEntities;
 namespace squeletteimplantation.Migrations
 {
     [DbContext(typeof(MaBd))]
-    partial class MaBdModelSnapshot : ModelSnapshot
+    [Migration("20171120012242_isRequiredId")]
+    partial class isRequiredId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
@@ -106,6 +107,21 @@ namespace squeletteimplantation.Migrations
                     b.ToTable("Etudiant");
                 });
 
+            modelBuilder.Entity("SqueletteImplantation.DbEntities.Models.Machin", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("NombreMagique");
+
+                    b.Property<string>("Truc")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Machin");
+                });
+
             modelBuilder.Entity("SqueletteImplantation.DbEntities.Models.RelEnseignantEntreprise", b =>
                 {
                     b.Property<int?>("Id");
@@ -158,7 +174,7 @@ namespace squeletteimplantation.Migrations
             modelBuilder.Entity("SqueletteImplantation.DbEntities.Models.RelEnseignantEtudiant", b =>
                 {
                     b.HasOne("SqueletteImplantation.DbEntities.Models.Etudiant", "etudiant")
-                        .WithMany("RelEnseignantEtudiants")
+                        .WithMany("RelEnseignantEtudiant")
                         .HasForeignKey("NoDa")
                         .HasConstraintName("fk_Etudiant_relEnseignantEtudiant")
                         .OnDelete(DeleteBehavior.Cascade);

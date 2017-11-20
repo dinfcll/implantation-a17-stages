@@ -19,9 +19,11 @@ declare var jBox:any;
 })
 
 export  class LoginEnseignantComponent { 
-    public token: string;
+   private isValid:boolean;
     private enseignant: Enseignant;
-    constructor(private http: Http,  private router: Router){ }
+    constructor(private http: Http,  private router: Router){ 
+        this.isValid=true;
+    }
 
     Connexion(courriel: string, mdp: string) {
         var headers = new Headers();
@@ -30,21 +32,37 @@ export  class LoginEnseignantComponent {
             Resultat=>
             {
                 this.enseignant = Resultat.json() as Enseignant;
+                
+               
+               
 
                 if(Resultat.status == 200)
                     {
-                         this.router.navigate(['/accueil-enseignant']);                
+                         //naviguer plus loin
+                         this.router.navigate(['/accueil-enseignant']);
+                         
                          localStorage.setItem('var', JSON.stringify(this.enseignant));
                     }
                 else
                     {
-                        new jBox('Notice', {
-                            content: "Mot de passe ou Nom d'utilisateur non valide",
-                            color: 'red',
-                            autoClose: 5000
-                            }); 
+                        //message erreur
+                        if(Resultat.status == 204)
+                            {
+                                this.isValid=false;
+                                
+                                new jBox('Notice', {
+                                    content: 'Mot de passe ou nom utilistateur invalide',
+                                    color: 'red',
+                                    autoClose: 5000
+                                    }); 
+                                
+                            }
+                         
                     }
             })
     }
-}
+    
+    
+   
+ }
 

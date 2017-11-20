@@ -1,7 +1,27 @@
 <div>
-        <input type="text" placeholder="Recherche" id="recherche" [(ngModel)]="Recherche">
-        <button class="loupe"   (click)="getEntreprise(Recherche,AnneeRecherche)" ></button>	
-        <table border=1>
+       
+      <!--  <button class="col-sm-2 col-xs-2 col-lg-2 col-md-2  col-form-label row" id="loupe"   (click)="getEntreprise(Recherche,AnneeRecherche)" ></button>	-->
+        <div class="form-group row">
+            
+                    <input class="col-sm-2 col-xs-2 col-lg-2 col-md-2  col-form-label row"  type="text" placeholder="Recherche" id="recherche" [(ngModel)]="Recherche" (keyup.enter)="getEntreprise(Recherche,annees)" (keyup)="filter()">
+                    <select class="custom-select" [(ngModel)]="annees">
+                            <option></option>
+                            <option *ngFor=" let value of TAnnees">
+                                {{value}}
+                            </option>
+                        </select>
+                    <div class="suggestions" *ngIf="filteredList.length > 0">
+                            <ul id="autocomplete" *ngFor="let item of filteredList" >
+                                <li class="liautocomplete">
+                                    <a (click)="select(item)">{{item}}</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <button class="col-sm-2 col-xs-2 col-lg-2 col-md-2  col-form-label row" id="loupe"  (click)="getEntreprise(Recherche,annees)" ></button>
+                </div>
+        
+        <div class="form-group row table-responsive">
+        <table border=1 class="table table-hover">
             <caption>Tableau de données des entreprises</caption>
             <thead>
                 <tr>
@@ -65,16 +85,19 @@
                 </tr>
             </tbody>
         </table>
+        </div>
         <a class="btn icon-btn btn-success" [routerLink]="['/detailEntreprise', -1]" routerLinkActive="active" id="btn">
             <span class="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"></span>
             ajouter une entreprise
         </a>
-        <select [(ngModel)]="AnneeRecherche">
-            <option></option>
-            <option *ngFor=" let value of TAnnees">
-                {{value}}
-            </option>
-        </select>
+       
+    
+        
+    
+
+
+ 
+       
 </div>
 
     
