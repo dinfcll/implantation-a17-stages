@@ -81,7 +81,7 @@ export class PageRechercheEtudiantComponent  {
      );
     }else
     {
-        this.jBoxMessage("yellow", "en attente de connexion ou Aucun étudiant dans la base de donn�e");
+        
         this.etudiants = null;
     }
 

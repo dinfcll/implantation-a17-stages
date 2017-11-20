@@ -21,21 +21,21 @@ declare var jBox:any;
 export class PageDetailEtudiantComponent  { 
     etudiant:Etudiant;
     entreprise:Entreprise;
-    entreprise2:Entreprise;//utille dans la fonction getentrepriseparnom
-    enseignants: Enseignant[];//tableau des enseignants qui suivent un étudiant
-    enseignants2: Enseignant[];//tableau de de la liste des enseignants dans la BD
+    entreprise2:Entreprise;
+    enseignants: Enseignant[];
+    enseignants2: Enseignant[];
     ID: number;
     PageAjouter:boolean;
     PageInfo:boolean;
-    PageModifier:boolean;//utile pour le service
-    TabisChecked: boolean[];//utile pour connaitre quel case est coché et non coché dans la lise de tous les cases
-    TabCheckedNomEns:any[];//uTile pour affichage du nom, cocher les case et passer le 
-                           //numéro de l'enseignant en paramètre de l'évènement checked
-    selectedItems: any = [];//pour l'évènement checked change
-     TabRelEnsEtu:RelEnseignantEtudiant[]; //utile pour sauvegarder toutes les nouvelle relensetu dans la BD
-     relEnsEtu:RelEnseignantEtudiant;//utile pour créer l'objet RelEnseignantEtudiant
-     selectedItemsAsupprimer: any = [];//UTILE POUR SUPPRIMER LES ANCIENNES relEtuEns
-     Tnomentreprise:string[];//tableau des noms des entreprise pour le dropdown
+    PageModifier:boolean;
+    TabisChecked: boolean[];
+    TabCheckedNomEns:any[];
+                          
+    selectedItems: any = [];
+     TabRelEnsEtu:RelEnseignantEtudiant[]; 
+     relEnsEtu:RelEnseignantEtudiant;
+     selectedItemsAsupprimer: any = [];
+     Tnomentreprise:string[];
    
     constructor(private location: Location ,private service: AppService, private http: Http,  private router: Router){
         this.PageAjouter=false;
@@ -44,8 +44,8 @@ export class PageDetailEtudiantComponent  {
          this.TabisChecked=[];
         this.TabCheckedNomEns=[];
         this.TabRelEnsEtu=[];
-        this.testModifier();//utile pour le service qui me permet de partager la variable 
-                            //page modifier entre 2 composant
+        this.testModifier(); 
+                            
        
         this.etudiant = new Etudiant(-1,"","","","","","", "etudiant",null);
         this.entreprise = new Entreprise(-1,"","","","","","",0,0,0,0,0,"");
@@ -68,7 +68,7 @@ export class PageDetailEtudiantComponent  {
         
     }
 
-     //Récupère l'etudiant choisie par le NoDA
+     
      getEtudiantParNoEnt(NoDA: number)
      {
       
@@ -86,7 +86,7 @@ export class PageDetailEtudiantComponent  {
 
 
 
-    //Récupère l'ID de l'etudiant choisie
+    
     DetectionPageID (): number 
     {
         let CheminLong: string = this.router.url.toString();
@@ -103,7 +103,7 @@ export class PageDetailEtudiantComponent  {
         }
         return id;
     }
-//obtenir l'entreprise en fonction de l'id
+
     getEntrepriseParNoEnt(NoEnt: number)
     {
         
@@ -118,7 +118,7 @@ export class PageDetailEtudiantComponent  {
          
        
     }
-    //obtenir la liste des nom d entreprise pour le dropdown
+   
     getListeNomEntreprise()
     {
         
@@ -133,8 +133,7 @@ export class PageDetailEtudiantComponent  {
          
        
     }
-    //obtenir l'id de l' entreprise en fonction de son nom qui est utile pour assigner au champ id
-    // de l'objet étudiant
+    
     getEntrepriseParNomEnt(NomEnt: string)
     {
         
@@ -146,8 +145,6 @@ export class PageDetailEtudiantComponent  {
           this.entreprise2 = donnees.json() as Entreprise
           if(donnees.status==200)
             {
-                //appelé ici car http.get est asymchrone, ceci nous garantie une valeur
-                //pour notre id de l'étudiant
                 if(this.PageModifier)
                     {
                         this.ModifEtudiant();
@@ -169,7 +166,7 @@ export class PageDetailEtudiantComponent  {
          
        
     }
-//Obtenir la liste des enseignants en charge d'un étudiant
+
     getListeEnseignantParEtudiant(noDa:number) {
         let url: string;
        
@@ -196,7 +193,7 @@ export class PageDetailEtudiantComponent  {
      }
 
 
-     //Obtenir la liste des enseignants 
+     
     getListeEnseignant() {
         let url: string;
        
@@ -219,11 +216,11 @@ export class PageDetailEtudiantComponent  {
     
      }
 
-   //pour cocher les cases des enseignants qui suit l'étudiant
+  
      remplirTabIsChecked()
      {
         let i, j:number;
-     //initialisation du contenu de la liste
+    
          for( i=0; i<this.enseignants2.length; i++)
             {
                this.TabisChecked.push(false);
@@ -241,29 +238,27 @@ export class PageDetailEtudiantComponent  {
                 }
 
      }
-    //utile pour afficher les checkbox cochés des enseignants qui suit un étudiant
+   
      createTabCheckedNomEnseignant()
      {
        
         for (var i = 0; i < this.enseignants2.length; i++) {
             this.TabCheckedNomEns.push({
-                                 no: this.enseignants2[i].noEnseignant,//utile pour l'évènement (change)
+                                 no: this.enseignants2[i].noEnseignant,
                                  nom: this.enseignants2[i].nom,
                                  isChecked: this.TabisChecked[i] 
                                 });
-             //étant donné que certains checkbox seront coché, je m assure de mettre leur 
-             //la valeur du noEnseignant correspond dans la table selectedItems car
-             //elle sont cochés sans évènement déclenché                   
+                          
             if(this.TabisChecked[i])
                 {
-                    this.selectedItemsAsupprimer.push(this.enseignants2[i].noEnseignant);//utile pour supprimer l'ancienne relation
+                    this.selectedItemsAsupprimer.push(this.enseignants2[i].noEnseignant);
                     this.selectedItems.push(this.enseignants2[i].noEnseignant);
                 }
         }
      }
 
     
-//utile pour l'évènement checkedchange des case à cocher
+
      selectEnseignant(noEns : number, e : any) {
         
                 var index = this.selectedItems.indexOf(noEns);
@@ -282,7 +277,7 @@ export class PageDetailEtudiantComponent  {
  
  AddRelEnsEtuBD(){
     
-                  //SUPPRIMER LA RELATION ÉTUDIANT ENSEIGNANT EXISTANT
+                 
             for(var i=0; i<this.selectedItemsAsupprimer.length; i++)
                 {
                     this.http.delete("api/relEnseignantEtudiant/SupprimerRelensetu/" + this.etudiant.noDa+"/"+ this.selectedItemsAsupprimer[i]).subscribe(Result =>
@@ -301,13 +296,13 @@ export class PageDetailEtudiantComponent  {
         for(var i=0; i<longueur; i++){
         this.selectedItems.pop();  
     }  
-          //création d'une table relEnsEtu utile pour facilité la sauvegarde des cases cochés
+          
           for(var i=0; i<this.selectedItems.length; i++)
             {
                 this.relEnsEtu=new RelEnseignantEtudiant(this.etudiant.noDa, this.selectedItems[i])
                 this.TabRelEnsEtu.push( this.relEnsEtu);
             }
-      //ajout des nouveau relenseignantetudiant qui suit l'étudiant dans la BD
+      
       for(var i=0; i<this.TabRelEnsEtu.length; i++)
             {
                 this.http.post("api/Enseignant/sauvegardeRelEnseignantEtudiantbd", this.TabRelEnsEtu[i]).subscribe(Result =>
@@ -330,7 +325,7 @@ export class PageDetailEtudiantComponent  {
 
   ModifEtudiant(){
        
-        this.etudiant.id=this.entreprise2.id;//affecter l'id de son entreprise qui a été modifier
+        this.etudiant.id=this.entreprise2.id;
        
 
         this.http.put("api/Etudiant/ModifierEtudiant", this.etudiant).subscribe(donne =>
@@ -343,7 +338,7 @@ export class PageDetailEtudiantComponent  {
                         this.jBoxMessage("green","Modification effectuée avec succès!");
             });
   }
-     //Messages d'erreurs/succès
+     
      jBoxMessage(couleur: string, message: string) {
         
               new jBox('Notice', {
@@ -376,7 +371,7 @@ export class PageDetailEtudiantComponent  {
                     return;
                 }
                 else{
-                   // this.validationSiEtudiantExisteEtAjoutBD(this.etudiant.noDa);
+                   
                    this.getEntrepriseParNomEnt(this.entreprise.nomentreprise);
                 }
              
@@ -406,7 +401,7 @@ export class PageDetailEtudiantComponent  {
                             
                             else
                                 {
-                                    //message erreur
+                                    
                                     if(r.status == 204)
                                         {
                           
