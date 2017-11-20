@@ -134,7 +134,7 @@ namespace SqueletteImplantation.Controllers
             return new OkObjectResult(entreprise);
         }
 
-    [HttpPost]
+        [HttpPost]
         [Route("api/Entreprise/Enregistrementbd")]
         public IActionResult Enregistrementbd(Entreprise Entreprise)
         {
