@@ -17,7 +17,7 @@ namespace SqueletteImplantation.DbEntities.Models
         public string Annee { get; set; }
 
 
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public Entreprise entreprise { get; set; }
         public List<RelEnseignantEtudiant>RelEnseignantEtudiant{get;set;}
     }

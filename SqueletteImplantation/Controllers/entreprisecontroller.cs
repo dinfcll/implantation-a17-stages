@@ -44,10 +44,11 @@ namespace SqueletteImplantation.Controllers
         {
             return from b in _maBd.Entreprise
                    where
-                   b.lieu.Contains(recherchetxtbox) ||
-                   b.notel.Contains(recherchetxtbox) ||
-                   b.personneresponsable.Contains(recherchetxtbox) ||
-                   b.poste.Contains(recherchetxtbox)
+                   b.lieu.ToUpper().Contains(recherchetxtbox) ||
+                   b.notel.ToUpper().Contains(recherchetxtbox) ||
+                   b.personneresponsable.ToUpper().Contains(recherchetxtbox) ||
+                   b.poste.ToUpper().Contains(recherchetxtbox) ||
+                   b.nomentreprise.ToUpper().Contains(recherchetxtbox)
                    orderby b.date
                    select new
                    {
@@ -60,6 +61,7 @@ namespace SqueletteImplantation.Controllers
                        b.nbreoui,
                        b.courrielres,
                        b.date
+                       b.Id
                    };
         }
 

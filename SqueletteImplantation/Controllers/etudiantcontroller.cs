@@ -78,9 +78,9 @@ namespace SqueletteImplantation.Controllers
             return from b in _maBd.Etudiant
                    join ent in _maBd.Entreprise on b.Id equals ent.Id//nouvelle ligne
                    where
-                   b.Nom.Contains(recherchetxtbox) ||
-                   b.Prenom.Contains(recherchetxtbox) ||
-                   b.Profil.Contains(recherchetxtbox) 
+                   b.Nom.ToUpper().Contains(recherchetxtbox) ||
+                   b.Prenom.ToUpper().Contains(recherchetxtbox) ||
+                   b.Profil.ToUpper().Contains(recherchetxtbox) 
                   
                    orderby b.Annee
                    select new
@@ -204,7 +204,7 @@ namespace SqueletteImplantation.Controllers
 
          [HttpPost]
         [Route("api/EtudiantConnecte")]
-        public IActionResult LoginEnseignant([FromBody] EtudiantDto etu  )
+        public IActionResult verifSiEtudiantExisteDeja([FromBody] EtudiantDto etu  )
         {
            var obj = _maBd.Etudiant.FirstOrDefault(m => m.NoDa == etu.NoDa);
            if(obj == null)

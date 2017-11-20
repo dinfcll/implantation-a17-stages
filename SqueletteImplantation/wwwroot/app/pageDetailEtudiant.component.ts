@@ -47,9 +47,9 @@ export class PageDetailEtudiantComponent  {
         this.testModifier();//utile pour le service qui me permet de partager la variable 
                             //page modifier entre 2 composant
        
-        this.etudiant = new Etudiant(-1,"","","","","","", "",0);
+        this.etudiant = new Etudiant(-1,"","","","","","", "etudiant",null);
         this.entreprise = new Entreprise(-1,"","","","","","",0,0,0,0,0,"");
-        this.entreprise2 = new Entreprise(-1,"","","","","","",0,0,0,0,0,"");
+        this.entreprise2 = new Entreprise(null,"","","","","","",0,0,0,0,0,"");
         this.ID = this.DetectionPageID();
         this.getListeNomEntreprise();
         if (this.ID != -1) {
@@ -60,7 +60,7 @@ export class PageDetailEtudiantComponent  {
         }
         else
         {
-            this.etudiant = new Etudiant(-1,"","","","","","","",0);
+            this.etudiant = new Etudiant(-1,"","","","","","etudiant","",null);
             this.getListeEnseignant();
           
             
@@ -138,7 +138,7 @@ export class PageDetailEtudiantComponent  {
     getEntrepriseParNomEnt(NomEnt: string)
     {
         
-      
+      if(NomEnt !== ""){
       let url: string;
       url = "api/EntrepriseNomEnt/"+NomEnt;
       this.http.get(url).subscribe(donnees =>
@@ -163,6 +163,9 @@ export class PageDetailEtudiantComponent  {
             }
          
          });
+        }else{
+            this.validationSiEtudiantExisteEtAjoutBD(this.etudiant.noDa);
+        }
          
        
     }
@@ -294,6 +297,10 @@ export class PageDetailEtudiantComponent  {
             }
 
       SaveRelEnsEtuBD(){
+        var longueur=this.selectedItems.length;
+        for(var i=0; i<longueur; i++){
+        this.selectedItems.pop();  
+    }  
           //création d'une table relEnsEtu utile pour facilité la sauvegarde des cases cochés
           for(var i=0; i<this.selectedItems.length; i++)
             {
@@ -393,7 +400,7 @@ export class PageDetailEtudiantComponent  {
                             if(r.status == 200)
                                 {
                                    
-                                    this.jBoxMessage("red", "Attention!!! cette étudiant existe déjà.");
+                                    this.jBoxMessage("red", "Attention!!! un étudiant existe déjà avec ce numéro de DA.");
                                     
                                 }
                             
@@ -402,8 +409,9 @@ export class PageDetailEtudiantComponent  {
                                     //message erreur
                                     if(r.status == 204)
                                         {
-                                       
-                                        this.etudiant.id=this.entreprise2.id;
+                           /***********************************************/
+                                         this.etudiant.id=this.entreprise2.id;
+                                        
                                        
                                         this.http.post("api/Etudiant/EnregistrementEtudiantbd", this.etudiant).subscribe(Result =>
                                             {
