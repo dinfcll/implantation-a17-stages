@@ -112,9 +112,7 @@ export class PageDetailEntrepriseComponent  {
     }
 
 
-    validation(): boolean
-    {
-       
+    validation(): boolean {
         let tab: number[] = [
             this.entrepriseAjouter.nbreconfirmation,
             this.entrepriseAjouter.nbrenon,
@@ -127,28 +125,15 @@ export class PageDetailEntrepriseComponent  {
             || this.entrepriseAjouter.poste === "" || this.entrepriseAjouter.nomentreprise === "")
             return false;
 
-        while (i >= 0 && tab[i].toString()!="" && !isNaN(tab[i]))
-        {
+        while (i >= 0 && tab[i].toString() != "" && !isNaN(tab[i])) {
             i--;
         }
 
-        if(i!=-1)
+        if (i != -1)
             return false;
 
         return true;
-<<<<<<< HEAD
     }
-//Messages d'erreurs/succès
-      jBoxMessage(couleur: string, message: string) {
-
-          new jBox('Notice', {
-              content: message,
-              color: couleur,
-              autoClose: 5000
-          });
-      }
-=======
-  }
 
   jBoxMessage(couleur: string, message: string) {
 
@@ -158,7 +143,4 @@ export class PageDetailEntrepriseComponent  {
           autoClose: 5000
       });
   }
-
->>>>>>> master
-
 }

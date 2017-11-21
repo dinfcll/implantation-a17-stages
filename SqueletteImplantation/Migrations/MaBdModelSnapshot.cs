@@ -108,7 +108,7 @@ namespace squeletteimplantation.Migrations
 
             modelBuilder.Entity("SqueletteImplantation.DbEntities.Models.RelEnseignantEntreprise", b =>
                 {
-                    b.Property<int?>("Id");
+                    b.Property<int>("Id");
 
                     b.Property<int>("NoEnseignant");
 

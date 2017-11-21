@@ -77,7 +77,8 @@ export class PageDetailEtudiantComponent  {
        this.http.get(url).subscribe(donnees =>
           {
            this.etudiant = donnees.json() as Etudiant;
-          console.log(this.etudiant.id);
+           console.log(this.etudiant.id);
+           if (this.etudiant.id!=null)
          this.getEntrepriseParNoEnt(this.etudiant.id);
           });
        
@@ -137,31 +138,31 @@ export class PageDetailEtudiantComponent  {
     getEntrepriseParNomEnt(NomEnt: string)
     {
         
-      if(NomEnt !== ""){
-      let url: string;
-      url = "api/EntrepriseNomEnt/"+NomEnt;
-      this.http.get(url).subscribe(donnees =>
-         {
-          this.entreprise2 = donnees.json() as Entreprise
-          if(donnees.status==200)
-            {
-                if(this.PageModifier)
-                    {
+        if (NomEnt !== "") {
+            let url: string;
+            url = "api/EntrepriseNomEnt/" + NomEnt;
+            this.http.get(url).subscribe(donnees => {
+                this.entreprise2 = donnees.json() as Entreprise
+                if (donnees.status == 200) {
+                    if (this.PageModifier) {
                         this.ModifEtudiant();
-                    }else{
-                        if(this.PageAjouter)
-                            {
-                               this.validationSiEtudiantExisteEtAjoutBD(this.etudiant.noDa);
-                            }
+                    } else {
+                        if (this.PageAjouter) {
+                            this.validationSiEtudiantExisteEtAjoutBD(this.etudiant.noDa);
+                        }
                     }
-                    
-               
-              
+
+                }
+            });
+        }
+        else
+        {
+            if (this.PageAjouter) {
+                this.validationSiEtudiantExisteEtAjoutBD(this.etudiant.noDa);
             }
-         
-         });
-        }else{
-            this.validationSiEtudiantExisteEtAjoutBD(this.etudiant.noDa);
+            else
+                this.ModifEtudiant();
+       
         }
          
        

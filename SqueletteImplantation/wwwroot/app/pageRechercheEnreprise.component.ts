@@ -26,27 +26,19 @@ export class pageRechercheEntrepriseComponent
     AnneeRecherche: string;
     AnneeCourante: string;
     Recherche: string;
-    TAnnees: string[];
     filteredList:any[];
     Tnomentreprise:string[];
-    
-     
+    TAnnees: string[];
     annees: string;
-   
     Tentreprise: string[];
     constructor(private elementRef: ElementRef,private http: Http, private router: Router)
     {
-        this.Tentreprise=[];
         this.Tnomentreprise=[];
         this.entreprises=[];
         this.TAnnees=[];
         this.AnneeCourante = (new Date()).getFullYear().toString();
-        this.AnneeRecherche = "";
-    
-   
+        this.AnneeRecherche = ""; 
         this.filteredList=[];
-       
-        this.annees = "";
         this.Recherche = "";
         this.getEntreprise("","");
         this.RemplirCombo();
@@ -95,7 +87,6 @@ export class pageRechercheEntrepriseComponent
                 donnees => 
                 {
                     if (donnees.status == 200) {
-                        console.log(this.entreprises);
                         this.entreprises = donnees.json() as Entreprise[];
                     }
                     else
@@ -210,4 +201,3 @@ export class pageRechercheEntrepriseComponent
 
    
      
-//}

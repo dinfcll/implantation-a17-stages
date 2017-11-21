@@ -1,11 +1,12 @@
 using System.Collections;
-using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using SqueletteImplantation.DbEntities;
 using SqueletteImplantation.DbEntities.DTOs;
 using SqueletteImplantation.DbEntities.Models;
-
+using System.Collections.Generic;
+using System.Linq;
 namespace SqueletteImplantation.Controllers
+ 
 {
     public class EtudiantController : Controller
     {
@@ -26,37 +27,50 @@ namespace SqueletteImplantation.Controllers
             {
                 return NotFound();
             }
-
+           
             return new OkObjectResult(etudiant);
         }
 
         [HttpGet]
         [Route("api/Etudiant/annees")]
-        public IEnumerable EtudiantAnnee()//retourne tout les etudiant de l ann�e en cours
+        public IActionResult EtudiantAnnee()//retourne tout les etudiant de l ann�e en cours
         {
             var AnneeRecente = (from b in _maBd.Etudiant 
                                 select b.Annee).Max();
-            return from b in _maBd.Etudiant
-                   join ent in _maBd.Entreprise on b.Id equals ent.Id//nouvelle ligne
-                   where b.Annee.Contains(AnneeRecente.ToString())
-                   select new
-                   {
-                       b.NoDa,
-                       b.Nom,
-                       b.Prenom,
-                       b.Profil,
-                       b.Annee,
-                       ent.nomentreprise,
+            List<object> ListeAvecID = (from b in _maBd.Etudiant
+                                 join ent in _maBd.Entreprise on b.Id equals ent.Id//nouvelle ligne
+                                 where b.Annee.Contains(AnneeRecente.ToString())
+                                 select new
+                                 {
+                                     b.NoDa,
+                                     b.Nom,
+                                     b.Prenom,
+                                     b.Profil,
+                                     b.Annee,
+                                     ent.nomentreprise,
 
-                   };
-                  
+                                 }).ToList<object>();
+          List<object> ListeSansID = (from b in _maBd.Etudiant
+                                 where b.Id == null
+                                 select new
+                                 {
+                                     b.NoDa,
+                                     b.Nom,
+                                     b.Prenom,
+                                     b.Profil,
+                                     b.Annee,
+                                     b.Id
+                                 }).ToList<object>();
+
+            ListeAvecID=ListeSansID.Concat(ListeAvecID).ToList();
+            return new OkObjectResult(ListeAvecID);
         }
 
         [HttpGet]
         [Route("api/Etudiant/RechercheAnnee/{annees}")]
-        public IEnumerable EntrepriseRechercheAnnee(string annees)
+        public IActionResult EntrepriseRechercheAnnee(string annees)
         {
-            return from b in _maBd.Etudiant
+            List<object> ListeAvecID= (from b in _maBd.Etudiant
                    join ent in _maBd.Entreprise on b.Id equals ent.Id//nouvelle ligne
                    where b.Annee.Contains(annees.ToString())
                    select new
@@ -68,14 +82,30 @@ namespace SqueletteImplantation.Controllers
                        b.Annee,
                        ent.nomentreprise,
 
-                   };
-        }
+                   }).ToList<object>();
+            List<object> ListeSansID = (from b in _maBd.Etudiant
+                                        where b.Annee.Contains(annees.ToString()) 
+                                        && b.Id == null
+                                        select new
+                                        {
+                                            b.NoDa,
+                                            b.Nom,
+                                            b.Prenom,
+                                            b.Profil,
+                                            b.Annee,
+                                            b.Id
+                                        }).ToList<object>();
+
+                ListeAvecID = ListeSansID.Concat(ListeAvecID).ToList();
+                return new OkObjectResult(ListeAvecID);
+            }
 
         [HttpGet]
         [Route("api/Etudiant/RechercheSansAnnee/{recherchetxtbox}")]
-        public IEnumerable Recherche(string recherchetxtbox)
+        public IActionResult Recherche(string recherchetxtbox)
         {
-            return from b in _maBd.Etudiant
+            recherchetxtbox = recherchetxtbox.ToUpper();
+            List<object> ListeAvecID = (from b in _maBd.Etudiant
                    join ent in _maBd.Entreprise on b.Id equals ent.Id//nouvelle ligne
                    where
                    b.Nom.ToUpper().Contains(recherchetxtbox) ||
@@ -90,37 +120,73 @@ namespace SqueletteImplantation.Controllers
                        b.Prenom,
                        b.Profil,
                        b.Annee,
-                       ent.nomentreprise,//nouvelle ligne
+                       ent.nomentreprise
+                   }).ToList<object>();
 
-                   };
-        }
+            List<object> ListeSansID = (from b in _maBd.Etudiant
+                    where( b.Nom.ToUpper().Contains(recherchetxtbox) ||
+                    b.Prenom.ToUpper().Contains(recherchetxtbox) ||
+                    b.Profil.ToUpper().Contains(recherchetxtbox))
+                    && b.Id ==null
+                    orderby b.Annee
+                     select new
+                     {
+                         b.NoDa,
+                         b.Nom,
+                         b.Prenom,
+                         b.Profil,
+                         b.Annee,
+                         b.Id
+                     }).ToList<object>();
+            ListeAvecID = ListeSansID.Concat(ListeAvecID).ToList();
+            return new OkObjectResult(ListeAvecID);
+        
+    }
 
 
 
 
         [HttpGet]
         [Route("api/Etudiant/{annees}/{recherchetxtbox}")]
-        public IEnumerable Recherche(string recherchetxtbox, string annees)
+        public IActionResult Recherche(string recherchetxtbox, string annees)
         {
-            return from b in _maBd.Etudiant
-                   join ent in _maBd.Entreprise on b.Id equals ent.Id//nouvelle ligne
-                   where b.Annee.Contains(annees) && (
-                   b.Nom.Contains(recherchetxtbox) ||
-                   b.Prenom.Contains(recherchetxtbox) ||
-                   b.Profil.Contains(recherchetxtbox))
+            recherchetxtbox = recherchetxtbox.ToUpper();
+         List<object> ListeAvecID =(from b in _maBd.Etudiant
+                                   join ent in _maBd.Entreprise on b.Id equals ent.Id//nouvelle ligne
+                                   where b.Annee.Contains(annees) && (
+                                   b.Nom.ToUpper().Contains(recherchetxtbox) ||
+                                   b.Prenom.ToUpper().Contains(recherchetxtbox) ||
+                                   b.Profil.ToUpper().Contains(recherchetxtbox))
+                                   orderby b.Annee
+                                   select new
+                                   {
+                                       b.NoDa,
+                                       b.Nom,
+                                       b.Prenom,
+                                       b.Profil,
+                                       b.Annee,
+                                       ent.nomentreprise,
 
+                                   }).ToList<object>();
+            List<object> ListeSansID = (from b in _maBd.Etudiant
+                                        where b.Annee.Contains(annees) && (
+                                        b.Nom.ToUpper().Contains(recherchetxtbox) ||
+                                        b.Prenom.ToUpper().Contains(recherchetxtbox) ||
+                                        b.Profil.ToUpper().Contains(recherchetxtbox))
+                                        && b.Id == null
+                                        orderby b.Annee
+                                        select new
+                                        {
+                                            b.NoDa,
+                                            b.Nom,
+                                            b.Prenom,
+                                            b.Profil,
+                                            b.Annee,
+                                            b.Id,
 
-                   orderby b.Annee
-                   select new
-                   {
-                       b.NoDa,
-                       b.Nom,
-                       b.Prenom,
-                       b.Profil,
-                       b.Annee,
-                       ent.nomentreprise,//nouvelle ligne
-
-                   };
+                                        }).ToList<object>();
+            ListeAvecID = ListeSansID.Concat(ListeAvecID).ToList();
+            return new OkObjectResult(ListeAvecID);
         }
 
 

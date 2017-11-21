@@ -183,10 +183,13 @@ namespace SqueletteImplantation.Controllers
         public IActionResult SuprimeEntreprisebd(int ID)
         {
             var entreprise = _maBd.Entreprise.FirstOrDefault(x => x.Id == ID);
+            if (entreprise == null)
+                return new NoContentResult();
+            var etudiant = _maBd.Etudiant.FirstOrDefault(x => x.Id == ID);
+            if (etudiant != null)
+                return NoContent();
             var resultat = _maBd.Entreprise.Remove(entreprise);
             _maBd.SaveChanges();
-            if (resultat == null)
-                return NotFound();
             return new OkResult();
 
         }
