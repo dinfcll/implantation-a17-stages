@@ -202,24 +202,24 @@ namespace SqueletteImplantation.Controllers
         }
 
 
-        [HttpGet]
+     /*   [HttpGet]
         [Route("api/Enseignant/{NoEns}")]
-        public IEnumerable ListeEtudiantSuiviParUnEnseignant( int  NoEns)//liste étudiant suivi par un enseignant
+        public IEnumerable ListeEtudiantSuiviParUnEnseignant(int NoEns)//liste étudiant suivi par un enseignant
         {
             return from b in _maBd.RelEnseignantEtudiant
-                    join etud in _maBd.Etudiant on b.NoDa equals etud.NoDa//nouvelle ligne
-                    where
-                    b.NoEnseignant == NoEns
+                   join etud in _maBd.Etudiant on b.NoDa equals etud.NoDa//nouvelle ligne
+                   where
+                   b.NoEnseignant == NoEns
 
 
-                    select new
-                    {
-                        etud.NoDa,
-                        etud.Nom,
+                   select new
+                   {
+                       etud.NoDa,
+                       etud.Nom,
 
 
-                    };
-            
+                   };
+
         }
 
         [HttpGet]
@@ -234,14 +234,14 @@ namespace SqueletteImplantation.Controllers
 
                    select new
                    {
-                      
+
                        ens.Nom,
 
 
                    };
-            
 
-        }
+
+        }*/
 
 
         [HttpGet]
