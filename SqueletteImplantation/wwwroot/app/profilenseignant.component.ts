@@ -28,7 +28,6 @@ export class ProfilEnseignantComponent  {
         
         this.user=localStorage.getItem('var') ;
         this. ens = JSON.parse(this.user);
-        console.log(this.ens);
     }
     
 

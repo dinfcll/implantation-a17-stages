@@ -10,7 +10,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="wwwroot\app\confirmation-dialog.ts" />
     <Content Include="wwwroot\html\confirmation-dialog.html" />
   </ItemGroup>
 

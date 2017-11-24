@@ -9,8 +9,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var http_1 = require("@angular/http");
 var core_1 = require("@angular/core");
+var http_1 = require("@angular/http");
 var router_1 = require("@angular/router");
 var pageAccueilEnseignantComponent = (function () {
     function pageAccueilEnseignantComponent(http, router) {
