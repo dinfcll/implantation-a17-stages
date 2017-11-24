@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using SqueletteImplantation.DbEntities;
 
-namespace squeletteimplantation.Migrations
+namespace SqueletteImplantation.Migrations
 {
     [DbContext(typeof(MaBd))]
     partial class MaBdModelSnapshot : ModelSnapshot
@@ -108,7 +108,7 @@ namespace squeletteimplantation.Migrations
 
             modelBuilder.Entity("SqueletteImplantation.DbEntities.Models.RelEnseignantEntreprise", b =>
                 {
-                    b.Property<int>("Id");
+                    b.Property<int?>("Id");
 
                     b.Property<int>("NoEnseignant");
 
