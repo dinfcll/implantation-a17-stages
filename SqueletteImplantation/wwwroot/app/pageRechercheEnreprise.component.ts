@@ -86,7 +86,9 @@ export class pageRechercheEntrepriseComponent
         }
     }
    
-    Supprimer(ID:number) {
+    Supprimer(ID:number,Nom:string) {
+        var r = confirm("Voulez-vous supprimer l'entreprise "+Nom.toString());
+    if (r == true) {
         this.http.delete("api/Entreprise/Supprimer/" + ID.toString()).subscribe( donnee => {
                 if (donnee.status == 200) {
                     this.jBoxMessage("green", "Entreprise supprimée avec succès!");
