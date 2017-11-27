@@ -55,7 +55,7 @@
                 <td> {{etudiant.profil }}</td>	
                 <td> {{etudiant.nomentreprise}}</td>
                 <td> {{etudiant.annee}}</td>
-                <td><button class="btn icon-btn btn-danger"  (click)="Supprimer(etudiant.noDa);"><span class="glyphicon btn-glyphicon glyphicon-trash img-circle"></span>Supprimer</button></td>
+                <td><button class="btn icon-btn btn-danger"  (click)="Supprimer(etudiant.noDa,etudiant.prenom);"><span class="glyphicon btn-glyphicon glyphicon-trash img-circle"></span>Supprimer</button></td>
                 <td><a [routerLink]="['/detailEtudiant', etudiant.noDa]"  routerLinkActive="active"  class="btn icon-btn btn-primary" id="Modifier" (click)="PageModif()"><li><i class="fa fa-pencil fa-fw"></i>Modifier</a></td>
             </tr>
         </tbody>
