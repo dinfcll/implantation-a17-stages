@@ -98,6 +98,7 @@ export class pageRechercheEntrepriseComponent
                     this.jBoxMessage("red", "Erreur lors de la suppression de l'entreprise!");
                 }
          });
+        }
     }
 
     AjouterAnnee(entreprise: Entreprise)
