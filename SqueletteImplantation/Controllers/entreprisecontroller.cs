@@ -166,8 +166,8 @@ namespace SqueletteImplantation.Controllers
             return new OkObjectResult(Entreprise);
         }
         [HttpGet]
-        [Route("api/Entreprise/VérifAnneeCourante/{nomentreprise}")]
-        public IActionResult VérifEntrepriseAnneeCourante(string nomentreprise)
+        [Route("api/Entreprise/VerifAnneeCourante/{nomentreprise}")]
+        public IActionResult VerifEntrepriseAnneeCourante(string nomentreprise)
         {
             DateTime DateAujourdhui = DateTime.Now;
             string Date = DateAujourdhui.Year.ToString();

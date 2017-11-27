@@ -107,7 +107,7 @@ export class pageRechercheEntrepriseComponent
         entreprise.nbrpeutetre = 0;
         entreprise.date = this.AnneeCourante;
         let nomentreprise: string = entreprise.nomentreprise;
-        this.http.get("api/Entreprise/VérifAnneeCourante/"+nomentreprise).subscribe(Resultat => {
+        this.http.get("api/Entreprise/VerifAnneeCourante/"+nomentreprise).subscribe(Resultat => {
             if (Resultat.status != 200) {
                 this.jBoxMessage("red", "L'entreprise existe déjà pour l'année courante !");
             } else {
