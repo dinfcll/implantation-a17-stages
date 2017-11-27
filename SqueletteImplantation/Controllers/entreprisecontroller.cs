@@ -192,8 +192,20 @@ namespace SqueletteImplantation.Controllers
 
         [HttpDelete]
         [Route("api/Entreprise/Supprimer/{ID}")]
-        public IActionResult SuprimeEntreprisebd(int ID)
+        public IActionResult SuprimeEntreprisebd(int ID)                         
         {
+            var Etudiants = from b in _maBd.Etudiant
+                           join e in _maBd.Entreprise on b.Id equals e.Id
+                           select b;
+            foreach (var Fetudiant in Etudiants)
+            {
+                Fetudiant.Id = null;
+                _maBd.Etudiant.Update(Fetudiant);
+            }
+            
+ //           var relations = from b in _maBd.RelEnseignantEntreprise
+                            
+
             var entreprise = _maBd.Entreprise.FirstOrDefault(x => x.Id == ID);
             if (entreprise == null)
                 return new NoContentResult();
