@@ -67,7 +67,7 @@ export class PageDetailEntrepriseComponent  {
             this.jBoxMessage("red", "Attention!!! Vous avez saisi un caractère non valide dans statistique de confirmation.");
         }
         else
-        {          
+        {
             this.http.put("api/entreprise/Modifier", this.entrepriseAjouter).subscribe(donne =>
             {
                 if (donne.status !== 200) {

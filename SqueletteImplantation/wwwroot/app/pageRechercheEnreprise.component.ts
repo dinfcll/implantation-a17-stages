@@ -97,24 +97,37 @@ export class pageRechercheEntrepriseComponent
                 else {
                     this.jBoxMessage("red", "Erreur lors de la suppression de l'entreprise!");
                 }
-            });
-    }}
+         });
+    }
 
     AjouterAnnee(entreprise: Entreprise)
     {
+        entreprise.nbreconfirmation = 0;
+        entreprise.nbrenon = 0;
+        entreprise.nbreoui = 0;
+        entreprise.nbreprobablementnon = 0;
+        entreprise.nbrpeutetre = 0;
         entreprise.date = this.AnneeCourante;
-        this.http.post("api/Entreprise/Ajouter", entreprise).subscribe(Result => {
-            if (Result.status == 200) {
-                this.jBoxMessage("green", "Entreprise ajoutée à l'année courante!");
+        let nomentreprise: string = entreprise.nomentreprise;
+        this.http.get("api/Entreprise/VerifAnneeCourante/"+nomentreprise).subscribe(Resultat => {
+            if (Resultat.status != 200) {
+                this.jBoxMessage("red", "L'entreprise existe déjà pour l'année courante !");
             } else {
-                this.jBoxMessage("red", "Erreur lors de l'ajout de l'entreprise à l'année courante!");
+                this.http.post("api/Entreprise/Ajouter", entreprise).subscribe(Result => {
+                    if (Result.status == 200) {
+                        this.jBoxMessage("green", "Entreprise ajoutée à l'année courante!");
+                    } else {
+                        this.jBoxMessage("red", "Erreur lors de l'ajout de l'entreprise à l'année courante!");
+                    }
+                });
             }
-        });
+            this.getEntreprise(this.Recherche, this.AnneeRecherche);
+            this.RemplirCombo()
+        });    
     }
 
     jBoxMessage(couleur: string, message: string) {
-        new jBox('Notice',
-            {
+        new jBox('Notice', {
                 content: message,
                 color: couleur,
                 autoClose: 5000
@@ -126,7 +139,7 @@ export class pageRechercheEntrepriseComponent
         url = "api/Etudiant/RemplirComboEntreprise";
         this.http.get(url).subscribe(donnees => {
             this.Tnomentreprise = donnees.json() as string[];
-            });
+        });
     }
 
     filter() {
@@ -142,7 +155,6 @@ export class pageRechercheEntrepriseComponent
     select(item: any){
         this.Recherche = item;
         this.filteredList = [];
-       
     }
 
     verifClickDansComposant(event: any){
