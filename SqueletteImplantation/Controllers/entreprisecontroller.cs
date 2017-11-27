@@ -5,6 +5,7 @@ using SqueletteImplantation.DbEntities;
 using SqueletteImplantation.DbEntities.DTOs;
 using SqueletteImplantation.DbEntities.Models;
 using System.Collections.Generic;
+using System;
 
 namespace SqueletteImplantation.Controllers
 {
@@ -130,7 +131,6 @@ namespace SqueletteImplantation.Controllers
             {
                 return NotFound();
             }
-            
             return new OkObjectResult(entreprise);
         }
         [HttpGet]
@@ -159,14 +159,26 @@ namespace SqueletteImplantation.Controllers
         [HttpPost]
         [Route("api/Entreprise/Enregistrementbd")]
         public IActionResult Enregistrementbd(Entreprise Entreprise)
-        {
+        {        
             Entreprise.Id = null;
             var resultat = _maBd.Entreprise.Add(Entreprise);
             _maBd.SaveChanges();
             return new OkObjectResult(Entreprise);
-
-
-        }       
+        }
+        [HttpGet]
+        [Route("api/Entreprise/VérifAnneeCourante/{nomentreprise}")]
+        public IActionResult VérifEntrepriseAnneeCourante(string nomentreprise)
+        {
+            DateTime DateAujourdhui = DateTime.Now;
+            string Date = DateAujourdhui.Year.ToString();
+            var EntrepriseExistante = from b in _maBd.Entreprise
+                                      where b.nomentreprise.ToUpper() == nomentreprise.ToUpper()
+                                      && b.date == Date
+                                      select b.Id;
+            if (EntrepriseExistante.Any())
+                return NoContent();
+            return new OkResult(); 
+        }
         [HttpPut]
         [Route("api/Entreprise/Modifier")]
         public IActionResult Modificationbd([FromBody]Entreprise entreprise)
