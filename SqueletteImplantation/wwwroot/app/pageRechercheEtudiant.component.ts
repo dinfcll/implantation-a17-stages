@@ -76,7 +76,9 @@ export class PageRechercheEtudiantComponent  {
         });
     } 
 
-    Supprimer(no : number): void { 
+    Supprimer(no : number,Nom:string): void { 
+        var r = confirm("Voulez-vous supprimer l'étudiant "+Nom.toString());
+    if (r == true) {
         this.http.delete("api/Etudiant/SupprimerEtudiant/" + no).subscribe(donne => {
             if (donne.status == 200) {
                 this.jBoxMessage("green", "Supression effectuée avec succès!");        
@@ -86,7 +88,7 @@ export class PageRechercheEtudiantComponent  {
                 this.jBoxMessage("red", "Erreur lors de la suppression de l'entreprise.")
             }
         });
-    }
+    }}
 
     jBoxMessage(couleur: string, message: string) {
           new jBox('Notice', {
