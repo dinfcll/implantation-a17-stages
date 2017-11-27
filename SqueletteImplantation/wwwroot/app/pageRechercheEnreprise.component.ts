@@ -1,15 +1,10 @@
+import { Component,ElementRef} from '@angular/core';
 import { Http } from '@angular/http';
+import { Router, RouterModule, Routes } from '@angular/router';
+
 import { Entreprise } from './models/entreprise.class';
 
-import { Router, RouterModule, Routes } from '@angular/router';
 declare var jBox: any;
-
-import { Component,ElementRef} from '@angular/core';
-
-
-
-
-
 
 @Component({
     selector: 'recherche_entreprise',
@@ -31,8 +26,7 @@ export class pageRechercheEntrepriseComponent
     TAnnees: string[];
     annees: string;
     Tentreprise: string[];
-    constructor(private elementRef: ElementRef,private http: Http, private router: Router)
-    {
+    constructor(private elementRef: ElementRef,private http: Http, private router: Router) {
         this.Tnomentreprise=[];
         this.entreprises=[];
         this.TAnnees=[];
@@ -43,8 +37,6 @@ export class pageRechercheEntrepriseComponent
         this.getEntreprise("","");
         this.RemplirCombo();
         this.getListeNomEntreprise();
-        
-        
     }
     
     RemplirCombo() {
@@ -54,9 +46,7 @@ export class pageRechercheEntrepriseComponent
                 if (donnees.status == 200) {
                     this.TAnnees = donnees.json() as string[]
                     this.getEntreprise(this.Recherche, this.AnneeRecherche);
-                }
-                else
-                {
+                } else {
                     this.jBoxMessage("red", "Aucune année trouvée!");
                 }
             });
@@ -83,36 +73,26 @@ export class pageRechercheEntrepriseComponent
             }
         }
         if (this.TAnnees.length != 0) {
-            this.http.get(url).subscribe(
-                donnees => 
-                {
+            this.http.get(url).subscribe(donnees => {
                     if (donnees.status == 200) {
                         this.entreprises = donnees.json() as Entreprise[];
-                    }
-                    else
-                    {
+                    } else {
                         this.jBoxMessage("red", "Aucune occurence ne peux être affichée!");
                     }
-                });
-        }
-        else
-        {
+            });
+        } else {
             this.jBoxMessage("yellow", "Aucune entreprise dans la base de donnée");
             this.entreprises = null;
         }
     }
    
-    Supprimer(ID:number)
-    {
-        this.http.delete("api/Entreprise/Supprimer/" + ID.toString()).subscribe(
-            donnee => {
-                if (donnee.status == 200)
-                {
+    Supprimer(ID:number) {
+        this.http.delete("api/Entreprise/Supprimer/" + ID.toString()).subscribe( donnee => {
+                if (donnee.status == 200) {
                     this.jBoxMessage("green", "Entreprise supprimée avec succès!");
                     this.RemplirCombo();
                 }
-                else
-                {
+                else {
                     this.jBoxMessage("red", "Erreur lors de la suppression de l'entreprise!");
                 }
             });
@@ -124,46 +104,33 @@ export class pageRechercheEntrepriseComponent
         this.http.post("api/Entreprise/Ajouter", entreprise).subscribe(Result => {
             if (Result.status == 200) {
                 this.jBoxMessage("green", "Entreprise ajoutée à l'année courante!");
-            }
-            else
-            {
+            } else {
                 this.jBoxMessage("red", "Erreur lors de l'ajout de l'entreprise à l'année courante!");
             }
         });
     }
 
-    jBoxMessage(couleur: string, message: string)
-    {
+    jBoxMessage(couleur: string, message: string) {
         new jBox('Notice',
             {
                 content: message,
                 color: couleur,
                 autoClose: 5000
-        });
+            });
     }   
 
-      
+    getListeNomEntreprise() {
+        let url: string;
+        url = "api/Etudiant/RemplirComboEntreprise";
+        this.http.get(url).subscribe(donnees => {
+            this.Tnomentreprise = donnees.json() as string[];
+            });
+    }
 
-
-          //obtenir la liste des nom d entreprise pour le dropdown
-     getListeNomEntreprise()
-     {
-         
-      // this.PageAjouter = false;
-       let url: string;
-       url = "api/Etudiant/RemplirComboEntreprise";
-       this.http.get(url).subscribe(donnees =>
-          {
-           this.Tnomentreprise = donnees.json() as string[];
-          
-          });
-          
-        
-     }
     filter() {
-        if (this.Recherche !== ""){
+        if (this.Recherche !== "") {
             this.filteredList = this.Tnomentreprise.filter(function(el:any){
-                return el.toLowerCase().indexOf(this.Recherche.toLowerCase()) > -1;
+            return el.toLowerCase().indexOf(this.Recherche.toLowerCase()) > -1;
             }.bind(this));
         }else{
             this.filteredList = [];
@@ -176,9 +143,6 @@ export class pageRechercheEntrepriseComponent
        
     }
 
-
-
-
     verifClickDansComposant(event: any){
         var clickedComponent = event.target;
         var inside = false;
@@ -188,14 +152,11 @@ export class pageRechercheEntrepriseComponent
             }
            clickedComponent = clickedComponent.parentNode;
         } while (clickedComponent);
-         if(!inside){
+         if(!inside) {
              this.filteredList = [];
          }
      }
-    
-
-
-    }
+}
 
      
 
