@@ -34,7 +34,6 @@ export class pageRechercheEntrepriseComponent
         this.AnneeRecherche = ""; 
         this.filteredList=[];
         this.Recherche = "";
-        this.getEntreprise("","");
         this.RemplirCombo();
         this.getListeNomEntreprise();
     }
@@ -74,22 +73,24 @@ export class pageRechercheEntrepriseComponent
         }
         if (this.TAnnees.length != 0) {
             this.http.get(url).subscribe(donnees => {
-                    if (donnees.status == 200) {
-                        this.entreprises = donnees.json() as Entreprise[];
-                    } else {
-                        this.jBoxMessage("red", "Aucune occurence ne peux être affichée!");
-                    }
+                if (donnees.status == 200) {
+                    this.entreprises = donnees.json() as Entreprise[];
+                } else {
+                    this.jBoxMessage("red", "Aucune occurence ne peux être affichée!");
+                }
             });
         } else {
-            this.jBoxMessage("yellow", "Aucune entreprise dans la base de donnée");
-            this.entreprises = null;
+            if (this.TAnnees.length == 0){
+                this.jBoxMessage("yellow", "Aucune entreprise dans la base de donnée");
+                this.entreprises = null;
+            }
         }
     }
    
-    Supprimer(ID:number,Nom:string) {
-        var r = confirm("Voulez-vous supprimer l'entreprise "+Nom.toString());
-    if (r == true) {
-        this.http.delete("api/Entreprise/Supprimer/" + ID.toString()).subscribe( donnee => {
+    Supprimer(ID: number, Nom: string) {
+        var r = confirm("Voulez-vous supprimer l'entreprise " + Nom.toString());
+        if (r == true) {
+            this.http.delete("api/Entreprise/Supprimer/" + ID.toString()).subscribe(donnee => {
                 if (donnee.status == 200) {
                     this.jBoxMessage("green", "Entreprise supprimée avec succès!");
                     this.RemplirCombo();
@@ -97,7 +98,7 @@ export class pageRechercheEntrepriseComponent
                 else {
                     this.jBoxMessage("red", "Erreur lors de la suppression de l'entreprise!");
                 }
-         });
+            });
         }
     }
 
