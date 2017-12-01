@@ -11,6 +11,7 @@ import { PageDetailEntrepriseComponent } from "./pageDetailsEntreprise.component
 import { pageRechercheEntrepriseComponent } from "./pageRechercheEnreprise.component";
 import { ProfilEnseignantComponent } from "./profilenseignant.component";
 
+import { pageAccueilEtudiantComponent } from "./pageAccueilEtudiant.component";
 
 
 import {PageDetailEtudiantComponent} from "./pageDetailEtudiant.component";
@@ -57,6 +58,10 @@ const appRoutes: Routes=[
       path: 'detailEtudiant/:noDa', 
       component:  PageDetailEtudiantComponent
     },
+    {
+      path: 'accueil-etudiant', 
+      component:  pageAccueilEtudiantComponent
+    }
  
   
 ]
@@ -71,7 +76,8 @@ const appRoutes: Routes=[
                   PageDetailEntrepriseComponent,
                   pageRechercheEntrepriseComponent,
                   ProfilEnseignantComponent,
-                  PageDetailEtudiantComponent ],
+                  PageDetailEtudiantComponent,
+                  pageAccueilEtudiantComponent ],
    
   bootstrap:    [ AppComponent ],
   providers:[AppService]

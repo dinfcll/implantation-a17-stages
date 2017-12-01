@@ -97,6 +97,48 @@ namespace SqueletteImplantation.Controllers
         }
 
 
+        [HttpGet]
+        [Route("api/Enseignant/{NoEns}")]
+        public IActionResult GetEnseignantParNoEns(int NoEns)
+        {
+            var enseignant = _maBd.Enseignant.FirstOrDefault(m => m.NoEnseignant == NoEns);
+
+            if (enseignant == null)
+            {
+                return NotFound();
+            }
+
+            return new OkObjectResult(enseignant);
+        }
+
+
+
+        [HttpGet]
+        [Route("api/EnseignantNomEns/{NomEns}")]
+        public IActionResult GetEnseignantParNom(string NomEns)
+        {
+            var enseignant = _maBd.Enseignant.FirstOrDefault(m => m.Nom == NomEns);
+
+            if (enseignant == null)
+            {
+                return NotFound();
+            }
+
+            return new OkObjectResult(enseignant);
+        }
+
+        [HttpGet]
+        [Route("api/Enseignant/RemplirComboEnseignant")]//pour le dropdown qui affectera un etudiant à un enseignant
+        public IEnumerable ListeEnseignant()
+        {
+            return (from b in _maBd.Enseignant
+                    
+                    select b.Nom).Distinct();
+        }
+
+
+
+
 
 
 

@@ -7,8 +7,7 @@ import {  Router }   from '@angular/router';
 import { Http, Headers } from '@angular/http';
 import {AppService} from "./app.service";
 import { Location }   from '@angular/common';
-import {RelEnseignantEtudiant} from "./models/relenseignantetudiant.class";
-import 'rxjs/add/operator/map'
+
 declare var jBox:any;
 @Component({
   selector: 'detail-etudiant',
@@ -22,46 +21,40 @@ export class PageDetailEtudiantComponent  {
     etudiant:Etudiant;
     entreprise:Entreprise;
     entreprise2:Entreprise;
-    enseignants: Enseignant[];
-    enseignants2: Enseignant[];
+    enseignant: Enseignant;
+    enseignant2: Enseignant;
+    Tnomenseignants: string[];
     ID: number;
     PageAjouter:boolean;
     PageInfo:boolean;
     PageModifier:boolean;
-    TabisChecked: boolean[];
-    TabCheckedNomEns:any[];
-                          
-    selectedItems: any = [];
-     TabRelEnsEtu:RelEnseignantEtudiant[]; 
-     relEnsEtu:RelEnseignantEtudiant;
-     selectedItemsAsupprimer: any = [];
+  
      Tnomentreprise:string[];
    
     constructor(private location: Location ,private service: AppService, private http: Http,  private router: Router){
         this.PageAjouter=false;
         this.Tnomentreprise=[];
-        this.enseignants=[];
-         this.TabisChecked=[];
-        this.TabCheckedNomEns=[];
-        this.TabRelEnsEtu=[];
+        this.Tnomenseignants=[];
+        this.enseignant=new Enseignant(-1,"", "", "", "", "");
+        this.enseignant2=new Enseignant(-1,"", "", "", "", "");
+     
         this.testModifier(); 
                             
        
-        this.etudiant = new Etudiant(-1,"","","","","","", "etudiant",null);
+        this.etudiant = new Etudiant(-1,"","","","","",null, "etudiant","",null);
         this.entreprise = new Entreprise(-1,"","","","","","",0,0,0,0,0,"");
         this.entreprise2 = new Entreprise(null,"","","","","","",0,0,0,0,0,"");
         this.ID = this.DetectionPageID();
+        this. getListeNomEnseignant();
         this.getListeNomEntreprise();
         if (this.ID != -1) {
             this.getEtudiantParNoEnt(this.ID);
-            this.getListeEnseignantParEtudiant(this.ID);
-           
-            this.TabCheckedNomEns=[];
+          
         }
         else
         {
-            this.etudiant = new Etudiant(-1,"","","","","","etudiant","",null);
-            this.getListeEnseignant();
+            this.etudiant = new Etudiant(-1,"","","","","",null,"etudiant","",null);
+          //  this.getListeEnseignant();
           
             
         }
@@ -78,9 +71,18 @@ export class PageDetailEtudiantComponent  {
           {
            this.etudiant = donnees.json() as Etudiant;
            console.log(this.etudiant.id);
-           if (this.etudiant.id!=null)
-         this.getEntrepriseParNoEnt(this.etudiant.id);
-          });
+           if (this.etudiant.id!=null){
+            this.getEntrepriseParNoEnt(this.etudiant.id);
+           }
+           if (this.etudiant.noEnseignant!=null){
+            this.getEnseignantParNoEns(this.etudiant.noEnseignant);
+          
+           }
+
+          }
+
+            
+        );
        
      }
 
@@ -119,6 +121,21 @@ export class PageDetailEtudiantComponent  {
          
        
     }
+
+    getEnseignantParNoEns(NoEns: number)
+    {
+        
+     
+      let url: string;
+      url = "api/Enseignant/"+NoEns;
+      this.http.get(url).subscribe(donnees =>
+         {
+          this.enseignant = donnees.json() as Enseignant
+         
+         });
+         
+       
+    }
    
     getListeNomEntreprise()
     {
@@ -134,7 +151,126 @@ export class PageDetailEtudiantComponent  {
          
        
     }
+
+    getListeNomEnseignant()
+    {
+        
+     
+      let url: string;
+      url = "api/Enseignant/RemplirComboEnseignant";
+      this.http.get(url).subscribe(donnees =>
+         {
+          this.Tnomenseignants = donnees.json() as string[];
+         
+         });
+         
+       
+    }
     
+    getEnseignantParNomEns(NomEns: string)
+    {
+        let url: string;
+        if(NomEns !== "")
+        {
+                        url = "api/EnseignantNomEns/" + NomEns;
+                        this.http.get(url).subscribe(donnees => {
+                        this.enseignant2 = donnees.json() as Enseignant
+                        if(donnees.status==200)
+                        {
+                            this.etudiant.noEnseignant=this.enseignant2.noEnseignant;
+                            if(this.PageModifier)
+                            {
+                               this.RequeteModif();
+
+                            }
+                            else
+                            {
+                                if(this.PageAjouter)
+                                {
+                                        this.etudiant.id=this.entreprise2.id;
+                                        
+                                        this.RequeteAjouter();
+                                 }
+                            }
+
+                        }
+                    
+                    
+                    })
+    
+      }
+      else
+      {
+                if(this.PageModifier)
+                {
+                    if(this.entreprise.nomentreprise === "")
+                        {
+                            this.etudiant.id=null;
+                        }
+                        if(this.enseignant.nom === "")
+                            {
+                                this.etudiant.noEnseignant=null;
+                            }
+                    this.RequeteModif();
+
+                }
+                else
+                {
+                        if(this.PageAjouter)
+                        {
+                            if(this.entreprise.nomentreprise === "")
+                                {
+                                    this.etudiant.id=null;
+                                }
+                                if(this.enseignant.nom === "")
+                                    {
+                                        this.etudiant.noEnseignant=null;
+                                    }
+                                    this.RequeteAjouter();
+                              
+                         }
+                }
+      }
+
+
+
+
+
+
+
+
+
+
+    }
+
+     RequeteModif()
+     {
+        this.http.put("api/Etudiant/ModifierEtudiant", this.etudiant).subscribe(donne =>
+            {
+                    if (donne.status !== 200)
+                    {
+                        this.jBoxMessage("red", "Erreur lors de la modification de l'étudiant.");
+                    }
+                    else
+                        this.jBoxMessage("green","Modification effectuée avec succès!");
+            });
+     }
+     RequeteAjouter()
+     {
+        this.http.post("api/Etudiant/EnregistrementEtudiantbd", this.etudiant).subscribe(Result =>
+            {
+                if(Result.status == 200)
+                  {
+                     
+                      this.jBoxMessage("green", "Etudiant ajoutée!");
+                  }
+            });
+     }
+
+
+
+
+
     getEntrepriseParNomEnt(NomEnt: string)
     {
         
@@ -161,31 +297,17 @@ export class PageDetailEtudiantComponent  {
                 this.validationSiEtudiantExisteEtAjoutBD(this.etudiant.noDa);
             }
             else
-                this.ModifEtudiant();
+                {
+                    if(this.PageModifier)
+                        {
+                            this.ModifEtudiant();
+                        }
+                }
        
         }
          
        
     }
-
-    getListeEnseignantParEtudiant(noDa:number) {
-        let url: string;
-       
-    
-        this.http.get("api/EtudiantList/"+noDa).subscribe(
-            donnees => {
-                this.enseignants = donnees.json() as Enseignant[]
-                console.log(this.enseignants);
-                if(donnees.status == 200)
-                    {
-                        this.getListeEnseignant();
-                    }
-               
-                
-            }
-        );
-    
-     }
 
      testModifier():void
      {
@@ -194,132 +316,28 @@ export class PageDetailEtudiantComponent  {
      }
 
 
-     
-    getListeEnseignant() {
+     /*pour dropdown enseignant*/
+    /*getListeEnseignant() {
         let url: string;
        
     
-        this.http.get("api/Enseignant/ListeEnseignant").subscribe(
+        this.http.get("api/Etudiant/RemplirComboEnseignant").subscribe(
             donnees => {
-                this.enseignants2 = donnees.json() as Enseignant[]
+                this.Tnomenseignants = donnees.json() as string[]
               
-               if(donnees.status==200)
-                {      
-                        this.selectedItemsAsupprimer=[];
-                        this.remplirTabIsChecked();
-                        this.createTabCheckedNomEnseignant();
-                }
-                console.log(this.enseignants2);
                
                 
             }
         );
     
-     }
+    }*/
 
   
-     remplirTabIsChecked()
-     {
-        let i, j:number;
-    
-         for( i=0; i<this.enseignants2.length; i++)
-            {
-               this.TabisChecked.push(false);
-            }
-
-            for( i=0; i<this.enseignants2.length; i++)
-                {
-                    for( j=0; j<this.enseignants.length; j++)
-                        {
-                           if(this.enseignants[j].nom === this.enseignants2[i].nom)
-                            {
-                                this.TabisChecked[i]=true;
-                            }
-                        }
-                }
-
-     }
-   
-     createTabCheckedNomEnseignant()
-     {
-       
-        for (var i = 0; i < this.enseignants2.length; i++) {
-            this.TabCheckedNomEns.push({
-                                 no: this.enseignants2[i].noEnseignant,
-                                 nom: this.enseignants2[i].nom,
-                                 isChecked: this.TabisChecked[i] 
-                                });
-                          
-            if(this.TabisChecked[i])
-                {
-                    this.selectedItemsAsupprimer.push(this.enseignants2[i].noEnseignant);
-                    this.selectedItems.push(this.enseignants2[i].noEnseignant);
-                }
-        }
-     }
-
-    
-
-     selectEnseignant(noEns : number, e : any) {
-        
-                var index = this.selectedItems.indexOf(noEns);
-                if (e.target.checked) {
-                    if (index === -1) {
-                        this.selectedItems.push(noEns);
-                    }
-                } else {
-                    if (index !== -1) {
-                        this.selectedItems.splice(index, 1);
-                    }
-                }
-                console.log(this.selectedItems);
-            }
-
- 
- AddRelEnsEtuBD(){
-    
-                 
-            for(var i=0; i<this.selectedItemsAsupprimer.length; i++)
-                {
-                    this.http.delete("api/relEnseignantEtudiant/SupprimerRelensetu/" + this.etudiant.noDa+"/"+ this.selectedItemsAsupprimer[i]).subscribe(Result =>
-                         {
-                             console.log(Result.status);
-                        });
-                }
-                
-     
-                 this.SaveRelEnsEtuBD();
-
-            }
-
-      SaveRelEnsEtuBD(){
-        var longueur=this.selectedItems.length;
-        for(var i=0; i<longueur; i++){
-        this.selectedItems.pop();  
-    }  
-          
-          for(var i=0; i<this.selectedItems.length; i++)
-            {
-                this.relEnsEtu=new RelEnseignantEtudiant(this.etudiant.noDa, this.selectedItems[i])
-                this.TabRelEnsEtu.push( this.relEnsEtu);
-            }
-      
-      for(var i=0; i<this.TabRelEnsEtu.length; i++)
-            {
-                this.http.post("api/Enseignant/sauvegardeRelEnseignantEtudiantbd", this.TabRelEnsEtu[i]).subscribe(Result =>
-                    {
-                        console.log(Result.status);
-                    });
-            }
-      }
+  
            
      SaveModifEtudiant(){
         
-        this.TabRelEnsEtu=[];
-        
-
-        this.AddRelEnsEtuBD(); 
-        this.remplirTabselectedItemsAsupprimer();
+    
         this.getEntrepriseParNomEnt(this.entreprise.nomentreprise);
        
 } 
@@ -327,17 +345,9 @@ export class PageDetailEtudiantComponent  {
   ModifEtudiant(){
        
         this.etudiant.id=this.entreprise2.id;
-       
+        this.getEnseignantParNomEns(this.enseignant.nom);
 
-        this.http.put("api/Etudiant/ModifierEtudiant", this.etudiant).subscribe(donne =>
-            {
-                    if (donne.status !== 200)
-                    {
-                        this.jBoxMessage("red", "Erreur lors de la modification de l'étudiant.");
-                    }
-                    else
-                        this.jBoxMessage("green","Modification effectuée avec succès!");
-            });
+      
   }
      
      jBoxMessage(couleur: string, message: string) {
@@ -351,20 +361,12 @@ export class PageDetailEtudiantComponent  {
 
          
 
-          remplirTabselectedItemsAsupprimer(){
-                    var longueur=this.selectedItemsAsupprimer.length;
-                    for(var i=0; i<longueur; i++){
-                    this.selectedItemsAsupprimer.pop();  
-                }  
-                    for(var i=0; i<this.selectedItems.length; i++){
-                        this.selectedItemsAsupprimer.push(this.selectedItems[i]);
-                    }
-
-          }
-       
+         
+       /********************************************* */
 
           Ajouter()
           {
+              
             this.validationChampSaisi();
             if(!this. validationChampSaisi())
                 {
@@ -390,9 +392,7 @@ export class PageDetailEtudiantComponent  {
                         .post("api/EtudiantConnecte", JSON.stringify({noDa: noDa}), { headers: headers })
                         .subscribe(r=>
                         {
-                        
-                        
-
+                       
                             if(r.status == 200)
                                 {
                                    
@@ -402,26 +402,8 @@ export class PageDetailEtudiantComponent  {
                             
                             else
                                 {
-                                    
-                                    if(r.status == 204)
-                                        {
-                          
-                                         this.etudiant.id=this.entreprise2.id;
-                                        
-                                       
-                                        this.http.post("api/Etudiant/EnregistrementEtudiantbd", this.etudiant).subscribe(Result =>
-                                            {
-                                                if(Result.status == 200)
-                                                  {
-                                                      this.SaveRelEnsEtuBD();
-                                                      this.jBoxMessage("green", "Etudiant ajoutée!");
-                                                  }
-                                            });
-
-
-
-
-                                        }
+                                    this.getEnseignantParNomEns(this.enseignant.nom);
+                                   
                                     
                                 }
                                 

@@ -4,7 +4,7 @@ import { Http } from '@angular/http';
 import { Etudiant } from './models/etudiant.class';
 import {AppService} from "./app.service";
 import { Component,ElementRef  } from '@angular/core';
-
+import { Enseignant } from './models/enseignant.class';
 import {  Router, RouterModule, Routes}   from '@angular/router';
 declare var jBox:any;
 @Component({
@@ -21,9 +21,9 @@ export class PageRechercheEtudiantComponent  {
     filteredList:any[];
     Tnometudiant: string[];
     
-// PageModifier:boolean;
+
   etudiants: Etudiant[];
-  //selectedItems: any = [];
+  
   annees: string;
   Recherche: string;
   TAnnees: String[];
@@ -141,11 +141,7 @@ jBoxMessage(couleur: string, message: string) {
       }
 
 
-/*testModifier():void
-{
-    this.service.currentPageModif.subscribe(pageModifier=>this.PageModifier=pageModifier);
-    console.log(this.PageModifier)
-}*/
+
 
 PageModif():void
 {
@@ -163,9 +159,7 @@ AutocompleteEtudiant() {
             console.log(this.Tnometudiant);
         });
     } 
-/*listeFiltre(){
 
-}*/
 
 filter() {
     if (this.Recherche !== ""){
