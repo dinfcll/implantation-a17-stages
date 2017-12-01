@@ -1,10 +1,12 @@
 ﻿<div *ngIf="entrepriseAjouter" class="container" id="principal">
     <div class="jumbotron scroll-area">
 
-
+        <div *ngIf="PageDetail" class="form-group row">
+            <h2 class="col-sm-12 col-xs-12 col-lg-12 col-md-12 col-form-label">Détails de l'entreprise {{entrepriseAjouter.nomentreprise}}</h2>
+        </div>      
            
      <div *ngIf="!PageAjouter" class="form-group row">  
-           <h2 *ngIf="!PageAjouter" class="col-sm-12 col-xs-12 col-lg-12 col-md-12 col-form-label">informations sur l'entreprise{{entrepriseAjouter.nomentreprise}}</h2>
+           <h2 *ngIf="!PageAjouter" class="col-sm-12 col-xs-12 col-lg-12 col-md-12 col-form-label">Modification de l'entreprise {{entrepriseAjouter.nomentreprise}}</h2>
         </div>      
            
         <div *ngIf="PageAjouter" class="form-group row">     
@@ -75,17 +77,17 @@
                     <input class="nbre"  type="text" [(ngModel)]="entrepriseAjouter.nbrenon"  placeholder="Nombre de non" />
             </div> 
         </div>
-        <div  class="form-group row" *ngIf="PageAjouter == false">
-            <a  class="btn icon-btn btn-primary" id="Modifier" (click)="Modifier()"><i class="fa fa-floppy-o"></i>Sauvegarder</a>
-        </div>
-        <div class="form-group row">
-                    <button  class="btn icon-btn btn-primary" *ngIf="PageAjouter == true" (click)="Ajouter()"><li><i class="fa fa-floppy-o"></i>Sauvegarder</button>
-        </div>
-       
-        <div class="form-group row">
-                <button class="btn icon-btn btn-warning btn-circle btn-xl"   (click)="goBack()"><li><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
+        <div *ngIf="!PageDetail">
+            <div class="form-group row" *ngIf="PageAjouter == false">
+                <a class="btn icon-btn btn-primary" id="Modifier" (click)="Modifier()"><i class="fa fa-floppy-o"></i>Sauvegarder</a>
+            </div>
+            <div class="form-group row">
+                <button class="btn icon-btn btn-primary" *ngIf="PageAjouter == true" (click)="Ajouter()"><i class="fa fa-floppy-o"></i>Sauvegarder</button>
+            </div>
 
-          </div>
-
+            <div class="form-group row">
+                <button class="btn icon-btn btn-warning btn-circle btn-xl" (click)="goBack()"><li><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
+            </div>
+        </div>
     </div> 
 </div>

@@ -14,6 +14,7 @@ import { ProfilEnseignantComponent } from "./profilenseignant.component";
 import { PageDetailEtudiantComponent } from "./pageDetailEtudiant.component";
 
 import { AppService } from "./app.service";
+import { AppServiceDetail } from "./app.ServiceDetail";
 
 const appRoutes: Routes = [
   {
@@ -74,7 +75,7 @@ const appRoutes: Routes = [
                   PageDetailEtudiantComponent ],
    
   bootstrap:    [ AppComponent ],
-  providers:[AppService]
+  providers: [AppService]
 })
 
 export class AppModule { }

@@ -5,7 +5,7 @@ import {  Router, RouterModule, Routes, ActivatedRoute, ParamMap}   from '@angul
 import { Location }   from '@angular/common';
 declare var jBox:any;
 import { Entreprise } from './models/entreprise.class';
-
+import { AppService} from './app.service';
 
 @Component({
   selector: 'detail-entreprise',
@@ -16,50 +16,38 @@ import { Entreprise } from './models/entreprise.class';
 })
 export class PageDetailEntrepriseComponent  {
     entrepriseAjouter:Entreprise;
-    ID: number;
     PageAjouter: boolean;
+    PageDetail: boolean;
 
-    
-    constructor(private http: Http, private router: Router,private location: Location)
-    {
-        this.ID = this.DetectionPageID();
-        if (this.ID != -1) {
-            this.getEntrepriseParNoEnt(this.ID);
-        }
-        else
-        {
-            this.entrepriseAjouter = new Entreprise(-1,"","","","","","",0,0,0,0,0,"");
-        }
-
-    }
-    
-    getEntrepriseParNoEnt(NoEnt: number)
-    {
-      this.PageAjouter = false;
-      let url: string;
-      url = "api/Entreprise/"+NoEnt;
-      this.http.get(url).subscribe(donnees =>
-         {
-          this.entrepriseAjouter = donnees.json() as Entreprise
-         });
-    
-    }
-    
-    DetectionPageID (): number 
+    constructor(private http: Http, private router: Router, private location: Location, private appservice: AppService)
     {
         let CheminLong: string = this.router.url.toString();
         let Page: string[];
-        let idStr:string;
-        let id:number;
+        let idStr: string;
+        let id: number;
+        this.PageAjouter = false;
+        this.RecupererFlag();
         Page = CheminLong.split('/');
-        idStr=Page[Page.length-1]
-        id = +idStr;
+        id = +Page[Page.length - 1];
         if (id == -1) {
+            this.entrepriseAjouter = new Entreprise(-1, "", "", "", "", "", "", 0, 0, 0, 0, 0, "");
             this.PageAjouter = true;
+        } else {
+            this.getEntrepriseParNoEnt(id);
         }
-        return id;
     }
 
+    getEntrepriseParNoEnt(ID:number)
+    {
+      this.PageAjouter = false;
+      let url: string;
+      url = "api/Entreprise/" + ID;
+      this.http.get(url).subscribe(donnees => {
+          this.entrepriseAjouter = donnees.json() as Entreprise
+      });
+    
+    }
+    
     Modifier(): void
     {
         if (!this.validation())
@@ -108,7 +96,7 @@ export class PageDetailEntrepriseComponent  {
     goBack(): void
     {
         this.location.back();
-        
+        this.appservice.changeFlag(false);
     }
 
 
@@ -142,5 +130,10 @@ export class PageDetailEntrepriseComponent  {
           color: couleur,
           autoClose: 5000
       });
+    }
+  RecupererFlag():void
+  {
+      this.appservice.currentPageModif.subscribe(pageDetail => this.PageDetail = pageDetail);
+      console.log(this.PageDetail);
   }
 }

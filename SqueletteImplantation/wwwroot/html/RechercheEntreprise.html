@@ -62,7 +62,7 @@
             </thead>
             <tbody>
                 <tr *ngFor="let entreprise of entreprises">
-                    <td> {{entreprise.nomentreprise }}</td>
+                    <td  [routerLink]="['/detailEntreprise', entreprise.id]" routerLinkActive="active" (click)="ModifierFlagAppServiceDetail()"> {{entreprise.nomentreprise}}</td>
                     <td> {{entreprise.lieu}}</td>
                     <td> {{entreprise.notel }}</td>
                     <td> {{entreprise.poste}}</td>
@@ -72,7 +72,7 @@
                     <td> {{entreprise.courrielres}}</td>
                     <td> {{entreprise.date}}</td>
                     <td><button class="btn icon-btn btn-danger" (click)="Supprimer(entreprise.id,entreprise.nomentreprise);"><span class="glyphicon btn-glyphicon glyphicon-trash img-circle"></span>Supprimer</button></td>
-                    <td><button class="btn icon-btn btn-primary" *ngIf="entreprise.date==AnneeCourante" [routerLink]="['/detailEntreprise', entreprise.id]" routerLinkActive="active"><i class="fa fa-pencil fa-fw"></i>Modifier</button> </td>
+                    <td><button class="btn icon-btn btn-primary" *ngIf="entreprise.date==AnneeCourante"  [routerLink]="['/detailEntreprise', entreprise.id]" routerLinkActive="active"><i class="fa fa-pencil fa-fw"></i>Modifier</button> </td>
                     <td><button class="btn icon-btn btn-info" *ngIf="entreprise.date!=AnneeCourante" id="AjouterAnnee" (click)="AjouterAnnee(entreprise)">Ajouter à l'année courante</button></td>
                     <td><button class="btn icon-btn btn-block" (click)='getEntreprise(entreprise.nomentreprise,"")'>Consulter toutes les années</button></td>
                 </tr>

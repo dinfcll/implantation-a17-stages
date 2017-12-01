@@ -212,7 +212,6 @@ namespace SqueletteImplantation.Controllers
             var resultat = _maBd.Entreprise.Remove(entreprise);
             _maBd.SaveChanges();
             return new OkResult();
-
         }
         [HttpPost]
         [Route("api/Entreprise/Ajouter")]
