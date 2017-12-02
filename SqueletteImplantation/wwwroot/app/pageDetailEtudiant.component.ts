@@ -41,7 +41,7 @@ export class PageDetailEtudiantComponent  {
         this.testModifier(); 
                             
        
-        this.etudiant = new Etudiant(-1,"","","","","",null, "etudiant","",null);
+        this.etudiant = new Etudiant(-1,"","","","","","",null, "etudiant","",null);
         this.entreprise = new Entreprise(-1,"","","","","","",0,0,0,0,0,"");
         this.entreprise2 = new Entreprise(null,"","","","","","",0,0,0,0,0,"");
         this.ID = this.DetectionPageID();
@@ -53,7 +53,7 @@ export class PageDetailEtudiantComponent  {
         }
         else
         {
-            this.etudiant = new Etudiant(-1,"","","","","",null,"etudiant","",null);
+            this.etudiant = new Etudiant(-1,"","","","","","",null,"etudiant","",null);
           //  this.getListeEnseignant();
           
             
@@ -316,23 +316,7 @@ export class PageDetailEtudiantComponent  {
      }
 
 
-     /*pour dropdown enseignant*/
-    /*getListeEnseignant() {
-        let url: string;
-       
     
-        this.http.get("api/Etudiant/RemplirComboEnseignant").subscribe(
-            donnees => {
-                this.Tnomenseignants = donnees.json() as string[]
-              
-               
-                
-            }
-        );
-    
-    }*/
-
-  
   
            
      SaveModifEtudiant(){

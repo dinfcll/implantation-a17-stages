@@ -147,10 +147,10 @@ PageModif():void
 {
     this.service.changeFlag(true);
 }
-PageInfo():void
+/*PageInfo():void
 {
     this.service.changeFlag(false);
-}
+}*/
 
 AutocompleteEtudiant() {
     this.http.get("api/Etudiant/autocomplete").subscribe(

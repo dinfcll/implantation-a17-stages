@@ -10,6 +10,7 @@ export class Etudiant {
                     public  addresseCourriel: string,
                     public  annee: string,
                     public  profil: string, 
+                    public  pathCV: string,
                     public noEnseignant: number,
                     public motPasse: string,
                     public noTel: string, 

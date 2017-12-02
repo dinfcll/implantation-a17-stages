@@ -5,6 +5,11 @@ using SqueletteImplantation.DbEntities.DTOs;
 using SqueletteImplantation.DbEntities.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using System;
+
 namespace SqueletteImplantation.Controllers
  
 {
@@ -12,9 +17,12 @@ namespace SqueletteImplantation.Controllers
     {
         private readonly MaBd _maBd;
 
-        public EtudiantController(MaBd maBd)
+        private readonly UploadService _uploadService;
+
+        public EtudiantController(MaBd maBd, UploadService uploadService)
         {
             _maBd = maBd;
+            _uploadService = uploadService;
         }
 
         [HttpGet]
@@ -455,7 +463,30 @@ namespace SqueletteImplantation.Controllers
             return new OkObjectResult(entreprise);
         }
 
-        
+
+        [HttpPost]
+        [Route("api/ajoutfichier")]
+        public IActionResult UploadFichierSurServeur(IList<IFormFile> cv)
+        {
+            string NomCV;
+            string Date = DateTime.Now.ToString("h_mm_ss_");
+
+            if (cv.Count == 1 && cv[0] != null)
+            {
+                NomCV = Date + cv[0].FileName;
+
+                if (_uploadService.upload(cv[0], UploadFile.Chemin + NomCV))
+                {
+                    return new OkObjectResult(UploadFile.Chemin + NomCV);
+                }
+            }
+            return new BadRequestResult();
+        }
+
+
+
+
+
 
 
 

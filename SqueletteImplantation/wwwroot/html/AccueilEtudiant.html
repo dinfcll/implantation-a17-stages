@@ -17,3 +17,7 @@
 {{etu.id}}
 <br/>
 {{etu.noTel}}
+<br/>
+<input type="file" name="file" id="file" class="inputfile"  (change)="fileChange($event)" accept=".pdf,.doc,.docx,.jpg,.png"/>
+<br/>
+<input type="button" value="soumettre"id="btnAjouterTrace" (click)="onClickAddTrace()">
