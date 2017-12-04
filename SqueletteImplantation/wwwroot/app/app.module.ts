@@ -14,7 +14,6 @@ import { ProfilEnseignantComponent } from "./profilenseignant.component";
 import { PageDetailEtudiantComponent } from "./pageDetailEtudiant.component";
 
 import { AppService } from "./app.service";
-import { AppServiceDetail } from "./app.ServiceDetail";
 
 const appRoutes: Routes = [
   {

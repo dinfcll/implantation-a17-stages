@@ -1,4 +1,4 @@
-<div>
+<div id="principalDiv">
     <div class="form-group row"> 
         <input class="col-sm-2 col-xs-2 col-lg-2 col-md-2  col-form-label row"  type="text" placeholder="Recherche" id="recherche" [(ngModel)]="Recherche" (keyup.enter)="getEntreprise(Recherche,annees)" (keyup)="filter()">
         <select class="custom-select" [(ngModel)]="annees">

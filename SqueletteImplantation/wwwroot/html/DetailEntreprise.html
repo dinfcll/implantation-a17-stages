@@ -1,4 +1,5 @@
-﻿<div *ngIf="entrepriseAjouter" class="container" id="principal">
+﻿
+<div *ngIf="entrepriseAjouter" class="container" id="principal">
     <div class="jumbotron scroll-area">
 
         <div *ngIf="PageDetail" class="form-group row">
@@ -75,7 +76,20 @@
             </div> 
             <div  class="col-sm-2 col-xs-2 col-lg-2 col-md-2">
                     <input class="nbre"  type="text" [(ngModel)]="entrepriseAjouter.nbrenon"  placeholder="Nombre de non" />
-            </div> 
+            </div>
+           
+        </div>
+        <div class="container row">
+            <table *ngIf="PageDetail">
+                <tr>
+                    <th>Nom</th>
+                    <th>Courriel</th>
+                </tr>
+                <tr *ngFor="let enseignant of TEnseignant">
+                    <td>{{enseignant.nom}} {{enseignant.prenom}}</td>
+                    <td>{{enseignant.courriel}}</td>
+                </tr>
+            </table>
         </div>
         <div *ngIf="!PageDetail">
             <div class="form-group row" *ngIf="PageAjouter == false">

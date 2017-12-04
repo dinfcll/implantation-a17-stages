@@ -110,6 +110,7 @@ export class pageRechercheEntrepriseComponent
         entreprise.nbreprobablementnon = 0;
         entreprise.nbrpeutetre = 0;
         entreprise.date = this.AnneeCourante;
+        entreprise.id = null;
         let nomentreprise: string = entreprise.nomentreprise;
         this.http.get("api/Entreprise/VerifAnneeCourante/"+nomentreprise).subscribe(Resultat => {
             if (Resultat.status != 200) {

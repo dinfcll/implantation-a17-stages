@@ -24,9 +24,9 @@ namespace SqueletteImplantation.Controllers
         public IActionResult EntrepriseAnnee()
         {
             var AnneeRecente = (from b in _maBd.Entreprise select b.date).Max();
-            var resultat =from b in _maBd.Entreprise
-                   where b.date.Contains(AnneeRecente.ToString())
-                   select b;
+            var resultat = from b in _maBd.Entreprise
+                           where b.date.Contains(AnneeRecente.ToString())
+                           select b;
             if (resultat == null)
                 return NotFound();
             return new OkObjectResult(resultat);
@@ -36,9 +36,9 @@ namespace SqueletteImplantation.Controllers
         [Route("api/Entreprise/RechercheAnnee/{annees}")]
         public IActionResult EntrepriseRechercheAnnee(string annees)
         {
-                var Resultat = from b in _maBd.Entreprise
-                   where b.date.Contains(annees.ToString())
-                   select b;
+            var Resultat = from b in _maBd.Entreprise
+                           where b.date.Contains(annees.ToString())
+                           select b;
             if (Resultat == null)
                 return NotFound();
             return new OkObjectResult(Resultat);
@@ -50,26 +50,26 @@ namespace SqueletteImplantation.Controllers
         {
             recherchetxtbox = recherchetxtbox.ToUpper();
             var Resultat = from b in _maBd.Entreprise
-                   where
-                   b.lieu.ToUpper().Contains(recherchetxtbox) ||
-                   b.notel.ToUpper().Contains(recherchetxtbox) ||
-                   b.personneresponsable.ToUpper().Contains(recherchetxtbox) ||
-                   b.poste.ToUpper().Contains(recherchetxtbox)
-                   || b.nomentreprise.ToUpper().Contains(recherchetxtbox)
-                   orderby b.date
-                   select new
-                   {
-                       b.nomentreprise,
-                       b.lieu,
-                       b.notel,
-                       b.poste,
-                       b.personneresponsable,
-                       b.nbrenon,
-                       b.nbreoui,
-                       b.courrielres,
-                       b.date,
-                       b.Id
-                   };
+                           where
+                           b.lieu.ToUpper().Contains(recherchetxtbox) ||
+                           b.notel.ToUpper().Contains(recherchetxtbox) ||
+                           b.personneresponsable.ToUpper().Contains(recherchetxtbox) ||
+                           b.poste.ToUpper().Contains(recherchetxtbox)
+                           || b.nomentreprise.ToUpper().Contains(recherchetxtbox)
+                           orderby b.date
+                           select new
+                           {
+                               b.nomentreprise,
+                               b.lieu,
+                               b.notel,
+                               b.poste,
+                               b.personneresponsable,
+                               b.nbrenon,
+                               b.nbreoui,
+                               b.courrielres,
+                               b.date,
+                               b.Id
+                           };
             if (Resultat == null)
                 return NotFound();
             return new OkObjectResult(Resultat);
@@ -80,27 +80,27 @@ namespace SqueletteImplantation.Controllers
         public IActionResult Recherche(string recherchetxtbox, string annees)
         {
             recherchetxtbox = recherchetxtbox.ToUpper();
-            var Resultat= from b in _maBd.Entreprise
-                   where b.date.Contains(annees) && (
-                   b.lieu.ToUpper().Contains(recherchetxtbox) ||
-                   b.notel.ToUpper().Contains(recherchetxtbox) ||
-                   b.personneresponsable.ToUpper().Contains(recherchetxtbox) ||
-                   b.poste.ToUpper().Contains(recherchetxtbox))
-                   || b.nomentreprise.ToUpper().Contains(recherchetxtbox)
-                   orderby b.date
-                   select new
-                   {
-                       b.nomentreprise,
-                       b.lieu,
-                       b.notel,
-                       b.poste,
-                       b.personneresponsable,
-                       b.nbrenon,
-                       b.nbreoui,
-                       b.courrielres,
-                       b.date,
-                       b.Id
-                   };
+            var Resultat = from b in _maBd.Entreprise
+                           where b.date.Contains(annees) && (
+                           b.lieu.ToUpper().Contains(recherchetxtbox) ||
+                           b.notel.ToUpper().Contains(recherchetxtbox) ||
+                           b.personneresponsable.ToUpper().Contains(recherchetxtbox) ||
+                           b.poste.ToUpper().Contains(recherchetxtbox))
+                           || b.nomentreprise.ToUpper().Contains(recherchetxtbox)
+                           orderby b.date
+                           select new
+                           {
+                               b.nomentreprise,
+                               b.lieu,
+                               b.notel,
+                               b.poste,
+                               b.personneresponsable,
+                               b.nbrenon,
+                               b.nbreoui,
+                               b.courrielres,
+                               b.date,
+                               b.Id
+                           };
             if (Resultat == null)
             {
                 return NotFound();
@@ -113,13 +113,13 @@ namespace SqueletteImplantation.Controllers
         public IActionResult ListeAnnees()
         {
             var Resultat = (from b in _maBd.Entreprise
-                    orderby b.date descending
-                    select b.date).Distinct();
+                            orderby b.date descending
+                            select b.date).Distinct();
             if (Resultat == null)
             {
                 return NotFound();
             }
-             return new OkObjectResult(Resultat);
+            return new OkObjectResult(Resultat);
         }
         [HttpGet]
         [Route("api/EntrepriseNomEnt/{NomEnt}")]
@@ -159,7 +159,7 @@ namespace SqueletteImplantation.Controllers
         [HttpPost]
         [Route("api/Entreprise/Enregistrementbd")]
         public IActionResult Enregistrementbd(Entreprise Entreprise)
-        {        
+        {
             Entreprise.Id = null;
             var resultat = _maBd.Entreprise.Add(Entreprise);
             _maBd.SaveChanges();
@@ -177,7 +177,7 @@ namespace SqueletteImplantation.Controllers
                                       select b.Id;
             if (EntrepriseExistante.Any())
                 return NoContent();
-            return new OkResult(); 
+            return new OkResult();
         }
         [HttpPut]
         [Route("api/Entreprise/Modifier")]
@@ -192,15 +192,15 @@ namespace SqueletteImplantation.Controllers
 
         [HttpDelete]
         [Route("api/Entreprise/Supprimer/{ID}")]
-        public IActionResult SuprimeEntreprisebd(int ID)                         
+        public IActionResult SuprimeEntreprisebd(int ID)
         {
             var entreprise = _maBd.Entreprise.FirstOrDefault(x => x.Id == ID);
             if (entreprise == null)
                 return new NoContentResult();
 
             var Etudiants = from b in _maBd.Etudiant
-                           join e in _maBd.Entreprise on b.Id equals e.Id
-                           select b;
+                            join e in _maBd.Entreprise on b.Id equals e.Id
+                            select b;
             if (Etudiants != null)
             {
                 foreach (var Fetudiant in Etudiants)
@@ -219,10 +219,20 @@ namespace SqueletteImplantation.Controllers
         {
             entreprise.Id = null;
             var Result = _maBd.Entreprise.Add(entreprise);
-             _maBd.SaveChanges();
+            _maBd.SaveChanges();
             if (Result == null)
                 return NotFound();
             return new OkResult();
+        }
+        [HttpGet]
+        [Route("api/Entreprise/EnseignantID/{ID}")]
+        public IActionResult ToutEnseignantEntreprise(int ID)
+        {
+            var Resultat = from b in _maBd.RelEnseignantEntreprise
+                           join ens in _maBd.Enseignant on b.NoEnseignant equals ens.NoEnseignant
+                           where b.Id == ID
+                           select ens; // dto
+            return new OkObjectResult(Resultat);
         }
 
     }

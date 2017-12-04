@@ -3,7 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import {  Router, RouterModule, Routes, ActivatedRoute, ParamMap}   from '@angular/router';
 import { Location }   from '@angular/common';
-declare var jBox:any;
+declare var jBox: any;
+import { Enseignant} from './models/enseignant.class';
 import { Entreprise } from './models/entreprise.class';
 import { AppService} from './app.service';
 
@@ -18,7 +19,7 @@ export class PageDetailEntrepriseComponent  {
     entrepriseAjouter:Entreprise;
     PageAjouter: boolean;
     PageDetail: boolean;
-
+    TEnseignant: Enseignant[];
     constructor(private http: Http, private router: Router, private location: Location, private appservice: AppService)
     {
         let CheminLong: string = this.router.url.toString();
@@ -44,6 +45,9 @@ export class PageDetailEntrepriseComponent  {
       url = "api/Entreprise/" + ID;
       this.http.get(url).subscribe(donnees => {
           this.entrepriseAjouter = donnees.json() as Entreprise
+          if (this.PageDetail) {
+              this.RechercherEnseignantEntreprise();
+          }
       });
     
     }
@@ -131,9 +135,20 @@ export class PageDetailEntrepriseComponent  {
           autoClose: 5000
       });
     }
-  RecupererFlag():void
-  {
+  RecupererFlag():void {
       this.appservice.currentPageModif.subscribe(pageDetail => this.PageDetail = pageDetail);
-      console.log(this.PageDetail);
+  }
+
+  RechercherEnseignantEntreprise()
+  {
+      console.log('Bonjour!');
+      this.http.get('api/Entreprise/EnseignantID/' + this.entrepriseAjouter.id.toString()).subscribe(Resultat => {
+          if (Resultat.status != 200) {
+              this.jBoxMessage("red", "Erreur lors de la recherche des enseignants en relation avec l'entreprise");
+          } else {
+              this.TEnseignant = Resultat.json() as Enseignant[];
+              console.log("HELLO");
+          }
+      });
   }
 }
