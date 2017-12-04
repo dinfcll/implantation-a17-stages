@@ -82,5 +82,12 @@
     text-align: center;
     border-radius: 10px;
 }
+#principal[_ngcontent-c0] tbody {
+    background-color: #FFFFFF;
+    border: 1px solid #6495ed;
+    overflow-y: auto;
+    overflow: scroll;
+    height: 50px;
+}
 
 
