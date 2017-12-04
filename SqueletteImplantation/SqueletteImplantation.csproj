@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <Content Include="wwwroot\app\pageGestionEnseignant.component.ts" />
+    <Content Include="wwwroot\html\gestiondenseignant.html" />
     <Content Include="wwwroot\html\GestionEnseignant.html" />
   </ItemGroup>
 
