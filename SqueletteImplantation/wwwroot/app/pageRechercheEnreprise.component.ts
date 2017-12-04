@@ -177,8 +177,8 @@ export class pageRechercheEntrepriseComponent
              this.filteredList = [];
          }
     }
-    ModifierFlagAppServiceDetail() {
 
+    ModifierFlagAppServiceDetail() {
         this.appservice.changeFlag(true);
     }
 }
