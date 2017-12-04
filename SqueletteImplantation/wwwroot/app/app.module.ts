@@ -74,7 +74,7 @@ const appRoutes: Routes = [
                   PageDetailEtudiantComponent ],
    
   bootstrap:    [ AppComponent ],
-  providers:[AppService]
+  providers: [AppService]
 })
 
 export class AppModule { }

@@ -1,7 +1,7 @@
 import { Component,ElementRef} from '@angular/core';
 import { Http } from '@angular/http';
 import { Router, RouterModule, Routes } from '@angular/router';
-
+import { AppService } from './app.service';
 import { Entreprise } from './models/entreprise.class';
 
 declare var jBox: any;
@@ -26,7 +26,7 @@ export class pageRechercheEntrepriseComponent
     TAnnees: string[];
     annees: string;
     Tentreprise: string[];
-    constructor(private elementRef: ElementRef,private http: Http, private router: Router) {
+    constructor(private elementRef: ElementRef, private http: Http, private router: Router, private appservice: AppService) {
         this.Tnomentreprise=[];
         this.entreprises=[];
         this.TAnnees=[];
@@ -36,6 +36,7 @@ export class pageRechercheEntrepriseComponent
         this.Recherche = "";
         this.RemplirCombo();
         this.getListeNomEntreprise();
+        this.appservice.changeFlag(false);
     }
     
     RemplirCombo() {
@@ -110,21 +111,23 @@ export class pageRechercheEntrepriseComponent
         entreprise.nbreprobablementnon = 0;
         entreprise.nbrpeutetre = 0;
         entreprise.date = this.AnneeCourante;
+        entreprise.id = null;
         let nomentreprise: string = entreprise.nomentreprise;
         this.http.get("api/Entreprise/VerifAnneeCourante/"+nomentreprise).subscribe(Resultat => {
             if (Resultat.status != 200) {
                 this.jBoxMessage("red", "L'entreprise existe déjà pour l'année courante !");
+                entreprise.date = "";
             } else {
                 this.http.post("api/Entreprise/Ajouter", entreprise).subscribe(Result => {
                     if (Result.status == 200) {
                         this.jBoxMessage("green", "Entreprise ajoutée à l'année courante!");
+                        this.getEntreprise(this.Recherche, this.AnneeRecherche);
+                        this.RemplirCombo();
                     } else {
                         this.jBoxMessage("red", "Erreur lors de l'ajout de l'entreprise à l'année courante!");
                     }
                 });
             }
-            this.getEntreprise(this.Recherche, this.AnneeRecherche);
-            this.RemplirCombo()
         });    
     }
 
@@ -171,7 +174,11 @@ export class pageRechercheEntrepriseComponent
          if(!inside) {
              this.filteredList = [];
          }
-     }
+    }
+    ModifierFlagAppServiceDetail() {
+
+        this.appservice.changeFlag(true);
+    }
 }
 
      
