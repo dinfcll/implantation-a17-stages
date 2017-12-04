@@ -9,6 +9,7 @@ import { LoginEnseignantComponent }  from './loginenseignant.component';
 import { PageRechercheEtudiantComponent } from "./pageRechercheEtudiant.component";
 import { pageAccueilEnseignantComponent } from "./pageAccueilEnseignant.component";
 import { PageDetailEntrepriseComponent } from "./pageDetailsEntreprise.component";
+import { GestionEnseignant } from "./pageGestionEnseignant.component"
 import { pageRechercheEntrepriseComponent } from "./pageRechercheEnreprise.component";
 import { ProfilEnseignantComponent } from "./profilenseignant.component";
 import { PageDetailEtudiantComponent } from "./pageDetailEtudiant.component";
@@ -56,24 +57,26 @@ const appRoutes: Routes = [
     {
       path: 'detailEtudiant/:noDa', 
       component:  PageDetailEtudiantComponent
-    },
- 
-  
-]
+  },
+    {
+        path: 'gestionenseignant',
+        component: GestionEnseignant
 
+    }]
 
 @NgModule({
   imports:      [ BrowserModule, FormsModule,HttpModule,  RouterModule.forRoot(appRoutes) ],
   declarations: [ AppComponent,
                   LoginEnseignantComponent,
                   pageAccueilEnseignantComponent,
-                  PageRechercheEtudiantComponent,
                   PageDetailEntrepriseComponent,
+                  PageRechercheEtudiantComponent,
                   pageRechercheEntrepriseComponent,
                   ProfilEnseignantComponent,
-                  PageDetailEtudiantComponent ],
+                  PageDetailEtudiantComponent,
+                  GestionEnseignant],
    
-  bootstrap:    [ AppComponent ],
+  bootstrap: [ AppComponent ],
   providers: [AppService]
 })
 
