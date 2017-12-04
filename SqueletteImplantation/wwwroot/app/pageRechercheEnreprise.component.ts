@@ -104,30 +104,33 @@ export class pageRechercheEntrepriseComponent
 
     AjouterAnnee(entreprise: Entreprise)
     {
+        let DateBase = entreprise.date;
         entreprise.nbreconfirmation = 0;
         entreprise.nbrenon = 0;
         entreprise.nbreoui = 0;
         entreprise.nbreprobablementnon = 0;
         entreprise.nbrpeutetre = 0;
-        entreprise.date = this.AnneeCourante;
         entreprise.id = null;
         let nomentreprise: string = entreprise.nomentreprise;
         this.http.get("api/Entreprise/VerifAnneeCourante/"+nomentreprise).subscribe(Resultat => {
             if (Resultat.status != 200) {
-                this.jBoxMessage("red", "L'entreprise existe déjà pour l'année courante !");
-                entreprise.date = "";
+                this.jBoxMessage("red", "L'entreprise existe déjà pour l'année courante !"); 
             } else {
+                entreprise.date = this.AnneeCourante;
                 this.http.post("api/Entreprise/Ajouter", entreprise).subscribe(Result => {
                     if (Result.status == 200) {
                         this.jBoxMessage("green", "Entreprise ajoutée à l'année courante!");
-                        this.getEntreprise(this.Recherche, this.AnneeRecherche);
-                        this.RemplirCombo();
+                        if (this.TAnnees.indexOf(this.AnneeCourante) == -1) {
+                            this.TAnnees.push(this.AnneeCourante);
+                        }
                     } else {
                         this.jBoxMessage("red", "Erreur lors de l'ajout de l'entreprise à l'année courante!");
                     }
                 });
+                entreprise.date = DateBase;
             }
-        });    
+        });
+        
     }
 
     jBoxMessage(couleur: string, message: string) {
