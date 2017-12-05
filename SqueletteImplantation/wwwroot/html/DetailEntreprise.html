@@ -6,8 +6,8 @@
             <h2 class="col-sm-12 col-xs-12 col-lg-12 col-md-12 col-form-label">Détails de l'entreprise {{entrepriseAjouter.nomentreprise}}</h2>
         </div>      
            
-     <div *ngIf="!PageAjouter" class="form-group row">  
-           <h2 *ngIf="!PageAjouter" class="col-sm-12 col-xs-12 col-lg-12 col-md-12 col-form-label">Modification de l'entreprise {{entrepriseAjouter.nomentreprise}}</h2>
+     <div *ngIf="!PageAjouter && !PageDetail" class="form-group row">  
+           <h2 class="col-sm-12 col-xs-12 col-lg-12 col-md-12 col-form-label">Modification de l'entreprise {{entrepriseAjouter.nomentreprise}}</h2>
         </div>      
            
         <div *ngIf="PageAjouter" class="form-group row">     

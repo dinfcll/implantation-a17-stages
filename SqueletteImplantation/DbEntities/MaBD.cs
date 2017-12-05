@@ -28,6 +28,10 @@ namespace SqueletteImplantation.DbEntities
                 .Property(m => m.Id)
                 .ValueGeneratedOnAdd();
 
+            modelBuilder.Entity<Enseignant>()
+                .Property(m => m.NoEnseignant)
+                .ValueGeneratedOnAdd();
+
             modelBuilder.Entity<RelEnseignantEntreprise>()
               .HasKey(m => new { m.Id, m.NoEnseignant });
 
