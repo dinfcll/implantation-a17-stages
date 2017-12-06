@@ -28,10 +28,14 @@ export class PageDetailEtudiantComponent  {
     PageAjouter:boolean;
     PageInfo:boolean;
     PageModifier:boolean;
+    MesssageCV:string;
+    transmisCV:boolean;
   
      Tnomentreprise:string[];
    
     constructor(private location: Location ,private service: AppService, private http: Http,  private router: Router){
+        this.transmisCV=false;
+        this.MesssageCV="";
         this.PageAjouter=false;
         this.Tnomentreprise=[];
         this.Tnomenseignants=[];
@@ -78,6 +82,16 @@ export class PageDetailEtudiantComponent  {
             this.getEnseignantParNoEns(this.etudiant.noEnseignant);
           
            }
+
+           if(this.etudiant.pathCV===null)
+            {
+                this.MesssageCV="Aucun CV transmis par cette étudiant";
+            }
+            else
+                {
+                    this.transmisCV=true;
+                    this.MesssageCV="Un CV a été transmis par cette étudiant";
+                }
 
           }
 
@@ -417,6 +431,7 @@ export class PageDetailEtudiantComponent  {
 
               goBack(): void
               {
+                  this.transmisCV=false;
                   this.PageAjouter=false;
                   this.PageModif();
                   this.location.back();
@@ -427,6 +442,27 @@ export class PageDetailEtudiantComponent  {
               PageModif():void
               {
                   this.service.changeFlag(false);
+              }
+
+              PageInfo():void
+              {
+                  this.service.changeFlag(false);
+              }
+
+              SuppressionCVetudiant():void
+              {
+                this.http.put("api/Etudiant/SuppressionCVEtudiant", this.etudiant).subscribe(donne =>
+                    {
+                            if (donne.status == 200)
+                            {
+                                this.transmisCV=true;
+                                this.MesssageCV="Aucun CV transmis par cette étudiant";
+                                (<HTMLInputElement> document.getElementById("btnsupprimerCV")).disabled = true;
+                                this.jBoxMessage('green', "Suppression réussie du CV de "+this.etudiant.prenom+" "+this.etudiant.nom);
+                               
+                            }
+                           
+                    });
               }
             
 

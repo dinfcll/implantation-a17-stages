@@ -12,12 +12,14 @@
 <br/>
 {{etu.profil}}
 <br/>
-{{etu.noEnseignant}}
+{{enseignant.nom}}
 <br/>
-{{etu.id}}
+{{entreprise.nomentreprise}}
 <br/>
 {{etu.noTel}}
 <br/>
 <input type="file" name="file" id="file" class="inputfile"  (change)="fileChange($event)" accept=".pdf,.doc,.docx,.jpg,.png"/>
 <br/>
-<input type="button" value="soumettre"id="btnAjouterTrace" (click)="onClickAddTrace()">
+<input type="button" value="soumettre"id="btnAjouterTrace" (click)=" RequeteInsertPATHCV()"/>
+<br/>
+<a target="_blank" href="/app/CV/1_56_13_bg.jpg" download>download</a> 

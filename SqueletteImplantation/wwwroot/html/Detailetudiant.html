@@ -29,6 +29,7 @@
         <label for="inputannee" class="col-sm-2 col-xs-2 col-lg-2 col-md-2 col-form-label" id="labelannee">Annee :</label>
         <input  class="col-sm-6 col-xs-6 col-lg-6 col-md-6" id="inputannee" type="text" [(ngModel)]="etudiant.annee" placeholder="Annee" />
     </div>
+
     <div *ngIf="PageAjouter == true"  class="form-group row">
         <label for="inputMotpasse" class="col-sm-2 col-xs-2 col-lg-2 col-md-2 col-form-label" id="labelMotpasse">Mot de passe:</label>
         <input class="col-sm-6 col-xs-6 col-lg-6 col-md-6" id="inputMotpasse" type="text" [(ngModel)]="etudiant.motPasse" value="etudiant" placeholder="etudiant" disabled/>
@@ -67,8 +68,25 @@
 
                  <label for="listeens" class="col-sm-2 col-xs-2 col-lg-2 col-md-2 col-form-label" id="labelenseignantencharge">enseignant en charge:</label>
                  <input class="col-sm-6 col-xs-6 col-lg-6 col-md-6" id="listeens" type="text" [(ngModel)]="enseignant.nom" placeholder="profil"/>
-         </div>     
+         </div> 
          
+         <div class="form-group row">
+             <div  class="col-sm-6 col-xs-6 col-lg-6 col-md-6">
+                <label for="inputCV" class="col-sm-2 col-xs-2 col-lg-2 col-md-2 col col-form-label" id="labelprenom">Dépôt CV:</label>
+             </div> 
+             <div  class="col-sm-6 col-xs-6 col-lg-6 col-md-6">
+                <label class="col-sm-6 col-xs-6 col-lg-6 col-md-6" id="inputCV">{{MesssageCV}}</label>
+             </div>
+             
+         </div>
+         <div class="form-group row">
+                <div *ngIf="transmisCV == true"  class="col-sm-6 col-xs-6 col-lg-6 col-md-6">
+                                        <a target="_blank" href="{{etudiant.pathCV}}" download><button type="button" class="btn btn-info"> <i class="fa fa-download" aria-hidden="true"></i>Télécharger CV</button></a>
+                </div>
+                <div *ngIf="transmisCV == true" class="col-sm-6 col-xs-6 col-lg-6 col-md-6"> 
+                                          <button id="btnsupprimerCV" class="btn icon-btn btn-danger" (click)="SuppressionCVetudiant()"><span class="glyphicon btn-glyphicon glyphicon-trash img-circle"></span>Supprimer CV</button>
+                </div>
+        </div>
 </div>
    
     <div *ngIf="PageModifier == true || PageAjouter == true">

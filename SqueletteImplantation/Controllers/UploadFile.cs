@@ -9,7 +9,7 @@ namespace SqueletteImplantation.Controllers
     public class UploadFile: UploadService
     {
 
-        public static string Chemin = @"\CV";
+        public static string Chemin = @"\CV\";
 
         public bool upload(IFormFile formFile, string chemin)
         {
@@ -17,7 +17,7 @@ namespace SqueletteImplantation.Controllers
             string CheminApp = @"c:\Users\Romy Steve\Desktop\STAGE_dernier_etape\implantation-a17-stages\SqueletteImplantation\wwwroot\app";
             try
             {
-                using (FileStream upload = new FileStream(CheminApp + chemin, FileMode.CreateNew))
+                using (FileStream upload = new FileStream(CheminApp + chemin, FileMode.Create))
                 {
                    
                      formFile.CopyTo(upload);
@@ -29,6 +29,37 @@ namespace SqueletteImplantation.Controllers
                 return false;
             }
         }
+
+
+        public bool deletefile(string destinationFile)
+        {
+            bool retour = false;
+            try
+            {
+                if (File.Exists(destinationFile))
+                {
+                    File.Delete(destinationFile);
+                    retour = true;
+                }
+            }
+            catch (IOException)
+            {
+                retour = false;
+            }
+            return retour;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
