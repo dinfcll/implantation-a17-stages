@@ -9,6 +9,7 @@ declare var jBox: any;
 @Component({
     selector: 'GestionEnseignant',
     templateUrl: `./../html/gestiondenseignant.html`,
+    styleUrls: [`./../css/detail_entreprise_etudiant.css`],
 })
 
 export class GestionEnseignant {
