@@ -28,15 +28,21 @@ export class GestionEnseignant {
         });
     }
 
-    Supprimer(NoEnseignant: number) {
-        this.http.delete('api/Enseignant/SupprimerEnseignant/' + NoEnseignant.toString()).subscribe(Resultat => {
-            if (Resultat.status != 200) {
-                this.jBoxMessage("red", "Erreur lors de l'aquisitions des enseignants");
-            } else {
-                this.jBoxMessage("green", "Suppression effectuée avec succès!");
-            }
-        });
+    Supprimer(Position: number) {
+        var r = confirm("Voulez-vous vraiment supprimer l'enseignant " + this.TEnseignant[Position].prenom + " " + this.TEnseignant[Position].nom + " ?");
+        if (r) {
+            this.http.delete('api/Enseignant/SupprimerEnseignant/' + this.TEnseignant[Position].noEnseignant.toString()).subscribe(Resultat => {
+                if (Resultat.status != 200) {
+                    this.jBoxMessage("red", "Erreur lors de l'aquisitions des enseignants");
+                } else {
+                    this.jBoxMessage("green", "Suppression effectuée avec succès!");
+                    this.TEnseignant.splice(Position, 1);
+                }
+            });
+        }
+       
     }
+
     jBoxMessage(couleur: string, message: string) {
 
         new jBox('Notice', {
@@ -45,6 +51,7 @@ export class GestionEnseignant {
             autoClose: 5000
         });
     }
+
     Retour(): void {
         this.location.back();
     }

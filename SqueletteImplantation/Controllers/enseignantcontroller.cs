@@ -42,8 +42,9 @@ namespace SqueletteImplantation.Controllers
         [Route("api/Enseignant/SupprimerEnseignant/{ID}")]
         public IActionResult SuprimeEnseignantbd(int ID)
         {
-            Enseignant enseignant = new Enseignant() { NoEnseignant = ID };
-            _maBd.Enseignant.Attach(enseignant);
+            var enseignant = _maBd.Enseignant.FirstOrDefault(x => x.NoEnseignant == ID);
+            if (enseignant == null)
+                return new NoContentResult();
             var resultat = _maBd.Enseignant.Remove(enseignant);
             _maBd.SaveChanges();
             if (resultat == null)

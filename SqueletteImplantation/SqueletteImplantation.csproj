@@ -10,8 +10,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="wwwroot\app\pageAjouterEnseignant.component.ts" />
     <Content Include="wwwroot\css\AjouterEnseignant.css" />
     <Content Include="wwwroot\css\gestionenseignant.css" />
+    <Content Include="wwwroot\html\AjouterEnseignant.html" />
   </ItemGroup>
 
 

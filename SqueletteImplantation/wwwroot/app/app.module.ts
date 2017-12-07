@@ -13,56 +13,59 @@ import { GestionEnseignant } from "./pageGestionEnseignant.component"
 import { pageRechercheEntrepriseComponent } from "./pageRechercheEnreprise.component";
 import { ProfilEnseignantComponent } from "./profilenseignant.component";
 import { PageDetailEtudiantComponent } from "./pageDetailEtudiant.component";
-
+import { PageAjouterEnseignant } from "./pageAjouterEnseignant.component";
 import { AppService } from "./app.service";
 
 const appRoutes: Routes = [
-  {
-    path:'',
-    component: LoginEnseignantComponent,
-    pathMatch: 'full',
-  },
-  {
-    path:'accueil-enseignant',
-    component: pageAccueilEnseignantComponent,
-    children: [ 
-      {
-          path: 'accueil-enseignant/recherche-etudiant',
-          component: PageRechercheEtudiantComponent
-      },
-      {
-        path: 'accueil-enseignant/recherche-entreprise', 
-        component:  pageRechercheEntrepriseComponent
-      },
-      { 
-        path: '', 
-        redirectTo: 'accueil-enseignant/recherche-entreprise', 
-        pathMatch: 'full'
-       },]
-  },
- {
-    path: 'Login', 
-    component: LoginEnseignantComponent 
-  },
-  {
-    path: 'profil-enseignant',
-    component:  ProfilEnseignantComponent
-},
-  {
-    path: 'detailEntreprise/:id', 
-    component:  PageDetailEntrepriseComponent
-  },
-  
-  
     {
-      path: 'detailEtudiant/:noDa', 
-      component:  PageDetailEtudiantComponent
-  },
+        path:'',
+        component: LoginEnseignantComponent,
+        pathMatch: 'full',
+    },
+    {
+        path:'accueil-enseignant',
+        component: pageAccueilEnseignantComponent,
+        children: [ 
+            {
+                path: 'accueil-enseignant/recherche-etudiant',
+                component: PageRechercheEtudiantComponent
+            },
+            {
+                path: 'accueil-enseignant/recherche-entreprise', 
+                component:  pageRechercheEntrepriseComponent
+            },
+            { 
+                path: '', 
+                redirectTo: 'accueil-enseignant/recherche-entreprise', 
+                pathMatch: 'full'
+            },
+        ]
+    },
+    {
+        path: 'Login', 
+        component: LoginEnseignantComponent 
+    },
+    {
+        path: 'profil-enseignant',
+        component:  ProfilEnseignantComponent
+    },
+    {
+        path: 'detailEntreprise/:id', 
+        component:  PageDetailEntrepriseComponent
+    },
+    {
+        path: 'detailEtudiant/:noDa', 
+        component:  PageDetailEtudiantComponent
+    },
     {
         path: 'gestionenseignant',
         component: GestionEnseignant
-
-    }]
+    },
+    {
+        path: 'AjouterEnseignant',
+        component: PageAjouterEnseignant
+    }
+]
 
 @NgModule({
   imports:      [ BrowserModule, FormsModule,HttpModule,  RouterModule.forRoot(appRoutes) ],
@@ -74,9 +77,10 @@ const appRoutes: Routes = [
                   pageRechercheEntrepriseComponent,
                   ProfilEnseignantComponent,
                   PageDetailEtudiantComponent,
-                  GestionEnseignant],
+                  GestionEnseignant,
+                  PageAjouterEnseignant],
    
-  bootstrap: [ AppComponent ],
+  bootstrap: [ AppComponent],
   providers: [AppService]
 })
 

@@ -6,7 +6,8 @@
 }
 
 #DivContenuPage {
-    margin-top: 5%;
+    margin-left:10%;
+    margin-right:10%;
 }
 
 #DivTable {
@@ -16,7 +17,7 @@
     margin-left: 0px;
     border: 2px;
     border: medium solid #6495ed;
-    margin-top:30px;
+    margin-top:10px;
 
 }
 
@@ -33,4 +34,28 @@ h3 {
     color:beige;
     text-align:center;
 
+}
+.btn-circle {
+    width: 30px;
+    height: 30px;
+    padding: 6px 0px;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.42857;
+    margin-top:20%;
+    margin-left:-5px;
+    position:absolute;
+}
+
+.btn-circle.btn-xl {
+    width: 70px;
+    height: 70px;
+    padding: 10px 16px;
+    border-radius: 35px;
+    font-size: 24px;
+    line-height: 1.33;
+}
+#BtnAjouter {
+    margin-top:100px;
 }

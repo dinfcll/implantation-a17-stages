@@ -1,0 +1,23 @@
+﻿<div id="PageGlobale" class="alert-danger">
+    <h3>Ajouter un enseignant</h3>
+    <form class="container">
+            <div id="Formulaire" class="row">
+            <label class="col-sm-1">Nom</label>
+            <input class=" col-sm-4" [(ngModel)]="EnseignantAjouter.nom" />
+        </div>
+        <br />
+        <div class="row">
+            <label class="col-sm-1">Prénom</label>
+            <input class="col-sm-4 " [(ngModel)]="EnseignantAjouter.prenom" />
+        </div> 
+        <br />
+        <div class="row">
+            <label class="col-sm-1">Nom d'utilisateur</label>
+            <input class="col-sm-4" [(ngModel)]="EnseignantAjouter.nomutil" />
+        </div>
+        <div class="row">
+            <label class="col-sm-1">Email</label>
+            <input type="email" class="col-sm-4" [(ngModel)]="EnseignantAjouter.nomutil" required />
+        </div>
+    </form>
+</div>

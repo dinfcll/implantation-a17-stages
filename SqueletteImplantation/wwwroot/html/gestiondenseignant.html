@@ -1,8 +1,8 @@
 ﻿<div class="container" id="PageGlobale">
-   <div id="DivContenuPage">
+    <button class="btn icon-btn btn-warning btn-circle btn-xl" (click)="Retour()"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
+    <div id="DivContenuPage">
        <h3>Gestion des enseignants</h3>
-       <button class="btn icon-btn btn-warning btn-circle btn-xl" (click)="Retour()"><li><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
-       <button class="btn icon-btn btn-success" [routerLink]="['/AjoutEnseignant']" routerLinkActive="active">Ajouter</button>
+       <button id="BtnAjouter"class="btn icon-btn btn-success" [routerLink]="['/AjouterEnseignant']" routerLinkActive="active">Ajouter</button>
            <div class="form-group row table-responsive" id="DivTable">
                <table border=1 class="table table-hover" id="Table">
                    <thead>
@@ -12,10 +12,10 @@
                            <td>Supprimer</td>
                        </tr>
                    </thead>
-                   <tr *ngFor="let Enseignant of TEnseignant">
+                   <tr *ngFor="let Enseignant of TEnseignant,let i=index">
                        <td>{{Enseignant.prenom}} {{Enseignant.nom}}</td>
                        <td>{{Enseignant.courriel}}</td>
-                       <td><button class="btn icon-btn btn-danger" (click)="Supprimer(Enseignant.NoEnseignant)"><span class="glyphicon btn-glyphicon glyphicon-trash img-circle"></span>Supprimer</button></td>
+                       <td><button class="btn icon-btn btn-danger" (click)="Supprimer(i)"><span class="glyphicon btn-glyphicon glyphicon-trash img-circle"></span>Supprimer</button></td>
                    </tr>
                </table>
            </div>
