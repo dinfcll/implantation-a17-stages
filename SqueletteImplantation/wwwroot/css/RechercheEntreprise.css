@@ -1,43 +1,67 @@
-﻿/*#principalDiv {
-    background-color:red;
+﻿#PageGlobale {
+    background-image: url("/images/Stage.jpg");
+    background-size: 100%;
     width: 100%;
     height: 100%;
     position: fixed;
+    background-repeat:no-repeat;
+    background-size:100% 100%;
 }
 
+#DivContenuPage {
+    margin-top: 220px;
+    margin-left: 5%;
+    margin-right: 5%;
+}
 
-
-.nomEnt {
-    color: red;
+.suggestions a {
+    font-weight: normal;
+    color: #333333;
+    text-decoration: none;
     cursor: pointer;
-    font-size: x-large;
-}
-
-#Supprimer {
-    border-radius: 25px;
+    line-height: 1.5;
+    font-size: 20px;
+    color:dodgerblue;
     cursor: pointer;
 }
+.input-group {
+margin-bottom:10px;
+}
 
-
-
-
-
-#divConteneur {
-    background-color: gray;
+.liautocomplete {
+    list-style: none outside none;
+    margin-top:-9.5px;
+    padding: 2px;
+    clear: left;
+    max-height: 200px;
+    overflow: auto;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.49);
+    box-shadow: 0px 1px 6px 1px rgba(0, 0, 0, 0.4);
+    border: 1px solid #eeeeee;
+    border-radius: 4px;
+    text-align: center;
+    margin-left:-40px;
+    margin-right:11%;
+}
+#MenuDeroulant {
+    position: absolute;
+    top: 275px;
+    left: 0;
+    z-index: 1;
+    right: 0;
+}
+#DivTable {
     display: inline-block;
+    width: 100%;
+    max-height: 700px;
+    margin-left: 0px;
+    border: 2px;
+    border: medium solid #6495ed;
 }
+
 #date {
     width: 20px;
-}
-
-#btn {
-    top: 25%;
-    left: 5%;
-    position: fixed;
-    cursor: pointer;
-    text-decoration: none;
-    color: wheat;
-    font-size: 100%;
 }
 
 table {
@@ -67,123 +91,3 @@ td {
     background-color: #EFF6FF;
     text-align: left;
 }
-
-caption {
-    font-family: sans-serif;
-    color: wheat;
-    font-size: bold;
-    text-align: center;
-}
-*/
-/***********************************************************/
-#PageGlobale {
-    background-color: red;
-    width: 100%;
-    height: 100%;
-    position: fixed;
-}
-
-#DivContenuPage {
-  background-color:chartreuse;
-  margin-top:150px;
-  margin-left:5%;
-  margin-right:5%;
-}
-
-#loupe {
-    background: url(images/loupe.png) no-repeat 0 0;
-    width: 30px;
-    height: 30px;
-    border-radius: 2em;
-    cursor: pointer;
-}
-
-#recherche {
-    width: 50px;
-    height: 30px;
-    background: white;
-    box-shadow: 1px 1px 2px rgba(0,0,0,.3) inset;
-    border-radius: 2em;
-    text-align: center;
-}
-
-/*
-#DivTable {
-    display: inline-block;
-    width: 100%;
-    max-height: 700px;
-    margin-left: 0px;
-    border: 2px;
-    border: medium solid #6495ed;
-    margin-top: 10px;
-}
-
-
-
-
-
-
-#loupe {
-    background: url(images/loupe.png) no-repeat 0 0;
-    width: 30px;
-    height: 30px;
-    position: fixed;
-    left: 70%;
-    top: 20%;
-    border-radius: 2em;
-    cursor: pointer;
-}
-#recherche {
-    width: 208px;
-    height: 30px;
-    background: white;
-    box-shadow: 1px 1px 2px rgba(0,0,0,.3) inset;
-    border-radius: 2em;
-    position: fixed;
-    left: 70%;
-    top: 20%;
-    text-align: center;
-}
-
-.suggestions {
-    position: absolute;
-    left: 66%;
-    top: 25%;
-    z-index: 1000;
-}
-
-    .suggestions a {
-        font-weight: normal;
-        color: #333333;
-        text-decoration: none;
-        cursor: pointer;
-        line-height: 1.5;
-        font-size: 20px;
-        color: black;
-        cursor: pointer;
-    }
-.liautocomplete {
-    position: relative;
-    display: block;
-    float: left;
-    list-style: none outside none;
-    margin: 0;
-    padding: 2px;
-    clear: left;
-    width: 208px;
-    max-height: 200px;
-    overflow: auto;
-    border-radius: 4px;
-    background-color: rgba(255, 255, 255, 0.49);
-    box-shadow: 0px 1px 6px 1px rgba(0, 0, 0, 0.4);
-    border: 1px solid #eeeeee;
-    border-radius: 4px;
-    text-align: center;
-}
-
-select {
-    position: fixed;
-    left: 88%;
-    top: 20%;
-    border-radius: 2em;
-}*/
