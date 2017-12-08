@@ -20,8 +20,14 @@ namespace SqueletteImplantation.Controllers
 
         [HttpPost]
         [Route("api/Enseignant/EnregistrementEnseignantbd")]
-        public IActionResult EnregistrementEnseignantbd(Enseignant Enseignant)
+        public IActionResult EnregistrementEnseignantbd([FromBody]Enseignant Enseignant)
         {
+            var NomUtil = from b in _maBd.Enseignant
+                          where b.NomUti == Enseignant.NomUti
+                          select b.NomUti;
+            if (NomUtil.Count()!=0)
+                return NoContent();
+            Enseignant.NoEnseignant = null;
             var resultat = _maBd.Enseignant.Add(Enseignant);
             _maBd.SaveChanges();
             return new OkObjectResult(Enseignant);
@@ -34,7 +40,7 @@ namespace SqueletteImplantation.Controllers
             var resultat = _maBd.Enseignant.Update(enseignant);
             _maBd.SaveChanges();
             if (resultat == null)
-                return NotFound();
+                return NoContent();
             return new OkResult();
         }
 

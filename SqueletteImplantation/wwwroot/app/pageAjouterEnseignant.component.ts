@@ -4,6 +4,8 @@ import { Http } from '@angular/http';
 import { Enseignant } from './models/enseignant.class';
 import { Router, RouterModule, Routes, ActivatedRoute, ParamMap } from '@angular/router';
 import { Location } from '@angular/common';
+import { FormControl, FormBuilder, Validators } from '@angular/forms';
+
 declare var jBox: any;
 
 @Component({
@@ -11,54 +13,37 @@ declare var jBox: any;
     templateUrl: `./../html/AjouterEnseignant.html`,
     styleUrls: [`./../css/AjouterEnseignant.css`],
 })
+
 export class PageAjouterEnseignant {
     EnseignantAjouter: Enseignant;
     constructor(private http: Http, private router: Router, private location: Location) {
-        this.EnseignantAjouter = new Enseignant(-1,"","","","","Prof_123*");
+        this.EnseignantAjouter = new Enseignant(-1,"","","","","Prof123*");
     }
-
 
     Ajouter() {
-      /*  if (!this.validation()) {
-            this.jBoxMessage("red", "Attention!!! Vous avez saisi un caractère non valide dans statistique de confirmation.");
+       if (this.validation()) {
+            this.jBoxMessage("red", "Attention!!! vous avez un ou des champs vides !");
+       } else {
+           this.http.post("api/Enseignant/EnregistrementEnseignantbd", this.EnseignantAjouter).subscribe(Resultat => {
+                if (Resultat.status == 200) {
+                    this.jBoxMessage("green", "Enseignant ajouté!");
+                } else {
+                    if (Resultat.status == 204) {
+                        this.jBoxMessage("red", "Veuillez saisir un autre nom d'utilisateur");
+                    } else {
+                        this.jBoxMessage("red", "Erreur lors de l'enregistrement de l'enseignant");
+                    }
+                }
+           });
         }
-        else {
-            this.http.post("api/Entreprise/Ajouter", this.entrepriseAjouter).subscribe(Result => {
-                if (Result.status == 200) {
-                    this.jBoxMessage("green", "Entreprise ajoutée!");
-                }
-                else {
-                    this.jBoxMessage("red", "Erreur lors de l'ajout de l'entreprise");
-                }
-            });
-        }*/
     }
 
-    goBack(): void {
+    Retour(): void {
         this.location.back();
     }
 
-
-    validation() {
-        if (this.EnseignantAjouter.courriel === "" || this.EnseignantAjouter.nom === "" || this.EnseignantAjouter.nomUti === "" || this.EnseignantAjouter.prenom === "")
-        {
-            this.jBoxMessage("red", "Veuillez remplir tout les champs!");
-            return;
-        }
-           
-        let ACommercialPositionEmail: number = this.EnseignantAjouter.courriel.search('@');
-        let extension: string[] = this.EnseignantAjouter.courriel.split('@');
-        if (extension.length != 2)
-        {
-            this.jBoxMessage("red", "Le courriel doit contenir un @");
-            return;
-        }
-        let TrouverPoint: string[] = extension[1].split('.');
-        if (TrouverPoint.length != 2)
-        {
-            this.jBoxMessage("red", "Format d'adresse courriel invalide");
-            return;
-        }
+    validation(): boolean  {
+        return (this.EnseignantAjouter.courriel === "" || this.EnseignantAjouter.nom === "" || this.EnseignantAjouter.nomUti === "" || this.EnseignantAjouter.prenom === "");
     }
 
     jBoxMessage(couleur: string, message: string) {
@@ -69,5 +54,4 @@ export class PageAjouterEnseignant {
             autoClose: 5000
         });
     }
-   
 }
