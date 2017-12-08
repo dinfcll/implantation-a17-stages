@@ -1,6 +1,6 @@
 ﻿
 <div *ngIf="entrepriseAjouter" class="container" id="principal">
-    <div class="jumbotron scroll-area">
+ <div class="jumbotron scroll-area"> 
 
         <div *ngIf="PageDetail" class="form-group row">
             <h2 class="col-sm-12 col-xs-12 col-lg-12 col-md-12 col-form-label">Détails de l'entreprise {{entrepriseAjouter.nomentreprise}}</h2>
@@ -51,7 +51,7 @@
         <div class="form-group row"> 
             <div class="row vdivide">
                 <div class="col-sm-2 col-xs-2 col-lg-2 col-md-2 text-center">Vacants</div>
-                <div class="col-sm-2 col-xs-2 col-lg-2 col-md-2 text-center">Pris</div>
+                <div class="col-sm-2 col-xs-2 col-lg-2 col-md-2 text-center">Engagé</div>
                 <div class="col-sm-2 col-xs-2 col-lg-2 col-md-2 text-center">Peut-etre</div>
                 <div class="col-sm-2 col-xs-2 col-lg-2 col-md-2 text-center">Probablement non</div>
                 <div class="col-sm-2 col-xs-2 col-lg-2 col-md-2 text-center">Non</div>
@@ -66,7 +66,7 @@
             </div> 
             
             <div  class="col-sm-2 col-xs-2 col-lg-2 col-md-2">
-                    <input class="nbre" type="text" [(ngModel)]="entrepriseAjouter.nbreoui" disabled="disabled" placeholder="Nombre de oui" />
+                    <input class="nbre" type="text" [(ngModel)]="entrepriseAjouter.nbreoui" placeholder="Nombre de oui" />
             </div> 
             <div  class="col-sm-2 col-xs-2 col-lg-2 col-md-2">
                     <input class="nbre" type="text" [(ngModel)]="entrepriseAjouter.nbrpeutetre"  placeholder="Nombre de peut-être" />
@@ -98,10 +98,9 @@
             <div class="form-group row">
                 <button class="btn icon-btn btn-primary" *ngIf="PageAjouter == true" (click)="Ajouter()"><i class="fa fa-floppy-o"></i>Sauvegarder</button>
             </div>
-
-            <div class="form-group row">
-                <button class="btn icon-btn btn-warning btn-circle btn-xl" (click)="goBack()"><li><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
-            </div>
         </div>
-    </div> 
-</div>
+     <div class="form-group row">
+         <button class="btn icon-btn btn-warning btn-circle btn-xl" (click)="goBack()"><li><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
+     </div>
+ </div> 
+</div> 
