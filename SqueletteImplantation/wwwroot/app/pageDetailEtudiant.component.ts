@@ -135,16 +135,8 @@ export class PageDetailEtudiantComponent  {
     }
 
     getListeEnseignantParEtudiant(noDa:number) {
-
         let url: string;
-        this.http.get("api/EtudiantList/"+noDa).subscribe(
-            donnees => {
-                this.enseignants = donnees.json() as Enseignant[]
-                if(donnees.status == 200) {
-
-                    this.getListeEnseignant();
-                }  
-            });
+        this.getListeEnseignant();
     }
 
     testModifier(): void {

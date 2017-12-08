@@ -43,6 +43,7 @@ namespace SqueletteImplantation.Controllers
                                  select new
                                  {
                                      b.NoDa,
+                                     b.Id,
                                      b.Nom,
                                      b.Prenom,
                                      b.Profil,
@@ -252,11 +253,6 @@ namespace SqueletteImplantation.Controllers
                     orderby b.Annee descending
                     select b.Nom).Distinct();
         }
-
-
-
-
-
         [HttpPost]
         [Route("api/Etudiant/EnregistrementEtudiantbd")]
         public IActionResult EnregistrementEtudiantbd([FromBody] Etudiant Etudiant)
@@ -305,11 +301,7 @@ namespace SqueletteImplantation.Controllers
             return new OkResult();
         }
 
-
-
-
         
-
         [HttpGet]
         [Route("api/Etudiant/RemplirComboAnneeEtudiant")]//pour le dropdown qui affectera un etudiant dans une entreprise
         public IEnumerable ListeAnnee()
@@ -353,12 +345,5 @@ namespace SqueletteImplantation.Controllers
             
             return new OkObjectResult(ListeAvecID);
         }
-
-
-
-
-
-
-
     }
 }
