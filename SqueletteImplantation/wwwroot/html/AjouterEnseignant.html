@@ -11,7 +11,7 @@
                        pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
                        #email="ngModel">
                 <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
-                    <div [hidden]="!email.hasError('required')"></div>
+                    <div [hidden]="!email.hasError('required')">Veuillez saisir un courriel</div>
                     <div [hidden]="!email.hasError('pattern')">
                         Le courriel devrait être de format: <small><b>joe@abc.com</b></small>
                     </div>
