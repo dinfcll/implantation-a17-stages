@@ -7,7 +7,7 @@ namespace SqueletteImplantation.DbEntities.Models
 {
     public class Enseignant
     {
-        public int NoEnseignant {get; set; }
+        public int? NoEnseignant {get; set; }
         public string NomUti { get; set; }
         public string Nom { get; set; }
         public string Prenom { get; set; }
