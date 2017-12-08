@@ -1,0 +1,14 @@
+<label>Ancien mot de passe:</label>
+<br/>
+<input id="aMdp" type="text" [(ngModel)]="ancienMdp1"/>
+<br/>
+<label>saisir nouveau mot de passe:</label>
+<br/>
+<input id="nMdp1"type="text" [(ngModel)]="nouveauMdp1"/>
+<br/>
+<label>Saisir à nouveau votre mot de passe:</label>
+<br/>
+<input id="nMdp2" type="text" [(ngModel)]="nouveauMdp2"/>
+<br/>
+
+<button (click)="ChangerMdp(ancienMdp1, nouveauMdp2,nouveauMdp2)">Sauvegarder</button>

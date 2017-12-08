@@ -10,10 +10,10 @@ import { pageAccueilEnseignantComponent } from "./pageAccueilEnseignant.componen
 import { PageDetailEntrepriseComponent } from "./pageDetailsEntreprise.component";
 import { pageRechercheEntrepriseComponent } from "./pageRechercheEnreprise.component";
 import { ProfilEnseignantComponent } from "./profilenseignant.component";
-
+import {mdpEtudiantComponent} from "./mdpEtudiant.component";
 import { pageAccueilEtudiantComponent } from "./pageAccueilEtudiant.component";
 
-
+import {modifEtudiantComponent} from "./modifEtudiant.component";
 import {PageDetailEtudiantComponent} from "./pageDetailEtudiant.component";
 import {AppService} from "./app.service";
 const appRoutes: Routes=[
@@ -61,6 +61,14 @@ const appRoutes: Routes=[
     {
       path: 'accueil-etudiant', 
       component:  pageAccueilEtudiantComponent
+    },
+    {
+      path: 'profil-etudiant', 
+      component:  modifEtudiantComponent
+    },
+    {
+      path: 'changer-Mdpetudiant', 
+      component:  mdpEtudiantComponent
     }
  
   
@@ -77,7 +85,9 @@ const appRoutes: Routes=[
                   pageRechercheEntrepriseComponent,
                   ProfilEnseignantComponent,
                   PageDetailEtudiantComponent,
-                  pageAccueilEtudiantComponent ],
+                  pageAccueilEtudiantComponent,
+                  modifEtudiantComponent,
+                  mdpEtudiantComponent ],
    
   bootstrap:    [ AppComponent ],
   providers:[AppService]

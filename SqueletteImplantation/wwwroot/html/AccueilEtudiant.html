@@ -1,25 +1,33 @@
 <h1>ALLO LE MONDE</h1>
 
-{{etu.noDa}}
+<input  *ngIf="PageModifier == false" id="noda" type="text" [(ngModel)]="etu.noDa"/>
 <br/>
-{{etu.nom}}
+<input id="nom" type="text" [(ngModel)]="etu.nom"/>
 <br/>
-{{etu.prenom}}
+<input id="prenom"type="text" [(ngModel)]="etu.prenom"/>
 <br/>
-{{etu.addresseCourriel}}
+<input id="courriel" type="text" [(ngModel)]="etu.addresseCourriel"/>
 <br/>
-{{etu.motPasse}}
+<input  id="motpasse" type="text" [(ngModel)]="etu.motPasse"/>
 <br/>
-{{etu.profil}}
+<input id="profil" type="text" [(ngModel)]="etu.profil"/>
 <br/>
-{{enseignant.nom}}
+<input id="notel" type="text"[(ngModel)]="etu.noTel"/>
 <br/>
-{{entreprise.nomentreprise}}
-<br/>
-{{etu.noTel}}
-<br/>
-<input type="file" name="file" id="file" class="inputfile"  (change)="fileChange($event)" accept=".pdf,.doc,.docx,.jpg,.png"/>
-<br/>
-<input type="button" value="soumettre"id="btnAjouterTrace" (click)=" RequeteInsertPATHCV()"/>
-<br/>
-<a target="_blank" href="/app/CV/1_56_13_bg.jpg" download>download</a> 
+<div *ngIf="PageModifier == false">
+     <input id="nomens" type="text" [(ngModel)]="enseignant.nom"/>
+    <br/>
+    <input id="entnom" type="text" [(ngModel)]="entreprise.nomentreprise"/>
+     <br/>
+
+    <input id="fichier" type="file" name="file" id="file" class="inputfile"  (change)="fileChange($event)" accept=".pdf,.doc,.docx,.jpg,.png"/>
+    <br/>
+    <input id="soumettre" type="button" value="soumettre"id="btnAjouterTrace" (click)=" RequeteInsertPATHCV()"/>
+
+    <br/>
+    <button routerLink="/profil-etudiant" routerLinkActive="active">Mettre à jour mon profil</button> 
+    <br/>
+    <button routerLink="/changer-Mdpetudiant">changez de mot de motPasse</button>
+
+</div>
+

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 
 import { Entreprise } from './models/entreprise.class';
 import { Etudiant } from './models/etudiant.class';
@@ -17,7 +17,8 @@ declare var jBox:any;
   
   
 })
-export class PageDetailEtudiantComponent  { 
+export class PageDetailEtudiantComponent implements AfterViewInit, OnInit  { 
+  
     etudiant:Etudiant;
     entreprise:Entreprise;
     entreprise2:Entreprise;
@@ -32,6 +33,7 @@ export class PageDetailEtudiantComponent  {
     transmisCV:boolean;
   
      Tnomentreprise:string[];
+     TidSelectionne:string[];
    
     constructor(private location: Location ,private service: AppService, private http: Http,  private router: Router){
         this.transmisCV=false;
@@ -42,28 +44,50 @@ export class PageDetailEtudiantComponent  {
         this.enseignant=new Enseignant(-1,"", "", "", "", "");
         this.enseignant2=new Enseignant(-1,"", "", "", "", "");
      
-        this.testModifier(); 
+        
                             
        
         this.etudiant = new Etudiant(-1,"","","","","","",null, "etudiant","",null);
         this.entreprise = new Entreprise(-1,"","","","","","",0,0,0,0,0,"");
         this.entreprise2 = new Entreprise(null,"","","","","","",0,0,0,0,0,"");
+       
+        
+     
+    }
+    
+    ngOnInit(){
         this.ID = this.DetectionPageID();
+        this.testModifier(); 
         this. getListeNomEnseignant();
         this.getListeNomEntreprise();
         if (this.ID != -1) {
             this.getEtudiantParNoEnt(this.ID);
           
+          
         }
         else
         {
             this.etudiant = new Etudiant(-1,"","","","","","",null,"etudiant","",null);
-          //  this.getListeEnseignant();
-          
+         
             
         }
-        
+
     }
+    ngAfterViewInit() {
+        this.TidSelectionne=["inputCV", "listeens", "inputcompagnie", "inputProfil", "inputNoTel", "inputCourriel", "inputannee", "inputprenom", "inputnom"];
+          if(this.PageAjouter===false && this.PageModifier===false){
+                 for (var i = 0; i < this.TidSelectionne.length; i++)
+                        {
+                        
+                           (<HTMLInputElement> document.getElementById(this.TidSelectionne[i])).disabled = true;
+                          
+                       } 
+                       
+                      
+                          
+         
+              }
+      }
 
      
      getEtudiantParNoEnt(NoDA: number)
@@ -271,11 +295,12 @@ export class PageDetailEtudiantComponent  {
      }
      RequeteAjouter()
      {
+         this.etudiant.pathCV=null;
         this.http.post("api/Etudiant/EnregistrementEtudiantbd", this.etudiant).subscribe(Result =>
             {
                 if(Result.status == 200)
                   {
-                     
+                
                       this.jBoxMessage("green", "Etudiant ajoutée!");
                   }
             });
@@ -444,7 +469,7 @@ export class PageDetailEtudiantComponent  {
                   this.service.changeFlag(false);
               }
 
-              PageInfo():void
+              Pageinfo():void
               {
                   this.service.changeFlag(false);
               }
@@ -458,12 +483,15 @@ export class PageDetailEtudiantComponent  {
                                 this.transmisCV=true;
                                 this.MesssageCV="Aucun CV transmis par cette étudiant";
                                 (<HTMLInputElement> document.getElementById("btnsupprimerCV")).disabled = true;
+                                (<HTMLInputElement> document.getElementById("btntelecharge")).disabled = true;
                                 this.jBoxMessage('green', "Suppression réussie du CV de "+this.etudiant.prenom+" "+this.etudiant.nom);
                                
                             }
                            
                     });
               }
+
+            
             
 
 

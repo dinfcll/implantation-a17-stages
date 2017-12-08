@@ -2,7 +2,7 @@ import { Http } from '@angular/http';
 
 import { Entreprise } from './models/entreprise.class';
 
-import { Component } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 
 import { Enseignant } from './models/enseignant.class';
 
@@ -21,7 +21,7 @@ declare var jBox:any;
     //styleUrls: [`./../css/accueil_enseignant.css`],
 })
 
-export class pageAccueilEtudiantComponent
+export class pageAccueilEtudiantComponent implements AfterViewInit, OnInit
 {
     etu: any;
     user:string;
@@ -30,20 +30,41 @@ export class pageAccueilEtudiantComponent
    Message:string;
    enseignant:Enseignant;
    entreprise:Entreprise;
+   TidSelectionne: string[];
+   PageModifier:boolean;
 
     
     constructor(private http: Http, private router: Router)
     {
+        this.PageModifier=false;
+        this.TidSelectionne=[];
         this.Message="";
         this.enseignant=new Enseignant(-1,"", "", "", "", "");
         this.entreprise = new Entreprise(-1,"","","","","","",0,0,0,0,0,"");
         
+       
+        
+    }
+
+
+    ngOnInit(){
         this.user=localStorage.getItem('currentUser') ;
         this. etu = JSON.parse(this.user);
         console.log(this.etu);
-        this.getEnseignantetEntrepriseParNoEnsNoEnt(this.etu.noEnseignant, this.etu.id)
+        this.getEnseignantetEntrepriseParNoEnsNoEnt(this.etu.noEnseignant, this.etu.id);
         
-    }
+     }
+    ngAfterViewInit() {
+        this.TidSelectionne=["noda", "nom", "prenom", "courriel", "motpasse", "courriel", "profil", "nomens", "entnom", "notel"];
+          if(this.PageModifier===false){
+                 for (var i = 0; i < this.TidSelectionne.length; i++)
+                        {
+                        
+                           (<HTMLInputElement> document.getElementById(this.TidSelectionne[i])).disabled = true;
+                          
+                       } 
+                    }
+                }
     
 
     Deconnexion() {
