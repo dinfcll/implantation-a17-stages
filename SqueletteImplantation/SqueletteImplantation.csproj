@@ -10,14 +10,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="wwwroot\app\pageAjouterEnseignant.component.ts" />
-    <Content Include="wwwroot\css\AjouterEnseignant.css" />
-    <Content Include="wwwroot\css\gestionenseignant.css" />
-    <Content Include="wwwroot\html\AjouterEnseignant.html" />
-  </ItemGroup>
-
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore" Version="1.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.3" />
