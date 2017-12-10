@@ -115,7 +115,7 @@
             <button class=" btn-icon btn-success" [routerLink]="['/detailEntreprise', -1]" routerLinkActive="active" id="btn"><span class="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"></span> ajouter une entreprise</button>
         </div>
         <div class="row" id="MenuDeroulant">
-            <div class="col-xs-offset-6 col-xs-4" *ngIf="filteredList.length > 0">
+            <div class="col-xs-offset-6 col-xs-4 suggestions" *ngIf="filteredList.length > 0">
                 <ul id="autocomplete" *ngFor="let item of filteredList">
                     <li class="liautocomplete">
                         <a (click)="select(item)">{{item}}</a>
