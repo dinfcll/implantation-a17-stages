@@ -27,16 +27,16 @@ const appRoutes: Routes=[
     component: pageAccueilEnseignantComponent,
     children: [ 
       {
-          path: 'accueil-enseignant/recherche-etudiant',
+          path: 'recherche-etudiant',
           component: PageRechercheEtudiantComponent
       },
       {
-        path: 'accueil-enseignant/recherche-entreprise', 
+        path: 'recherche-entreprise', 
         component:  pageRechercheEntrepriseComponent
       },
       { 
         path: '', 
-        redirectTo: 'accueil-enseignant/recherche-entreprise', 
+        redirectTo: 'recherche-entreprise', 
         pathMatch: 'full'
        },]
   },
@@ -60,7 +60,8 @@ const appRoutes: Routes=[
     },
     {
       path: 'accueil-etudiant', 
-      component:  pageAccueilEtudiantComponent
+      component:  pageAccueilEtudiantComponent,
+     
     },
     {
       path: 'profil-etudiant', 
@@ -69,7 +70,11 @@ const appRoutes: Routes=[
     {
       path: 'changer-Mdpetudiant', 
       component:  mdpEtudiantComponent
-    }
+    },
+    
+   
+    
+   
  
   
 ]

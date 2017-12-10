@@ -19,6 +19,7 @@ declare var jBox:any;
     selector: 'mdp-etudiant',
 
     templateUrl: `./../html/mdpEtudiant.html`,
+    styleUrls: [`./../css/mdp.css`],
     
 })
 
@@ -45,6 +46,12 @@ export class mdpEtudiantComponent implements  OnInit
 
     ChangerMdp(ancienMdp1:string, nouveauMdp1:string,nouveauMdp2:string){
 
+        if(ancienMdp1==="" || nouveauMdp1==="" || nouveauMdp2==="")
+            {
+                this.jBoxMessage("red", "Veuillez remplir tous les champs svp!!!");
+                return;
+            }
+            else{
         if(this.VerifAncienMdp(ancienMdp1)==false)
             {
                 this.jBoxMessage("red", "Votre ancien mot de passe est incorrect");
@@ -53,7 +60,7 @@ export class mdpEtudiantComponent implements  OnInit
             else{
                 if(this.VerifNouveauMdp(nouveauMdp1, nouveauMdp2)==false)
                     {
-                        this.jBoxMessage("red", "la nouvelle saisie de votre mot de pas est différente de la prémière");
+                        this.jBoxMessage("red", "vous devez saisir le même mot de passe aux champs (*) et (**)");
                         return;
                     }
                     else{
@@ -61,6 +68,7 @@ export class mdpEtudiantComponent implements  OnInit
                     }
                 
             }
+        }
 
 
     }
@@ -110,7 +118,10 @@ export class mdpEtudiantComponent implements  OnInit
           }
 
     
-
+          Deconnexion() {
+            localStorage.removeItem('currentUser');
+            this.router.navigate(['/Login']);
+        }
 
 
 

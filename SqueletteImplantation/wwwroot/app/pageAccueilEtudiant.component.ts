@@ -18,26 +18,30 @@ declare var jBox:any;
     selector: 'accueil_enseignant',
 
     templateUrl: `./../html/AccueilEtudiant.html`,
-    //styleUrls: [`./../css/accueil_enseignant.css`],
+    styleUrls: [`./../css/accueiletudiant.css`],
 })
 
 export class pageAccueilEtudiantComponent implements AfterViewInit, OnInit
 {
     etu: any;
     user:string;
+    recu:boolean;
    file: File;
    formData: FormData;
    Message:string;
    enseignant:Enseignant;
    entreprise:Entreprise;
    TidSelectionne: string[];
+   Tidentreprise:string[];
    PageModifier:boolean;
 
     
     constructor(private http: Http, private router: Router)
     {
+        this.recu=false;
         this.PageModifier=false;
         this.TidSelectionne=[];
+        this.Tidentreprise=[];
         this.Message="";
         this.enseignant=new Enseignant(-1,"", "", "", "", "");
         this.entreprise = new Entreprise(-1,"","","","","","",0,0,0,0,0,"");
@@ -51,11 +55,12 @@ export class pageAccueilEtudiantComponent implements AfterViewInit, OnInit
         this.user=localStorage.getItem('currentUser') ;
         this. etu = JSON.parse(this.user);
         console.log(this.etu);
-        this.getEnseignantetEntrepriseParNoEnsNoEnt(this.etu.noEnseignant, this.etu.id);
+      //  this.getEnseignantetEntrepriseParNoEnsNoEnt(this.etu.noEnseignant, this.etu.id);
         
      }
     ngAfterViewInit() {
-        this.TidSelectionne=["noda", "nom", "prenom", "courriel", "motpasse", "courriel", "profil", "nomens", "entnom", "notel"];
+        this.TidSelectionne=[ "nom", "prenom", "courriel", "profil", "nomens", "notel"];
+        this.Tidentreprise=[  "entnom", "entadd", "entcourriel", "entpers", "entnotel"];
           if(this.PageModifier===false){
                  for (var i = 0; i < this.TidSelectionne.length; i++)
                         {
@@ -64,7 +69,20 @@ export class pageAccueilEtudiantComponent implements AfterViewInit, OnInit
                           
                        } 
                     }
+
+                    this.getEnseignantetEntrepriseParNoEnsNoEnt(this.etu.noEnseignant, this.etu.id);
+
+                   
+
+
+
+
+
+
+
                 }
+
+            
     
 
     Deconnexion() {
@@ -128,6 +146,7 @@ export class pageAccueilEtudiantComponent implements AfterViewInit, OnInit
                 {
                     if(NoEnt != null)
                         {
+                            this.recu=true;
                             this.getEntrepriseParNoEnt(NoEnt);
                             console.log(this.entreprise);
                         }
@@ -148,6 +167,17 @@ export class pageAccueilEtudiantComponent implements AfterViewInit, OnInit
       this.http.get(url).subscribe(donnees =>
          {
           this.entreprise = donnees.json() as Entreprise
+          if(donnees.status==200){
+            if(this.PageModifier===false && this.recu===true){
+                for (var i = 0; i < this.Tidentreprise.length; i++)
+                       {
+                       
+                          (<HTMLInputElement> document.getElementById(this.Tidentreprise[i])).disabled = true;
+                         
+                      } 
+                   }
+          }
+          
          });
     
     }
@@ -201,6 +231,9 @@ export class pageAccueilEtudiantComponent implements AfterViewInit, OnInit
                   autoClose: 5000
               });
           }
+
+
+       
     
 
          

@@ -19,7 +19,7 @@ declare var jBox:any;
     selector: 'modif_etudiant',
 
     templateUrl: `./../html/AccueilEtudiant.html`,
-    
+    styleUrls: [`./../css/accueiletudiant.css`],
 })
 
 export class modifEtudiantComponent implements AfterViewInit, OnInit
@@ -36,6 +36,7 @@ export class modifEtudiantComponent implements AfterViewInit, OnInit
         this.TidSelectionne=[];
         this.enseignant=new Enseignant(-1,"", "", "", "", "");
         this.entreprise = new Entreprise(-1,"","","","","","",0,0,0,0,0,"");
+       
     }
 
     ngOnInit(){
@@ -46,19 +47,7 @@ export class modifEtudiantComponent implements AfterViewInit, OnInit
        
     }
     ngAfterViewInit() {
-        /*this.TidSelectionne=["noda", "nom", "prenom", "courriel", "motpasse", "courriel", "profil", "nomens", "noment", "notel"];
-          if(this.PageModifier===false){
-                 for (var i = 0; i < this.TidSelectionne.length; i++)
-                        {
-                        
-                           (<HTMLInputElement> document.getElementById(this.TidSelectionne[i])).disabled = true;
-                          
-                       } 
-                       
-                      
-                          
-         
-              }*/
+      
       }
 
 
@@ -102,7 +91,51 @@ export class modifEtudiantComponent implements AfterViewInit, OnInit
            });
       
       }
+
+
+      ModifierEtudiant()
+      {
+        if(!this. validationChampSaisi())
+            {
+                this.jBoxMessage("red", "Attention!!! vérifiez que tous les champs sont remplis correctement(le numéro de téléphone doit être des chiffres)");
+                return;
+            }
+        this.http.put("api/Etudiant/ModifierEtudiant", this.etu).subscribe(donne =>
+            {
+             if (donne.status == 200)
+                 {
+                     this.jBoxMessage('green', "modification réussie");
+                 }
+                 else
+                     this.jBoxMessage('red', "échec de la modification");
+            });
+      }
   
+      jBoxMessage(couleur: string, message: string) {
+        
+              new jBox('Notice', {
+                  content: message,
+                  color: couleur,
+                  autoClose: 5000
+              });
+          }
+
+
+          validationChampSaisi(): boolean
+          {
+             
+              
+             
+              if ( this.etu.nom === "" || 
+                this.etu.prenom === "" || this.etu.addresseCourriel === ""
+                  ||  this.etu.noTel === "" || this.etu.profil === ""  || isNaN(+this.etu.noTel)
+                 )
+                  {
+                  return false;
+                  }
+
+                  return true;
+              }
 
 
 
