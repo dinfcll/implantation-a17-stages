@@ -27,5 +27,35 @@ namespace SqueletteImplantation.Controllers
            }
             return new OkObjectResult(obj);
         }
+
+
+
+
+        [HttpPost]
+        [Route("api/Etudiant")]
+        public IActionResult LoginEtudiant([FromBody] EtudiantDto etu)
+        {
+            var obj = _maBd.Etudiant.FirstOrDefault(m => m.NoDa == etu.NoDa && m.MotPasse == etu.MotPasse);
+            if (obj == null)
+            {
+                return new OkObjectResult(null);
+            }
+            return new OkObjectResult(obj);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }

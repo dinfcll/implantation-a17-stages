@@ -14,7 +14,9 @@ namespace SqueletteImplantation.DbEntities.Mappers
             entityBuilder.Property(m=>m.NoTel);
             entityBuilder.Property(m => m.Profil).IsRequired();
             entityBuilder.Property(m => m.Annee).IsRequired();
+            entityBuilder.Property(m => m.PathCV);
             entityBuilder.Property(m => m.Id);
+            entityBuilder.Property(m => m.NoEnseignant);
             entityBuilder.Property(m=>m.Nom);
             entityBuilder.Property(m=>m.Prenom);
         }

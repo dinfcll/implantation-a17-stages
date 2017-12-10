@@ -1,0 +1,42 @@
+<div class="container" id="principal3">
+        <div  id="menu">
+                <a class="btn btn-primary" routerLink="/accueil-etudiant" routerLinkActive="active" ><i class="fa fa-user fa-fw"></i> {{etu.noDa}}</a>
+                <a class="btn btn-primary dropdown-toggle"   data-toggle="dropdown" >
+                <span class="fa fa-caret-down" title="Toggle dropdown menu"></span>
+                </a>
+                <ul class="dropdown-menu">
+                        <li><a  routerLink="/profil-etudiant" routerLinkActive="active">Mettre à jour mon profil</a></li>
+                        <li><a   routerLink="/changer-Mdpetudiant" routerLinkActive="active"> changez le mot de passe</a></li>
+                        <li><a (click)="Deconnexion()"><i class="fa fa-sign-out" aria-hidden="true"></i> Déconnexion</a></li>
+                        
+                    
+                        
+                    </ul>
+        </div>
+        <div class="jumbotron scroll-area">
+
+                <div class="form-group row" >
+                        <h3  >Mise à jour du mot de passe:</h3>
+                         
+                </div>
+
+                <div class="form-group row" >
+                        <label for="aMdp" class="col-sm-4 col-xs-4 col-lg-4 col-md-4 col-form-label" >Ancien mot de passe:</label>
+                         <input class="col-sm-6 col-xs-6 col-lg-6 col-md-6" id="aMdp" type="text" [(ngModel)]="ancienMdp1"/>
+                </div>
+                <div class="form-group row" >
+                      <label for="nMdp1" class="col-sm-4 col-xs-4 col-lg-4 col-md-4 col-form-label">saisir nouveau mot de passe*:</label>
+
+                       <input class="col-sm-6 col-xs-6 col-lg-6 col-md-6" id="nMdp1"type="text" [(ngModel)]="nouveauMdp1"/>
+                </div>
+                <div class="form-group row">
+                       <label for="nMdp2" class="col-sm-4 col-xs-4 col-lg-4 col-md-4 col-form-label">Saisir à nouveau votre mot de passe**:</label>
+
+                       <input class="col-sm-6 col-xs-6 col-lg-6 col-md-6" id="nMdp2" type="text" [(ngModel)]="nouveauMdp2"/>
+                </div>
+                <div class="form-group row">
+                <button class="btn icon-btn btn-primary" (click)="ChangerMdp(ancienMdp1, nouveauMdp1,nouveauMdp2)"><i class="fa fa-floppy-o"></i>Sauvegarder</button>
+                </div>
+
+        </div>
+</div>

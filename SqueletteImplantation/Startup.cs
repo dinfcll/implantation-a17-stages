@@ -7,6 +7,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
 using SqueletteImplantation.DbEntities;
+using SqueletteImplantation.Controllers;
+
+
 
 namespace SqueletteImplantation
 {
@@ -34,6 +37,8 @@ namespace SqueletteImplantation
 
             services.AddDbContext<MaBd>(
                 options => options.UseNpgsql(@"Host=localhost;Database=mabd;Username=postgres;Password=admin123"));
+            services.AddTransient<UploadService, UploadFile>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
