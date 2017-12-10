@@ -1,37 +1,19 @@
 
-        <img class="img_fond" src="images/bg.jpg">
-        <div class="container" id="log">
-                
-                
-                    
-                        
-                        <p id="etu">Étudiants</p>
-                        
-                             <input type="text"  placeholder="saisir votre DA" id="DA" name="noDA">
-                             <i class="fa fa-user fa-2x cust" aria-hidden="true"></i>
-                        
-
-                        
-                              <input type="password" placeholder="Saisir votre mot de passe" id="MdpDA" name="mdpEtu">
-                              <i class="fa fa-lock fa-2x cust" aria-hidden="true"></i>
-                              
-                              <button type="submit" name="btnConnecEtu"  id="btn1"onclick="ConnexionEtudiant(this.form)">Connexion</button>
-
-                        <hr id="trait">
-                        <p id="pro">Enseignants</p>
-                              
-                        
-                               <input type="text" placeholder="Votre courriel ou votre numéro d'employé" id="Prof" name="Courriel" [(ngModel)]="courriel" >
-                               <i class="fa fa-user fa-2x cust1" aria-hidden="true"></i>
-                               
-                               <input type="password" placeholder="Saisir votre mot de passe" id="MdpProf" name="mdpProf" [(ngModel)]="mdp" >
-                               <i class="fa fa-lock fa-2x cust1" aria-hidden="true"></i>
-                               <button (click)="Connexion(courriel, mdp)"  id="btn2"  >Connexion</button>
-                                <p *ngIf="!isValid" id="alert">Courriel ou mot de passe invalide!!!</p>
-                                
-                           
-                
-                
-      </div>      
+<img class="img_fond" src="images/oui.jpg">
+<div class="container" id="log">           
+    <p id="etu">Étudiants</p>                       
+    <input type="text"  placeholder="saisir votre DA" id="DA" name="noDA">
+    <i class="fa fa-user fa-2x cust" aria-hidden="true"></i>                      
+    <input type="password" placeholder="Saisir votre mot de passe" id="MdpDA" name="mdpEtu">
+    <i class="fa fa-lock fa-2x cust" aria-hidden="true"></i>                             
+    <button type="submit" name="btnConnecEtu"  id="btn1"onclick="ConnexionEtudiant(this.form)">Connexion</button>
+    <hr id="trait">
+    <p id="pro">Enseignants</p>                                                   
+    <input type="text" placeholder="Votre courriel ou votre numéro d'employé" id="Prof" name="Courriel" [(ngModel)]="courriel" >
+    <i class="fa fa-user fa-2x cust1" aria-hidden="true"></i>                              
+    <input type="password" placeholder="Saisir votre mot de passe" id="MdpProf" name="mdpProf" [(ngModel)]="mdp" >
+    <i class="fa fa-lock fa-2x cust1" aria-hidden="true"></i>
+    <button (click)="Connexion(courriel, mdp)"  id="btn2"  >Connexion</button>
+</div>      
             
         

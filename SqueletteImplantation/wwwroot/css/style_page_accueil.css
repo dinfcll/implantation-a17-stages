@@ -89,7 +89,7 @@ body {
      cursor: pointer;
    }
    #trait {
-     width:100%;
+     width:95%;
      margin-top:50px;
      color:black;
      position:absolute;
@@ -141,3 +141,10 @@ body {
       padding-top: 8px;
       border:  1px solid #fff;
     }*/
+#principal[_ngcontent-c0] {
+    background-color: #FFFFFF;
+    border: 1px solid #6495ed;
+    overflow-y: auto;
+    overflow: scroll;
+    height: 50px;
+}

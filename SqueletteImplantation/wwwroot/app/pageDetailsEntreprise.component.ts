@@ -3,9 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import {  Router, RouterModule, Routes, ActivatedRoute, ParamMap}   from '@angular/router';
 import { Location }   from '@angular/common';
-declare var jBox:any;
+declare var jBox: any;
+import { Enseignant} from './models/enseignant.class';
 import { Entreprise } from './models/entreprise.class';
-
+import { AppService} from './app.service';
 
 @Component({
   selector: 'detail-entreprise',
@@ -16,50 +17,41 @@ import { Entreprise } from './models/entreprise.class';
 })
 export class PageDetailEntrepriseComponent  {
     entrepriseAjouter:Entreprise;
-    ID: number;
     PageAjouter: boolean;
-
-    
-    constructor(private http: Http, private router: Router,private location: Location)
-    {
-        this.ID = this.DetectionPageID();
-        if (this.ID != -1) {
-            this.getEntrepriseParNoEnt(this.ID);
-        }
-        else
-        {
-            this.entrepriseAjouter = new Entreprise(-1,"","","","","","",0,0,0,0,0,"");
-        }
-
-    }
-    
-    getEntrepriseParNoEnt(NoEnt: number)
-    {
-      this.PageAjouter = false;
-      let url: string;
-      url = "api/Entreprise/"+NoEnt;
-      this.http.get(url).subscribe(donnees =>
-         {
-          this.entrepriseAjouter = donnees.json() as Entreprise
-         });
-    
-    }
-    
-    DetectionPageID (): number 
+    PageDetail: boolean;
+    TEnseignant: Enseignant[];
+    constructor(private http: Http, private router: Router, private location: Location, private appservice: AppService)
     {
         let CheminLong: string = this.router.url.toString();
         let Page: string[];
-        let idStr:string;
-        let id:number;
+        let idStr: string;
+        let id: number;
+        this.PageAjouter = false;
+        this.RecupererFlag();
         Page = CheminLong.split('/');
-        idStr=Page[Page.length-1]
-        id = +idStr;
+        id = +Page[Page.length - 1];
         if (id == -1) {
+            this.entrepriseAjouter = new Entreprise(-1, "", "", "", "", "", "", 0, 0, 0, 0, 0, "");
             this.PageAjouter = true;
+        } else {
+            this.getEntrepriseParNoEnt(id);
         }
-        return id;
     }
 
+    getEntrepriseParNoEnt(ID:number)
+    {
+      this.PageAjouter = false;
+      let url: string;
+      url = "api/Entreprise/" + ID;
+      this.http.get(url).subscribe(donnees => {
+          this.entrepriseAjouter = donnees.json() as Entreprise
+          if (this.PageDetail) {
+              this.RechercherEnseignantEntreprise();
+          }
+      });
+    
+    }
+    
     Modifier(): void
     {
         if (!this.validation())
@@ -67,7 +59,7 @@ export class PageDetailEntrepriseComponent  {
             this.jBoxMessage("red", "Attention!!! Vous avez saisi un caractère non valide dans statistique de confirmation.");
         }
         else
-        {          
+        {
             this.http.put("api/entreprise/Modifier", this.entrepriseAjouter).subscribe(donne =>
             {
                 if (donne.status !== 200) {
@@ -108,7 +100,7 @@ export class PageDetailEntrepriseComponent  {
     goBack(): void
     {
         this.location.back();
-        
+        this.appservice.changeFlag(false);
     }
 
 
@@ -141,6 +133,22 @@ export class PageDetailEntrepriseComponent  {
           content: message,
           color: couleur,
           autoClose: 5000
+      });
+    }
+  RecupererFlag():void {
+      this.appservice.currentPageModif.subscribe(pageDetail => this.PageDetail = pageDetail);
+  }
+
+  RechercherEnseignantEntreprise()
+  {
+      console.log('Bonjour!');
+      this.http.get('api/Entreprise/EnseignantID/' + this.entrepriseAjouter.id.toString()).subscribe(Resultat => {
+          if (Resultat.status != 200) {
+              this.jBoxMessage("red", "Erreur lors de la recherche des enseignants en relation avec l'entreprise");
+          } else {
+              this.TEnseignant = Resultat.json() as Enseignant[];
+              console.log("HELLO");
+          }
       });
   }
 }

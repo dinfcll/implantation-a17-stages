@@ -8,17 +8,9 @@ export class AppService {
     private PageModif=new BehaviorSubject<boolean>(false);
     currentPageModif=this.PageModif.asObservable();
 
-    constructor(){
-
-    }
+    constructor(){ }
 
     changeFlag(flag:boolean){
        this.PageModif.next(flag);
     }
-
-
-
-
-
-
 }

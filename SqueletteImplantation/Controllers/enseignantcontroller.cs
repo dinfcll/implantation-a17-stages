@@ -18,31 +18,20 @@ namespace SqueletteImplantation.Controllers
             _maBd = maBd;
         }
 
-
-
-
-
-
-
-
-
-
-
-
-        //apres on fait le update de la bd etudiant pour placer l'id de son entreprise
-
-        /**********************************************/
         [HttpPost]
         [Route("api/Enseignant/EnregistrementEnseignantbd")]
-        public IActionResult EnregistrementEnseignantbd(Enseignant Enseignant)
+        public IActionResult EnregistrementEnseignantbd([FromBody]Enseignant Enseignant)
         {
+            var NomUtil = from b in _maBd.Enseignant
+                          where b.NomUti == Enseignant.NomUti
+                          select b.NomUti;
+            if (NomUtil.Count()!=0)
+                return NoContent();
+            Enseignant.NoEnseignant = null;
             var resultat = _maBd.Enseignant.Add(Enseignant);
             _maBd.SaveChanges();
             return new OkObjectResult(Enseignant);
-
-
         }
-
 
         [HttpPut]
         [Route("api/Enseignant/ModifierEnseignant")]
@@ -51,27 +40,23 @@ namespace SqueletteImplantation.Controllers
             var resultat = _maBd.Enseignant.Update(enseignant);
             _maBd.SaveChanges();
             if (resultat == null)
-                return NotFound();
+                return NoContent();
             return new OkResult();
         }
-
 
         [HttpDelete]
         [Route("api/Enseignant/SupprimerEnseignant/{ID}")]
         public IActionResult SuprimeEnseignantbd(int ID)
         {
-            Enseignant enseignant = new Enseignant() { NoEnseignant = ID };
-            _maBd.Enseignant.Attach(enseignant);
+            var enseignant = _maBd.Enseignant.FirstOrDefault(x => x.NoEnseignant == ID);
+            if (enseignant == null)
+                return new NoContentResult();
             var resultat = _maBd.Enseignant.Remove(enseignant);
             _maBd.SaveChanges();
             if (resultat == null)
                 return NotFound();
             return new OkResult();
         }
-
-        /****************************************************/
-
-        
 
         [HttpPost]
         [Route("api/Enseignant/EnregistrementRelEnseignantEntreprisebd")]
@@ -82,26 +67,14 @@ namespace SqueletteImplantation.Controllers
             if (resultat == null)
                 return NotFound();
             return new OkObjectResult(EnsEnt);
-
-
         }
-
 
         [HttpGet]
         [Route("api/Enseignant/ListeEnseignant")]
         public IEnumerable EntrepriseRechercheAnnee()
         {
             return from b in _maBd.Enseignant
-                  
                    select b;
         }
-
-
-
-
-
-
-
-
     }
 }

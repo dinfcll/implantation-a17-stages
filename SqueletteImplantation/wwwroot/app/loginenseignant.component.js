@@ -26,12 +26,10 @@ var LoginEnseignantComponent = (function () {
         this.http.post("api/Enseignant", JSON.stringify({ courriel: courriel, motDePasse: mdp }), { headers: headers }).subscribe(function (Resultat) {
             _this.enseignant = Resultat.json();
             if (Resultat.status == 200) {
-                //naviguer plus loin
                 _this.router.navigate(['/accueil-enseignant']);
                 localStorage.setItem('var', JSON.stringify(_this.enseignant));
             }
             else {
-                //message erreur
                 if (Resultat.status == 204) {
                     _this.isValid = false;
                     new jBox('Notice', {
