@@ -66,7 +66,7 @@
 
                 <tbody>
                     <tr *ngFor="let etudiant of etudiants">
-                        <td id="NomEtu" class="nomEnt" [routerLink]="['/detailEtudiant', etudiant.noDa]" routerLinkActive="active" (click)="PageInfo()"> {{etudiant.nom }}</td>
+                        <td id="NomEtu" class="nomEnt" [routerLink]="['/detailEtudiant', etudiant.noDa]" routerLinkActive="active"> {{etudiant.nom }}</td>
                         <td> {{etudiant.prenom}}</td>
                         <td> {{etudiant.profil }}</td>
                         <td> {{etudiant.nomentreprise}}</td>
