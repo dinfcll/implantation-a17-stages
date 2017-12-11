@@ -1,0 +1,168 @@
+<div class="container" id="principal2">
+
+        <div  id="menu">
+                <a class="btn btn-primary" routerLink="/accueil-etudiant" routerLinkActive="active"><i class="fa fa-user fa-fw"></i> {{etu.noDa}}</a>
+                <a class="btn btn-primary dropdown-toggle"   data-toggle="dropdown" >
+                <span class="fa fa-caret-down" title="Toggle dropdown menu"></span>
+                </a>
+                <ul class="dropdown-menu">
+                        <li><a  routerLink="/profil-etudiant" routerLinkActive="active"><i class="icon-edit"></i>Mettre à jour mon profil</a></li>
+                        <li><a   routerLink="/changer-Mdpetudiant" routerLinkActive="active"> <i class="fa fa-lock fa-2x cust1" aria-hidden="true"></i>changez le mot de mot de passe</a></li>
+                        <li><a (click)="Deconnexion()"><i class="fa fa-sign-out" aria-hidden="true"></i> Déconnexion</a></li>
+                        
+                    
+                        
+                    </ul>
+        </div>
+       
+        <div class="jumbotron scroll-area">
+
+
+
+
+
+
+
+                    <div *ngIf="PageModifier == true" class="form-group row">  
+                            <h3 class="col-sm-6 col-xs-6 col-lg-6 col-md-6"> Mise à jour de mes informations </h3>     
+                        </div>
+                    
+                    <div class="form-group row" >
+                        <label for="nom" class="col-sm-4 col-xs-4 col-lg-4 col-md-4 col-form-label" >Nom Étudiant:</label>
+                        <input class="col-sm-6 col-xs-6 col-lg-6 col-md-6" id="nom" type="text" [(ngModel)]="etu.nom"
+                        required
+                        pattern="[\u00C0-\u017Fa-zA-Z']+([- ][\u00C0-\u017Fa-zA-Z']+)*"
+                         name="nom"
+                        #nom="ngModel"/>
+                            
+   
+                    </div>
+                    <div class="form-group row"[hidden]="nom.valid || nom.pristine" class="alert alert-danger">
+                        <div [hidden]="!nom.hasError('required')">Le prénom est requis.</div>
+                        <div [hidden]="!nom.hasError('pattern')">Caractère invalide entré dans le nom.</div>
+                  </div>
+                    <div class="form-group row">
+                        <label for="prenom" class="col-sm-4 col-xs-4 col-lg-4 col-md-4 col-form-label" >Prénom étudiant:</label>
+                        <input class="col-sm-6 col-xs-6 col-lg-6 col-md-6" id="prenom"type="text" [(ngModel)]="etu.prenom"
+                        required
+                        pattern="[\u00C0-\u017Fa-zA-Z']+([- ][\u00C0-\u017Fa-zA-Z']+)*"
+                         name="prenom"
+                        #prenom="ngModel"/>
+                           
+                    </div>
+                    
+                    <div class="form-group row" [hidden]="prenom.valid || prenom.pristine"
+                            class="alert alert-danger">
+                        <div [hidden]="!prenom.hasError('required')">Le prénom est requis.</div>
+                        <div [hidden]="!prenom.hasError('pattern')">Caractère invalide entré dans le prénom.</div>
+                    </div>
+                    
+                    <div class="form-group row" >
+                            <label for="courriel" class="col-sm-4 col-xs-4 col-lg-4 col-md-4 col-form-label" >Courriel:</label>
+                            <input class="col-sm-6 col-xs-6 col-lg-6 col-md-6" id="courriel" type="text" [(ngModel)]="etu.addresseCourriel"
+                            required
+                             name="email"
+                            pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+                            #email="ngModel"/>
+                            
+                
+                    </div>
+                    <div  class="form-group row" [hidden]="email.valid || email.pristine" class="alert alert-danger">
+                            
+                             <div  [hidden]="!email.hasError('required')"></div>
+                                 <div  [hidden]="!email.hasError('pattern')">
+                                     Le courriel devrait être de format: <small><b>joe@abc.com</b></small>
+                                 </div>
+                         </div>
+                   
+                    <div class="form-group row">
+                            <label for="profil" class="col-sm-4 col-xs-4 col-lg-4 col-md-4 col-form-label" >Profil:</label>
+                            <input class="col-sm-6 col-xs-6 col-lg-6 col-md-6" id="profil" type="text" [(ngModel)]="etu.profil"   required
+                            pattern="[\u00C0-\u017Fa-zA-Z']+([- ][\u00C0-\u017Fa-zA-Z']+)*"
+                             name="profil"
+                            #profil="ngModel"/>
+                               
+                        </div>
+                        
+                        <div class="form-group row" [hidden]="profil.valid || profil.pristine"
+                                class="alert alert-danger">
+                            <div [hidden]="!profil.hasError('required')">Le profil est requis.</div>
+                            <div [hidden]="!profil.hasError('pattern')">Caractère invalide entré dans le prénom.</div>
+                        </div>
+                     <div class="form-group row">
+                            <label for="notel" class="col-sm-4 col-xs-4 col-lg-4 col-md-4 col-form-label" >Numero tél:</label>
+                            <input class="col-sm-6 col-xs-6 col-lg-6 col-md-6" id="notel" type="text"[(ngModel)]="etu.noTel"required
+                            
+                             name="notel"
+                            #notel="ngModel"/>
+                               
+                        </div>
+                        
+                        <div class="form-group row" [hidden]="notel.valid || notel.pristine"
+                                class="alert alert-danger">
+                            <div [hidden]="!notel.hasError('required')">Le numero de téléphone est requis(ex: 888 888 8888).</div>
+                           
+                        </div>
+                    <div *ngIf="PageModifier == false">
+                            <div class="form-group row">
+                                    <label for="nomens" class="col-sm-4 col-xs-4 col-lg-4 col-md-4 col-form-label">Enseignant en charge:</label>
+                                    <input class="tooltip" data-jbox-title="Title 1" data-jbox-content="Content 1" class="col-sm-6 col-xs-6 col-lg-6 col-md-6" id="nomens" type="text" [(ngModel)]="enseignant.nom"/>
+                            </div>
+
+                            <div *ngIf="PageModifier == false && recu == true">
+                                        <div class="form-group row">
+                                                <label for="entnom" class="col-sm-4 col-xs-4 col-lg-4 col-md-4 col-form-label" >Entreprise:</label>
+                                                <input class="col-sm-6 col-xs-6 col-lg-6 col-md-6" id="entnom" type="text" [(ngModel)]="entreprise.nomentreprise"/>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="entadd" class="col-sm-4 col-xs-4 col-lg-4 col-md-4 col-form-label" >Adresse entreprise:</label>
+                                            <input class="col-sm-6 col-xs-6 col-lg-6 col-md-6" id="entadd" type="text" [(ngModel)]="entreprise.lieu"/>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="entnotel" class="col-sm-4 col-xs-4 col-lg-4 col-md-4 col-form-label" >Téléphone entreprise:</label>
+                                            <input class="col-sm-6 col-xs-6 col-lg-6 col-md-6" id="entnotel" type="text" [(ngModel)]="entreprise.notel"/>
+                                        </div>
+
+
+                                        <div class="form-group row">
+                                            <label for="entpers" class="col-sm-4 col-xs-4 col-lg-4 col-md-4 col-form-label" >Personne à contacter entreprise:</label>
+                                           <input class="col-sm-6 col-xs-6 col-lg-6 col-md-6" id="entpers" type="text" [(ngModel)]="entreprise.personneresponsable"/>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="entcourriel" class="col-sm-4 col-xs-4 col-lg-4 col-md-4 col-form-label" >Courriel personne à contacté entreprise:</label>
+                                            <input class="col-sm-6 col-xs-6 col-lg-6 col-md-6" id="entcourriel" type="text" [(ngModel)]="entreprise.courrielres"/>
+                                        </div>
+                            </div>
+
+                           
+
+
+
+
+
+                            <div class="form-group row">
+                                <input  class="col-sm-4 col-xs-4 col-lg-4 col-md-4" id="fichier" type="file" name="file" id="file" class="inputfile"  (change)="fileChange($event)" accept=".pdf,.doc,.docx,.jpg,.png"/>
+                            </div>   
+                            <div class="form-group row">
+                                <button class="btn icon-btn btn-primary"  id="soumettre" (click)=" RequeteInsertPATHCV()">soumettre</button>
+                            </div>
+
+                        </div>
+
+                          
+
+                        
+                    
+
+
+                    <div *ngIf="PageModifier == true" class="form-group row">
+                    <button id="btn" class="btn icon-btn btn-primary"   (click)= "ModifierEtudiant()"><i class="fa fa-floppy-o"></i>Sauvegarder</button>
+                    </div>
+
+        </div>
+       
+</div>
+

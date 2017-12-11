@@ -27,8 +27,9 @@
 
      <div class="form-group row">
         <label for="inputannee" class="col-sm-2 col-xs-2 col-lg-2 col-md-2 col-form-label" id="labelannee">Annee :</label>
-        <input  class="col-sm-6 col-xs-6 col-lg-6 col-md-6" id="inputannee" type="text" [(ngModel)]="etudiant.annee" placeholder="Annee" />
+        <input  class="col-sm-6 col-xs-6 col-lg-6 col-md-6" id="inputannee" type="text" [(ngModel)]="etudiant.annee" placeholder="Annee" disabled/>
     </div>
+
     <div *ngIf="PageAjouter == true"  class="form-group row">
         <label for="inputMotpasse" class="col-sm-2 col-xs-2 col-lg-2 col-md-2 col-form-label" id="labelMotpasse">Mot de passe:</label>
         <input class="col-sm-6 col-xs-6 col-lg-6 col-md-6" id="inputMotpasse" type="text" [(ngModel)]="etudiant.motPasse" value="etudiant" placeholder="etudiant" disabled/>
@@ -60,20 +61,31 @@
 <div *ngIf="PageModifier == false && PageAjouter == false">
          <div class="form-group row">
                 <label for="inputcompagnie" class="col-sm-2 col-xs-2 col-lg-2 col-md-2 col-form-label" id="labelcompagnie">compagnie:</label>
-                <input class="col-sm-6 col-xs-6 col-lg-6 col-md-6" id="inputcompagnie" type="text" [(ngModel)]="entreprise.nomentreprise" placeholder="profil"/>
+                <input class="col-sm-6 col-xs-6 col-lg-6 col-md-6" id="inputcompagnie" type="text" [(ngModel)]="entreprise.nomentreprise" placeholder="compagnie"/>
         </div>   
                 
         <div class="form-group row">
 
-                 <label for="listeens" class="col-sm-2 col-xs-2 col-lg-2 col-md-2 col-form-label" id="labelenseignantencharge">enseignant(s) en charge:</label>
-         </div>     
-         <div class="form-group row">    
-                 <ul *ngFor="let enseignant of enseignants" id="listeens" class="list-group">
-                        
-                                <li > {{enseignant.nom}}</li>
-                        </ul> 
-        </div>          
-
+                 <label for="listeens" class="col-sm-2 col-xs-2 col-lg-2 col-md-2 col-form-label" id="labelenseignantencharge">enseignant en charge:</label>
+                 <input class="col-sm-6 col-xs-6 col-lg-6 col-md-6" id="listeens" type="text" [(ngModel)]="enseignant.nom" placeholder="profil"/>
+         </div> 
+         
+         <div class="form-group row">
+             
+                <label for="inputCV" class="col-sm-2 col-xs-2 col-lg-2 col-md-2 col col-form-label" id="labelprenom">Dépôt CV:</label>
+             
+                <input  class="col-sm-6 col-xs-6 col-lg-6 col-md-6" id="inputCV" value="{{MesssageCV}}" />
+             
+             
+         </div>
+         <div class="form-group row">
+                <div *ngIf="transmisCV == true"  class="col-sm-6 col-xs-6 col-lg-6 col-md-6">
+                                        <a target="_blank" href="{{etudiant.pathCV}}" download><button type="button" id="btntelecharge" class="btn btn-info"> <i class="fa fa-download" aria-hidden="true"></i>Télécharger CV</button></a>
+                </div>
+                <div *ngIf="transmisCV == true" class="col-sm-6 col-xs-6 col-lg-6 col-md-6"> 
+                                          <button id="btnsupprimerCV" class="btn icon-btn btn-danger" (click)="SuppressionCVetudiant()"><span class="glyphicon btn-glyphicon glyphicon-trash img-circle"></span>Supprimer CV</button>
+                </div>
+        </div>
 </div>
    
     <div *ngIf="PageModifier == true || PageAjouter == true">
@@ -86,28 +98,20 @@
                                 </option>
                         </select>
                 </div>
+                <div class="form-group row"> 
+                                <label  class="col-sm-3 col-xs-3 col-lg-3 col-md-3 col-form-label row" id="labelenseignantencharge">enseignant en charge:</label>
+                                
+                                 <select [(ngModel)]="enseignant.nom" class="custom-select" id="nomens">
+                                         <option selected></option>
+                                         <option *ngFor=" let value of Tnomenseignants">
+                                                 {{value}}
+                                         </option>
+                                 </select>
+                 </div>
     </div>  
-    <div *ngIf="PageModifier == true">        
-                        <label  class="col-sm-12 col-xs-12 col-lg-12 col-md-12 col-form-label row" id="labelenseignantencharge">enseignant(s) en charge:</label>
-                       
-                         
-                                        <div *ngFor="let item of TabCheckedNomEns" id="listeens" class="col-sm-12 col-xs-12 col-lg-12 col-md-12 row">
-                                                        <label><input type="checkbox" [checked]="item.isChecked" (change)="selectEnseignant(item.no, $event)" value="">{{item.nom}}</label>
-                                       </div>
-                               
-                
-    </div>
+    
 
-   <div *ngIf="PageAjouter == true">
-            <label  class="col-sm-12 col-xs-12 col-lg-12 col-md-12 col-form-label row" id="labelenseignantencharge">enseignant(s) en charge:</label>
-            
-              
-                             <div *ngFor="let item of enseignants2" id="listeens" class="col-sm-12 col-xs-12 col-lg-12 col-md-12 row">
-                                             <label><input type="checkbox"  (change)="selectEnseignant(item.noEnseignant, $event)" value="">{{item.nom}}</label>
-                            </div>
-
-    </div>
-
+   
 
 
 
@@ -115,10 +119,10 @@
 
 
     <div *ngIf="PageModifier == true" class="form-group row"> 
-            <button  class="btn icon-btn btn-primary"  (click)="SaveModifEtudiant()"><li><i class="fa fa-floppy-o"></i>Sauvegarder</button>
+            <button  class="btn icon-btn btn-primary"  (click)="SaveModifEtudiant()"><i class="fa fa-floppy-o"></i>Sauvegarder</button>
     </div>
     <div *ngIf="PageAjouter == true" class="form-group row"> 
-            <button  class="btn icon-btn btn-primary"  (click)="Ajouter()"><li><i class="fa fa-floppy-o"></i>Sauvegarder</button>
+            <button id="btn" class="btn icon-btn btn-primary"  (click)="Ajouter()"><i class="fa fa-floppy-o"></i>Sauvegarder</button>
     </div>
     
    
