@@ -9,7 +9,7 @@ namespace SqueletteImplantation.Controllers
     public class UploadFile: UploadService
     {
 
-        public static string Chemin = @"\CV\";
+        public static string Chemin = "/CV/";
 
         public bool upload(IFormFile formFile, string chemin)
         {
