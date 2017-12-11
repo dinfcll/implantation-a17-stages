@@ -5,7 +5,7 @@ import {Observable} from 'rxjs/Observable';
 
 
 @Injectable()
-export class AuthguardGuard implements CanActivate, CanActivateChild {
+export class AuthguardGuardens implements CanActivate, CanActivateChild {
     private IsLoggedIn:boolean;
     private redirectUrl:string;
    
@@ -35,7 +35,8 @@ export class AuthguardGuard implements CanActivate, CanActivateChild {
             return true;
        }else{
            if(localStorage.getItem('currentUser') !== null){
-               if(JSON.parse(localStorage.getItem('currentUser'))[1]=="etudiant"){
+               console.log(JSON.parse(localStorage.getItem('currentUser'))[1]);
+               if(JSON.parse(localStorage.getItem('currentUser'))[1]=="prof"){
                         this.IsLoggedIn=true;
                         this.router.navigateByUrl(url);
                }else{

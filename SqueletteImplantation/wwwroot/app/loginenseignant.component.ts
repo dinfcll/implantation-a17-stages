@@ -43,7 +43,7 @@ export  class LoginEnseignantComponent  {
                          //naviguer plus loin
                          this.router.navigate(['/accueil-enseignant']);
                          
-                         localStorage.setItem('currentUser', JSON.stringify(this.enseignant));
+                         localStorage.setItem('currentUser', JSON.stringify([this.enseignant, "prof"]));
                         
                         
                         
@@ -85,7 +85,7 @@ export  class LoginEnseignantComponent  {
                          //naviguer plus loin
                          this.router.navigate(['/accueil-etudiant']);
                          
-                         localStorage.setItem('currentUser', JSON.stringify(this.etudiant));
+                         localStorage.setItem('currentUser', JSON.stringify([this.etudiant,"etudiant"]));
                         
                     }
                 else
