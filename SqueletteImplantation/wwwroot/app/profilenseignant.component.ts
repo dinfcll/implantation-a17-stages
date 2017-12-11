@@ -31,7 +31,7 @@ export class ProfilEnseignantComponent {
 
     constructor(private elementRef: ElementRef, private location: Location, private http: Http, private router: Router, private appservice: AppService) {
 
-        this.user = localStorage.getItem('var');
+        this.user = localStorage.getItem('currentUser');
         this.ens = JSON.parse(this.user) as Enseignant;
         this.Etudiantselonprof();
         this.Modifier = false;
@@ -46,7 +46,6 @@ export class ProfilEnseignantComponent {
     }
 
     Etudiantselonprof() {
-        console.log(this.ens.noEnseignant.toString());
         this.http.get("api/Etudiant/" + this.ens.noEnseignant.toString()).subscribe(donnees => {
             if (donnees.status != 200) {
                 this.jBoxMessage("red", "Erreur lors de l'obtention des étudiants en relation!");
