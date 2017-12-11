@@ -65,7 +65,7 @@ const appRoutes: Routes=[
   },
     {
         path: 'detailEtudiant/:noDa', 
-        canActivate: [ AuthguardGuard ],
+        canActivate: [ AuthguardGuardens ],
         component:  PageDetailEtudiantComponent
     },
     {
