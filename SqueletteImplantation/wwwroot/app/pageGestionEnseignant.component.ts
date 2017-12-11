@@ -4,6 +4,7 @@ import { Http, Headers } from '@angular/http';
 import { Router } from '@angular/router';
 import 'rxjs/add/operator/map';
 import { Location } from '@angular/common';
+
 declare var jBox: any;
 
 @Component({
@@ -15,6 +16,7 @@ declare var jBox: any;
 export class GestionEnseignant {
     TEnseignant: Enseignant[];
     constructor(private http: Http, private router: Router,private location:Location) {
+      
         this.RemplirTEnseignant();
     }
 

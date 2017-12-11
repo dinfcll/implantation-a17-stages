@@ -53,7 +53,8 @@ export class pageAccueilEtudiantComponent implements AfterViewInit, OnInit
 
     ngOnInit(){
         this.user=localStorage.getItem('currentUser') ;
-        this. etu = JSON.parse(this.user);
+        this. etu = JSON.parse(this.user)[0];
+        //localStorage.getItem("savedData"))[0]
         console.log(this.etu);
       //  this.getEnseignantetEntrepriseParNoEnsNoEnt(this.etu.noEnseignant, this.etu.id);
         

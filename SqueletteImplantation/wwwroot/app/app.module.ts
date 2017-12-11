@@ -18,6 +18,11 @@ import {PageAjouterEnseignant} from "./pageAjouterEnseignant.component"
 import {modifEtudiantComponent} from "./modifEtudiant.component";
 import {PageDetailEtudiantComponent} from "./pageDetailEtudiant.component";
 import {AppService} from "./app.service";
+import {AuthguardGuard} from "./authguard.guard";
+import {AuthguardGuardens} from "./authguard.guardens"
+
+
+
 const appRoutes: Routes=[
   {
     path:'',
@@ -27,6 +32,8 @@ const appRoutes: Routes=[
   {
     path:'accueil-enseignant',
     component: pageAccueilEnseignantComponent,
+    canActivate: [ AuthguardGuardens ],
+    canActivateChild:[AuthguardGuardens],
     children: [ 
       {
           path: 'recherche-etudiant',
@@ -48,49 +55,43 @@ const appRoutes: Routes=[
   },
   {
     path: 'profil-enseignant',
+    canActivate: [ AuthguardGuard ],
     component:  ProfilEnseignantComponent
 },
   {
     path: 'detailEntreprise/:id', 
+    canActivate: [ AuthguardGuardens ],
     component:  PageDetailEntrepriseComponent
   },
-  
-  
-    {
-        path: 'Login', 
-        component: LoginEnseignantComponent 
-    },
-    {
-        path: 'profil-enseignant',
-        component:  ProfilEnseignantComponent
-    },
-    {
-        path: 'detailEntreprise/:id', 
-        component:  PageDetailEntrepriseComponent
-    },
     {
         path: 'detailEtudiant/:noDa', 
+      //  canActivate: [ AuthguardGuard ],
         component:  PageDetailEtudiantComponent
     },
     {
         path: 'gestionenseignant',
+        canActivate: [ AuthguardGuardens ],
         component: GestionEnseignant
     },
     {
         path: 'AjouterEnseignant',
+       canActivate: [AuthguardGuardens ],
         component: PageAjouterEnseignant
     },
      {
       path: 'accueil-etudiant', 
+      canActivate: [ AuthguardGuard ], 
       component:  pageAccueilEtudiantComponent,
      
     },
     {
       path: 'profil-etudiant', 
+      canActivate: [ AuthguardGuard ],
       component:  modifEtudiantComponent
     },
     {
       path: 'changer-Mdpetudiant', 
+      canActivate: [ AuthguardGuard ],
       component:  mdpEtudiantComponent
     },
     
@@ -127,7 +128,7 @@ const appRoutes: Routes=[
 
 
   bootstrap: [ AppComponent],
-  providers: [AppService]
+  providers: [AppService, AuthguardGuard,AuthguardGuardens]
 })
 
 

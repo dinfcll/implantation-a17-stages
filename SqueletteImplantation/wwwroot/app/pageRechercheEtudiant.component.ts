@@ -63,7 +63,7 @@ export class PageRechercheEtudiantComponent  {
             if (donnees.status == 200) {
                 this.etudiants = donnees.json() as Etudiant[]
             } else {
-                this.jBoxMessage("red", "Aucune occurence ne peux �tre affich�e!");
+                this.jBoxMessage("red", "Aucune occurence ne peux être affichée!");
             }
         });
     } else {
