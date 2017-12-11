@@ -33,7 +33,7 @@ export class ProfilEnseignantComponent {
 
         this.user = localStorage.getItem('currentUser');
         this.ens = JSON.parse(this.user) as Enseignant;
-        this.Etudiantselonprof();
+        this.Etudiantselonprof(this.ens.noEnseignant);
         this.Modifier = false;
         this.PremierMotPAsse = "";
         this.DeuxiemeMotPasse = "";
@@ -45,8 +45,8 @@ export class ProfilEnseignantComponent {
         this.location.back();
     }
 
-    Etudiantselonprof() {
-        this.http.get("api/Etudiant/" + this.ens.noEnseignant.toString()).subscribe(donnees => {
+    Etudiantselonprof(noens: number) {
+        this.http.get("api/Etudiant/" + noens).subscribe(donnees => {
             if (donnees.status != 200) {
                 this.jBoxMessage("red", "Erreur lors de l'obtention des étudiants en relation!");
                 return;
