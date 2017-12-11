@@ -6,6 +6,7 @@ import { Router, RouterModule, Routes, ActivatedRoute, ParamMap } from '@angular
 import { Location } from '@angular/common';
 import { FormControl, FormBuilder, Validators } from '@angular/forms';
 
+
 declare var jBox: any;
 
 @Component({
@@ -17,6 +18,7 @@ declare var jBox: any;
 export class PageAjouterEnseignant {
     EnseignantAjouter: Enseignant;
     constructor(private http: Http, private router: Router, private location: Location) {
+       
         this.EnseignantAjouter = new Enseignant(-1,"","","","","Prof123*");
     }
 

@@ -1,5 +1,5 @@
 import 'rxjs/add/operator/switchMap';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Http } from '@angular/http';
 import {  Router, RouterModule, Routes, ActivatedRoute, ParamMap}   from '@angular/router';
 import { Location }   from '@angular/common';
@@ -7,6 +7,7 @@ declare var jBox: any;
 import { Enseignant} from './models/enseignant.class';
 import { Entreprise } from './models/entreprise.class';
 import { AppService} from './app.service';
+
 
 @Component({
   selector: 'detail-entreprise',
@@ -27,6 +28,7 @@ export class PageDetailEntrepriseComponent  {
         let idStr: string;
         let id: number;
         this.PageAjouter = false;
+       
         this.RecupererFlag();
         Page = CheminLong.split('/');
         id = +Page[Page.length - 1];

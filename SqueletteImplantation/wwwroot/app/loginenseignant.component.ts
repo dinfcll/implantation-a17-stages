@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Enseignant } from './models/enseignant.class';
 import { Etudiant } from './models/etudiant.class';
 import {  Router }   from '@angular/router';
 import { Http, Headers  } from '@angular/http';
+
+
 
 
 declare var jBox:any;
@@ -12,15 +14,20 @@ declare var jBox:any;
     styleUrls:[`./../css/style_page_accueil.css`],
 })
 
-export  class LoginEnseignantComponent { 
+export  class LoginEnseignantComponent  { 
 
+    private isEnseignant:boolean;
+    private isEtudiant:boolean;
     private isValid: boolean;
     private enseignant: Enseignant;
     private etudiant: Etudiant;
-    constructor(private http: Http,  private router: Router){ 
+    constructor(private http: Http,  private router: Router) { 
+        //localStorage.clear();
         this.isValid=true;
+       
         
     }
+    
 
     Connexion(courriel: string, mdp: string) {
 
@@ -36,7 +43,10 @@ export  class LoginEnseignantComponent {
                          //naviguer plus loin
                          this.router.navigate(['/accueil-enseignant']);
                          
-                         localStorage.setItem('var', JSON.stringify(this.enseignant));
+                         localStorage.setItem('currentUser', JSON.stringify(this.enseignant));
+                        
+                        
+                        
                     }
                 else
                     {
@@ -47,7 +57,7 @@ export  class LoginEnseignantComponent {
                                 
                                
                                     this.jBoxMessage("red", "Mot de passe ou nom utilistateur invalide");
-                                
+                                   
                             }
                          
                     }
@@ -76,6 +86,7 @@ export  class LoginEnseignantComponent {
                          this.router.navigate(['/accueil-etudiant']);
                          
                          localStorage.setItem('currentUser', JSON.stringify(this.etudiant));
+                        
                     }
                 else
                     {

@@ -6,7 +6,7 @@ import { Component, Input, OnInit, ViewChild, ElementRef, AfterViewInit } from '
 
 import { Enseignant } from './models/enseignant.class';
 
-
+import { etuConnexionService } from "./appetuConnec.service";
 
 import {  Router, RouterModule, Routes}   from '@angular/router';
 
@@ -36,7 +36,7 @@ export class pageAccueilEtudiantComponent implements AfterViewInit, OnInit
    PageModifier:boolean;
 
     
-    constructor(private http: Http, private router: Router)
+    constructor(private http: Http, private router: Router, private Connecetuservice:etuConnexionService)
     {
         this.recu=false;
         this.PageModifier=false;

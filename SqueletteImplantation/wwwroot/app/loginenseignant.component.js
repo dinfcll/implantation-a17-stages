@@ -12,12 +12,23 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var http_1 = require("@angular/http");
+var appetuConnec_service_1 = require("./appetuConnec.service");
+var appensConnec_service_1 = require("./appensConnec.service");
 var LoginEnseignantComponent = (function () {
-    function LoginEnseignantComponent(http, router) {
+    function LoginEnseignantComponent(http, router, Connecetuservice, Connecensservice) {
         this.http = http;
         this.router = router;
+        this.Connecetuservice = Connecetuservice;
+        this.Connecensservice = Connecensservice;
+        //localStorage.clear();
         this.isValid = true;
+        this.isEnseignant = false;
+        this.isEtudiant = false;
     }
+    LoginEnseignantComponent.prototype.ngOnInit = function () {
+        this.Connecensservice.changeFlagEns(this.isEnseignant);
+        this.Connecetuservice.changeFlagEtu(this.isEtudiant);
+    };
     LoginEnseignantComponent.prototype.Connexion = function (courriel, mdp) {
         var _this = this;
         var headers = new http_1.Headers();
@@ -27,7 +38,9 @@ var LoginEnseignantComponent = (function () {
             if (Resultat.status == 200) {
                 //naviguer plus loin
                 _this.router.navigate(['/accueil-enseignant']);
-                localStorage.setItem('var', JSON.stringify(_this.enseignant));
+                localStorage.setItem('currentUser', JSON.stringify(_this.enseignant));
+                _this.isEnseignant = true;
+                _this.Connecensservice.changeFlagEns(_this.isEnseignant);
             }
             else {
                 //message erreur
@@ -52,6 +65,8 @@ var LoginEnseignantComponent = (function () {
                 //naviguer plus loin
                 _this.router.navigate(['/accueil-etudiant']);
                 localStorage.setItem('currentUser', JSON.stringify(_this.etudiant));
+                _this.isEtudiant = true;
+                _this.Connecetuservice.changeFlagEtu(_this.isEtudiant);
             }
             else {
                 //message erreur
@@ -83,7 +98,7 @@ var LoginEnseignantComponent = (function () {
             templateUrl: "./../html/indexConnexionEnseignantEtudiant.html",
             styleUrls: ["./../css/style_page_accueil.css"],
         }),
-        __metadata("design:paramtypes", [http_1.Http, router_1.Router])
+        __metadata("design:paramtypes", [http_1.Http, router_1.Router, appetuConnec_service_1.etuConnexionService, appensConnec_service_1.ensConnexionService])
     ], LoginEnseignantComponent);
     return LoginEnseignantComponent;
 }());
