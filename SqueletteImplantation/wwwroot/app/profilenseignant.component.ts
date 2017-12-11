@@ -17,82 +17,45 @@ declare var jBox: any;
 })
 
 export class ProfilEnseignantComponent {
-    ens: any;
+    ens: Enseignant;
     user: string;
     etudiants: Etudiant[];
     AnneeRecherche: string;
     etudiant: Etudiant;
     PageInfo: boolean;
-    annees: string;
-    Recherche: string;
-    TAnnees: String[];
+    Modifier: boolean;
+    MotPasseActuel: string;
+    PremierMotPAsse: string;
+    DeuxiemeMotPasse: string;
+    ModifMotPasse: boolean;
 
     constructor(private elementRef: ElementRef, private location: Location, private http: Http, private router: Router, private appservice: AppService) {
 
         this.user = localStorage.getItem('var');
-        this.ens = JSON.parse(this.user);
-        this.TAnnees = [];
-        this.annees = "";
-        this.AnneeRecherche = ""; 
-        this.Recherche = "";
-        this.getEtudiant("", "");
-        this.RemplirComboAnneeEtudiant();
-        this.RemplirCombo()
-        this.appservice.changeFlag(false);
-        this.Etudiantselonprof(1213);
+        this.ens = JSON.parse(this.user) as Enseignant;
+        this.Etudiantselonprof();
+        this.Modifier = false;
+        this.PremierMotPAsse = "";
+        this.DeuxiemeMotPasse = "";
+        this.ModifMotPasse = false;
+        this.MotPasseActuel = "";
     }
 
     goBack(): void {
         this.location.back();
     }
 
-    Etudiantselonprof(NoEnseignant: number) {
-        this.http.get("api/Etudiant/{" + NoEnseignant + "}").subscribe(donnees => {
-            this.etudiant = donnees.json() as Etudiant
-
-        });
-
-    }
-    RemplirComboAnneeEtudiant() {
-        this.http.get("api/Etudiant/RemplirComboAnneeEtudiant").subscribe(
-            donnees => {
-                if (donnees.status == 200) {
-                    this.TAnnees = donnees.json() as string[]
-                    this.getEtudiant(this.Recherche, this.annees);
-                } else {
-                    this.jBoxMessage("red", "Aucune année trouvée!");
-                }
-            });
-    } 
-    getEtudiant(Recherche: string, annees: string) {
-        let url: string;
-        if ((Recherche == "" && annees == "")) {
-            url = "api/Etudiant/annees";
-        } else {
-            if (Recherche != "" && annees == "") {
-                url = " api/Etudiant/RechercheSansAnnee/" + Recherche;
-            } else {
-                if (Recherche == "" && annees != "") {
-                    url = "api/Etudiant/RechercheAnnee/" + annees
-                } else {
-                    url = "api/Etudiant/" + annees + "/" + Recherche;
-                }
+    Etudiantselonprof() {
+        console.log(this.ens.noEnseignant.toString());
+        this.http.get("api/Etudiant/" + this.ens.noEnseignant.toString()).subscribe(donnees => {
+            if (donnees.status != 200) {
+                this.jBoxMessage("red", "Erreur lors de l'obtention des étudiants en relation!");
+                return;
             }
-        }
-
-        if (this.TAnnees.length != 0) {
-            this.http.get(url).subscribe(donnees => {
-                if (donnees.status == 200) {
-                    this.etudiants = donnees.json() as Etudiant[]
-                } else {
-                    this.jBoxMessage("red", "Aucune occurence ne peux être affichée!");
-                }
-            });
-        } else {
-            this.etudiants = null;
-        }
-
+            this.etudiants = donnees.json() as Etudiant[];
+        });
     }
+
     jBoxMessage(couleur: string, message: string) {
         new jBox('Notice', {
             content: message,
@@ -100,28 +63,59 @@ export class ProfilEnseignantComponent {
             autoClose: 5000
         });
     }
-    getEntreprise(Recherche: string, annees: string) {
-        let url: string;
-        this.Recherche = Recherche;
-        this.AnneeRecherche = annees;
-        if ((Recherche == "" && annees == "")) {
-            url = "api/Entreprise/annees";
+
+    ActiverModification() {
+        if (this.Modifier)
+            this.Modifier = false;
+        else
+            this.Modifier = true;
+    }
+    ModificationMotPasse() {
+        if (this.MotPasseActuel != this.ens.motDePasse) {
+            this.jBoxMessage("red", "Mot de passe incorrect !");
+            return;
         }
+        if (this.PremierMotPAsse == "" || this.DeuxiemeMotPasse == "") {
+            this.jBoxMessage("red", "Veuillez entrer votre nouveau mot de passe et le confirmer !");
+            return;
+        }
+        if (this.PremierMotPAsse != this.DeuxiemeMotPasse) {
+            this.jBoxMessage("red", "Les deux mots de passe ne correspondent pas !");
+            return;
+        }
+        if (this.DeuxiemeMotPasse == this.ens.motDePasse) {
+            this.jBoxMessage("red", "Veuillez saisir un mot de passe différent que celui actuel !");
+            return;
+        }
+        this.ens.motDePasse = this.PremierMotPAsse;
+        this.Modification();
     }
-    RemplirCombo() {
-        this.http.get("api/Entreprise/RemplirCombo").subscribe(
-            donnees => {
-
-                if (donnees.status == 200) {
-                    this.TAnnees = donnees.json() as string[]
-                    this.getEntreprise(this.Recherche, this.AnneeRecherche);
-                } else {
-                    this.jBoxMessage("red", "Aucune année trouvée!");
-                }
-            });
+    ActiverModifMotPasse() {
+        if (this.ModifMotPasse)
+            this.ModifMotPasse = false;
+        else
+            this.ModifMotPasse = true;
     }
+    ModifierInfo() {
+        if (this.ens.courriel == "" || this.ens.nomUti == "") {
+            this.jBoxMessage("red", "Veuillez entrer un nom d'utilisateur et un courriel !")
+        }
+        if (this.ens.courriel.indexOf('@') == -1) {
+            this.jBoxMessage("red", "Le courriel est invalide !");
+            return;
+        }
+        this.Modification();
+    }
+    Modification() {
+        this.http.put("api/Enseignant/ModifierEnseignant", this.ens).subscribe(Resultat => {
+            if (Resultat.status == 200) {
+                this.jBoxMessage("green", "Modification du profil effectuée avec succès !");
+                this.Modifier = false;
+                this.ModifMotPasse = false;
+            } else {
+                this.jBoxMessage("red", "Erreur lors de la modification du profil");
+            }
+        });
 
-    ModifierFlagAppServiceDetail() {
-        this.appservice.changeFlag(true);
     }
 }
