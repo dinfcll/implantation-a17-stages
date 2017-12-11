@@ -12,7 +12,7 @@ declare var jBox: any;
         '(document:click)': 'verifClickDansComposant($event)',
     },
     templateUrl: `./../html/RechercheEntreprise.html`,
-    styleUrls: [`./../css/accueil_enseignant.css`],
+    styleUrls: [`./../css/RechercheEtudiant.css`],
 })
 
 export class pageRechercheEntrepriseComponent 

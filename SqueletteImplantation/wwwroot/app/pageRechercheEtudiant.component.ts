@@ -17,14 +17,12 @@ declare var jBox:any;
         '(document:click)': 'verifClickDansComposant($event)',
     },
   templateUrl: `./../html/PageRechercheEtudiant.html`,
-  styleUrls:[`./../css/accueil_enseignant.css`],
+  styleUrls:[`./../css/RechercheEtudiant.css`],
 })
 
 export class PageRechercheEtudiantComponent  { 
-    
-    
-    filteredList:any[];
-    Tnometudiant: string[];
+  filteredList:any[];
+  Tnometudiant: string[];
   etudiants: Etudiant[];
     
 

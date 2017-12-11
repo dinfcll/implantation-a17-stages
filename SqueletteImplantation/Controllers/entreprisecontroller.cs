@@ -234,6 +234,18 @@ namespace SqueletteImplantation.Controllers
                            select ens; // dto
             return new OkObjectResult(Resultat);
         }
+        [HttpGet]
+        [Route("api/Entreprise/EtudiantEntreprise/{NoEnt}")]
+        public IActionResult EtudiantEntreprise(int NoEnt)
+        {
+            var Etudiants = from b in _maBd.Etudiant
+                            where b.Id == NoEnt
+                            select b;
+            if (Etudiants == null)
+                return NoContent();
+            return new OkObjectResult(Etudiants);
+
+        }
     }
 }
 

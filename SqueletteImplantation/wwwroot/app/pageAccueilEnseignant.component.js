@@ -16,6 +16,8 @@ var pageAccueilEnseignantComponent = (function () {
     function pageAccueilEnseignantComponent(http, router) {
         this.http = http;
         this.router = router;
+        this.user = localStorage.getItem('var');
+        this.ens = JSON.parse(this.user);
     }
     pageAccueilEnseignantComponent.prototype.Deconnexion = function () {
         localStorage.removeItem('currentUser');

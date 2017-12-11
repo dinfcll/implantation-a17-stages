@@ -459,6 +459,25 @@ namespace SqueletteImplantation.Controllers
             return new OkObjectResult(entreprise);
         }
 
+        [HttpPut]
+        [Route("api/Etudiant/EtudiantPris/{ID}")]
+        public IActionResult CompteurEtudiantEntreprise(int ID)
+        {
+            var Etudiants = from b in _maBd.Etudiant
+                        where b.Id == ID
+                        select b.NoDa;
+            int Nombre = Etudiants.Count();
+            var Ent = (from b in _maBd.Entreprise
+                       where b.Id == ID
+                       select b).First();
+            if (Ent == null)
+                return NoContent();
+            Ent.nbreoui = Nombre;
+            _maBd.Update(Ent);
+            _maBd.SaveChanges();
+            return new OkObjectResult(Ent);
+
+        }
 
         [HttpPost]
         [Route("api/ajoutfichier")]
@@ -466,7 +485,6 @@ namespace SqueletteImplantation.Controllers
         {
             string NomCV;
             string Date = System.DateTime.Now.ToString("h_mm_ss_");
-
             if (cv.Count == 1 && cv[0] != null)
             {
                 NomCV =  cv[0].FileName.Split('\\')[cv[0].FileName.Split('\\').Length -1];
@@ -479,10 +497,6 @@ namespace SqueletteImplantation.Controllers
             return new BadRequestResult();
         }
 
-
-
-
-
         [HttpPut]
         [Route("api/Etudiant/SuppressionCVEtudiant")]
         public IActionResult SuppressionCVEtudiant([FromBody]Etudiant etudiant)
@@ -493,16 +507,12 @@ namespace SqueletteImplantation.Controllers
                // CheminApp = @"c:\Users\Romy Steve\Desktop\STAGE_dernier_etape\implantation-a17-stages\SqueletteImplantation\wwwroot\app\CV\" + etudiant.PathCV.Split('/')[etudiant.PathCV.Split('/').Length - 1];
             
                 CheminApp = "/home/ubuntu/implantation-a17-stages/SqueletteImplantation/wwwroot/app/CV/" + etudiant.PathCV.Split('/')[etudiant.PathCV.Split('/').Length - 1];
-            
-            
             }
              etudiant.PathCV = null;
             var resultat = _maBd.Etudiant.Update(etudiant);
-          
-            
+
             if (resultat !=null)
             {
-               
                 _uploadService.deletefile(CheminApp);
                 _maBd.SaveChanges();
                 return new OkResult();

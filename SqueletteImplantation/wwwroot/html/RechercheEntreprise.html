@@ -1,72 +1,81 @@
-<div id="principalDiv" >
-    <div class="form-group row"> 
-        <input class="col-sm-2 col-xs-2 col-lg-2 col-md-2  col-form-label row"  type="text" placeholder="Recherche" id="recherche" [(ngModel)]="Recherche" (keyup.enter)="getEntreprise(Recherche,annees)" (keyup)="filter()">
-        <select class="custom-select" [(ngModel)]="annees">
-                <option></option>
-                <option *ngFor=" let value of TAnnees">{{value}}</option>
-        </select>
-        <div class="suggestions" *ngIf="filteredList.length > 0">
-            <ul id="autocomplete" *ngFor="let item of filteredList" >
-                <li class="liautocomplete">
-                    <a (click)="select(item)">{{item}}</a>
-                </li>
-            </ul>
+<div id="PageGlobale">
+    <div id="DivContenuPage" class="container-fluid">
+        <div class="row">
+            <div class="col-xs-offset-6 col-xs-4">
+                <div class="input-group">
+                    <span class="input-group-btn">
+                        <button class="btn btn-secondary btn-info " type="button" (click)="getEntreprise(Recherche,annees)"><span class="glyphicon glyphicon-search"></span>Rechercher!</button>
+                    </span>
+                    <input class="form-control" type="text" placeholder="Recherche" [(ngModel)]="Recherche" (keyup.enter)="getEntreprise(Recherche,annees)" (keyup)="filter()">
+                </div>
+            </div>
+            <div class="form-group col-xs-2">
+                <select class=" form-control" [(ngModel)]="annees">
+                    <option></option>
+                    <option *ngFor=" let value of TAnnees">{{value}}</option>
+                </select>
+            </div>
         </div>
-        <button class="col-sm-2 col-xs-2 col-lg-2 col-md-2  col-form-label row" id="loupe"  (click)="getEntreprise(Recherche,annees)" ></button>
-    </div>
-    <div  id="divConteneur" class="form-group row container" >
-        <table border=1 >
-            <caption>Tableau de données des entreprises</caption>
-            <thead>
-                <tr>
-                    <th>
-                        Nom d'entreprise
-                    </th>
-                    <th>
-                        Lieu
-                    </th>
-                    <th>
-                        Numéro Téléphone
-                    </th>
-                    <th>
-                        Poste
-                    </th>
-                    <th>
-                        Personne Responsable
-                    </th>
-                    <th>
-                        Nombre d'étudiants acceptés
-                    </th>
-                    <th>
-                        Nombre d'étudiants refusés
-                    </th>
-                    <th>
-                        Courriel du responsable
-                    </th>
-                    <th id="date">
-                        Date(Année)
-                    </th>
-                    <th>
-                        Supprimer
-                    </th>
-                    <th>
-                        Modifier
-                    </th>
-                    <th>
-                        Ajouter à l'année courante
-                    </th>
-                    <th>
-                        Voir l'entreprise
-                    </th>
-                </tr>
-            </thead>
-
-           
-      
-
+        <div class="row">
+            <button class=" btn-icon btn-success" [routerLink]="['/detailEntreprise', -1]" routerLinkActive="active" id="btn"><span class="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"></span> ajouter une entreprise</button>
+        </div>
+        <div class="row" id="MenuDeroulant">
+            <div class="col-xs-offset-6 col-xs-4 suggestions" *ngIf="filteredList.length > 0">
+                <ul id="autocomplete" *ngFor="let item of filteredList">
+                    <li class="liautocomplete">
+                        <a (click)="select(item)">{{item}}</a>
+                    </li>
+                </ul>
+            </div>
+           </div>
+        <div class="form-group row table-responsive" id="DivTable">
+            <table border=1 class="table-hover">
+                <thead>
+                    <tr>
+                        <th>
+                            Nom d'entreprise
+                        </th>
+                        <th>
+                            Lieu
+                        </th>
+                        <th>
+                            Numéro Téléphone
+                        </th>
+                        <th>
+                            Poste
+                        </th>
+                        <th>
+                            Personne Responsable
+                        </th>
+                        <th>
+                            Nombre d'étudiants acceptés
+                        </th>
+                        <th>
+                            Nombre d'étudiants refusés
+                        </th>
+                        <th>
+                            Courriel du responsable
+                        </th>
+                        <th id="date">
+                            Date(Année)
+                        </th>
+                        <th>
+                            Supprimer
+                        </th>
+                        <th>
+                            Modifier
+                        </th>
+                        <th>
+                            Ajouter à l'année courante
+                        </th>
+                        <th>
+                            Voir l'entreprise
+                        </th>
+                    </tr>
+                </thead>
                 <tbody>
                     <tr *ngFor="let entreprise of entreprises">
-                        <td [routerLink]="['/detailEntreprise', entreprise.id]" routerLinkActive="active" (click)="ModifierFlagAppServiceDetail()"> {{entreprise.nomentreprise}}</td>
+                        <td id="NomEnt" [routerLink]="['/detailEntreprise', entreprise.id]" routerLinkActive="active" (click)="ModifierFlagAppServiceDetail()"> {{entreprise.nomentreprise}}</td>
                         <td> {{entreprise.lieu}}</td>
                         <td> {{entreprise.notel }}</td>
                         <td> {{entreprise.poste}}</td>
@@ -82,16 +91,13 @@
                     </tr>
                 </tbody>
             </table>
-        
+
+        </div>
     </div>
-    <a class="btn icon-btn btn-success" [routerLink]="['/detailEntreprise', -1]" routerLinkActive="active" id="btn">
-        <span class="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"></span> ajouter une entreprise
-    </a>   
 </div>
 
-    
-    
-    
 
 
 
+ 
+    

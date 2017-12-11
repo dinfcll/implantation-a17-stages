@@ -4,7 +4,7 @@ import { Http } from '@angular/http';
 import {  Router, RouterModule, Routes, ActivatedRoute, ParamMap}   from '@angular/router';
 import { Location }   from '@angular/common';
 declare var jBox: any;
-import { Enseignant} from './models/enseignant.class';
+import { Etudiant} from './models/etudiant.class';
 import { Entreprise } from './models/entreprise.class';
 import { AppService} from './app.service';
 
@@ -19,7 +19,7 @@ export class PageDetailEntrepriseComponent  {
     entrepriseAjouter:Entreprise;
     PageAjouter: boolean;
     PageDetail: boolean;
-    TEnseignant: Enseignant[];
+    TEtudiant: Etudiant[];
     constructor(private http: Http, private router: Router, private location: Location, private appservice: AppService)
     {
         let CheminLong: string = this.router.url.toString();
@@ -141,13 +141,11 @@ export class PageDetailEntrepriseComponent  {
 
   RechercherEnseignantEntreprise()
   {
-      console.log('Bonjour!');
-      this.http.get('api/Entreprise/EnseignantID/' + this.entrepriseAjouter.id.toString()).subscribe(Resultat => {
+      this.http.get('api/Entreprise/EtudiantEntreprise/' + this.entrepriseAjouter.id.toString()).subscribe(Resultat => {
           if (Resultat.status != 200) {
-              this.jBoxMessage("red", "Erreur lors de la recherche des enseignants en relation avec l'entreprise");
+              this.jBoxMessage("red", "Erreur lors de la recherche des étudiants en relation avec l'entreprise");
           } else {
-              this.TEnseignant = Resultat.json() as Enseignant[];
-              console.log("HELLO");
+              this.TEtudiant = Resultat.json() as Etudiant[];
           }
       });
   }
