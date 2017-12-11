@@ -1,0 +1,77 @@
+﻿<div class="container" id="principal">
+    <div class="jumbotron scroll-area">
+        
+        
+        <div class="form-group row" *ngIf="!ModifMotPasse && !Modifier">
+            <label for="inputprenom" class="col-sm-2 col-xs-2 col-lg-2 col-md-2 col col-form-label" id="labelprenom">Nom de l'enseignant:</label>
+            <input class="col-sm-6 col-xs-6 col-lg-6 col-md-6" id="inputprenom" [disabled]="!Modifier" type="text" value=" {{ens.prenom}} {{ens.nom}}" />
+            <br />
+        </div>
+
+        
+        <div class="form-group row" *ngIf="!ModifMotPasse">
+            <label for="inputprenom" class="col-sm-2 col-xs-2 col-lg-2 col-md-2 col col-form-label" id="labelprenom">Nom utilisateur:</label>
+            <input class="col-sm-6 col-xs-6 col-lg-6 col-md-6" id="inputprenom" type="text" [disabled]="!Modifier" [(ngModel)]="ens.nomUti" />
+        </div>
+
+        <div class="form-group row" *ngIf="!ModifMotPasse">
+            <label for="inputprenom" class="col-sm-2 col-xs-2 col-lg-2 col-md-2 col col-form-label" id="labelprenom">Courriel:</label>
+            <input class="col-sm-6 col-xs-6 col-lg-6 col-md-6" id="inputprenom" type="text" [disabled]="!Modifier" [(ngModel)]="ens.courriel" />
+        </div>
+
+        <div class="form-group row" *ngIf="ModifMotPasse">
+            <label for="inputprenom" class="col-sm-2 col-xs-2 col-lg-2 col-md-2 col col-form-label" id="labelprenom">Mot de passe actuel:</label>
+            <input class="col-sm-6 col-xs-6 col-lg-6 col-md-6" id="inputprenom" type="password" [(ngModel)]="MotPasseActuel" />
+        </div>
+        <div class="form-group row" *ngIf="ModifMotPasse">
+            <label for="inputprenom" class="col-sm-2 col-xs-2 col-lg-2 col-md-2 col col-form-label" id="labelprenom">Nouveau mot de passe:</label>
+            <input class="col-sm-6 col-xs-6 col-lg-6 col-md-6" id="inputprenom" type="password"  [(ngModel)]="PremierMotPAsse" />
+        </div>
+        <div class="form-group row" *ngIf="ModifMotPasse">
+            <label for="inputprenom" class="col-sm-2 col-xs-2 col-lg-2 col-md-2 col col-form-label" id="labelprenom">Confirmez votre mot de passe:</label>
+            <input class="col-sm-6 col-xs-6 col-lg-6 col-md-6" id="inputprenom" type="password"  [(ngModel)]="DeuxiemeMotPasse" />
+        </div>
+        <div class="form-group row">
+            <button class="btn icon-btn btn-warning btn-circle btn-xl" (click)="goBack()"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
+        </div>
+        <div class="form-group row">
+            <button class="btn icon-btn btn-primary" *ngIf="!Modifier&&!ModifMotPasse"(click)="ActiverModification()"><i class="fa fa-pencil fa-fw"></i>Modifier les informations</button> 
+            <button class="btn icon-btn btn-success" *ngIf="Modifier" (click)="ModifierInfo()"><i class="fa fa-pencil fa-fw"></i>Enregistrer les modifications</button> 
+            <button class="btn icon-btn btn-danger" *ngIf="Modifier" (click)="ActiverModification()"><i class="fa fa-pencil fa-fw"></i>Annuler</button> 
+            <button class="btn icon-btn btn-primary" *ngIf="!ModifMotPasse&&!Modifier" (click)="ActiverModifMotPasse()"><i class="fa fa-pencil fa-fw"></i>Modifier le mot de passe</button> 
+            <button class="btn icon-btn btn-success" *ngIf="ModifMotPasse" (click)="ModificationMotPasse()"><i class="fa fa-pencil fa-fw"></i>Enregistrer les modifications</button>
+            <button class="btn icon-btn btn-danger" *ngIf="ModifMotPasse" (click)="ActiverModifMotPasse()"><i class="fa fa-pencil fa-fw"></i>Annuler</button> 
+        </div>
+        <div class="form-group row table-responsive" *ngIf="!Modifier&&!ModifMotPasse">
+            <table border=1 id="divConteneur" class="table table-hover">
+                <caption>Tableau de données des étudiants(es) à {{ens.prenom}} {{ens.nom}}</caption>
+                <thead>
+                    <tr>
+                        <th>
+                            Nom d'étudiant
+                        </th>
+                        <th>
+                            Prénom
+                        </th>
+                        <th>
+                            Profil
+                        </th>
+                        <th>
+                            Nom Compagnie
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr *ngFor="let etudiant of etudiants">
+                        <td class="nomEnt" [routerLink]="['/detailEtudiant', etudiant.noDa]" routerLinkActive="active"> {{etudiant.nom }}</td>
+                        <td> {{etudiant.prenom}}</td>
+                        <td> {{etudiant.profil }}</td>
+                        <td class="nomEnt" [routerLink]="['/detailEntreprise', etudiant.id]" routerLinkActive="active" (click)="ModifierFlagAppServiceDetail()"> {{etudiant.nomentreprise}}</td>
+                        </tr>
+                </tbody>
+            </table>
+        </div>
+
+        </div>
+    </div>

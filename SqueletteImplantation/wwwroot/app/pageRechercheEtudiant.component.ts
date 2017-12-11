@@ -5,8 +5,13 @@ import {  Router, RouterModule, Routes}   from '@angular/router';
 
 import { Etudiant } from './models/etudiant.class';
 
-declare var jBox: any;
 
+
+
+
+import { Enseignant } from './models/enseignant.class';
+
+declare var jBox:any;
 @Component({
     host: {
         '(document:click)': 'verifClickDansComposant($event)',
@@ -19,6 +24,10 @@ export class PageRechercheEtudiantComponent  {
   filteredList:any[];
   Tnometudiant: string[];
   etudiants: Etudiant[];
+    
+
+  
+  
   annees: string;
   Recherche: string;
   TAnnees: String[];
@@ -96,26 +105,22 @@ export class PageRechercheEtudiantComponent  {
           });
     }
 
-/*testModifier():void
+
+
+PageModif():void
 {
-    this.service.currentPageModif.subscribe(pageModifier=>this.PageModifier=pageModifier);
-    console.log(this.PageModifier)
-}*/
+    this.service.changeFlag(true);
+}
 
-    PageModif():void {
-        this.service.changeFlag(true);
-    }
 
-    PageInfo():void {
-        this.service.changeFlag(false);
-    }
-
-    AutocompleteEtudiant() {
-        this.http.get("api/Etudiant/autocomplete").subscribe(
-            donnees => {
-                this.Tnometudiant = donnees.json() as string[]
-            });
+AutocompleteEtudiant() {
+    this.http.get("api/Etudiant/autocomplete").subscribe(
+        donnees => {
+            this.Tnometudiant = donnees.json() as string[]
+            console.log(this.Tnometudiant);
+        });
     } 
+
 
     filter() {
         if (this.Recherche !== "") {

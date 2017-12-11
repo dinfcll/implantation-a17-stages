@@ -10,9 +10,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var http_1 = require("@angular/http");
 var router_1 = require("@angular/router");
-require("rxjs/add/operator/map");
+var http_1 = require("@angular/http");
 var LoginEnseignantComponent = (function () {
     function LoginEnseignantComponent(http, router) {
         this.http = http;
@@ -26,19 +25,56 @@ var LoginEnseignantComponent = (function () {
         this.http.post("api/Enseignant", JSON.stringify({ courriel: courriel, motDePasse: mdp }), { headers: headers }).subscribe(function (Resultat) {
             _this.enseignant = Resultat.json();
             if (Resultat.status == 200) {
+                //naviguer plus loin
                 _this.router.navigate(['/accueil-enseignant']);
                 localStorage.setItem('var', JSON.stringify(_this.enseignant));
             }
             else {
+                //message erreur
                 if (Resultat.status == 204) {
                     _this.isValid = false;
-                    new jBox('Notice', {
-                        content: 'Mot de passe ou nom utilistateur invalide',
-                        color: 'red',
-                        autoClose: 5000
-                    });
+                    _this.jBoxMessage("red", "Mot de passe ou nom utilistateur invalide");
                 }
             }
+        });
+    };
+    LoginEnseignantComponent.prototype.ConnexionEtudiant = function (DAEtu, mdpEtu) {
+        var _this = this;
+        if (!this.validation(DAEtu, mdpEtu)) {
+            this.jBoxMessage("red", "Vérifier que tous les champs sont remplis ou vérifier votre numero de DA(7 chiffres)");
+            return;
+        }
+        var headers = new http_1.Headers();
+        headers.append('Content-Type', 'application/json');
+        this.http.post("api/Etudiant", JSON.stringify({ noDa: DAEtu, motPasse: mdpEtu }), { headers: headers }).subscribe(function (Resultat) {
+            _this.etudiant = Resultat.json();
+            if (Resultat.status == 200) {
+                //naviguer plus loin
+                _this.router.navigate(['/accueil-etudiant']);
+                localStorage.setItem('currentUser', JSON.stringify(_this.etudiant));
+            }
+            else {
+                //message erreur
+                if (Resultat.status == 204) {
+                    _this.isValid = false;
+                    _this.jBoxMessage("red", "Mot de passe ou numero de DA invalide");
+                }
+            }
+        });
+    };
+    LoginEnseignantComponent.prototype.validation = function (DAEtu, mdpEtu) {
+        if (DAEtu.toString().length == 0
+            || isNaN(DAEtu)
+            || mdpEtu.length == 0) {
+            return false;
+        }
+        return true;
+    };
+    LoginEnseignantComponent.prototype.jBoxMessage = function (couleur, message) {
+        new jBox('Notice', {
+            content: message,
+            color: couleur,
+            autoClose: 5000
         });
     };
     return LoginEnseignantComponent;
