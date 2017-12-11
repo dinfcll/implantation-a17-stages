@@ -381,11 +381,6 @@ namespace SqueletteImplantation.Controllers
                     orderby b.Annee descending
                     select b.Nom).Distinct();
         }
-
-
-
-
-
         [HttpPost]
         [Route("api/Etudiant/EnregistrementEtudiantbd")]
         public IActionResult EnregistrementEtudiantbd([FromBody] Etudiant Etudiant)
@@ -527,5 +522,24 @@ namespace SqueletteImplantation.Controllers
 
 
 
+        [HttpGet]
+        [Route("api/Etudiant/{noEnseignant}")]
+        public IActionResult Etudiantselonprof(int noenseignant)
+        {
+            
+            List<object> ListeAvecID = (from b in _maBd.Etudiant 
+                                        join ent in _maBd.Entreprise on b.Id equals ent.Id
+                                        where b.NoEnseignant == noenseignant 
+                                        orderby b.Annee
+                                        select new
+                                        {
+                                            b.Nom,
+                                            b.Prenom,
+                                            b.Profil,
+                                            ent.nomentreprise,
+                                        }).ToList<object>();
+            
+            return new OkObjectResult(ListeAvecID);
+        }
     }
 }

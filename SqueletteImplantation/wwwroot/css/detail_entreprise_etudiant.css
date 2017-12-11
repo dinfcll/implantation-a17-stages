@@ -87,5 +87,10 @@
     overflow: scroll;
     height: 50px;
 }
-
+#divConteneur {
+    background-color:white;
+}
+th {
+    background-color: rgba(77, 210, 255,0.5);
+}
 
