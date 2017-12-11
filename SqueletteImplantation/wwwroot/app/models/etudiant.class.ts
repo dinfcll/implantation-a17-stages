@@ -15,7 +15,4 @@ export class Etudiant {
                     public motPasse: string,
                     public noTel: string, 
                     public id: number){}
-
-
-
 }
