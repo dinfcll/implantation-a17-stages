@@ -32,7 +32,7 @@ export class ProfilEnseignantComponent {
     constructor(private elementRef: ElementRef, private location: Location, private http: Http, private router: Router, private appservice: AppService) {
 
         this.user = localStorage.getItem('currentUser');
-        this.ens = JSON.parse(this.user) as Enseignant;
+        this.ens = JSON.parse(localStorage.getItem('currentUser'))[0] as Enseignant;
         this.Etudiantselonprof(this.ens.noEnseignant);
         this.Modifier = false;
         this.PremierMotPAsse = "";
