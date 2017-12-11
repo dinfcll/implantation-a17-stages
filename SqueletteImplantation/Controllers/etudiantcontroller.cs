@@ -268,6 +268,7 @@ namespace SqueletteImplantation.Controllers
         [Route("api/Etudiant/{annees}/{recherchetxtbox}")]
         public IActionResult Recherche(string recherchetxtbox, string annees)
         {
+            recherchetxtbox = recherchetxtbox.ToUpper();
             List<object> ListeAvecIDAvecNoEns = (from b in _maBd.Etudiant
                                                  join ent in _maBd.Entreprise on b.Id equals ent.Id//nouvelle ligne
                                                  join ens in _maBd.Enseignant on b.NoEnseignant equals ens.NoEnseignant//nouvelle ligne
