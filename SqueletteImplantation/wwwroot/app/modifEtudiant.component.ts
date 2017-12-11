@@ -138,7 +138,10 @@ export class modifEtudiantComponent implements AfterViewInit, OnInit
               }
 
 
-
+          Deconnexion() {
+              localStorage.removeItem('currentUser');
+              this.router.navigate(['/Login']);
+          }
 
 
 

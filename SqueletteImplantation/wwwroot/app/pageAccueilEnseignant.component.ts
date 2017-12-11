@@ -19,7 +19,6 @@ export class pageAccueilEnseignantComponent {
     constructor(private http: Http, private router: Router) {
         this.user = localStorage.getItem('currentUser');
         this.ens = JSON.parse(this.user) as Enseignant;
-
     }
     
     Deconnexion() {

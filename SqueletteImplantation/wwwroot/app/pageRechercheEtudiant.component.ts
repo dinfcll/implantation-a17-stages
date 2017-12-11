@@ -24,10 +24,6 @@ export class PageRechercheEtudiantComponent  {
   filteredList:any[];
   Tnometudiant: string[];
   etudiants: Etudiant[];
-    
-
-  
-  
   annees: string;
   Recherche: string;
   TAnnees: String[];
