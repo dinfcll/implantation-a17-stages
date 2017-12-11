@@ -333,8 +333,26 @@ namespace SqueletteImplantation.Controllers
             return new OkObjectResult(entreprise);
         }
 
-        
 
+        [HttpPut]
+        [Route("api/Etudiant/EtudiantPris/{ID}")]
+        public IActionResult CompteurEtudiantEntreprise(int ID)
+        {
+            var Etudiants = from b in _maBd.Etudiant
+                        where b.Id == ID
+                        select b.NoDa;
+            int Nombre = Etudiants.Count();
+            var Ent = (from b in _maBd.Entreprise
+                       where b.Id == ID
+                       select b).First();
+            if (Ent == null)
+                return NoContent();
+            Ent.nbreoui = Nombre;
+            _maBd.Update(Ent);
+            _maBd.SaveChanges();
+            return new OkObjectResult(Ent);
+
+        }
 
 
 

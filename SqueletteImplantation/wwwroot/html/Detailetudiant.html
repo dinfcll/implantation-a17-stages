@@ -27,11 +27,7 @@
 
      <div class="form-group row">
         <label for="inputannee" class="col-sm-2 col-xs-2 col-lg-2 col-md-2 col-form-label" id="labelannee">Annee :</label>
-        <input  class="col-sm-6 col-xs-6 col-lg-6 col-md-6" id="inputannee" type="text" [(ngModel)]="etudiant.annee" placeholder="Annee" />
-    </div>
-    <div *ngIf="PageAjouter == true"  class="form-group row">
-        <label for="inputMotpasse" class="col-sm-2 col-xs-2 col-lg-2 col-md-2 col-form-label" id="labelMotpasse">Mot de passe:</label>
-        <input class="col-sm-6 col-xs-6 col-lg-6 col-md-6" id="inputMotpasse" type="text" [(ngModel)]="etudiant.motPasse" value="etudiant" placeholder="etudiant" disabled/>
+        <input [disabled]="true"  class="col-sm-6 col-xs-6 col-lg-6 col-md-6" id="inputannee" type="text" [(ngModel)]="etudiant.annee" placeholder="Annee" />
     </div>
 
     <div class="form-group row">
@@ -115,16 +111,16 @@
 
 
     <div *ngIf="PageModifier == true" class="form-group row"> 
-            <button  class="btn icon-btn btn-primary"  (click)="SaveModifEtudiant()"><li><i class="fa fa-floppy-o"></i>Sauvegarder</button>
+            <button  class="btn icon-btn btn-primary"  (click)="ModifEtudiant()"><i class="fa fa-floppy-o"></i>Sauvegarder</button>
     </div>
     <div *ngIf="PageAjouter == true" class="form-group row"> 
-            <button  class="btn icon-btn btn-primary"  (click)="Ajouter()"><li><i class="fa fa-floppy-o"></i>Sauvegarder</button>
+            <button  class="btn icon-btn btn-primary"  (click)="Ajouter()"><i class="fa fa-floppy-o"></i>Sauvegarder</button>
     </div>
     
    
  </div>
                     <div class="form-group row">
                 
-                                <button class="btn icon-btn btn-warning btn-circle btn-xl"   (click)="goBack()"><li><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
+                                <button class="btn icon-btn btn-warning btn-circle btn-xl"   (click)="goBack()"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
                     </div>
 </div>

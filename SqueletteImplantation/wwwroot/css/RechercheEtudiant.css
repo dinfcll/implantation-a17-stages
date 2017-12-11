@@ -90,3 +90,9 @@ td {
     background-color: #EFF6FF;
     text-align: left;
 }
+#NomEtu {
+    font-weight: bold;
+    cursor: pointer;
+    font-size: large;
+    color: dodgerblue;
+}

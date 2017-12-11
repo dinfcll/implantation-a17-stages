@@ -9,7 +9,6 @@ import { Enseignant } from './models/enseignant.class';
 
 import {AppService} from "./app.service";
 
-/*import {RelEnseignantEtudiant} from "./models/relenseignantetudiant.class";*/
 import 'rxjs/add/operator/map'
 declare var jBox:any;
 @Component({
@@ -31,8 +30,6 @@ export class PageDetailEtudiantComponent  {
     TabisChecked: boolean[];
     TabCheckedNomEns:any[];             
     selectedItems: any = [];
-    /* TabRelEnsEtu:RelEnseignantEtudiant[]; 
-     relEnsEtu:RelEnseignantEtudiant;*/
      selectedItemsAsupprimer: any = [];
      Tnomentreprise:string[];
    
@@ -42,7 +39,6 @@ export class PageDetailEtudiantComponent  {
         this.enseignants=[];
          this.TabisChecked=[];
         this.TabCheckedNomEns=[];
-      //  this.TabRelEnsEtu=[];
         this.testModifier(); 
         this.etudiant = new Etudiant(-1,"","","","","","", "etudiant",null);
         this.entreprise = new Entreprise(-1,"","","","","","",0,0,0,0,0,"");
@@ -55,7 +51,8 @@ export class PageDetailEtudiantComponent  {
             this.TabCheckedNomEns=[];
         } else {
             this.etudiant = new Etudiant(-1,"","","","","","etudiant","",null);
-            this.getListeEnseignant();    
+            this.getListeEnseignant();
+            this.etudiant.annee = (new Date()).getFullYear().toString();
         }  
     }
 
@@ -230,43 +227,12 @@ export class PageDetailEtudiantComponent  {
             for (var i = 0; i < this.selectedItemsAsupprimer.length; i++) {
 
                     this.http.delete("api/relEnseignantEtudiant/SupprimerRelensetu/" + this.etudiant.noDa+"/"+ this.selectedItemsAsupprimer[i]).subscribe(Result => {
-                             //AJOUTER UN MESSAGE D'ERREUR
+                             
                     });
             }
-                 //this.SaveRelEnsEtuBD();
+               
         }
 
-  /*    SaveRelEnsEtuBD(){
-        var longueur=this.selectedItems.length;
-        for(var i=0; i<longueur; i++){
-        this.selectedItems.pop();  
-    }  
-          
-          for(var i=0; i<this.selectedItems.length; i++)
-            {
-                this.relEnsEtu=new RelEnseignantEtudiant(this.etudiant.noDa, this.selectedItems[i])
-                this.TabRelEnsEtu.push( this.relEnsEtu);
-            }
-      
-      for(var i=0; i<this.TabRelEnsEtu.length; i++)
-            {
-                this.http.post("api/Enseignant/sauvegardeRelEnseignantEtudiantbd", this.TabRelEnsEtu[i]).subscribe(Result =>
-                    {
-                        console.log(Result.status);
-                    });
-            }
-      }
-           
-     SaveModifEtudiant(){
-        
-        this.TabRelEnsEtu=[];
-        
-
-        this.AddRelEnsEtuBD(); 
-        this.remplirTabselectedItemsAsupprimer();
-        this.getEntrepriseParNomEnt(this.entreprise.nomentreprise);
-       
-} */
 
     ModifEtudiant() {
        

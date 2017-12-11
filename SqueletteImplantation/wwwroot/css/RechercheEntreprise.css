@@ -91,3 +91,9 @@ td {
     background-color: #EFF6FF;
     text-align: left;
 }
+#NomEnt {
+    font-weight:bold;
+    cursor:pointer;
+    font-size:large;
+    color : dodgerblue;
+}

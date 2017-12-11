@@ -16,32 +16,32 @@
         
         <div class="form-group row">  
            <label for="inputnom" class="col-sm-4 col-xs-4 col-lg-4 col-md-4 col-form-label" id="labelnom">Nom de l'entreprise:</label>
-            <input class="col-sm-6 col-xs-6 col-lg-6 col-md-6" id="inputnom" type="text" [(ngModel)]="entrepriseAjouter.nomentreprise" placeholder="Nom de l'entreprise"/>
+            <input class="col-sm-6 col-xs-6 col-lg-6 col-md-6" id="inputnom" type="text" [disabled]="PageDetail" [(ngModel)]="entrepriseAjouter.nomentreprise" placeholder="Nom de l'entreprise"/>
         </div>
 
         <div class="form-group row">  
             <label for="inputlieu" class="col-sm-4 col-xs-4 col-lg-4 col-md-4 col-form-label" id="labellieu">Adresse:</label>
-            <input class="col-sm-6 col-xs-6 col-lg-6 col-md-6" id="inputlieu" type="text" [(ngModel)]="entrepriseAjouter.lieu" placeholder="Adresse"/>
+            <input class="col-sm-6 col-xs-6 col-lg-6 col-md-6" id="inputlieu" type="text" [disabled]="PageDetail" [(ngModel)]="entrepriseAjouter.lieu" placeholder="Adresse"/>
         </div>
         
         <div class="form-group row">  
             <label for="inputPersRes" class="col-sm-4 col-xs-4 col-lg-4 col-md-4 col-form-label" id="labelPersRes">Nom de la personne responsable:</label>
-            <input id="inputPersRes" class="col-sm-6 col-xs-6 col-lg-6 col-md-6" type="text" [(ngModel)]="entrepriseAjouter.personneresponsable" placeholder="Nom de la personne responsable"  />
+            <input id="inputPersRes" class="col-sm-6 col-xs-6 col-lg-6 col-md-6" type="text" [disabled]="PageDetail" [(ngModel)]="entrepriseAjouter.personneresponsable" placeholder="Nom de la personne responsable"  />
         </div>
         
         <div class="form-group row">
             <label for="inputNotel" class="col-sm-4 col-xs-4 col-lg-4 col-md-4 col-form-label"  id="labelNoTel">Numéro de téléphone de la personne responsable:</label>
-            <input id="inputNotel" class="col-sm-6 col-xs-6 col-lg-6 col-md-6" type="text" [(ngModel)]="entrepriseAjouter.notel" placeholder="Numéro de téléphone de la personne responsable"/>
+            <input id="inputNotel" class="col-sm-6 col-xs-6 col-lg-6 col-md-6" type="text" [disabled]="PageDetail" [(ngModel)]="entrepriseAjouter.notel" placeholder="Numéro de téléphone de la personne responsable"/>
         </div>
         
         <div class="form-group row">
             <label for="inputPoste" class="col-sm-4 col-xs-4 col-lg-4 col-md-4 col-form-label" id="labelPoste">Poste de la personne responsable:</label>
-            <input id="inputPoste" class="col-sm-6 col-xs-6 col-lg-6 col-md-6" type="text" [(ngModel)]="entrepriseAjouter.poste" placeholder="Poste de la personne responsable"/>
+            <input id="inputPoste" class="col-sm-6 col-xs-6 col-lg-6 col-md-6" type="text" [disabled]="PageDetail" [(ngModel)]="entrepriseAjouter.poste" placeholder="Poste de la personne responsable"/>
         </div>
          
         <div class="form-group row">
             <label for="inputcourriel" class="col-sm-4 col-xs-4 col-lg-4 col-md-4 col-form-label" id="labelcourriel">Courriel de la personne responsable:</label>
-            <input id="inputcourriel" class="col-sm-6 col-xs-6 col-lg-6 col-md-6" type="text" [(ngModel)]="entrepriseAjouter.courrielres" placeholder="Courriel de la personne responsable" />
+            <input id="inputcourriel" class="col-sm-6 col-xs-6 col-lg-6 col-md-6" type="text" [disabled]="PageDetail" [(ngModel)]="entrepriseAjouter.courrielres" placeholder="Courriel de la personne responsable" />
         </div>
 
         <div class="form-group row">  
@@ -50,11 +50,11 @@
 
         <div class="form-group row"> 
             <div class="row vdivide">
-                <div class="col-sm-2 col-xs-2 col-lg-2 col-md-2 text-center">Vacants</div>
+                <div  class="col-sm-2 col-xs-2 col-lg-2 col-md-2 text-center">Vacants</div>
                 <div class="col-sm-2 col-xs-2 col-lg-2 col-md-2 text-center">Engagé</div>
-                <div class="col-sm-2 col-xs-2 col-lg-2 col-md-2 text-center">Peut-etre</div>
-                <div class="col-sm-2 col-xs-2 col-lg-2 col-md-2 text-center">Probablement non</div>
-                <div class="col-sm-2 col-xs-2 col-lg-2 col-md-2 text-center">Non</div>
+                <div  class="col-sm-2 col-xs-2 col-lg-2 col-md-2 text-center">Peut-être engagés</div>
+                <div  class="col-sm-2 col-xs-2 col-lg-2 col-md-2 text-center">Probablement refusés</div>
+                <div  class="col-sm-2 col-xs-2 col-lg-2 col-md-2 text-center">Refusé</div>
             </div>   
             
         </div>  
@@ -62,17 +62,17 @@
         <div class="form-group row"> 
 
             <div  class="col-sm-2 col-xs-2 col-lg-2 col-md-2">
-                    <input class="nbre" type="text" [(ngModel)]="entrepriseAjouter.nbreconfirmation"  placeholder="name" />
+                    <input [disabled]="PageDetail" class="nbre" type="text" [(ngModel)]="entrepriseAjouter.nbreconfirmation"  placeholder="name" />
             </div> 
             
             <div  class="col-sm-2 col-xs-2 col-lg-2 col-md-2">
-                    <input class="nbre" type="text" [(ngModel)]="entrepriseAjouter.nbreoui" placeholder="Nombre de oui" />
+                    <input  [disabled]="true" class="nbre" type="text" [(ngModel)]="entrepriseAjouter.nbreoui" placeholder="Nombre de oui" />
             </div> 
             <div  class="col-sm-2 col-xs-2 col-lg-2 col-md-2">
-                    <input class="nbre" type="text" [(ngModel)]="entrepriseAjouter.nbrpeutetre"  placeholder="Nombre de peut-être" />
+                    <input [disabled]="PageDetail" class="nbre" type="text" [(ngModel)]="entrepriseAjouter.nbrpeutetre"  placeholder="Nombre de peut-être" />
             </div> 
             <div  class="col-sm-2 col-xs-2 col-lg-2 col-md-2">
-                    <input class="nbre"  type="text" [(ngModel)]="entrepriseAjouter.nbreprobablementnon"  placeholder="Nombre de probablement non" />
+                    <input class="nbre" [disabled]="PageDetail" type="text" [(ngModel)]="entrepriseAjouter.nbreprobablementnon"  placeholder="Nombre de probablement non" />
             </div> 
             <div  class="col-sm-2 col-xs-2 col-lg-2 col-md-2">
                     <input class="nbre"  type="text" [(ngModel)]="entrepriseAjouter.nbrenon"  placeholder="Nombre de non" />
@@ -80,14 +80,16 @@
            
         </div>
         <div class="container row">
-            <table *ngIf="PageDetail">
+            <table class="table table-hover" id="Table" *ngIf="PageDetail">
                 <tr>
                     <th>Nom</th>
                     <th>Courriel</th>
+                    <th>Profil</th>
                 </tr>
-                <tr *ngFor="let enseignant of TEnseignant">
-                    <td>{{enseignant.nom}} {{enseignant.prenom}}</td>
-                    <td>{{enseignant.courriel}}</td>
+                <tr *ngFor="let Etudiant of TEtudiant">
+                    <td>{{etudiant.nom}} {{etudiant.prenom}}</td>
+                    <td>{{etudiant.courriel}}</td>
+                    <td>{{etudiant.profil}}</td>
                 </tr>
             </table>
         </div>
@@ -100,7 +102,7 @@
             </div>
         </div>
      <div class="form-group row">
-         <button class="btn icon-btn btn-warning btn-circle btn-xl" (click)="goBack()"><li><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
+         <button class="btn icon-btn btn-warning btn-circle btn-xl" (click)="goBack()"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
      </div>
  </div> 
 </div> 
