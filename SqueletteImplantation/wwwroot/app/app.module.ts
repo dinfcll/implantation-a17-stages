@@ -55,7 +55,7 @@ const appRoutes: Routes=[
   },
   {
     path: 'profil-enseignant',
-    canActivate: [ AuthguardGuard ],
+    canActivate: [ AuthguardGuardens ],
     component:  ProfilEnseignantComponent
 },
   {
@@ -65,7 +65,7 @@ const appRoutes: Routes=[
   },
     {
         path: 'detailEtudiant/:noDa', 
-      //  canActivate: [ AuthguardGuard ],
+        canActivate: [ AuthguardGuard ],
         component:  PageDetailEtudiantComponent
     },
     {
