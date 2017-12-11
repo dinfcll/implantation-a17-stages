@@ -534,6 +534,8 @@ namespace SqueletteImplantation.Controllers
                                         select new
                                         {
                                             b.Nom,
+                                            b.NoDa,
+                                            b.Id,
                                             b.Prenom,
                                             b.Profil,
                                             ent.nomentreprise,
