@@ -41,6 +41,7 @@ export class AuthguardGuard implements CanActivate, CanActivateChild {
                }else{
                 this.IsLoggedIn=false;
                 this.router.navigateByUrl('/Login');
+                localStorage.removeItem('currentUser');
                }
                    
               
